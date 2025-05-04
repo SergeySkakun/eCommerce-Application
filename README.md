@@ -11,6 +11,20 @@ This platform replicates real-world shopping experiences in a digital environmen
 2. To learn to resolve controversial issues within the team.
 3. To create a full-fledged finished product for use.
 
+## Available Scripts
+
+| Script            | Usage                  | Explanation                                                                                                                                                        |
+| :---------------- | :--------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **dev**           | `npm run dev`          | Starts the development server on [localhost:5173](http://localhost:5173). HMR (Hot Module Replacement) is enabled.                                                 |
+| **build**         | `npm run build`        | Builds the production version of the app. First compiles TypeScript files (`tsc -b`), then bundles the project using Vite. Output is located in the `dist` folder. |
+| **lint**          | `npm run lint`         | Runs [ESLint](https://eslint.org/) on the project files to detect code quality issues.                                                                             |
+| **preview**       | `npm run preview`      | Serves the production build locally to verify the output before deploying.                                                                                         |
+| **format**        | `npm run format`       | Formats all files in the `src/` folder using [Prettier](https://prettier.io/), applying the project’s formatting rules.                                            |
+| **format\:check** | `npm run format:check` | Checks if the code is properly formatted without making any changes. Useful for CI/CD pipelines.                                                                   |
+| **stylelint**     | `npm run stylelint`    | Runs [Stylelint](https://stylelint.io/) on `.css` and `.scss` files to automatically fix style issues.                                                             |
+| **prepare**       | `npm run prepare`      | Initializes Git hooks using [Husky](https://typicode.github.io/husky/). This script runs automatically after installing dependencies.                              |
+| **test**          | `npm run test`         | Executes tests using [Jest](https://jestjs.io/). Looks for test files inside the `src/` folder with `.test.tsx`/`.test.ts` extensions.                             |
+
 ## Technology Stack
 
 |   Technology    |                                                   Version                                                   |
