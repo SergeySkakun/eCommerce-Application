@@ -11,6 +11,47 @@ This platform replicates real-world shopping experiences in a digital environmen
 2. To learn to resolve controversial issues within the team.
 3. To create a full-fledged finished product for use.
 
+## Setup and Running Locally
+
+Follow these steps to set up and run the project locally:
+
+### 1. Clone the Repository
+
+Clone the project to your local machine using Git:
+
+`git clone https://github.com/SergeySkakun/eCommerce-Application.git`
+
+### 2. Install Dependencies
+
+Navigate to the project directory and install the required dependencies using npm:
+
+```
+cd eCommerce-Application
+npm instal
+```
+
+### 3. Run the Development Server
+
+Start the development server:
+
+`npm run dev`
+
+This will start the project on localhost:5173 for development.
+
+### 4. Run the Development Server
+
+Start the development server:
+
+`npm run dev`
+
+This will output the bundled files in the dist directory.
+
+### 5. Run Tests
+
+To run the unit tests:
+
+`npm run test`
+
 ## Available Scripts
 
 | Script            | Usage                  | Explanation                                                                                                                                                        |
