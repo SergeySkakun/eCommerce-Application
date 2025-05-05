@@ -1,0 +1,1 @@
+cd ecommerce && npx --no -- commitlint --edit ${1}
