@@ -11,7 +11,7 @@
     "format": "prettier ./src --write .",
     "format:check": "prettier ./src --check .",
     "stylelint": "stylelint '**/*{.css,.scss}' --fix",
-    "prepare": "cd .. && husky ./ecommerce/.husky",
+    "prepare": "cd .. && husky ./.husky",
     "test": "jest"
   },
   "dependencies": {
