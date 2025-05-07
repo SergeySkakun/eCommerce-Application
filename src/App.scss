@@ -12,11 +12,11 @@
   transition: filter 300ms;
 
   &:hover {
-    filter: drop-shadow(0 0 2em rgb(100 108 255 / 66.7%));
+    filter: drop-shadow(0 0 2em #646cffaa);
   }
 
   &.react:hover {
-    filter: drop-shadow(0 0 2em rgb(97 218 251 / 66.7%));
+    filter: drop-shadow(0 0 2em #61dafbaa);
   }
 }
 
