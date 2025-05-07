@@ -1,17 +1,18 @@
 {
   "name": "ecommerce",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
+    "init": "npm install",
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
+    "lint": "eslint ./src",
     "preview": "vite preview",
     "format": "prettier ./src --write .",
-    "format:check": "prettier ./src --check .",
+    "format:check": "prettier ./src --check",
     "stylelint": "stylelint '**/*{.css,.scss}' --fix",
-    "prepare": "cd .. && husky ./.husky",
+    "prepare": "husky ./.husky",
     "test": "jest"
   },
   "dependencies": {
@@ -48,6 +49,7 @@
     "stylelint-config-standard-scss": "^14.0.0",
     "stylelint-prettier": "^5.0.3",
     "stylelint-scss": "^6.11.1",
+    "stylelint-use-nesting": "^6.0.0",
     "ts-jest": "^29.3.2",
     "ts-node": "^10.9.2",
     "typescript": "~5.7.2",
