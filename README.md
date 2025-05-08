@@ -27,7 +27,7 @@ Navigate to the project directory and install the required dependencies using np
 
 ```
 cd eCommerce-Application
-npm instal
+npm run init
 ```
 
 ### 3. Run the Development Server
@@ -56,6 +56,7 @@ To run the unit tests:
 
 | Script            | Usage                  | Explanation                                                                                                                                                        |
 | :---------------- | :--------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **init**          | `npm run init`         | Install all necessary dependencies.             
 | **dev**           | `npm run dev`          | Starts the development server on [localhost:5173](http://localhost:5173). HMR (Hot Module Replacement) is enabled.                                                 |
 | **build**         | `npm run build`        | Builds the production version of the app. First compiles TypeScript files (`tsc -b`), then bundles the project using Vite. Output is located in the `dist` folder. |
 | **lint**          | `npm run lint`         | Runs [ESLint](https://eslint.org/) on the project files to detect code quality issues.                                                                             |
