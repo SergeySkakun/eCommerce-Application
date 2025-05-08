@@ -1,48 +1,47 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
-import eslint from "@eslint/js"
-import eslintPluginUnicorn from "eslint-plugin-unicorn"
-// import tsParser from "@typescript-eslint/parser"
-import tsEslintPlugin from "@typescript-eslint/eslint-plugin"
+import js from "@eslint/js";
+import globals from "globals";
+import reactHooks from "eslint-plugin-react-hooks";
+import reactRefresh from "eslint-plugin-react-refresh";
+import tseslint from "typescript-eslint";
+import eslintPluginUnicorn from "eslint-plugin-unicorn";
+import tsParser from "@typescript-eslint/parser";
+import tsEslintPlugin from "@typescript-eslint/eslint-plugin";
 
 export default tseslint.config(
-  { ignores: ['dist', 'node_modules/'] },
+  { ignores: ["dist", "node_modules/"] },
   {
     extends: [
-      js.configs.recommended, 
+      js.configs.recommended,
       ...tseslint.configs.recommended,
 
       eslintPluginUnicorn.configs.recommended,
-      eslint.configs.recommended,
+      js.configs.recommended,
       tseslint.configs.recommendedTypeChecked,
     ],
     linterOptions: {
       reportUnusedDisableDirectives: "error",
       noInlineConfig: false,
     },
-    files: ['**/*.{ts,tsx}'],
+    files: ["**/*.{ts,tsx}"],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
-
-      // parser: tsParser,
-      // parserOptions: {
-      //   project: "./tsconfig.json",
-      // },
+      parser: tsParser,
+      parserOptions: {
+        project: "./tsconfig.json",
+        sourceType: "module",
+      },
     },
     plugins: {
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
+      "react-hooks": reactHooks,
+      "react-refresh": reactRefresh,
 
       "@typescript-eslint": tsEslintPlugin,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': [
-        'warn',
+      "react-refresh/only-export-components": [
+        "warn",
         { allowConstantExport: true },
       ],
 
@@ -50,7 +49,7 @@ export default tseslint.config(
         "error",
         { assertionStyle: "never" },
       ],
-      
+
       "@typescript-eslint/consistent-type-imports": "error",
       "@typescript-eslint/explicit-function-return-type": "error",
       "@typescript-eslint/explicit-member-accessibility": [
@@ -60,6 +59,7 @@ export default tseslint.config(
       "@typescript-eslint/member-ordering": "error",
       "class-methods-use-this": "error",
       "unicorn/better-regex": "error",
+      "no-console": "warn",
     },
   },
-)
+);

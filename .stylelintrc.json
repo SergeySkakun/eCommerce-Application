@@ -4,5 +4,13 @@
     "stylelint-config-clean-order",
     "stylelint-prettier/recommended"
   ],
-  "plugins": ["stylelint-order", "stylelint-scss"]
+  "plugins": ["stylelint-order", "stylelint-use-nesting", "stylelint-scss"],
+  "rules": {
+    "csstools/use-nesting": ["always", { "syntax": "scss" }],
+    "selector-max-id": 4,
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": true,
+    "scss/dollar-variable-pattern": "^foo",
+    "scss/selector-no-redundant-nesting-selector": true
+  }
 }
