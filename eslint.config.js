@@ -3,7 +3,6 @@ import globals from "globals";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
-import eslint from "@eslint/js";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import tsParser from "@typescript-eslint/parser";
 import tsEslintPlugin from "@typescript-eslint/eslint-plugin";
@@ -16,7 +15,7 @@ export default tseslint.config(
       ...tseslint.configs.recommended,
 
       eslintPluginUnicorn.configs.recommended,
-      eslint.configs.recommended,
+      js.configs.recommended,
       tseslint.configs.recommendedTypeChecked,
     ],
     linterOptions: {
