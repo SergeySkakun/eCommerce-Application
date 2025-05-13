@@ -6,7 +6,7 @@ import {
   PROJECT_KEY,
 } from "../../project-config";
 import { updateCookies } from "../../shared/ui/update-cookie";
-import type { AccessToken, BodyLogin, Error } from "../../shared/api/types";
+import type { AccessToken, BodyLogin, Error } from "../../types";
 
 export async function authenticateCustomer(body: BodyLogin): Promise<string> {
   let errorMessage = "";
