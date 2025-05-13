@@ -1,12 +1,5 @@
-import {
-  API_HOST,
-  AUTH_HOST,
-  CLIENT_ID,
-  CLIENT_SECRET,
-  PROJECT_KEY,
-} from "../../project-config";
-import { updateCookies } from "../../shared/ui/update-cookie";
-import type { AccessToken, BodyLogin, Error } from "../../types";
+import { API_HOST, PROJECT_KEY } from "../../project-config";
+import type { BodyLogin, Error } from "../../types";
 
 export async function authenticateCustomer(body: BodyLogin): Promise<string> {
   let errorMessage = "";
@@ -26,24 +19,9 @@ export async function authenticateCustomer(body: BodyLogin): Promise<string> {
     body: JSON.stringify(body),
   })
     .then((response) => response.json())
-    .then(async (data: Error) => {
+    .then((data: Error) => {
       if (data.statusCode) {
         errorMessage = data.message;
-      } else {
-        await fetch(
-          `${AUTH_HOST}/oauth/${PROJECT_KEY}/customers/token?grant_type=password&username=${body.email}&password=${body.password}`,
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Basic ${btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)}`,
-            },
-          }
-        )
-          .then((response) => response.json())
-          .then((data: AccessToken) => {
-            updateCookies(data.access_token, data.refresh_token);
-          })
-          .catch((error) => console.log(error));
       }
     })
     .catch((error) => console.log(error));
