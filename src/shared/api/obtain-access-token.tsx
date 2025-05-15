@@ -6,10 +6,12 @@ import {
   CLIENT_SECRET,
   PROJECT_KEY,
 } from "../../project-config";
-import { updateCookies } from "../ui/index";
+import { saveTokenCookie } from "../ui/index";
 import type { AccessToken } from "../types";
 
 export function ObtainAccessToken(): ReactElement {
+  const ACCESS_TOKEN = "access_token";
+  const REFRESH_TOKEN = "refresh_token";
   useEffect(function GetToken(): void {
     fetch(
       `${AUTH_HOST}/oauth/${PROJECT_KEY}/anonymous/token?grant_type=client_credentials`,
@@ -22,9 +24,10 @@ export function ObtainAccessToken(): ReactElement {
     )
       .then((response) => response.json())
       .then((data: AccessToken) => {
-        updateCookies(data.access_token, data.refresh_token);
+        saveTokenCookie(data.access_token, ACCESS_TOKEN);
+        saveTokenCookie(data.refresh_token, REFRESH_TOKEN);
       })
-      .catch((error) => console.log(error));
+      .catch(() => console.error("No connection"));
   }, []);
   return <></>;
 }
