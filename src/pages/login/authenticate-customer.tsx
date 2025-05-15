@@ -5,19 +5,23 @@ import {
   CLIENT_SECRET,
   PROJECT_KEY,
 } from "../../project-config";
-import { updateCookies } from "../../shared/ui/update-cookie";
-import type { AccessToken, BodyLogin, Error } from "../../types";
+import { saveTokenCookie } from "../../shared/ui/index";
+import type { BodyLogin } from "./types";
+import type { AccessToken, Error } from "../../shared/types";
 
 export async function authenticateCustomer(body: BodyLogin): Promise<string> {
   let errorMessage = "";
-  const arrayCookies = document.cookie.split(";");
   let BEARER_TOKEN = "";
+  const ACCESS_TOKEN = "access_token";
+  const REFRESH_TOKEN = "refresh_token";
+  const arrayCookies = document.cookie.split("; ");
   for (const cookie of arrayCookies) {
-    if (cookie.split("=")[0] === " access_token") {
-      BEARER_TOKEN = cookie.split("=")[1];
+    const [name, value] = cookie.split("=");
+    if (name === "access_token") {
+      BEARER_TOKEN = value;
+      break;
     }
   }
-
   await fetch(`${API_HOST}/${PROJECT_KEY}/me/login`, {
     method: "POST",
     headers: {
@@ -41,11 +45,12 @@ export async function authenticateCustomer(body: BodyLogin): Promise<string> {
         )
           .then((response) => response.json())
           .then((data: AccessToken) => {
-            updateCookies(data.access_token, data.refresh_token);
+            saveTokenCookie(data.access_token, ACCESS_TOKEN);
+            saveTokenCookie(data.refresh_token, REFRESH_TOKEN);
           })
-          .catch((error) => console.log(error));
+          .catch(() => (errorMessage = "No connection"));
       }
     })
-    .catch((error) => console.log(error));
+    .catch(() => (errorMessage = "No connection"));
   return errorMessage;
 }
