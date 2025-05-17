@@ -7,7 +7,7 @@ import {
   PROJECT_KEY,
 } from "../../project-config";
 import { saveTokenCookie } from "../ui/index";
-import type { AccessToken } from "../types";
+import type { AccessToken } from "./index";
 
 export function ObtainAccessToken(): ReactElement {
   const ACCESS_TOKEN = "access_token";
