@@ -5,11 +5,13 @@ import {
   CLIENT_SECRET,
   PROJECT_KEY,
 } from "../../project-config";
-import { saveTokenCookie } from "../../shared/ui/index";
-import type { BodySignUp } from "./types";
-import type { AccessToken, Error } from "../../shared/types";
+import { saveTokenCookie } from "../ui/index";
+import type { AccessToken, BodyLogin, BodySignUp, Error } from "./index";
 
-export async function createCustomer(body: BodySignUp): Promise<string> {
+export async function sendingSignInOrSignUpRequest(
+  body: BodySignUp | BodyLogin,
+  typeRequest: string
+): Promise<string> {
   let errorMessage = "";
   let BEARER_TOKEN = "";
   const ACCESS_TOKEN = "access_token";
@@ -22,7 +24,7 @@ export async function createCustomer(body: BodySignUp): Promise<string> {
       break;
     }
   }
-  await fetch(`${API_HOST}/${PROJECT_KEY}/me/signup`, {
+  await fetch(`${API_HOST}/${PROJECT_KEY}/me/${typeRequest}`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${BEARER_TOKEN}`,
