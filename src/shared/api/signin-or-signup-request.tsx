@@ -10,7 +10,7 @@ import type { AccessToken, BodyLogin, BodySignUp, Error } from "./index";
 
 export async function sendingSignInOrSignUpRequest(
   body: BodySignUp | BodyLogin,
-  typeRequest: string
+  typeRequest: string,
 ): Promise<string> {
   let errorMessage = "";
   let BEARER_TOKEN = "";
@@ -19,7 +19,7 @@ export async function sendingSignInOrSignUpRequest(
   const arrayCookies = document.cookie.split("; ");
   for (const cookie of arrayCookies) {
     const [name, value] = cookie.split("=");
-    if (name === "access_token") {
+    if (name === "anonymous_access_token") {
       BEARER_TOKEN = value;
       break;
     }
@@ -43,7 +43,7 @@ export async function sendingSignInOrSignUpRequest(
             headers: {
               Authorization: `Basic ${btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)}`,
             },
-          }
+          },
         )
           .then((response) => response.json())
           .then((data: AccessToken) => {

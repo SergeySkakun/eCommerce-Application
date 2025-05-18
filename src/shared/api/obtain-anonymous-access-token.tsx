@@ -9,9 +9,9 @@ import {
 import { saveTokenCookie } from "../ui/index";
 import type { AccessToken } from "./index";
 
-export function ObtainAccessToken(): ReactElement {
-  const ACCESS_TOKEN = "access_token";
-  const REFRESH_TOKEN = "refresh_token";
+export function ObtainAnonymousAccessToken(): ReactElement {
+  const ANONYMOUS_ACCESS_TOKEN = "anonymous_access_token";
+  const ANONYMOUS_REFRESH_TOKEN = "anonymous_refresh_token";
   useEffect(function GetToken(): void {
     fetch(
       `${AUTH_HOST}/oauth/${PROJECT_KEY}/anonymous/token?grant_type=client_credentials`,
@@ -20,12 +20,12 @@ export function ObtainAccessToken(): ReactElement {
         headers: {
           Authorization: `Basic ${btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)}`,
         },
-      }
+      },
     )
       .then((response) => response.json())
       .then((data: AccessToken) => {
-        saveTokenCookie(data.access_token, ACCESS_TOKEN);
-        saveTokenCookie(data.refresh_token, REFRESH_TOKEN);
+        saveTokenCookie(data.access_token, ANONYMOUS_ACCESS_TOKEN);
+        saveTokenCookie(data.refresh_token, ANONYMOUS_REFRESH_TOKEN);
       })
       .catch(() => console.error("No connection"));
   }, []);
