@@ -16,6 +16,9 @@ export function Login(): ReactNode {
       >
         Login Add Cookie
       </Button>
+      <Button variant="outlined" color="success" href="/main">
+        Main
+      </Button>
     </>
   );
 }

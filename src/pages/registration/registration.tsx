@@ -16,6 +16,9 @@ export function Registration(): ReactNode {
       >
         Registration Add Cookie
       </Button>
+      <Button variant="outlined" color="success" href="/main">
+        Main
+      </Button>
     </>
   );
 }
