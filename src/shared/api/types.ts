@@ -17,6 +17,8 @@ export interface BodySignUp {
   lastName: string;
   password: string;
   addresses: Addresses[];
+  defaultShippingAddress: number;
+  defaultBillingAddress: number;
   dateOfBirth: string;
   store: string;
 }
