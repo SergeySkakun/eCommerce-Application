@@ -18,12 +18,16 @@ export function Main(): ReactNode {
           LogOut
         </Button>
       ) : null}
-      <Button variant="outlined" color="success" href="/login">
-        Login
-      </Button>
-      <Button variant="outlined" color="success" href="/registration">
-        Registration
-      </Button>
+      {isLoggedIn ? null : (
+        <Button variant="outlined" color="success" href="/login">
+          Login
+        </Button>
+      )}
+      {isLoggedIn ? null : (
+        <Button variant="outlined" color="success" href="/registration">
+          Registration
+        </Button>
+      )}
     </>
   );
 }
