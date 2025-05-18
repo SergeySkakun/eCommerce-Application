@@ -1,0 +1,103 @@
+.page-404 {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  align-items: center;
+  justify-content: center;
+}
+
+.oops-text {
+  margin: 0;
+  font-size: 50px;
+}
+
+.error-text {
+  margin: 0;
+  font-size: 100px;
+  font-weight: bold;
+  color: red;
+}
+
+.right-car {
+  position: fixed;
+  right: -5rem;
+}
+
+.car-1 {
+  top: 0;
+  animation: go-right-car 6s linear;
+}
+
+.car-3 {
+  top: 18rem;
+  animation: go-right-car 9s linear;
+}
+
+.car-5 {
+  top: 28rem;
+  animation: go-right-car 8s linear;
+}
+
+.car-7 {
+  top: 44rem;
+  animation: go-right-car 12s linear;
+}
+
+.left-car {
+  position: fixed;
+  left: -5rem;
+}
+
+.car-2 {
+  top: 5rem;
+  animation: go-left-car 9s linear;
+}
+
+.car-4 {
+  top: 23rem;
+  animation: go-left-car 6s linear;
+}
+
+.car-6 {
+  top: 34rem;
+  animation: go-left-car 12s linear;
+}
+
+.car-8 {
+  top: 51rem;
+  animation: go-left-car 8s linear;
+}
+
+@keyframes go-right-car {
+  0% {
+    right: -5rem;
+  }
+
+  100% {
+    right: 125rem;
+  }
+}
+
+@keyframes go-left-car {
+  0% {
+    left: -5rem;
+  }
+
+  100% {
+    left: 125rem;
+  }
+}
+
+@media screen and (width <= 655px) {
+  .error-text {
+    font-size: 60px;
+  }
+}
+
+@media screen and (width <= 400px) {
+  .error-text {
+    padding-top: 20px;
+    font-size: 40px;
+  }
+}
