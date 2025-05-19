@@ -18,9 +18,16 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@hookform/resolvers": "^5.0.1",
+    "@mui/icons-material": "^7.1.0",
     "@mui/material": "^7.1.0",
+    "@mui/x-date-pickers": "^8.3.1",
+    "dayjs": "^1.11.13",
+    "postcode-validator": "^3.10.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.56.4",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",
