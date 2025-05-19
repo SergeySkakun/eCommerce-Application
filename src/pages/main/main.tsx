@@ -17,8 +17,10 @@ export function Main(): ReactNode {
         >
           LogOut
         </Button>
-      ) : null}
+      ) : /* eslint-disable unicorn/no-null */
+      null}
       {!isAuthCheckReady || isLoggedIn ? null : (
+        /* eslint-enable unicorn/no-null */
         <>
           <Button variant="outlined" color="success" href="/login">
             Login
