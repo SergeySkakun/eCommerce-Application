@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Button, Typography } from "@mui/material";
 
-export default function SubmitButton(): ReactNode {
+const SubmitButton = (): ReactNode => {
   return (
     <Button
       type="submit"
@@ -21,3 +21,5 @@ export default function SubmitButton(): ReactNode {
     </Button>
   );
 }
+
+export { SubmitButton }
