@@ -7,7 +7,13 @@ import {
   useNavigate,
   Navigate,
 } from "react-router-dom";
-import { Main, Login, Registration, NotFound, LoadingPage } from "../../pages";
+import {
+  Main,
+  LoginPage,
+  RegistrationForm,
+  NotFound,
+  LoadingPage,
+} from "../../pages";
 import { useAuth } from "../../shared";
 
 function MainRedirect(): undefined {
@@ -15,7 +21,7 @@ function MainRedirect(): undefined {
 
   useEffect(() => {
     void navigate("/main", { replace: true });
-  }, []);
+  }, [navigate]);
   return undefined;
 }
 
@@ -42,7 +48,7 @@ export function PageRouter(): React.ReactNode {
           path="/login"
           element={
             <PrivateRoute>
-              <Login />
+              <LoginPage />
             </PrivateRoute>
           }
         ></Route>
@@ -50,7 +56,7 @@ export function PageRouter(): React.ReactNode {
           path="/registration"
           element={
             <PrivateRoute>
-              <Registration />
+              <RegistrationForm />
             </PrivateRoute>
           }
         ></Route>
