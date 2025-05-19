@@ -14,24 +14,20 @@ export default function City({
   setCity,
   setCityError,
 }: StreetNameInputProperties): ReactNode {
-  
-
-
   const handleCityChange = (
-      event_: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
-    ): void => {
-      try {
+    event_: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+  ): void => {
+    try {
       setCity(event_.target.value);
       if (event_.target.value.length === 0) {
         setCityError("City must contain at least one character");
       } else {
         setCityError("");
       }
-      } catch {
-        setCityError("Missing city")
-      }
+    } catch {
+      setCityError("Missing city");
+    }
   };
-
 
   return (
     <TextField
