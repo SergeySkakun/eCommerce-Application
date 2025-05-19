@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
-import type { IFormInputProperties } from "./form-input-properties";
+import type { IFormInputProperties } from "../interfaces/form-input-properties";
 import { useState, type ReactElement } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 

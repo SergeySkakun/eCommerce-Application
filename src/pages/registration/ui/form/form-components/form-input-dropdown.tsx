@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Controller } from "react-hook-form";
-import type { IFormInputProperties } from "./form-input-properties";
+import type { IFormInputProperties } from "../interfaces/form-input-properties";
 import {
   FormControl,
   FormHelperText,
@@ -29,6 +29,8 @@ export const FormInputDropdown = ({
         <FormControl
           error={!!renderProperties.fieldState.error}
           sx={{ minWidth: 200 }}
+          size="small"
+          fullWidth
         >
           <InputLabel id={name}>{label}</InputLabel>
           <Select
