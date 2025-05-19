@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
-import { Grid, Link } from "@mui/material";
+import { Link } from "react-router-dom";
+import { Grid } from "@mui/material";
 
 export default function LoginFooter(): ReactElement {
   return (
@@ -9,8 +10,8 @@ export default function LoginFooter(): ReactElement {
       justifyContent={"space-between"}
       sx={{ mt: 2 }}
     >
-      <Link href="/registration">Sign Up</Link>
-      <Link href="/main">To Main</Link>
+      <Link to="/registration">Sign Up</Link>
+      <Link to="/main">To Main</Link>
     </Grid>
   );
 }

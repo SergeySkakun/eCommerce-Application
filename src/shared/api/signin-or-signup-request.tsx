@@ -14,8 +14,8 @@ export async function sendingSignInOrSignUpRequest(
 ): Promise<string> {
   let errorMessage = "";
   let BEARER_TOKEN = "";
-  const ACCESS_TOKEN = "access_token";
-  const REFRESH_TOKEN = "refresh_token";
+  const ACCESS_TOKEN = "user_access_token";
+  const REFRESH_TOKEN = "user_refresh_token";
   const arrayCookies = document.cookie.split("; ");
   for (const cookie of arrayCookies) {
     const [name, value] = cookie.split("=");

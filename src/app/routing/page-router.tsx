@@ -31,11 +31,11 @@ function PrivateRoute({ children }: { children: ReactNode }): ReactNode | null {
     return <LoadingPage />;
   }
 
-  if (!isLoggedIn) {
-    return children;
+  if (isLoggedIn) {
+    return <Navigate to="/main" replace />;
   }
 
-  return <Navigate to="/main" replace />;
+  return children;
 }
 
 export function PageRouter(): React.ReactNode {
