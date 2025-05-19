@@ -18,14 +18,14 @@ export const FormInputDate = ({
         <TextField
           type='date'
           size="small"
+          defaultValue={renderProperties.field.value}
           onChange={renderProperties.field.onChange}
           value={renderProperties.field.value}
           error={!!renderProperties.fieldState.error}
           helperText={renderProperties.fieldState.error?.message ?? undefined}
           fullWidth
           label={label}
-          sx={sx}
-        />
+          sx={sx} />
       )}
     />
   );

@@ -1,53 +1,24 @@
+/* eslint-disable unicorn/no-null */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { FormInputText } from "./form-components/form-input-text";
-// import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormInputDropdown } from "./form-components/form-input-dropdown";
 import type { ReactElement } from "react";
 import { FormInputPassword } from "./form-components/form-input-password";
 import { Container, Grid, Link } from "@mui/material";
-// import { postcodeValidator } from "postcode-validator";
 import { countries } from "./form-components/countries-list";
 import { FormInputCheckbox } from "./form-components/form-input-checkbox";
-import type { BodySignUp } from "../../../../shared/api";
-import { sendingSignInOrSignUpRequest } from "../../../../shared/api";
-import { FormInputDate } from "./form-components/form-input-date";
+import { type BodySignUp, sendingSignInOrSignUpRequest } from "../../../../shared/api";
 import { ValidationSchema } from "./validation/validation-schema";
-
-// const now = new Date();
-// const thirteenYearsAgo = new Date(now.getFullYear() - 13, now.getMonth(), now.getDate());
-
-
-// const validationSchema = yup.object({
-//   email: yup.string().email("Incorrect email").required("Required email"),
-//   firstName: yup.string().min(1, "First name must be 1 or more characters").matches(/^[ A-Za-z]+$/, "First name must contain only letters and spaces").required("Required first name"),
-//   lastName: yup.string().min(1, "Last name must be 1 or more characters").matches(/^[ A-Za-z]+$/, "Last name must contain only letters and spaces").required("Required last name"),
-//   password: yup.string().min(8, "Password must be 8 or more characters").matches(/[A-Z]/, "Password must contain at least one uppercase letter").matches(/[a-z]/, "Password must contain at least one lowercase letter").matches(/\d/, "Password must contain at least one number").matches(/[!#$%&?@]/, "Password must contain at least 1 special character:!#$%&?@&%").required("Required dropdown value"),
-//     streetName: yup.string().required("Required street name"),
-//     streetNumber: yup.string().required("Required street number"),
-//     postalCode: yup.string().required("Required postcode")
-//     .test('check-relation', 'Invalid postcode', (value, schema) => {
-//       try {
-//       const country = schema.parent.country;
-//           if (country && value && typeof value === 'string' && postcodeValidator(value, country)) {
-//             return true;
-//           }
-//           return false;
-//       } catch {
-//         return false
-//       }
-//     }),
-//     city: yup.string().required("Required city").matches(/^[ A-Za-z]+$/, "City must contain only letters and spaces"),
-//     country: yup.string().required("Required country"),
-//     dateOfBirth: yup.string().required("Invalid date"),
-//     // dateOfBirth: yup.date().nullable("Date not date").max(thirteenYearsAgo, "You must be over 13 years old").required("Invalid date"),
-//     defaultShippingAddress: yup.bool().oneOf([true], 'Field must be checked'),
-//     defaultBillingAddress: yup.bool().oneOf([true], 'Field must be checked'),
-// });
+import { DatePicker, type DateValidationError, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import React from "react";
+import dayjs from "dayjs";
+import { Form } from "../additional-form/form";
 
 interface FormValues {
   email: string;
@@ -59,13 +30,40 @@ interface FormValues {
   postalCode: string,
   city: string,
   country: string,
-  dateOfBirth: string,
+  dateOfBirth: dayjs.Dayjs | null,
   defaultShippingAddress: boolean,
-  defaultBillingAddress: boolean,
+  // defaultBillingAddress: boolean,
 }
 
 const RegistrationForm = (): ReactElement => {
+
+
+const [error, setError] = React.useState<DateValidationError | null>(null);
+
+
+
+  const errorMessage = React.useMemo(() => {
+    switch (error) {
+      case 'maxDate': {
+        return 'You must be over 13 years old';
+      }
+
+      case 'invalidDate': {
+        return 'Your date is not valid';
+      }
+
+      default: {
+        return '';
+      }
+    }
+  }, [error]);
+
+
+const startValidDate = dayjs().subtract(13, "year");
+
+
   const { handleSubmit, control } = useForm<FormValues>({
+
     resolver: yupResolver(ValidationSchema),
     defaultValues: {
       email: "",
@@ -77,9 +75,9 @@ const RegistrationForm = (): ReactElement => {
       postalCode: "",
       city: "",
       country: "",
-      dateOfBirth: "2025-05-20",
+      dateOfBirth: startValidDate,
       defaultShippingAddress: true,
-      defaultBillingAddress: true,
+      // defaultBillingAddress: true,
     },
   });
   const onSubmit = async (data: FormValues):Promise<void> => {
@@ -90,15 +88,16 @@ const RegistrationForm = (): ReactElement => {
       city: data.city,
       country: data.country
     }
+
+    const formatData = dayjs(data.dateOfBirth)
+    const resultDate = formatData.format('YYYY-MM-DD')
     const body: BodySignUp = {
       email: data.email,
       firstName: data.firstName,
       lastName: data.lastName,
       password: data.password,
       addresses: [address],
-      // defaultShippingAddress: 0,
-      // defaultBillingAddress: 0,
-      dateOfBirth: data.dateOfBirth,
+      dateOfBirth: resultDate,
       store: "rush-store"
     }
     // console.log( body )
@@ -133,13 +132,38 @@ const RegistrationForm = (): ReactElement => {
           name="lastName"
           control={control}
           label="Last name"
-          sx={{ mb: 2 }}
+          sx={{ mb: 2}}
+        />
+        <Controller
+        name={"dateOfBirth"}
+        control={control}
+        rules={{required: true}}
+        render={({field}) => (
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              format="YYYY-MM-DD"
+              sx={{ mb: 2, width: "100%" }}
+              label="Date of birth"
+              onError={(newError) => setError(newError)}
+              value={field.value}
+              inputRef={field.ref}
+              onChange={(date) => { field.onChange(date); } }
+              slotProps={{
+                textField: {
+                  helperText: errorMessage,
+                },
+                inputAdornment: null,
+              }}
+              maxDate={startValidDate}
+              />
+          </LocalizationProvider>)
+        }
         />
         <Typography
           component="h5"
           sx={{ textAlign: "left", width: "100%", mt: 2, mb: 2 }}
         >
-          Address
+          Main address
         </Typography>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid size={{ xs: 12, sm: 6}}>
@@ -182,28 +206,12 @@ const RegistrationForm = (): ReactElement => {
         />
         </Grid>
         </Grid>
-        <FormInputDate
-          name="dateOfBirth"
-          control={control}
-          label="Birthday"
-        />
         <FormInputCheckbox 
           name="defaultShippingAddress" 
           control={control}
           label="Set as default address"
         />
-        <FormInputCheckbox 
-          name="defaultBillingAddress" 
-          control={control}
-          label="Set as default address for billing"
-        />
-
-        <Typography
-          component="h5"
-          sx={{ textAlign: "left", width: "100%", mt: 2, mb: 2 }}
-        >
-          Address for billing
-        </Typography>
+        <Form/>
         <Button
           type="submit"
           variant={"contained"}
@@ -218,11 +226,15 @@ const RegistrationForm = (): ReactElement => {
         </Grid>
         <Grid>
           <Link
-            href="#"
-            // component={Routerlink}
-            // to ="/register"
+            href="/registration"
           >
             Sign In
+          </Link>
+
+          <Link
+            href="/main"
+          >
+            To main
           </Link>
         </Grid>
       </Grid>

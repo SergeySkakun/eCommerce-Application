@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { postcodeValidator } from "postcode-validator";
 import * as yup from "yup";
+import type { Reference } from "yup";
 
 
-// const now = new Date();
-// const thirteenYearsAgo = new Date(now.getFullYear() - 13, now.getMonth(), now.getDate());
+const now = new Date();
+const thirteenYearsAgo: number | Reference<number> = new Date(now.getFullYear() - 13, now.getMonth(), now.getDate()) as unknown as  number | Reference<number> ;
 
 const ValidationSchema = yup.object({
   email: yup.string().email("Incorrect email").required("Required email"),
@@ -30,8 +32,17 @@ const ValidationSchema = yup.object({
     city: yup.string().required("Required city").matches(/^[ A-Za-z]+$/, "City must contain only letters and spaces"),
     country: yup.string().required("Required country"),
     
-    dateOfBirth: yup.string().required("Invalid date"),
-    // dateOfBirth: yup.date().nullable("Date not date").max(thirteenYearsAgo, "You must be over 13 years old").required("Invalid date"),
+    // dateOfBirth: yup.string().required("Invalid date"),
+    dateOfBirth: yup.date().nullable("Date not date").max(thirteenYearsAgo, "You must be over 13 years old").required("Invalid date"), 
+  //  dateOfBirth: yup.string()
+  //     .required("Required data")
+  //     .transform((value, originalValue) => {
+  //       if (originalValue) {
+  //         const date = new Date(originalValue);
+  //         return Number.isNaN(date.getTime()) ? null : date; 
+  //   }
+  //   return null;
+  // }).nullable("Date not date").max(thirteenYearsAgo, "You must be over 13 years old").required("Invalid date"),
     defaultShippingAddress: yup.bool().oneOf([true], 'Field must be checked'),
     defaultBillingAddress: yup.bool().oneOf([true], 'Field must be checked'),
 });
