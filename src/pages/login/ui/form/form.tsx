@@ -21,30 +21,30 @@ const Form = (): ReactElement => {
       password: "",
     },
   });
-  const onSubmit = (data: ILoginForm):void => {
+  const onSubmit = (data: ILoginForm): void => {
     const body = {
       email: data.email,
       password: data.password,
-    }
+    };
     void sendingSignInOrSignUpRequest(body, "login");
   };
   return (
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <EmailInput
-          name="email"
-          control={control}
-          label="Email"
-          sx={{ mt: 1, mb: 2, boxSizing: "border-box" }}
-        />
-        <PasswordInput
-          name="password"
-          control={control}
-          label="Password"
-          sx={{ mt: 1, mb: 2, boxSizing: "border-box" }}
-        />
-        <SubmitButton />
-      </form>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <EmailInput
+        name="email"
+        control={control}
+        label="Email"
+        sx={{ mt: 1, mb: 2, boxSizing: "border-box" }}
+      />
+      <PasswordInput
+        name="password"
+        control={control}
+        label="Password"
+        sx={{ mt: 1, mb: 2, boxSizing: "border-box" }}
+      />
+      <SubmitButton />
+    </form>
   );
 };
 
-export {Form};
+export { Form };

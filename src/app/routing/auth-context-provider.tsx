@@ -11,19 +11,23 @@ export function AuthUserContextProvider({
   const [isAuthCheckReady, setIsAuthCheckReady] = useState(false);
 
   useEffect(() => {
-    const TOKEN_NAME = "access_token";
+    const TOKEN_NAME = "user_access_token";
     const cookie = document.cookie;
     setIsLoggedIn(cookie.includes(TOKEN_NAME));
     setIsAuthCheckReady(true);
   }, []);
 
   function login(): void {
-    document.cookie = "access_token=116; expires=1 Jan 2026 00:00:00 GMT;";
+    setIsAuthCheckReady(false);
     setIsLoggedIn(true);
   }
 
   function logout(): void {
-    document.cookie = "access_token=; expires=1 Jan 2000 00:00:00 GMT;";
+    document.cookie =
+      "user_access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie =
+      "user_refresh_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    setIsAuthCheckReady(false);
     setIsLoggedIn(false);
   }
 

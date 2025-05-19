@@ -1,9 +1,11 @@
 import type { ReactNode } from "react";
 import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../shared";
 
 export function Main(): ReactNode {
-  const { isLoggedIn, isAuthCheckReady, logout } = useAuth();
+  const { isLoggedIn, logout } = useAuth();
+
   return (
     <>
       <h1>Main</h1>
@@ -17,17 +19,18 @@ export function Main(): ReactNode {
         >
           LogOut
         </Button>
-      ) : /* eslint-disable unicorn/no-null */
-      null}
-      {!isAuthCheckReady || isLoggedIn ? null : (
-        /* eslint-enable unicorn/no-null */
+      ) : (
         <>
-          <Button variant="outlined" color="success" href="/login">
-            Login
-          </Button>
-          <Button variant="outlined" color="success" href="/registration">
-            Registration
-          </Button>
+          <Link to="/login">
+            <Button variant="outlined" color="success">
+              Login
+            </Button>
+          </Link>
+          <Link to="/registration">
+            <Button variant="outlined" color="success">
+              Registration
+            </Button>
+          </Link>
         </>
       )}
     </>

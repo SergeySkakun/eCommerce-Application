@@ -10,7 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { FormInputDropdown } from "./form-components/form-input-dropdown";
 import type { ReactElement } from "react";
 import { FormInputPassword } from "./form-components/form-input-password";
-import { Container, Grid, Link } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import { countries } from "./form-components/countries-list";
 import { FormInputCheckbox } from "./form-components/form-input-checkbox";
 import {
@@ -26,7 +26,8 @@ import {
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React from "react";
 import dayjs from "dayjs";
-import { AdditionalForm } from "../additional-form/form";
+import { Form } from "../additional-form/form";
+import { Link } from "react-router-dom";
 
 interface FormValues {
   email: string;
@@ -230,8 +231,8 @@ const RegistrationForm = (): ReactElement => {
         </form>
         <Grid container justifyContent={"space-between"} sx={{ mt: 1 }}>
           <Grid>
-            <Link href="/login">Sign In</Link>
-            <Link href="/main">To main</Link>
+            <Link to="/login">Sign In</Link>
+            <Link to="/main">To main</Link>
           </Grid>
         </Grid>
       </Paper>
