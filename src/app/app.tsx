@@ -1,6 +1,11 @@
 import type { ReactNode } from "react";
-import { LoginPage } from "../pages";
+import { PageRouter } from "./routing";
+import { AuthUserContextProvider } from "./routing";
 
 export function App(): ReactNode {
-  return <LoginPage />;
+  return (
+    <AuthUserContextProvider>
+      <PageRouter />
+    </AuthUserContextProvider>
+  );
 }
