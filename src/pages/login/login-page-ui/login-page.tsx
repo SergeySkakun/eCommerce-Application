@@ -165,15 +165,17 @@ const LoginPage = (): ReactElement => {
           sx={{ mt: 2 }}
         >
           <Grid>
-            <Typography>Don't have an account?</Typography>
+            <Link
+              href="/register"
+            >
+              Sign Up
+            </Link>
           </Grid>
           <Grid>
             <Link
-              href="#"
-              // component={Routeing}
-              // to ="/register"
+              href="/main"
             >
-              Sign Up
+              To main
             </Link>
           </Grid>
         </Grid>
