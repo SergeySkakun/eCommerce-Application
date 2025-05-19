@@ -5,11 +5,13 @@ import {
   CLIENT_SECRET,
   PROJECT_KEY,
 } from "../../project-config";
-import { saveTokenCookie } from "../../shared/ui/index";
-import type { BodyLogin } from "./types";
-import type { AccessToken, Error } from "../../shared/types";
+import { saveTokenCookie } from "../ui/index";
+import type { AccessToken, BodyLogin, BodySignUp, Error } from "./index";
 
-export async function authenticateCustomer(body: BodyLogin): Promise<string> {
+export async function sendingSignInOrSignUpRequest(
+  body: BodySignUp | BodyLogin,
+  typeRequest: string,
+): Promise<string> {
   let errorMessage = "";
   let BEARER_TOKEN = "";
   const ACCESS_TOKEN = "access_token";
@@ -17,12 +19,12 @@ export async function authenticateCustomer(body: BodyLogin): Promise<string> {
   const arrayCookies = document.cookie.split("; ");
   for (const cookie of arrayCookies) {
     const [name, value] = cookie.split("=");
-    if (name === "access_token") {
+    if (name === "anonymous_access_token") {
       BEARER_TOKEN = value;
       break;
     }
   }
-  await fetch(`${API_HOST}/${PROJECT_KEY}/me/login`, {
+  await fetch(`${API_HOST}/${PROJECT_KEY}/me/${typeRequest}`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${BEARER_TOKEN}`,
@@ -41,7 +43,7 @@ export async function authenticateCustomer(body: BodyLogin): Promise<string> {
             headers: {
               Authorization: `Basic ${btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)}`,
             },
-          }
+          },
         )
           .then((response) => response.json())
           .then((data: AccessToken) => {

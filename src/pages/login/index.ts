@@ -1,1 +1,1 @@
-export { authenticateCustomer } from "./authenticate-customer";
+export { LoginPage } from "./ui/";
