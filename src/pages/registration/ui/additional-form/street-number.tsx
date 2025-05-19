@@ -14,20 +14,20 @@ export default function StreetNumber({
   setStreetNumber,
   setStreetNumberError,
 }: StreetNameInputProperties): ReactNode {
-
-
   const handleStreetNumberChange = (
     event_: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
   ): void => {
     try {
-    setStreetNumber(event_.target.value);
-    if (event_.target.value.length === 0) {
-      setStreetNumberError("Street must contain at least one character");
-    } else {
-      setStreetNumberError("");
-    }
+      setStreetNumber(event_.target.value);
+      if (event_.target.value.length === 0) {
+        setStreetNumberError(
+          "Street number must contain at least one character",
+        );
+      } else {
+        setStreetNumberError("");
+      }
     } catch {
-      setStreetNumberError("Missing street")
+      setStreetNumberError("Missing street number");
     }
   };
 

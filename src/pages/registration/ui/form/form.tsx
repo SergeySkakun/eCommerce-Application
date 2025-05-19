@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
 /* eslint-disable unicorn/no-null */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import Paper from "@mui/material/Paper";
@@ -38,9 +39,9 @@ interface FormValues {
   postalCode: string;
   city: string;
   country: string;
-  dateOfBirth: dayjs.Dayjs | null;
+  dateOfBirth: Date;
   defaultShippingAddress: boolean;
-  // defaultBillingAddress: boolean,
+  defaultBillingAddress: boolean;
 }
 
 const RegistrationForm = (): ReactElement => {
@@ -76,7 +77,7 @@ const RegistrationForm = (): ReactElement => {
       postalCode: "",
       city: "",
       country: "",
-      dateOfBirth: startValidDate,
+      dateOfBirth: startValidDate as unknown as Date,
       defaultShippingAddress: true,
       // defaultBillingAddress: true,
     },
@@ -100,6 +101,8 @@ const RegistrationForm = (): ReactElement => {
       addresses: [address],
       dateOfBirth: resultDate,
       store: "rush-store",
+      defaultShippingAddress: 0,
+      defaultBillingAddress: 0,
     };
     // console.log( body )
     await sendingSignInOrSignUpRequest(body, "signup");
@@ -145,7 +148,7 @@ const RegistrationForm = (): ReactElement => {
                   sx={{ mb: 2, width: "100%" }}
                   label="Date of birth"
                   onError={(newError) => setError(newError)}
-                  value={field.value}
+                  value={field.value as unknown as dayjs.Dayjs}
                   inputRef={field.ref}
                   onChange={(date) => {
                     field.onChange(date);
@@ -217,7 +220,7 @@ const RegistrationForm = (): ReactElement => {
             control={control}
             label="Set as default address"
           />
-          <Form />
+          <AdditionalForm />
           <Button
             type="submit"
             variant={"contained"}
@@ -228,11 +231,7 @@ const RegistrationForm = (): ReactElement => {
         </form>
         <Grid container justifyContent={"space-between"} sx={{ mt: 1 }}>
           <Grid>
-            <Typography>Already have an account?</Typography>
-          </Grid>
-          <Grid>
             <Link to="/login">Sign In</Link>
-
             <Link to="/main">To main</Link>
           </Grid>
         </Grid>
