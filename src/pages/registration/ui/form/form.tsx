@@ -26,7 +26,7 @@ import {
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React from "react";
 import dayjs from "dayjs";
-import { Form } from "../additional-form/form";
+import { AdditionalForm } from "../additional-form/form";
 import { Link } from "react-router-dom";
 
 interface FormValues {
@@ -232,6 +232,8 @@ const RegistrationForm = (): ReactElement => {
         <Grid container justifyContent={"space-between"} sx={{ mt: 1 }}>
           <Grid>
             <Link to="/login">Sign In</Link>
+          </Grid>
+          <Grid>
             <Link to="/main">To main</Link>
           </Grid>
         </Grid>
