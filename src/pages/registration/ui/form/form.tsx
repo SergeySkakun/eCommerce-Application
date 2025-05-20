@@ -70,6 +70,7 @@ const RegistrationForm = (): ReactElement => {
   const startValidDate = dayjs().subtract(13, "year");
 
   const { handleSubmit, control } = useForm<FormValues>({
+    mode: "onChange",
     resolver: yupResolver(ValidationSchema),
     defaultValues: {
       email: "",
