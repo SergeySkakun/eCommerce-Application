@@ -79,7 +79,7 @@ const RegistrationForm = (): ReactElement => {
       country: "",
       dateOfBirth: startValidDate as unknown as Date,
       defaultShippingAddress: true,
-      // defaultBillingAddress: true,
+      defaultBillingAddress: true,
     },
   });
   const onSubmit = async (data: FormValues): Promise<void> => {
