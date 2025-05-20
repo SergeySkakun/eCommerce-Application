@@ -11,7 +11,8 @@ export function AuthUserContextProvider({
   const [isAuthCheckReady, setIsAuthCheckReady] = useState(false);
 
   useEffect(() => {
-    const hasToken = document.cookie.includes("user_access_token");
+    const TOKEN_NAME = "user_access_token";
+    const hasToken = document.cookie.includes(TOKEN_NAME);
     setIsLoggedIn(hasToken);
     setIsAuthCheckReady(true);
   }, []);
