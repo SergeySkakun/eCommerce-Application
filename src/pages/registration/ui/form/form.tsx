@@ -48,8 +48,9 @@ interface FormValues {
 
 const RegistrationForm = (): ReactElement => {
   const [error, setError] = React.useState<DateValidationError | null>(null);
-  const [isDefaultShippingAdress, setIsDefaulShippingAdress] = useState(false);
-  const [isDefaultBillingAdress, setIsDefaulBillingAdress] = useState(false);
+  const [isDefaultShippingAddress, setIsDefaultShippingAddress] =
+    useState(false);
+  const [isDefaultBillingAddress, setIsDefaultBillingAddress] = useState(false);
   const [messageApi, setMessageApi] = useState("");
   const { login } = useAuth();
   const errorMessage = React.useMemo(() => {
@@ -71,6 +72,7 @@ const RegistrationForm = (): ReactElement => {
   const startValidDate = dayjs().subtract(13, "year");
 
   const { handleSubmit, control } = useForm<FormValues>({
+    mode: "onChange",
     resolver: yupResolver(ValidationSchema),
     defaultValues: {
       email: "",
@@ -106,8 +108,8 @@ const RegistrationForm = (): ReactElement => {
       addresses: [address],
       dateOfBirth: resultDate,
       store: "rush-store",
-      defaultShippingAddress: isDefaultShippingAdress === false ? null : 0,
-      defaultBillingAddress: isDefaultBillingAdress === false ? null : 0,
+      defaultShippingAddress: isDefaultShippingAddress === false ? null : 0,
+      defaultBillingAddress: isDefaultBillingAddress === false ? null : 0,
     };
     setMessageApi(await sendingSignInOrSignUpRequest(body, "signup"));
     login();
@@ -225,7 +227,7 @@ const RegistrationForm = (): ReactElement => {
             <Checkbox
               name="defaultShippingAddress"
               onChange={(event) => {
-                setIsDefaulShippingAdress(event.target.checked);
+                setIsDefaultShippingAddress(event.target.checked);
               }}
             />
             Set as default address
@@ -234,7 +236,7 @@ const RegistrationForm = (): ReactElement => {
             <Checkbox
               name="defaultBillingAddress"
               onChange={(event) => {
-                setIsDefaulBillingAdress(event.target.checked);
+                setIsDefaultBillingAddress(event.target.checked);
               }}
             />
             Set as default billing address

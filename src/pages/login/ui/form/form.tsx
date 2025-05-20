@@ -16,6 +16,7 @@ interface ILoginForm {
 
 const Form = (): ReactElement => {
   const { handleSubmit, control } = useForm<ILoginForm>({
+    mode: "onChange",
     resolver: yupResolver(LogInSchema),
     defaultValues: {
       email: "",
