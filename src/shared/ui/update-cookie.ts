@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/no-document-cookie */
 export function saveTokenCookie(token: string, nameToken: string): void {
   const cookieToken = createTokenCookie(token, nameToken);
   document.cookie = cookieToken;

@@ -1,4 +1,8 @@
 import {
+  goAnimationAlert,
+  removeAnimationAlert,
+} from "../../pages/registration/ui/form";
+import {
   API_HOST,
   AUTH_HOST,
   CLIENT_ID,
@@ -36,6 +40,10 @@ export async function sendingSignInOrSignUpRequest(
       if (data.statusCode) {
         errorMessage = data.message;
       } else {
+        goAnimationAlert();
+        setInterval(() => {
+          removeAnimationAlert();
+        }, 5000);
         await fetch(
           `${AUTH_HOST}/oauth/${PROJECT_KEY}/customers/token?grant_type=password&username=${body.email}&password=${body.password}`,
           {
