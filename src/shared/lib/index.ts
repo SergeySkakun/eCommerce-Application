@@ -1,2 +1,2 @@
-export { useAuth } from "./auth";
-export { AuthUserContext } from "./auth";
+export { useAuth, AuthUserContext } from "./auth";
+export { hasLoggedInToken } from "./token";

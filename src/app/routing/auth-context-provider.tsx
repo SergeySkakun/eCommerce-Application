@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AuthUserContext } from "../../shared";
+import { AuthUserContext, hasLoggedInToken } from "../../shared";
 import type { ReactNode } from "react";
 
 export function AuthUserContextProvider({
@@ -11,14 +11,14 @@ export function AuthUserContextProvider({
   const [isAuthCheckReady, setIsAuthCheckReady] = useState(false);
 
   useEffect(() => {
-    const TOKEN_NAME = "user_access_token";
-    const hasToken = document.cookie.includes(TOKEN_NAME);
-    setIsLoggedIn(hasToken);
+    setIsLoggedIn(hasLoggedInToken());
     setIsAuthCheckReady(true);
   }, []);
 
   function login(): void {
-    setIsLoggedIn(true);
+    if (hasLoggedInToken()) {
+      setIsLoggedIn(true);
+    }
   }
 
   function logout(): void {

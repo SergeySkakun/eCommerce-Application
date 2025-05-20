@@ -29,6 +29,7 @@ import { AdditionalForm } from "../additional-form/form";
 import { Link } from "react-router-dom";
 import "./form.style.css";
 import { RegistrationSuccessMessage } from "./index";
+import { useAuth } from "../../../../shared";
 
 interface FormValues {
   email: string;
@@ -50,7 +51,7 @@ const RegistrationForm = (): ReactElement => {
   const [isDefaultShippingAdress, setIsDefaulShippingAdress] = useState(false);
   const [isDefaultBillingAdress, setIsDefaulBillingAdress] = useState(false);
   const [messageApi, setMessageApi] = useState("");
-
+  const { login } = useAuth();
   const errorMessage = React.useMemo(() => {
     switch (error) {
       case "maxDate": {
@@ -109,6 +110,7 @@ const RegistrationForm = (): ReactElement => {
       defaultBillingAddress: isDefaultBillingAdress === false ? null : 0,
     };
     setMessageApi(await sendingSignInOrSignUpRequest(body, "signup"));
+    login();
   };
 
   return (
