@@ -14,19 +14,18 @@ export default function StreetName({
   setStreetName,
   setStreetNameError,
 }: StreetNameInputProperties): ReactNode {
-
   const handleStreetNameChange = (
     event_: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
   ): void => {
     try {
-    setStreetName(event_.target.value);
-    if (event_.target.value.length === 0) {
-      setStreetNameError("Street must contain at least one character");
-    } else {
-      setStreetNameError("");
-    }
+      setStreetName(event_.target.value);
+      if (event_.target.value.length === 0) {
+        setStreetNameError("Street name must contain at least one character");
+      } else {
+        setStreetNameError("");
+      }
     } catch {
-      setStreetNameError("Missing street")
+      setStreetNameError("Missing name street");
     }
   };
 
