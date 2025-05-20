@@ -10,9 +10,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { FormInputDropdown } from "./form-components/form-input-dropdown";
 import type { ReactElement } from "react";
 import { FormInputPassword } from "./form-components/form-input-password";
-import { Container, Grid } from "@mui/material";
+import { Checkbox, Container, Grid } from "@mui/material";
 import { countries } from "./form-components/countries-list";
-import { FormInputCheckbox } from "./form-components/form-input-checkbox";
 import {
   type BodySignUp,
   sendingSignInOrSignUpRequest,
@@ -24,10 +23,12 @@ import {
   LocalizationProvider,
 } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import React from "react";
+import React, { useState } from "react";
 import dayjs from "dayjs";
-import { Form } from "../additional-form/form";
+import { AdditionalForm } from "../additional-form/form";
 import { Link } from "react-router-dom";
+import "./form.style.css";
+import { RegistrationSuccessMessage } from "./index";
 
 interface FormValues {
   email: string;
@@ -46,6 +47,9 @@ interface FormValues {
 
 const RegistrationForm = (): ReactElement => {
   const [error, setError] = React.useState<DateValidationError | null>(null);
+  const [isDefaultShippingAdress, setIsDefaulShippingAdress] = useState(false);
+  const [isDefaultBillingAdress, setIsDefaulBillingAdress] = useState(false);
+  const [messageApi, setMessageApi] = useState("");
 
   const errorMessage = React.useMemo(() => {
     switch (error) {
@@ -79,7 +83,7 @@ const RegistrationForm = (): ReactElement => {
       country: "",
       dateOfBirth: startValidDate as unknown as Date,
       defaultShippingAddress: true,
-      // defaultBillingAddress: true,
+      defaultBillingAddress: true,
     },
   });
   const onSubmit = async (data: FormValues): Promise<void> => {
@@ -101,15 +105,15 @@ const RegistrationForm = (): ReactElement => {
       addresses: [address],
       dateOfBirth: resultDate,
       store: "rush-store",
-      defaultShippingAddress: 0,
-      defaultBillingAddress: 0,
+      defaultShippingAddress: isDefaultShippingAdress === false ? null : 0,
+      defaultBillingAddress: isDefaultBillingAdress === false ? null : 0,
     };
-    // console.log( body )
-    await sendingSignInOrSignUpRequest(body, "signup");
+    setMessageApi(await sendingSignInOrSignUpRequest(body, "signup"));
   };
 
   return (
     <Container maxWidth="md">
+      <RegistrationSuccessMessage />
       <Paper elevation={10} sx={{ mt: 8, p: 2 }}>
         <Typography variant="h4"> Registration </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -215,12 +219,26 @@ const RegistrationForm = (): ReactElement => {
               />
             </Grid>
           </Grid>
-          <FormInputCheckbox
-            name="defaultShippingAddress"
-            control={control}
-            label="Set as default address"
-          />
+          <label className="default-address">
+            <Checkbox
+              name="defaultShippingAddress"
+              onChange={(event) => {
+                setIsDefaulShippingAdress(event.target.checked);
+              }}
+            />
+            Set as default address
+          </label>
+          <label className="default-billing-address">
+            <Checkbox
+              name="defaultBillingAddress"
+              onChange={(event) => {
+                setIsDefaulBillingAdress(event.target.checked);
+              }}
+            />
+            Set as default billing address
+          </label>
           <AdditionalForm />
+          <div className="message-api">{messageApi}</div>
           <Button
             type="submit"
             variant={"contained"}
