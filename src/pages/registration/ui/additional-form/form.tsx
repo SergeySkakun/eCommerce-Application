@@ -1,12 +1,6 @@
 import type { ReactNode } from "react";
 import { useState } from "react";
-import {
-  Checkbox,
-  FormControlLabel,
-  Grid,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 import StreetName from "./street-name";
 import StreetNumber from "./street-number";
 import City from "./city";
@@ -71,12 +65,6 @@ export function AdditionalForm(): ReactNode {
           countryError={countryError}
           setCountry={setCountry}
           setCountryError={setCountryError}
-        />
-        <FormControlLabel
-          style={{ width: "100%" }}
-          sx={{ mb: 2 }}
-          control={<Checkbox />}
-          label="Set as address for billing"
         />
       </Grid>
     </Paper>

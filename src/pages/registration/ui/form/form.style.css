@@ -1,0 +1,43 @@
+.message-api {
+  padding-top: 1rem;
+  color: red;
+  font-size: 18px;
+}
+
+.default-billing-address {
+  font-size: 18px;
+}
+
+.default-address {
+  font-size: 18px;
+}
+
+.alert {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 50px;
+  top: -5rem;
+  right: 4rem;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.699);
+  border: 2px solid rgb(0, 0, 0);
+  color: rgb(201, 200, 200);
+}
+
+.go-animation-alert {
+  animation: alert 5s ease;
+}
+
+@keyframes alert {
+  0% {
+    top: -5rem;
+  }
+  40% {
+    top: 5rem;
+  }
+  100% {
+    top: 5rem;
+  }
+}
