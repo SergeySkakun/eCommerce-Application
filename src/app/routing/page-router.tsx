@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import type { ReactNode } from "react";
 import {
-  BrowserRouter,
+  HashRouter,
   Routes,
   Route,
   useNavigate,
@@ -41,7 +41,7 @@ function GuestRoute({ children }: { children: ReactNode }): ReactNode {
 
 export function PageRouter(): React.ReactNode {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<MainRedirect />}></Route>
         <Route path="/main" element={<Main />}></Route>
@@ -63,6 +63,6 @@ export function PageRouter(): React.ReactNode {
         ></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
