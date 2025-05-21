@@ -1,2 +1,1 @@
-export { useAuth } from "./lib";
-export { AuthUserContext } from "./lib";
+export { useAuth, AuthUserContext, hasLoggedInToken } from "./lib";

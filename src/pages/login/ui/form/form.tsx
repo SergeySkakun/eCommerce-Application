@@ -7,6 +7,7 @@ import { SubmitButton } from "./form-components";
 import { LogInSchema } from "./login-schema";
 import { sendingSignInOrSignUpRequest } from "../../../../shared/api";
 import { EmailInput } from "./form-components";
+import { useAuth } from "../../../../shared";
 
 interface ILoginForm {
   email: string;
@@ -22,12 +23,15 @@ const Form = (): ReactElement => {
       password: "",
     },
   });
+  const { login } = useAuth();
+
   const onSubmit = (data: ILoginForm): void => {
     const body = {
       email: data.email,
       password: data.password,
     };
     void sendingSignInOrSignUpRequest(body, "login");
+    login();
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

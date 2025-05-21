@@ -1,6 +1,5 @@
 import type { ReactElement } from "react";
 import { Paper, Container } from "@mui/material";
-
 import GuestAvatar from "./avatar";
 import LoginTitle from "./login-title";
 import { Form } from "./form";
