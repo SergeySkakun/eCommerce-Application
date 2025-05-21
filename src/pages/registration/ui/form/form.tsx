@@ -30,6 +30,7 @@ import { Link } from "react-router-dom";
 import "./form.style.css";
 import { RegistrationSuccessMessage } from "./index";
 import { useAuth } from "../../../../shared";
+import { FormInputCheckbox } from "./form-components/form-input-checkbox";
 
 interface FormValues {
   email: string;
@@ -48,8 +49,8 @@ interface FormValues {
 
 const RegistrationForm = (): ReactElement => {
   const [error, setError] = React.useState<DateValidationError | null>(null);
-  const [isDefaultShippingAddress, setIsDefaultShippingAddress] =
-    useState(false);
+  // const [isDefaultShippingAddress, setIsDefaultShippingAddress] =
+  //   useState(false);
   const [isDefaultBillingAddress, setIsDefaultBillingAddress] = useState(false);
   const [messageApi, setMessageApi] = useState("");
   const { login } = useAuth();
@@ -85,8 +86,8 @@ const RegistrationForm = (): ReactElement => {
       city: "",
       country: "",
       dateOfBirth: startValidDate as unknown as Date,
-      defaultShippingAddress: true,
-      defaultBillingAddress: true,
+      defaultShippingAddress: false,
+      defaultBillingAddress: false,
     },
   });
   const onSubmit = async (data: FormValues): Promise<void> => {
@@ -108,7 +109,7 @@ const RegistrationForm = (): ReactElement => {
       addresses: [address],
       dateOfBirth: resultDate,
       store: "rush-store",
-      defaultShippingAddress: isDefaultShippingAddress === false ? null : 0,
+      defaultShippingAddress: 0,
       defaultBillingAddress: isDefaultBillingAddress === false ? null : 0,
     };
     setMessageApi(await sendingSignInOrSignUpRequest(body, "signup"));
@@ -223,30 +224,51 @@ const RegistrationForm = (): ReactElement => {
               />
             </Grid>
           </Grid>
-          <label className="default-address">
-            <Checkbox
-              name="defaultShippingAddress"
-              onChange={(event) => {
-                setIsDefaultShippingAddress(event.target.checked);
-              }}
-            />
-            Set as default address
-          </label>
-          <label className="default-billing-address">
-            <Checkbox
-              name="defaultBillingAddress"
-              onChange={(event) => {
-                setIsDefaultBillingAddress(event.target.checked);
-              }}
-            />
-            Set as default billing address
-          </label>
-          <AdditionalForm />
+          <Grid>
+            <Grid paddingLeft="0.7rem" size={{ xs: 12, sm: 6 }}>
+              <FormInputCheckbox
+                name="defaultShippingAddress"
+                control={control}
+                label="Set as default address"
+              />
+              {/* <FormInputCheckbox 
+                name="defaultBillingAddress" 
+                control={control}
+                label="Set as default address for billing"
+              /> */}
+              {/* <label className="default-address">
+                <Checkbox
+                  name="defaultShippingAddress"
+                  onChange={(event) => {
+                    setIsDefaultShippingAddress(event.target.checked);
+                  }}
+                />
+                Set as default address
+              </label> */}
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <label className="default-billing-address">
+                <Checkbox
+                  name="defaultBillingAddress"
+                  onChange={(event) => {
+                    setIsDefaultBillingAddress(event.target.checked);
+                  }}
+                />
+                Set as default billing address
+              </label>
+            </Grid>
+          </Grid>
+          {isDefaultBillingAddress ? (
+            <>
+              <AdditionalForm />
+            </>
+          ) : null}
           <div className="message-api">{messageApi}</div>
           <Button
             type="submit"
             variant={"contained"}
-            sx={{ mt: 2, display: "block" }}
+            fullWidth
+            sx={{ mt: 2, mb: 2, display: "block" }}
           >
             Submit
           </Button>

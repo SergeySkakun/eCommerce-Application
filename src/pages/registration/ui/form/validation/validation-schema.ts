@@ -1,13 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-// import dayjs from "dayjs";
 import dayjs from "dayjs";
 import { postcodeValidator } from "postcode-validator";
 import * as yup from "yup";
 
 const ValidationSchema = yup.object({
-  email: yup.string().email("Incorrect email").required("Required email"),
+  email: yup
+    .string()
+    .required("Required email")
+    .email("Incorrect email")
+    .matches(
+      /^((([\dA-Za-z][\d.A-z-]+[\dA-Za-z])|([\dА-я][\d.А-я-]+[\dА-я]))@([A-Za-z-]+\.){1,2}[A-Za-z-]{2,})$/,
+      "Incorrect email",
+    ),
   firstName: yup
     .string()
     .min(1, "First name must be 1 or more characters")
