@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import type { ReactElement } from "react";
+import { useState, type ReactElement } from "react";
 import { PasswordInput } from "./form-components";
 import { SubmitButton } from "./form-components";
 import { LogInSchema } from "./login-schema";
@@ -24,13 +24,14 @@ const Form = (): ReactElement => {
     },
   });
   const { login } = useAuth();
+  const [messageApi, setMessageApi] = useState("");
 
-  const onSubmit = (data: ILoginForm): void => {
+  const onSubmit = async (data: ILoginForm): Promise<void> => {
     const body = {
       email: data.email,
       password: data.password,
     };
-    void sendingSignInOrSignUpRequest(body, "login");
+    setMessageApi(await sendingSignInOrSignUpRequest(body, "login"));
     login();
   };
   return (
@@ -47,6 +48,7 @@ const Form = (): ReactElement => {
         label="Password"
         sx={{ mt: 1, mb: 2, boxSizing: "border-box" }}
       />
+      <div className="message-api">{messageApi}</div>
       <SubmitButton />
     </form>
   );
