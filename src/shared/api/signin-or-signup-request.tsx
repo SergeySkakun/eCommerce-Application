@@ -1,8 +1,4 @@
 import {
-  goAnimationAlert,
-  removeAnimationAlert,
-} from "../../pages/registration/ui/form";
-import {
   API_HOST,
   AUTH_HOST,
   CLIENT_ID,
@@ -11,6 +7,16 @@ import {
 } from "../../project-config";
 import { saveTokenCookie } from "../ui/index";
 import type { AccessToken, BodyLogin, BodySignUp, Error } from "./index";
+
+function goAnimationAlert(): void {
+  const alert = document.querySelector(".alert");
+  alert.classList.add("go-animation-alert");
+}
+
+function removeAnimationAlert(): void {
+  const alert = document.querySelector(".alert");
+  alert.classList.remove("go-animation-alert");
+}
 
 export async function sendingSignInOrSignUpRequest(
   body: BodySignUp | BodyLogin,
@@ -41,7 +47,7 @@ export async function sendingSignInOrSignUpRequest(
         errorMessage = data.message;
       } else {
         goAnimationAlert();
-        setInterval(() => {
+        setTimeout(() => {
           removeAnimationAlert();
         }, 5000);
         await fetch(
