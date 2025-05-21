@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/consistent-type-assertions */
 /* eslint-disable unicorn/no-null */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import Paper from "@mui/material/Paper";
@@ -18,7 +17,7 @@ import {
 } from "../../../../shared/api";
 import { ValidationSchema } from "./validation/validation-schema";
 import {
-  DatePicker,
+  DateField,
   type DateValidationError,
   LocalizationProvider,
 } from "@mui/x-date-pickers";
@@ -30,7 +29,7 @@ import { Link } from "react-router-dom";
 import "./form.style.css";
 import { RegistrationSuccessMessage } from "./index";
 import { useAuth } from "../../../../shared";
-import { FormInputCheckbox } from "./form-components/form-input-checkbox";
+// import { FormInputCheckbox } from "./form-components/form-input-checkbox";
 
 interface FormValues {
   email: string;
@@ -42,15 +41,16 @@ interface FormValues {
   postalCode: string;
   city: string;
   country: string;
-  dateOfBirth: Date;
+  // dateOfBirth: Date;
+  dateOfBirth: string;
   defaultShippingAddress: boolean;
   defaultBillingAddress: boolean;
 }
 
 const RegistrationForm = (): ReactElement => {
   const [error, setError] = React.useState<DateValidationError | null>(null);
-  // const [isDefaultShippingAddress, setIsDefaultShippingAddress] =
-  //   useState(false);
+  const [isDefaultShippingAddress, setIsDefaultShippingAddress] =
+    useState(false);
   const [isDefaultBillingAddress, setIsDefaultBillingAddress] = useState(false);
   const [messageApi, setMessageApi] = useState("");
   const { login } = useAuth();
@@ -85,9 +85,10 @@ const RegistrationForm = (): ReactElement => {
       postalCode: "",
       city: "",
       country: "",
-      dateOfBirth: startValidDate as unknown as Date,
-      defaultShippingAddress: false,
-      defaultBillingAddress: false,
+      // dateOfBirth: startValidDate as unknown as Date,
+      dateOfBirth: "1981-01-01",
+      defaultShippingAddress: true,
+      defaultBillingAddress: true,
     },
   });
   const onSubmit = async (data: FormValues): Promise<void> => {
@@ -109,11 +110,12 @@ const RegistrationForm = (): ReactElement => {
       addresses: [address],
       dateOfBirth: resultDate,
       store: "rush-store",
-      defaultShippingAddress: 0,
+      // defaultShippingAddress: 0,
+      defaultShippingAddress: isDefaultShippingAddress === false ? null : 0,
       defaultBillingAddress: isDefaultBillingAddress === false ? null : 0,
     };
     setMessageApi(await sendingSignInOrSignUpRequest(body, "signup"));
-    setTimeout(() => login(), 6500);
+    setTimeout(() => login(), 2700);
   };
 
   return (
@@ -152,15 +154,16 @@ const RegistrationForm = (): ReactElement => {
             rules={{ required: true }}
             render={({ field }) => (
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
+                <DateField
                   format="YYYY-MM-DD"
                   sx={{ mb: 2, width: "100%" }}
                   label="Date of birth"
                   onError={(newError) => setError(newError)}
-                  value={field.value as unknown as dayjs.Dayjs}
+                  value={dayjs(field.value)}
                   inputRef={field.ref}
                   onChange={(date) => {
-                    field.onChange(date);
+                    const formatDate = dayjs(date);
+                    field.onChange(formatDate);
                   }}
                   slotProps={{
                     textField: {
@@ -225,18 +228,18 @@ const RegistrationForm = (): ReactElement => {
             </Grid>
           </Grid>
           <Grid>
-            <Grid paddingLeft="0.7rem" size={{ xs: 12, sm: 6 }}>
-              <FormInputCheckbox
+            <Grid size={{ xs: 12, sm: 6 }}>
+              {/* <FormInputCheckbox
                 name="defaultShippingAddress"
                 control={control}
                 label="Set as default address"
-              />
+              /> */}
               {/* <FormInputCheckbox 
                 name="defaultBillingAddress" 
                 control={control}
                 label="Set as default address for billing"
               /> */}
-              {/* <label className="default-address">
+              <label className="default-address">
                 <Checkbox
                   name="defaultShippingAddress"
                   onChange={(event) => {
@@ -244,7 +247,7 @@ const RegistrationForm = (): ReactElement => {
                   }}
                 />
                 Set as default address
-              </label> */}
+              </label>
             </Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
               <label className="default-billing-address">

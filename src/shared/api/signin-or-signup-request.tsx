@@ -46,10 +46,12 @@ export async function sendingSignInOrSignUpRequest(
       if (data.statusCode) {
         errorMessage = data.message;
       } else {
-        goAnimationAlert();
-        setTimeout(() => {
-          removeAnimationAlert();
-        }, 5000);
+        if (typeRequest === "signup") {
+          goAnimationAlert();
+          setTimeout(() => {
+            removeAnimationAlert();
+          }, 2500);
+        }
         await fetch(
           `${AUTH_HOST}/oauth/${PROJECT_KEY}/customers/token?grant_type=password&username=${body.email}&password=${body.password}`,
           {
