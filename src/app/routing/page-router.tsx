@@ -15,6 +15,7 @@ import {
   LoadingPage,
 } from "../../pages";
 import { useAuth } from "../../shared";
+import { ObtainAnonymousAccessToken } from "../../shared/api";
 
 function MainRedirect(): undefined {
   const navigate = useNavigate();
@@ -45,7 +46,16 @@ export function PageRouter(): React.ReactNode {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainRedirect />}></Route>
-        <Route path="/main" element={<Main />}></Route>
+
+        <Route
+          path="/main"
+          element={
+            <>
+              <Main />
+              <ObtainAnonymousAccessToken />
+            </>
+          }
+        ></Route>
         <Route
           path="/login"
           element={

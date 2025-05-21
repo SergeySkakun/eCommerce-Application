@@ -27,14 +27,14 @@
 }
 
 .go-animation-alert {
-  animation: alert 5s ease;
+  animation: alert 2.5s ease;
 }
 
 @keyframes alert {
   0% {
     top: -5rem;
   }
-  40% {
+  30% {
     top: 5rem;
   }
   100% {
