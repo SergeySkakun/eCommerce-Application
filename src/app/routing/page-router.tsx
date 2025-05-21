@@ -41,7 +41,8 @@ function GuestRoute({ children }: { children: ReactNode }): ReactNode {
 
 export function PageRouter(): React.ReactNode {
   return (
-    <BrowserRouter basename="/eCommerce-Application">
+    // <BrowserRouter basename="/eCommerce-Application">
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainRedirect />}></Route>
         <Route path="/main" element={<Main />}></Route>

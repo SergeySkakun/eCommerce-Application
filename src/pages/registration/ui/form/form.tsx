@@ -112,7 +112,7 @@ const RegistrationForm = (): ReactElement => {
       defaultBillingAddress: isDefaultBillingAddress === false ? null : 0,
     };
     setMessageApi(await sendingSignInOrSignUpRequest(body, "signup"));
-    setTimeout(() => login(), 2000);
+    setTimeout(() => login(), 6500);
   };
 
   return (
