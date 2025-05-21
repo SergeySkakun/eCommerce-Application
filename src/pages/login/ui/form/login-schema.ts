@@ -11,6 +11,7 @@ const LogInSchema = yup.object({
     ),
   password: yup
     .string()
+    .required("Required password")
     .min(8, "Password must be 8 or more characters")
     .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
     .matches(/[a-z]/, "Password must contain at least one lowercase letter")
@@ -18,8 +19,7 @@ const LogInSchema = yup.object({
     .matches(
       /[!#$%&?@]/,
       "Password must contain at least 1 special character:!#$%&?@&%",
-    )
-    .required("Missing dropdown value"),
+    ),
 });
 
 export { LogInSchema };
