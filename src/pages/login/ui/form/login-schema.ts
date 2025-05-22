@@ -4,10 +4,9 @@ const LogInSchema = yup.object({
   email: yup
     .string()
     .required("Required email")
-    .email("Incorrect email")
     .matches(
       /^((([\dA-Za-z][\d.A-z-]+[\dA-Za-z])|([\dА-я][\d.А-я-]+[\dА-я]))@([A-Za-z-]+\.){1,2}[A-Za-z-]{2,})$/,
-      "Incorrect email",
+      "Email address must contain correct a valid name, like 'example@mail.com'",
     ),
   password: yup
     .string()
@@ -19,7 +18,8 @@ const LogInSchema = yup.object({
     .matches(
       /[!#$%&?@]/,
       "Password must contain at least 1 special character:!#$%&?@&%",
-    ),
+    )
+    .matches(/^[^ ]{2,}$/, "The password must not contain spaces"),
 });
 
 export { LogInSchema };

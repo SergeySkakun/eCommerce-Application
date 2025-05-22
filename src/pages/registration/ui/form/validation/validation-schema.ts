@@ -34,7 +34,8 @@ const ValidationSchema = yup.object({
     .matches(
       /[!#$%&?@]/,
       "Password must contain at least 1 special character:!#$%&?@&%",
-    ),
+    )
+    .matches(/^[^ ]{2,}$/, "The password must not contain spaces"),
   streetName: yup.string().required("Required street name"),
   streetNumber: yup.string().required("Required street number"),
   postalCode: yup
