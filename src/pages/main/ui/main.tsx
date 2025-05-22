@@ -10,33 +10,39 @@ export function Main(): ReactNode {
   return (
     <>
       <div className="main">
-        <h1 className="title">Fast and RUSH</h1>
-        {isLoggedIn ? (
-          <>
-            <Button
-              variant="contained"
-              color="error"
-              onClick={() => {
-                logout();
-              }}
-            >
-              LogOut
-            </Button>
-          </>
-        ) : (
-          <>
-            <Link to="/login">
-              <Button variant="outlined" color="success">
-                Login
-              </Button>
-            </Link>
-            <Link to="/registration">
-              <Button variant="outlined" color="success">
-                Registration
-              </Button>
-            </Link>
-          </>
-        )}
+        <header className="header">
+          <div className="logo">
+            <h1 className="title">Fast and RUSH</h1>
+          </div>
+          <div className="menu">
+            {isLoggedIn ? (
+              <>
+                <Button
+                  variant="contained"
+                  color="error"
+                  onClick={() => {
+                    logout();
+                  }}
+                >
+                  LogOut
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link to="/login">
+                  <Button variant="contained" color="success">
+                    Login
+                  </Button>
+                </Link>
+                <Link to="/registration">
+                  <Button variant="contained" color="success">
+                    Registration
+                  </Button>
+                </Link>
+              </>
+            )}
+          </div>
+        </header>
       </div>
     </>
   );

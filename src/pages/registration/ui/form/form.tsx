@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/consistent-type-assertions */
 /* eslint-disable unicorn/no-null */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import Paper from "@mui/material/Paper";
@@ -18,7 +17,7 @@ import {
 } from "../../../../shared/api";
 import { ValidationSchema } from "./validation/validation-schema";
 import {
-  DatePicker,
+  DateField,
   type DateValidationError,
   LocalizationProvider,
 } from "@mui/x-date-pickers";
@@ -30,6 +29,7 @@ import { Link } from "react-router-dom";
 import "./form.style.css";
 import { RegistrationSuccessMessage } from "./index";
 import { useAuth } from "../../../../shared";
+// import { FormInputCheckbox } from "./form-components/form-input-checkbox";
 
 interface FormValues {
   email: string;
@@ -41,7 +41,8 @@ interface FormValues {
   postalCode: string;
   city: string;
   country: string;
-  dateOfBirth: Date;
+  // dateOfBirth: Date;
+  dateOfBirth: string;
   defaultShippingAddress: boolean;
   defaultBillingAddress: boolean;
 }
@@ -84,7 +85,8 @@ const RegistrationForm = (): ReactElement => {
       postalCode: "",
       city: "",
       country: "",
-      dateOfBirth: startValidDate as unknown as Date,
+      // dateOfBirth: startValidDate as unknown as Date,
+      dateOfBirth: "1981-01-01",
       defaultShippingAddress: true,
       defaultBillingAddress: true,
     },
@@ -108,6 +110,7 @@ const RegistrationForm = (): ReactElement => {
       addresses: [address],
       dateOfBirth: resultDate,
       store: "rush-store",
+      // defaultShippingAddress: 0,
       defaultShippingAddress: isDefaultShippingAddress === false ? null : 0,
       defaultBillingAddress: isDefaultBillingAddress === false ? null : 0,
     };
@@ -151,15 +154,16 @@ const RegistrationForm = (): ReactElement => {
             rules={{ required: true }}
             render={({ field }) => (
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
+                <DateField
                   format="YYYY-MM-DD"
                   sx={{ mb: 2, width: "100%" }}
                   label="Date of birth"
                   onError={(newError) => setError(newError)}
-                  value={field.value as unknown as dayjs.Dayjs}
+                  value={dayjs(field.value)}
                   inputRef={field.ref}
                   onChange={(date) => {
-                    field.onChange(date);
+                    const formatDate = dayjs(date);
+                    field.onChange(formatDate);
                   }}
                   slotProps={{
                     textField: {
@@ -223,30 +227,51 @@ const RegistrationForm = (): ReactElement => {
               />
             </Grid>
           </Grid>
-          <label className="default-address">
-            <Checkbox
-              name="defaultShippingAddress"
-              onChange={(event) => {
-                setIsDefaultShippingAddress(event.target.checked);
-              }}
-            />
-            Set as default address
-          </label>
-          <label className="default-billing-address">
-            <Checkbox
-              name="defaultBillingAddress"
-              onChange={(event) => {
-                setIsDefaultBillingAddress(event.target.checked);
-              }}
-            />
-            Set as default billing address
-          </label>
-          <AdditionalForm />
+          <Grid>
+            <Grid size={{ xs: 12, sm: 6 }}>
+              {/* <FormInputCheckbox
+                name="defaultShippingAddress"
+                control={control}
+                label="Set as default address"
+              /> */}
+              {/* <FormInputCheckbox 
+                name="defaultBillingAddress" 
+                control={control}
+                label="Set as default address for billing"
+              /> */}
+              <label className="default-address">
+                <Checkbox
+                  name="defaultShippingAddress"
+                  onChange={(event) => {
+                    setIsDefaultShippingAddress(event.target.checked);
+                  }}
+                />
+                Set as default address
+              </label>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <label className="default-billing-address">
+                <Checkbox
+                  name="defaultBillingAddress"
+                  onChange={(event) => {
+                    setIsDefaultBillingAddress(event.target.checked);
+                  }}
+                />
+                Set as default billing address
+              </label>
+            </Grid>
+          </Grid>
+          {isDefaultBillingAddress ? (
+            <>
+              <AdditionalForm />
+            </>
+          ) : null}
           <div className="message-api">{messageApi}</div>
           <Button
             type="submit"
             variant={"contained"}
-            sx={{ mt: 2, display: "block" }}
+            fullWidth
+            sx={{ mt: 2, mb: 2, display: "block" }}
           >
             Submit
           </Button>
