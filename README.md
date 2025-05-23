@@ -56,7 +56,7 @@ To run the unit tests:
 
 | Script            | Usage                  | Explanation                                                                                                                                                        |
 | :---------------- | :--------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **init**          | `npm run init`         | Install all necessary dependencies.             
+| **init**          | `npm run init`         | Install all necessary dependencies.                                                                                                                                |
 | **dev**           | `npm run dev`          | Starts the development server on [localhost:5173](http://localhost:5173). HMR (Hot Module Replacement) is enabled.                                                 |
 | **build**         | `npm run build`        | Builds the production version of the app. First compiles TypeScript files (`tsc -b`), then bundles the project using Vite. Output is located in the `dist` folder. |
 | **lint**          | `npm run lint`         | Runs [ESLint](https://eslint.org/) on the project files to detect code quality issues.                                                                             |
@@ -73,6 +73,7 @@ To run the unit tests:
 | :-------------: | :---------------------------------------------------------------------------------------------------------: |
 |    **React**    |           ![React](https://img.shields.io/badge/React-^19.0.0-61DAFB?logo=react&logoColor=white)            |
 | **TypeScript**  |    ![TypeScript](https://img.shields.io/badge/TypeScript-~5.7.2-3178C6?logo=typescript&logoColor=white)     |
+| **Material UI** |     ![Material-UI](https://img.shields.io/badge/Material--UI-v7.1.0-blue.svg?logo=mui&logoColor=white)      |
 |    **SCSS**     |                ![SCSS](https://img.shields.io/badge/SCSS--CD6799?logo=sass&logoColor=white)                 |
 |    **Jest**     |             ![Jest](https://img.shields.io/badge/Jest-^29.7.0-C21325?logo=jest&logoColor=white)             |
 |    **Vite**     |             ![Vite](https://img.shields.io/badge/Vite-^6.3.1-646CFF?logo=vite&logoColor=white)              |

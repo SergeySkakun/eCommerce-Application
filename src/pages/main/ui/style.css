@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 92%;
+  padding: 0.4vw 0;
+}
+
+.menu {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.logo {
+  font-size: 2.5vw;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: center;
+
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+
+  color: rgb(42 14 87);
+
+  background-image: url("https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNhciUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D");
+  background-size: auto;
+}

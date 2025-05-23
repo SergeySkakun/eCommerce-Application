@@ -60,6 +60,7 @@ export default tseslint.config(
       "class-methods-use-this": "error",
       "unicorn/better-regex": "error",
       "no-console": "warn",
+      "unicorn/no-document-cookie": "off",
     },
   },
 );
