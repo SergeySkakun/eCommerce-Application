@@ -1,6 +1,6 @@
-import { API_HOST, PROJECT_KEY } from "../../project-config";
-import { getTokenFromCookie } from "../lib/token";
-import type { DataProduct } from "./types";
+import { API_HOST, PROJECT_KEY } from "../../../project-config";
+import { getTokenFromCookie } from "../../../shared/lib/token";
+import type { DataProduct } from "./index";
 
 // для фильтрации по категориям:
 //  передать в эту функцию 'filter=categories.id:"${ID}"'
