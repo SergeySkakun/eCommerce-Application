@@ -16,7 +16,7 @@ export const FormInputDate = ({
       control={control}
       render={(renderProperties) => (
         <TextField
-          type='date'
+          type="date"
           size="small"
           defaultValue={renderProperties.field.value}
           onChange={renderProperties.field.onChange}
@@ -25,13 +25,12 @@ export const FormInputDate = ({
           helperText={renderProperties.fieldState.error?.message ?? undefined}
           fullWidth
           label={label}
-          sx={sx} />
+          sx={sx}
+        />
       )}
     />
   );
 };
-
-
 
 // import { TextField } from "@mui/material";
 // import { Controller } from "react-hook-form";
@@ -82,7 +81,7 @@ export const FormInputDate = ({
 //                       sx={sx}
 //                     />
 //                   )}
-                      
+
 //                   // slotProps={{
 //                   //   textField: {
 //                   //     helperText: errorMessage,

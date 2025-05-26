@@ -4,6 +4,7 @@ export interface BodyLogin {
 }
 
 interface Addresses {
+  id: string;
   streetName: string;
   streetNumber: string;
   postalCode: string;
@@ -31,8 +32,24 @@ export interface AccessToken {
   token_type: string;
 }
 
-export interface Error {
-  errors: [];
-  message: string;
+export interface CustomerAllInfo {
   statusCode: number;
+  message: string;
+  customer: Customer;
+}
+
+interface Customer {
+  id: string;
+  version: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  password: string;
+  addresses: [Addresses];
+  defaultShippingAddressIds: string;
+  defaultbillingAddressIds: string;
+  shippingAddressIds: [string];
+  billingAddressIds: [string];
+  stores: [];
 }
