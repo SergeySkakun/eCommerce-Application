@@ -20,6 +20,6 @@ const SubmitButton = (): ReactNode => {
       </Typography>
     </Button>
   );
-}
+};
 
-export { SubmitButton }
+export { SubmitButton };

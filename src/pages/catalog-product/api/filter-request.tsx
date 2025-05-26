@@ -1,5 +1,5 @@
 import { API_HOST, PROJECT_KEY } from "../../../project-config";
-import { getTokenFromCookie } from "../../../shared/lib/token";
+import { getTokenFromCookie } from "../../../shared";
 import type { DataProduct } from "./index";
 
 // для фильтрации по категориям:

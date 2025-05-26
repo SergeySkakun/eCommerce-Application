@@ -3,4 +3,5 @@ export const TOKEN_NAMES = {
   successUserRefresh: "user_refresh_token",
   guestAccess: "anonymous_access_token",
   guestRefresh: "anonymous_refresh_token",
+  activeUserID: "active_user_ID",
 };

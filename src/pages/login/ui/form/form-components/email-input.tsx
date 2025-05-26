@@ -4,7 +4,12 @@ import { Controller } from "react-hook-form";
 import type { IFormInputProperties } from "./form-input-properties";
 import type { ReactElement } from "react";
 
-export const EmailInput = ({ name, control, label, sx }: IFormInputProperties): ReactElement => {
+export const EmailInput = ({
+  name,
+  control,
+  label,
+  sx,
+}: IFormInputProperties): ReactElement => {
   return (
     <Controller
       name={name}

@@ -5,9 +5,14 @@ import type { IFormInputProperties } from "./form-input-properties";
 import { useState, type ReactElement } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
-export const PasswordInput = ({ name, control, label, sx }: IFormInputProperties): ReactElement => {
-    const [showPassword, setShowPassword] = useState(false); 
-    const handleClickShowPassword = (): void => setShowPassword((show) => !show);
+export const PasswordInput = ({
+  name,
+  control,
+  label,
+  sx,
+}: IFormInputProperties): ReactElement => {
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = (): void => setShowPassword((show) => !show);
   return (
     <Controller
       name={name}
@@ -18,7 +23,7 @@ export const PasswordInput = ({ name, control, label, sx }: IFormInputProperties
           placeholder="Enter your password"
           onChange={renderProperties.field.onChange}
           value={renderProperties.field.value}
-          error={!!renderProperties.fieldState.error} 
+          error={!!renderProperties.fieldState.error}
           helperText={renderProperties.fieldState.error?.message ?? undefined}
           fullWidth
           label={label}

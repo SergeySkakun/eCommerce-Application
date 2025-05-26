@@ -5,8 +5,7 @@ interface CountryType {
   suggested?: boolean;
 }
 
-
-export const countries:  CountryType[] = [
+export const countries: CountryType[] = [
   { value: "AD", label: "Andorra", phone: "376" },
   {
     value: "AE",

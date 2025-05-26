@@ -1,4 +1,4 @@
-import { TOKEN_NAMES } from "./index";
+import { TOKEN_NAMES } from "./";
 
 export function getTokenFromCookie(): string {
   let BEARER_TOKEN = "";
