@@ -1,20 +1,10 @@
-import { API_HOST, PROJECT_KEY } from "../../project-config";
+import { API_HOST, PROJECT_KEY } from "../../../project-config";
+import { getTokenFromCookie } from "../../../shared";
 import type { DataProduct } from "./types";
 
 export async function getAllProducts(): Promise<DataProduct> {
   let allProducts: DataProduct;
-  let BEARER_TOKEN = "";
-  const arrayCookies = document.cookie.split("; ");
-  for (const cookie of arrayCookies) {
-    const [name, value] = cookie.split("=");
-    if (name === "user_access_token") {
-      BEARER_TOKEN = value;
-      break;
-    } else if (name === "anonymous_access_token") {
-      BEARER_TOKEN = value;
-      break;
-    }
-  }
+  const BEARER_TOKEN = getTokenFromCookie();
   await fetch(`${API_HOST}/${PROJECT_KEY}/products`, {
     method: "GET",
     headers: {
