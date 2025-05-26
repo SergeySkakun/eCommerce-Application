@@ -5,8 +5,7 @@ import {
   CLIENT_SECRET,
   PROJECT_KEY,
 } from "../../project-config";
-import { getTokenFromCookie, TOKEN_NAMES } from "../";
-import { saveTokenCookie } from "../";
+import { getTokenFromCookie, TOKEN_NAMES, saveTokenCookie } from "../";
 import type {
   AccessToken,
   BodyLogin,

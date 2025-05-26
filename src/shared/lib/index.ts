@@ -1,4 +1,7 @@
 export { useAuth, AuthUserContext } from "./auth";
-export { hasLoggedInToken } from "./token";
-export { TOKEN_NAMES } from "./token";
-export { getTokenFromCookie } from "./token";
+export {
+  hasLoggedInToken,
+  TOKEN_NAMES,
+  getTokenFromCookie,
+  saveTokenCookie,
+} from "./token";
