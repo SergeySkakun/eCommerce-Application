@@ -8,5 +8,5 @@ export type AuthContextType = {
 };
 
 export const AuthUserContext = createContext<AuthContextType | undefined>(
-  undefined
+  undefined,
 );
