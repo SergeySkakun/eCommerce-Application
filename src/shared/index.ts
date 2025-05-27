@@ -6,3 +6,4 @@ export {
   getTokenFromCookie,
   saveTokenCookie,
 } from "./lib";
+export * from "./api";
