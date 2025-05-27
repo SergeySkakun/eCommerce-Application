@@ -4,7 +4,7 @@ import type { DataProduct } from "./index";
 
 // для ФИЛЬТРАЦИИ
 //  по категориям:
-//      передать в эту функцию 'filter=categories.id:"${ID}"'
+//      передать в эту функцию 'filter=categories.id:"ID"'
 //      где ID это:
 //          для allcars - 82917f8e-eea7-4f90-984a-782053d24952
 //          для sedan - ddd035f0-06c3-46c5-a8c6-c7e4a3b3c01b
@@ -40,7 +40,12 @@ import type { DataProduct } from "./index";
 //              "variants.attributes.Power desc" - от большего к меньшему
 //              "variants.attributes.Power asc" - от меньшего к большему
 
-export async function sendingFilterSortingRequest(
+// для ПОИСКА
+//  передать в эту функцию 'fuzzy=true&text.en-US=*text*'
+//      где text это строка которую ввёл пользователь
+
+
+export async function sendingFilterSortingSearchRequest(
   token: string,
 ): Promise<DataProduct> {
   let products: DataProduct;
