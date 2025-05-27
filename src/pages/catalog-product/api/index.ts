@@ -1,3 +1,3 @@
-export { sendingFilterSortingRequest } from "./filter-sorting-request";
+export { sendingFilterSortingSearchRequest } from "./filter-sorting-search-request";
 export { getAllProducts } from "./request-to-get-all-products";
 export * from "./types";
