@@ -16,6 +16,7 @@ import {
 } from "../../pages";
 import { useAuth } from "../../shared";
 import { ObtainAnonymousAccessToken } from "../../shared/api";
+import { Header, Footer } from "../../widgets";
 
 function MainRedirect(): undefined {
   const navigate = useNavigate();
@@ -51,7 +52,9 @@ export function PageRouter(): React.ReactNode {
           path="/main"
           element={
             <>
+              <Header />
               <Main />
+              <Footer />
               <ObtainAnonymousAccessToken />
             </>
           }
@@ -60,7 +63,9 @@ export function PageRouter(): React.ReactNode {
           path="/login"
           element={
             <GuestRoute>
+              <Header />
               <LoginPage />
+              <Footer />
             </GuestRoute>
           }
         ></Route>
@@ -68,7 +73,9 @@ export function PageRouter(): React.ReactNode {
           path="/registration"
           element={
             <GuestRoute>
+              <Header />
               <RegistrationForm />
+              <Footer />
             </GuestRoute>
           }
         ></Route>

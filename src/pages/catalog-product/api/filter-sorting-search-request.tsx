@@ -44,7 +44,6 @@ import type { DataProduct } from "./index";
 //  передать в эту функцию 'fuzzy=true&text.en-US=*text*'
 //      где text это строка которую ввёл пользователь
 
-
 export async function sendingFilterSortingSearchRequest(
   token: string,
 ): Promise<DataProduct> {

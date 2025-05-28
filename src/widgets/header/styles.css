@@ -1,0 +1,52 @@
+.header {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.616);
+  width: 100%;
+  z-index: 100;
+}
+
+.title {
+  width: 100%;
+  font-size: 20px;
+  color: rgb(202, 202, 202);
+  text-align: center;
+  font-weight: bold;
+  font-family: Roboto;
+}
+
+.logo {
+  width: 29%;
+  padding-top: 5px;
+  text-decoration: none;
+}
+.menu {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.button {
+  padding: 10px;
+  color: rgb(202, 202, 202);
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  font-family: Roboto;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.link-menu {
+  display: flex;
+  text-decoration: none;
+}
+
+.button:hover {
+  color: rgb(255, 255, 255);
+}
+
+.title:hover {
+  color: rgb(255, 255, 255);
+}

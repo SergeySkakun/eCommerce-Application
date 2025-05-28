@@ -35,18 +35,28 @@ const Form = (): ReactElement => {
     login();
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
       <EmailInput
         name="email"
         control={control}
         label="Email"
-        sx={{ mt: 1, mb: 2, boxSizing: "border-box" }}
+        sx={{
+          mt: 1,
+          mb: 2,
+          boxSizing: "border-box",
+          backgroundColor: "rgb(107, 107, 107)",
+        }}
       />
       <PasswordInput
         name="password"
         control={control}
         label="Password"
-        sx={{ mt: 1, mb: 2, boxSizing: "border-box" }}
+        sx={{
+          mt: 1,
+          mb: 2,
+          boxSizing: "border-box",
+          backgroundColor: "rgb(107, 107, 107)",
+        }}
       />
       <div className="message-api">{messageApi}</div>
       <SubmitButton />

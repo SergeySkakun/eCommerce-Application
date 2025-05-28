@@ -10,8 +10,12 @@ export default function LoginFooter(): ReactElement {
       justifyContent={"space-between"}
       sx={{ mt: 2 }}
     >
-      <Link to="/registration">Sign Up</Link>
-      <Link to="/main">To Main</Link>
+      <Link className="link-login-footer" to="/registration">
+        Sign Up
+      </Link>
+      <Link className="link-login-footer" to="/main">
+        To Main
+      </Link>
     </Grid>
   );
 }

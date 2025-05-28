@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { useState } from "react";
-import { Grid, Paper, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import StreetName from "./street-name";
 import StreetNumber from "./street-number";
 import City from "./city";
@@ -24,15 +24,10 @@ export function AdditionalForm(): ReactNode {
   const [countryError, setCountryError] = useState("");
 
   return (
-    <Paper sx={{ mt: "4", padding: "20", boxSizing: "border-box" }}>
-      <Typography
-        component="h5"
-        sx={{ textAlign: "left", width: "100%", mt: 2, mb: 2 }}
-      >
-        Additional address
-      </Typography>
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid size={{ xs: 12, sm: 6 }}>
+    <div className="add-address">
+      <Typography className="title-address">Additional address</Typography>
+      <Grid container rowSpacing={1} columnSpacing={{ sm: 2, md: 3 }}>
+        <Grid size={{ sm: 6 }}>
           <StreetName
             streetName={streetName}
             streetNameError={streetNameError}
@@ -67,6 +62,6 @@ export function AdditionalForm(): ReactNode {
           setCountryError={setCountryError}
         />
       </Grid>
-    </Paper>
+    </div>
   );
 }
