@@ -12,7 +12,7 @@ const SubmitButton = (): ReactNode => {
         display: "block",
         pt: 1,
         pb: 1,
-        bgcolor: "sandybrown",
+        bgcolor: "rgb(107, 107, 107)",
       }}
     >
       <Typography fontWeight={"400"} variant="h6">

@@ -32,7 +32,11 @@ export default function City({
   return (
     <TextField
       fullWidth
-      sx={{ mt: 2, pb: 2, boxSizing: "border-box" }}
+      sx={{
+        mt: 2,
+        pb: 2,
+        boxSizing: "border-box",
+      }}
       label="City"
       placeholder="enter yor city"
       value={city}
