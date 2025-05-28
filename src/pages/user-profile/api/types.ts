@@ -2,6 +2,10 @@ export interface Action {
   action: string;
   addressId?: string;
   address?: Address;
+  firstName?: string;
+  lastName?: string;
+  dateOfBirth?: string;
+  email?: string;
 }
 interface Address {
   streetName: string;

@@ -7,40 +7,6 @@ import {
 } from "../../../shared";
 import type { Action } from "./types";
 
-// ДОБАВЛЕНИЕ адреса:
-//      передаём вот этот объект:
-//            const body: Action = {
-//                action: "addAddress",
-//                address: {
-//                    streetName: "Example Street",
-//                    streetNumber: "4711",
-//                    postalCode: "80933",
-//                    city: "Exemplary City",
-//                    country: "DE",
-//                },
-//            };
-
-// УДАЛЕНИЕ адреса:
-//      передаём вот этот объект:
-//            const body: Action = {
-//                action: "removeAddress",
-//                addressId: "{Rsv8fxK0}",
-//            };
-
-// ИЗМЕНЕНИЕ адреса
-//      передаём вот этот объект:
-//          const body: Action = {
-//              action: "changeAddress",
-//              addressId: "TcpXmc6m",
-//              address: {
-//                  streetName: "sovet",
-//                  streetNumber: "999",
-//                  postalCode: "80933",
-//                  city: "Gomel",
-//                  country: "BY",
-//              },
-//          };
-
 export async function addChangeDeleteUserAddress(
   action: Action,
 ): Promise<Customer> {
