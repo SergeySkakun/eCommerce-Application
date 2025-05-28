@@ -5,7 +5,6 @@ import { useAuth } from "../../shared";
 
 export function Header(): ReactNode {
   const { isLoggedIn, logout } = useAuth();
-
   return (
     <>
       <header className="header">
