@@ -1,10 +1,10 @@
 import { API_HOST, PROJECT_KEY } from "../../../project-config";
-import { getTokenFromCookie } from "../../../shared";
+import { getTokenFromCookie, TOKEN_NAMES } from "../../../shared";
 import type { DataProduct } from "./types";
 
 export async function getAllProducts(): Promise<DataProduct> {
   let allProducts: DataProduct;
-  const BEARER_TOKEN = getTokenFromCookie();
+  const BEARER_TOKEN = getTokenFromCookie(TOKEN_NAMES.successUserAccess);
   await fetch(`${API_HOST}/${PROJECT_KEY}/products`, {
     method: "GET",
     headers: {

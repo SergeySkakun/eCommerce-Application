@@ -1,5 +1,5 @@
 import { API_HOST, PROJECT_KEY } from "../../../project-config";
-import { getTokenFromCookie } from "../../../shared";
+import { getTokenFromCookie, TOKEN_NAMES } from "../../../shared";
 import type { DataProduct } from "./index";
 
 // для ФИЛЬТРАЦИИ
@@ -44,12 +44,11 @@ import type { DataProduct } from "./index";
 //  передать в эту функцию 'fuzzy=true&text.en-US=*text*'
 //      где text это строка которую ввёл пользователь
 
-
 export async function sendingFilterSortingSearchRequest(
   token: string,
 ): Promise<DataProduct> {
   let products: DataProduct;
-  const BEARER_TOKEN = getTokenFromCookie();
+  const BEARER_TOKEN = getTokenFromCookie(TOKEN_NAMES.successUserAccess);
   await fetch(
     `${API_HOST}/${PROJECT_KEY}/product-projections/search?${token}`,
     {

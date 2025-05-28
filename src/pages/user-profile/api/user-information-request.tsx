@@ -4,16 +4,8 @@ import type { Customer } from "../../../shared";
 
 export async function getUserInfoRequest(): Promise<Customer> {
   let userInfo: Customer;
-  let USER_ID = "";
-  const arrayCookies = document.cookie.split("; ");
-  for (const cookie of arrayCookies) {
-    const [name, value] = cookie.split("=");
-    if (name === TOKEN_NAMES.activeUserID) {
-      USER_ID = value;
-      break;
-    }
-  }
-  const BEARER_TOKEN = getTokenFromCookie();
+  const USER_ID = getTokenFromCookie(TOKEN_NAMES.activeUserID);
+  const BEARER_TOKEN = getTokenFromCookie(TOKEN_NAMES.successUserAccess);
   await fetch(`${API_HOST}/${PROJECT_KEY}/customers/${USER_ID}`, {
     method: "GET",
     headers: {
