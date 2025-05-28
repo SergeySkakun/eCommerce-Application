@@ -27,6 +27,20 @@ import type { Action } from "./types";
 //                addressId: "{Rsv8fxK0}",
 //            };
 
+// ИЗМЕНЕНИЕ адреса
+//      передаём вот этот объект:
+//          const body: Action = {
+//              action: "changeAddress",
+//              addressId: "TcpXmc6m",
+//              address: {
+//                  streetName: "sovet",
+//                  streetNumber: "999",
+//                  postalCode: "80933",
+//                  city: "Gomel",
+//                  country: "BY",
+//              },
+//          };
+
 export async function addChangeDeleteUserAddress(
   action: Action,
 ): Promise<Customer> {
