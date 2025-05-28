@@ -45,6 +45,7 @@ export function PageRouter(): React.ReactNode {
   return (
     // <BrowserRouter basename="/eCommerce-Application">
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<MainRedirect />}></Route>
 
@@ -52,9 +53,7 @@ export function PageRouter(): React.ReactNode {
           path="/main"
           element={
             <>
-              <Header />
               <Main />
-              <Footer />
               <ObtainAnonymousAccessToken />
             </>
           }
@@ -63,9 +62,7 @@ export function PageRouter(): React.ReactNode {
           path="/login"
           element={
             <GuestRoute>
-              <Header />
               <LoginPage />
-              <Footer />
             </GuestRoute>
           }
         ></Route>
@@ -73,14 +70,13 @@ export function PageRouter(): React.ReactNode {
           path="/registration"
           element={
             <GuestRoute>
-              <Header />
               <RegistrationForm />
-              <Footer />
             </GuestRoute>
           }
         ></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

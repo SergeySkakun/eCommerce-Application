@@ -26,9 +26,10 @@ body {
   text-align: center;
   font-size: 100px;
   color: white;
-  background-image: url("../../../../public/assets/main/image_1.jpg");
+  background-image: url("../../../../assets/main/image_1.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   gap: 30px;
 }
 

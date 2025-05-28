@@ -1,7 +1,7 @@
 .header {
   position: fixed;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   top: 0;
   background-color: rgba(0, 0, 0, 0.616);
   width: 100%;
@@ -9,23 +9,24 @@
 }
 
 .title {
+  display: flex;
+  justify-content: center;
   width: 100%;
-  font-size: 20px;
+  font-size: 1.2rem;
   color: rgb(202, 202, 202);
-  text-align: center;
   font-weight: bold;
   font-family: Roboto;
 }
 
 .logo {
-  width: 29%;
+  width: 9rem;
   padding-top: 5px;
   text-decoration: none;
 }
 .menu {
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 17rem;
 }
 
 .button {
