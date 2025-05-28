@@ -1,5 +1,9 @@
 import { API_HOST, PROJECT_KEY } from "../../../project-config";
-import { getTokenFromCookie, TOKEN_NAMES } from "../../../shared";
+import {
+  getTokenFromCookie,
+  saveTokenCookie,
+  TOKEN_NAMES,
+} from "../../../shared";
 import type { Customer } from "../../../shared";
 
 export async function getUserInfoRequest(): Promise<Customer> {
@@ -15,6 +19,7 @@ export async function getUserInfoRequest(): Promise<Customer> {
     .then((response) => response.json())
     .then((data: Customer) => {
       userInfo = data;
+      saveTokenCookie(data.version.toString(), TOKEN_NAMES.userVersion);
     })
     .catch(() => console.log("No connection"));
   return userInfo;
