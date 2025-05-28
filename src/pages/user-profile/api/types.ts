@@ -1,6 +1,7 @@
 export interface Action {
   action: string;
-  address: Address;
+  addressId?: string;
+  address?: Address;
 }
 interface Address {
   streetName: string;
@@ -8,4 +9,10 @@ interface Address {
   postalCode: string;
   city: string;
   country: string;
+}
+
+export interface Error {
+  statusCode: number;
+  message: string;
+  version: number;
 }

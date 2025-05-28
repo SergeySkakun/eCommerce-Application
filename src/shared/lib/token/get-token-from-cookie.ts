@@ -10,7 +10,6 @@ export function getTokenFromCookie(tokenName: string): string {
       break;
     } else if (name === TOKEN_NAMES.guestAccess) {
       TOKEN = value;
-      break;
     }
   }
   return TOKEN;

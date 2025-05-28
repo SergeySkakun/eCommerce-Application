@@ -1,10 +1,10 @@
 import { API_HOST, PROJECT_KEY } from "../../../project-config";
+import type { Customer } from "../../../shared";
 import {
   getTokenFromCookie,
   saveTokenCookie,
   TOKEN_NAMES,
 } from "../../../shared";
-import type { Customer } from "../../../shared";
 import type { Action } from "./types";
 
 // ДОБАВЛЕНИЕ адреса:
@@ -18,6 +18,13 @@ import type { Action } from "./types";
 //                    city: "Exemplary City",
 //                    country: "DE",
 //                },
+//            };
+
+// УДАЛЕНИЕ адреса:
+//      передаём вот этот объект:
+//            const body: Action = {
+//                action: "removeAddress",
+//                addressId: "{Rsv8fxK0}",
 //            };
 
 export async function addChangeDeleteUserAddress(
@@ -40,8 +47,12 @@ export async function addChangeDeleteUserAddress(
   })
     .then((response) => response.json())
     .then((data: Customer) => {
-      userInfo = data;
-      saveTokenCookie(data.version.toString(), TOKEN_NAMES.userVersion);
+      if (data.id) {
+        userInfo = data;
+        saveTokenCookie(data.version.toString(), TOKEN_NAMES.userVersion);
+      } else {
+        console.error(data.message);
+      }
     })
     .catch(() => console.log("No connection"));
   return userInfo;
