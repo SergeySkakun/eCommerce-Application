@@ -1,1 +1,1 @@
-export { getUserInfoRequest } from "./api";
+export { getUserInfoRequest, addChangeDeleteUserAddress } from "./api";
