@@ -16,6 +16,7 @@ import {
 } from "../../pages";
 import { useAuth } from "../../shared";
 import { ObtainAnonymousAccessToken } from "../../shared/api";
+import { Header, Footer } from "../../widgets";
 
 function MainRedirect(): undefined {
   const navigate = useNavigate();
@@ -44,9 +45,9 @@ export function PageRouter(): React.ReactNode {
   return (
     // <BrowserRouter basename="/eCommerce-Application">
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<MainRedirect />}></Route>
-
         <Route
           path="/main"
           element={
@@ -74,6 +75,7 @@ export function PageRouter(): React.ReactNode {
         ></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

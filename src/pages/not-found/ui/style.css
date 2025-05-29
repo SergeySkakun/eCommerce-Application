@@ -1,103 +1,54 @@
 .page-404 {
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  height: 60vh;
   gap: 35px;
   align-items: center;
   justify-content: center;
+  background-color: rgb(0, 0, 0);
+  padding: 50px;
 }
 
-.oops-text {
-  margin: 0;
-  font-size: 50px;
+.content-404 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 30%;
+  padding: 20px;
+  border: 3px solid rgb(68, 68, 68);
 }
 
 .error-text {
   margin: 0;
-  font-size: 100px;
+  text-align: center;
+  font-size: 50px;
   font-weight: bold;
   color: red;
+  font-family: Roboto;
+  margin-bottom: 30px;
 }
 
-.right-car {
-  position: fixed;
-  right: -5rem;
-}
-
-.car-1 {
-  top: 0;
-  animation: go-right-car 6s linear;
-}
-
-.car-3 {
-  top: 18rem;
-  animation: go-right-car 9s linear;
-}
-
-.car-5 {
-  top: 28rem;
-  animation: go-right-car 8s linear;
-}
-
-.car-7 {
-  top: 44rem;
-  animation: go-right-car 12s linear;
-}
-
-.left-car {
-  position: fixed;
-  left: -5rem;
-}
-
-.car-2 {
-  top: 5rem;
-  animation: go-left-car 9s linear;
-}
-
-.car-4 {
-  top: 23rem;
-  animation: go-left-car 6s linear;
-}
-
-.car-6 {
-  top: 34rem;
-  animation: go-left-car 12s linear;
-}
-
-.car-8 {
-  top: 51rem;
-  animation: go-left-car 8s linear;
-}
-
-@keyframes go-right-car {
-  0% {
-    right: -5rem;
-  }
-
-  100% {
-    right: 125rem;
+@media screen and (max-width: 1220px) {
+  .content-404 {
+    width: 40%;
   }
 }
 
-@keyframes go-left-car {
-  0% {
-    left: -5rem;
-  }
-
-  100% {
-    left: 125rem;
+@media screen and (max-width: 950px) {
+  .content-404 {
+    width: 50%;
   }
 }
 
-@media screen and (width <= 655px) {
-  .error-text {
-    font-size: 60px;
+@media screen and (max-width: 780px) {
+  .content-404 {
+    width: 70%;
   }
 }
 
-@media screen and (width <= 400px) {
-  .error-text {
-    padding-top: 20px;
-    font-size: 40px;
+@media screen and (max-width: 450px) {
+  .content-404 {
+    width: 80%;
   }
 }
