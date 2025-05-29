@@ -1,6 +1,6 @@
 import { API_HOST, PROJECT_KEY } from "../../../project-config";
+import type { DataProduct } from "../../../shared";
 import { getTokenFromCookie, TOKEN_NAMES } from "../../../shared";
-import type { DataProduct } from "../../catalog-product/api";
 
 export async function getProduct(productId: string): Promise<DataProduct> {
   let product: DataProduct;
