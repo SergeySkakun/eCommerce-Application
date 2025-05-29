@@ -51,3 +51,60 @@
 .title:hover {
   color: rgb(255, 255, 255);
 }
+
+.icon-burger-menu {
+  width: 25px;
+  height: 25px;
+  background-image: url("../../../assets/header/burger_menu.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.burger-button {
+  padding: 0;
+  height: 30px;
+}
+
+.burger-menu {
+  background-color: rgba(0, 0, 0, 0.514);
+}
+
+.burger-header {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.616);
+  width: 100%;
+  z-index: 100;
+}
+
+.burger-logo {
+  width: 9rem;
+  padding-top: 5px;
+  text-decoration: none;
+}
+
+.burger-button {
+  height: 25px;
+  padding: 5px;
+  color: rgb(202, 202, 202);
+  background-color: rgb(0, 0, 0);
+  border: none;
+  font-family: Roboto;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.button-burger-menu {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(0, 0, 0);
+  border: 2px solid rgb(53, 53, 53);
+}
+
+.burger-button:hover {
+  color: rgb(255, 255, 255);
+}

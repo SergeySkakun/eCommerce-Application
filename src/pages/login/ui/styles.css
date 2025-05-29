@@ -24,3 +24,21 @@
   color: white;
   font-weight: bold;
 }
+
+@media screen and (max-width: 800px) {
+  .login-content {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .login-content {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .login-content {
+    width: 80%;
+  }
+}

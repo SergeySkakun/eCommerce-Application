@@ -5,6 +5,7 @@ html {
 body {
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 .main {
@@ -69,7 +70,7 @@ body {
 }
 
 h2 {
-  width: 50%;
+  width: 100%;
   color: rgb(255, 255, 255);
   font-family: Roboto;
   text-align: center;
@@ -131,4 +132,98 @@ h2 {
   background-size: 48%;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+@media screen and (max-width: 600px) {
+  .head-container {
+    font-size: 60px;
+  }
+
+  .text-history {
+    font-size: 10px;
+  }
+
+  .text-technology {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .head-container {
+    font-size: 45px;
+  }
+
+  .text-history {
+    width: 90%;
+    font-size: 8px;
+  }
+
+  .text-technology {
+    font-size: 8px;
+    width: 90%;
+  }
+
+  .button-main-head {
+    font-size: 10px;
+  }
+
+  h2 {
+    font-size: 13px;
+  }
+
+  .content-history {
+    flex-direction: column;
+    width: 95%;
+  }
+
+  .image-history {
+    width: 100%;
+    height: 100px;
+  }
+
+  .content-technology {
+    flex-direction: column-reverse;
+    width: 95%;
+  }
+
+  .image-technology {
+    width: 100%;
+    height: 100px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .text-history {
+    width: 90%;
+    font-size: 12px;
+  }
+
+  .text-technology {
+    font-size: 12px;
+    width: 90%;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  .content-history {
+    flex-direction: column;
+    width: 95%;
+  }
+
+  .image-history {
+    width: 100%;
+    height: 200px;
+  }
+
+  .content-technology {
+    flex-direction: column-reverse;
+    width: 95%;
+  }
+
+  .image-technology {
+    width: 100%;
+    height: 220px;
+  }
 }

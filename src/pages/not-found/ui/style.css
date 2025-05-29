@@ -28,3 +28,27 @@
   font-family: Roboto;
   margin-bottom: 30px;
 }
+
+@media screen and (max-width: 1220px) {
+  .content-404 {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .content-404 {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .content-404 {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .content-404 {
+    width: 80%;
+  }
+}

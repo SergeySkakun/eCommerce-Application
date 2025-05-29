@@ -82,3 +82,27 @@
     top: 5rem;
   }
 }
+
+@media screen and (max-width: 1080px) {
+  .registration-content {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .registration-content {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .registration-content {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .registration-content {
+    width: 85%;
+  }
+}

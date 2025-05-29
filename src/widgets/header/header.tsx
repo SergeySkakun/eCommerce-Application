@@ -10,10 +10,10 @@ export function Header(): ReactNode {
       <header className="header">
         <div className="menu">
           <a href="#history" className="link-menu">
-            <button className="button button-about">HISTORY</button>
+            <button className="button button-history">HISTORY</button>
           </a>
           <a href="#technology" className="link-menu">
-            <button className="button button-about">TECHNOLOGY</button>
+            <button className="button button-technology">TECHNOLOGY</button>
           </a>
           <Link to="/products" className="link-menu">
             <button className="button button-product">CATALOG</button>
