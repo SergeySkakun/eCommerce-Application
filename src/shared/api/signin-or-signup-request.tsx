@@ -28,7 +28,7 @@ export async function sendingSignInOrSignUpRequest(
   typeRequest: string,
 ): Promise<string> {
   let errorMessage = "";
-  const BEARER_TOKEN = getTokenFromCookie();
+  const BEARER_TOKEN = getTokenFromCookie(TOKEN_NAMES.guestAccess);
   await fetch(`${API_HOST}/${PROJECT_KEY}/me/${typeRequest}`, {
     method: "POST",
     headers: {

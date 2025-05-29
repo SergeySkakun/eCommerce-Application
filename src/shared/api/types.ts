@@ -39,6 +39,7 @@ export interface CustomerAllInfo {
 }
 
 export interface Customer {
+  message: string;
   id: string;
   version: number;
   email: string;
