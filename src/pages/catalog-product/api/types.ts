@@ -34,10 +34,13 @@ interface MasterVariant {
 }
 
 export interface Prices {
-  value: {
-    currencyCode: string;
-    centAmount: number;
-  };
+  value: Value;
+  discounted?: Prices;
+}
+
+export interface Value {
+  currencyCode: string;
+  centAmount: number;
 }
 
 export interface Images {
