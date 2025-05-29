@@ -1,2 +1,2 @@
 export { Footer } from "./footer";
-export { WideScreenHeader } from "./header";
+export { Header } from "./header";

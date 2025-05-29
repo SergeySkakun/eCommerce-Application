@@ -134,7 +134,7 @@ h2 {
   background-position: center;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (width <= 600px) {
   .head-container {
     font-size: 60px;
   }
@@ -148,7 +148,7 @@ h2 {
   }
 }
 
-@media screen and (max-width: 380px) {
+@media screen and (width <= 380px) {
   .head-container {
     font-size: 45px;
   }
@@ -192,7 +192,7 @@ h2 {
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (width <= 500px) {
   .text-history {
     width: 90%;
     font-size: 12px;

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import type { ReactElement, ReactNode } from "react";
+import React, { useEffect } from "react";
+import type { ReactNode } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -16,8 +16,7 @@ import {
 } from "../../pages";
 import { useAuth } from "../../shared";
 import { ObtainAnonymousAccessToken } from "../../shared/api";
-import { WideScreenHeader, Footer } from "../../widgets";
-import { BurgerMenu } from "../../widgets/header/burger-menu";
+import { Header, Footer } from "../../widgets";
 
 function MainRedirect(): undefined {
   const navigate = useNavigate();
@@ -79,19 +78,4 @@ export function PageRouter(): React.ReactNode {
       <Footer />
     </BrowserRouter>
   );
-}
-
-function Header(): ReactElement {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const handleResize = (): void => {
-    setScreenWidth(window.innerWidth);
-  };
-  useEffect(() => {
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return (): void => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-  return <>{screenWidth > 710 ? <WideScreenHeader /> : <BurgerMenu />}</>;
 }
