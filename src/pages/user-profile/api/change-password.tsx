@@ -1,24 +1,28 @@
 import { API_HOST, PROJECT_KEY } from "../../../project-config";
-import type { Customer } from "../../../shared";
 import {
   getTokenFromCookie,
   saveTokenCookie,
   TOKEN_NAMES,
 } from "../../../shared";
-import type { Action } from "./types";
+import type { Customer } from "../../../shared";
 
-export async function addChangeDeleteUserAddress(
-  action: Action,
-): Promise<Customer> {
-  let userInfo: Customer;
-  const USER_ID = getTokenFromCookie(TOKEN_NAMES.activeUserID);
+// Изменение пароля:
+// передаём в функцию, введённый пользователем старый и новый пароль
+// возвращает сообщение об успешной смене или ошибку
+
+export async function changePassword(
+  currentPassword: string,
+  newPassword: string,
+): Promise<string> {
+  let message: string;
   const USER_VERSION = getTokenFromCookie(TOKEN_NAMES.userVersion);
   const BEARER_TOKEN = getTokenFromCookie(TOKEN_NAMES.successUserAccess);
   const body = {
     version: Number(USER_VERSION),
-    actions: [action],
+    currentPassword: currentPassword,
+    newPassword: newPassword,
   };
-  await fetch(`${API_HOST}/${PROJECT_KEY}/customers/${USER_ID}`, {
+  await fetch(`${API_HOST}/${PROJECT_KEY}/me/password`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${BEARER_TOKEN}`,
@@ -28,12 +32,12 @@ export async function addChangeDeleteUserAddress(
     .then((response) => response.json())
     .then((data: Customer) => {
       if (data.id) {
-        userInfo = data;
+        message = "Password successfully changed";
         saveTokenCookie(data.version.toString(), TOKEN_NAMES.userVersion);
       } else {
         console.error(data.message);
       }
     })
     .catch(() => console.log("No connection"));
-  return userInfo;
+  return message;
 }
