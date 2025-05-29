@@ -7,7 +7,7 @@ import {
 } from "../../../shared";
 import type { Action } from "./types";
 
-export async function addChangeDeleteUserAddress(
+export async function addChangeDeleteUserData(
   action: Action,
 ): Promise<Customer> {
   let userInfo: Customer;

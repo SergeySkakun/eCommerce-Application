@@ -1,5 +1,5 @@
 export {
   getUserInfoRequest,
-  addChangeDeleteUserAddress,
+  addChangeDeleteUserData,
   changePassword,
 } from "./api";

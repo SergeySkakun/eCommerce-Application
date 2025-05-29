@@ -1,3 +1,3 @@
 export { getUserInfoRequest } from "./user-information-request";
-export { addChangeDeleteUserAddress } from "./add-change-delete-user-address";
+export { addChangeDeleteUserData } from "./add-change-delete-user-data";
 export { changePassword } from "./change-password";
