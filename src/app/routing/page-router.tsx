@@ -16,7 +16,7 @@ import {
 } from "../../pages";
 import { useAuth } from "../../shared";
 import { ObtainAnonymousAccessToken } from "../../shared/api";
-import { Header, Footer } from "../../widgets";
+import { WideScreenHeader, Footer } from "../../widgets";
 import { BurgerMenu } from "../../widgets/header/burger-menu";
 
 function MainRedirect(): undefined {
@@ -46,7 +46,7 @@ export function PageRouter(): React.ReactNode {
   return (
     // <BrowserRouter basename="/eCommerce-Application">
     <BrowserRouter>
-      <UseCheckScreenSize />
+      <Header />
       <Routes>
         <Route path="/" element={<MainRedirect />}></Route>
         <Route
@@ -81,7 +81,7 @@ export function PageRouter(): React.ReactNode {
   );
 }
 
-function UseCheckScreenSize(): ReactElement {
+function Header(): ReactElement {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const handleResize = (): void => {
     setScreenWidth(window.innerWidth);
@@ -93,5 +93,5 @@ function UseCheckScreenSize(): ReactElement {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  return <>{screenWidth > 710 ? <Header /> : <BurgerMenu />}</>;
+  return <>{screenWidth > 710 ? <WideScreenHeader /> : <BurgerMenu />}</>;
 }

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./styles.css";
 import { useAuth } from "../../shared";
 
-export function Header(): ReactNode {
+export function WideScreenHeader(): ReactNode {
   const { isLoggedIn, logout } = useAuth();
   return (
     <>

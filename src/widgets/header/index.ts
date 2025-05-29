@@ -1,1 +1,1 @@
-export { Header } from "./header";
+export { WideScreenHeader } from "./wide-screen-header";
