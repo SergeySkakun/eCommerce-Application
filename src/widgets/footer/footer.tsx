@@ -7,7 +7,7 @@ export function Footer(): ReactNode {
     <>
       <footer className="footer">
         <div className="content">
-          <Link to="/products" className="link-footer">
+          <Link to="/catalog" className="link-footer">
             <button className="button-footer">CATALOG</button>
           </Link>
           <Link to="/about" className="link-footer">

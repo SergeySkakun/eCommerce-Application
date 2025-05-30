@@ -6,4 +6,5 @@ export {
   getTokenFromCookie,
   saveTokenCookie,
 } from "./lib";
+export { LoadingPlaceholder } from "./ui";
 export * from "./api";

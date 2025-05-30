@@ -15,7 +15,7 @@ export function WideScreenHeader(): ReactNode {
           <a href="#technology" className="link-menu">
             <button className="button button-technology">TECHNOLOGY</button>
           </a>
-          <Link to="/products" className="link-menu">
+          <Link to="/catalog" className="link-menu">
             <button className="button button-product">CATALOG</button>
           </Link>
         </div>

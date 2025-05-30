@@ -8,7 +8,7 @@ export function Main(): ReactNode {
       <main className="main">
         <div className="head-container">
           THIS IS FOR<br></br>ETERNITY
-          <Link to="/products" className="link">
+          <Link to="/catalog" className="link">
             <button className="button-main-head">
               CHOOSE THE RIGHT COMPANION
             </button>

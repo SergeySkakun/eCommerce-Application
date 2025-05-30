@@ -1,1 +1,1 @@
-export { sendingFilterSortingSearchRequest, getAllProducts } from "./api";
+export { CatalogProduct } from "./ui";
