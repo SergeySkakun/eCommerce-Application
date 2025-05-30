@@ -56,7 +56,7 @@ export function BurgerMenu(): React.ReactElement {
                 TECHNOLOGY
               </button>
             </a>
-            <Link to="/products" className="link-menu">
+            <Link to="/catalog" className="link-menu">
               <button onClick={handleClose} className="burger-button">
                 CATALOG
               </button>
