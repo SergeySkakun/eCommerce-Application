@@ -7,6 +7,8 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+import type { PriceInfo } from "./price";
+import { Price } from "./price";
 
 type ProductInfo = {
   id: string;
@@ -14,6 +16,7 @@ type ProductInfo = {
   description: string;
   imgUrl: string;
   imgLabel: string;
+  priceInfo: PriceInfo;
 };
 
 export function ProductCard({
@@ -22,6 +25,7 @@ export function ProductCard({
   description,
   imgUrl,
   imgLabel,
+  priceInfo,
 }: ProductInfo): ReactNode {
   const productURL = `/catalog/${id}`;
   return (
@@ -48,10 +52,11 @@ export function ProductCard({
             {description}
           </Typography>
         </CardContent>
-        <CardActions sx={{ marginTop: "auto" }}>
+        <CardActions sx={{ marginTop: "auto", p: "0 12px" }}>
           <Link to={productURL}>
             <Button size="small">More Info</Button>
           </Link>
+          <Price priceInfo={priceInfo} />
         </CardActions>
       </Box>
     </Card>
