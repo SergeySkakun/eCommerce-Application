@@ -1,27 +1,24 @@
 import type { ReactElement } from "react";
 import type { MasterData } from "../../../../shared/";
+import { parseMainProductData } from "../../../../shared/";
 import type { PriceInfo } from "./price";
 import { ProductCard } from "./product-card";
 
+const FIRST_PRODUCT_IMAGE_NUMBER = 0;
+
 export function createProductCard(cardInfo: MasterData): ReactElement {
-  const currentProductBasicInfo = cardInfo.masterData.current;
-  const currentProductImgInfo =
-    cardInfo.masterData.current.masterVariant.images[0];
-  const currentProductPriceInfo =
-    cardInfo.masterData.current.masterVariant.prices[0];
+  const {
+    productID: id,
+    productName: name,
+    productDescription: description,
+    productImages,
+    currencyCode,
+    rawPrice,
+    discountedPrice,
+  } = parseMainProductData(cardInfo);
 
-  const productID = cardInfo.id;
-  const productName = currentProductBasicInfo.name["en-US"];
-  const productDescription = currentProductBasicInfo.description["en-US"];
-  const productImg = currentProductImgInfo.url;
-  const productImgLabel = currentProductImgInfo.label;
-
-  const currencyCode = currentProductPriceInfo.value.currencyCode;
-  const rawPrice = currentProductPriceInfo.value.centAmount;
-  const isDiscountedProduct = Boolean(currentProductPriceInfo.discounted);
-  const discountedPrice = isDiscountedProduct
-    ? currentProductPriceInfo.discounted.value.centAmount
-    : 0;
+  const { url: productImg, label: productImgLabel } =
+    productImages[FIRST_PRODUCT_IMAGE_NUMBER];
 
   const priceInfo: PriceInfo = {
     currencyCode: currencyCode,
@@ -29,15 +26,14 @@ export function createProductCard(cardInfo: MasterData): ReactElement {
     discountedPrice: discountedPrice,
   };
 
-  return (
-    <ProductCard
-      key={productID}
-      id={productID}
-      name={productName}
-      description={productDescription}
-      imgUrl={productImg}
-      imgLabel={productImgLabel}
-      priceInfo={priceInfo}
-    />
-  );
+  const CardInfo = {
+    id,
+    name,
+    description,
+    imgUrl: productImg,
+    imgLabel: productImgLabel,
+    priceInfo: priceInfo,
+  };
+
+  return <ProductCard key={id} cardInfo={CardInfo} />;
 }

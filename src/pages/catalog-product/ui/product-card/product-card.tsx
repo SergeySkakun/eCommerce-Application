@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import type { PriceInfo } from "./price";
 import { Price } from "./price";
 
-type ProductInfo = {
+type CardInfo = {
   id: string;
   name: string;
   description: string;
@@ -19,15 +19,10 @@ type ProductInfo = {
   priceInfo: PriceInfo;
 };
 
-export function ProductCard({
-  id,
-  name,
-  description,
-  imgUrl,
-  imgLabel,
-  priceInfo,
-}: ProductInfo): ReactNode {
+export function ProductCard({ cardInfo }: { cardInfo: CardInfo }): ReactNode {
+  const { id, name, description, imgUrl, imgLabel, priceInfo } = cardInfo;
   const productURL = `/catalog/${id}`;
+
   return (
     <Card sx={{ maxWidth: 345, display: "flex", flexDirection: "column" }}>
       <CardMedia component="img" alt={imgLabel} height="140" image={imgUrl} />

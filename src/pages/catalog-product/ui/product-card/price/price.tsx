@@ -6,7 +6,7 @@ const FRACTION_DIGITS = 100;
 export type PriceInfo = {
   currencyCode: string;
   rawPrice: number;
-  discountedPrice?: number;
+  discountedPrice: number;
 };
 
 function DiscountedPrice({ currency, price }): ReactElement {

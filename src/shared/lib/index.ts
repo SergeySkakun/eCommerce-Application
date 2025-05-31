@@ -5,3 +5,4 @@ export {
   getTokenFromCookie,
   saveTokenCookie,
 } from "./token";
+export { parseMainProductData } from "./data-parsing";
