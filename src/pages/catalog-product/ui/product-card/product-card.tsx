@@ -54,7 +54,9 @@ export function ProductCard({
         </CardContent>
         <CardActions sx={{ marginTop: "auto", p: "0 12px" }}>
           <Link to={productURL}>
-            <Button size="small">More Info</Button>
+            <Button size="small" sx={{ fontSize: "14px" }}>
+              More Info
+            </Button>
           </Link>
           <Price priceInfo={priceInfo} />
         </CardActions>

@@ -10,9 +10,9 @@ export type PriceInfo = {
 };
 
 function DiscountedPrice({ currency, price }): ReactElement {
-  const discountedPriceString = String(price / FRACTION_DIGITS);
+  const discountedPriceString = String(Math.trunc(price / FRACTION_DIGITS));
   return (
-    <p className="price__amount_discounted">
+    <p className="price__amount_with-discount">
       {currency}
       {discountedPriceString}
     </p>
@@ -40,13 +40,17 @@ export function Price({ priceInfo }: { priceInfo: PriceInfo }): ReactElement {
 
   return (
     <div className="price">
-      <p className="price__amount">
-        {currencySymbol}
-        {priceString}
-      </p>
       {discountedPrice ? (
         <DiscountedPrice currency={currencySymbol} price={discountedPrice} />
       ) : null}
+      <p
+        className={
+          discountedPrice ? "price__amount_without-discount" : "price__amount"
+        }
+      >
+        {currencySymbol}
+        {priceString}
+      </p>
     </div>
   );
 }
