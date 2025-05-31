@@ -11,6 +11,7 @@ import {
   Main,
   LoginPage,
   RegistrationForm,
+  CatalogProduct,
   NotFound,
   LoadingPage,
   ProfilePage,
@@ -44,7 +45,6 @@ function GuestRoute({ children }: { children: ReactNode }): ReactNode {
 
 export function PageRouter(): React.ReactNode {
   return (
-    // <BrowserRouter basename="/eCommerce-Application">
     <BrowserRouter>
       <Header />
       <Routes>
@@ -74,14 +74,8 @@ export function PageRouter(): React.ReactNode {
             </GuestRoute>
           }
         ></Route>
-        <Route
-          path="/profile"
-          element={
-            <>
-              <ProfilePage />
-            </>
-          }
-        ></Route>
+        <Route path="/catalog" element={<CatalogProduct />}></Route>
+        <Route path="/profile" element={<ProfilePage />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
       <Footer />

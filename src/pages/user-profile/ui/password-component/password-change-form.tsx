@@ -10,10 +10,11 @@ import { passwordValidationSchema } from "./password-validation-schema";
 import { useForm } from "react-hook-form";
 import { PasswordInput } from "./password-input";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { changePassword, getUserInfoRequest } from "../../../api";
 import "./style.css";
 import { grey, red } from "@mui/material/colors";
-import LockResetIcon from "@mui/icons-material/LockReset";
+import { changePassword, getUserInfoRequest } from "../../api";
+import LockIcon from "@mui/icons-material/Lock";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
 
 interface Passwords {
   currentPassword: string;
@@ -95,10 +96,12 @@ export const PasswordChangeForm = (): React.ReactElement => {
         )}
       </Snackbar>
       <Button
+        fullWidth
         variant="contained"
         color="error"
         onClick={handleClickOpen}
         sx={{ width: "40%", margin: "auto 0" }}
+        endIcon={<LockIcon sx={{ fontSize: "0.8rem" }} />}
       >
         Change password
       </Button>
@@ -126,8 +129,8 @@ export const PasswordChangeForm = (): React.ReactElement => {
               background: "inherit",
             }}
           >
-            <Avatar sx={{ mt: 2, bgcolor: red[900] }} variant="circular">
-              <LockResetIcon />
+            <Avatar sx={{ mt: 2, bgcolor: red[900] }} variant="rounded">
+              <LockOpenIcon />
             </Avatar>
             <DialogTitle variant="button" sx={{ color: grey[200] }}>
               Change your password

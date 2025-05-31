@@ -61,6 +61,7 @@ export default tseslint.config(
       "unicorn/better-regex": "error",
       "no-console": "warn",
       "unicorn/no-document-cookie": "off",
+      "unicorn/no-null": "warn",
     },
   },
 );

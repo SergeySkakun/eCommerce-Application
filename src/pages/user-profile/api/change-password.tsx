@@ -36,7 +36,6 @@ export async function changePassword(
         saveTokenCookie(data.version.toString(), TOKEN_NAMES.userVersion);
       } else {
         message = data.message;
-        console.error(data.message);
       }
     })
     .catch((error: Error) => {
