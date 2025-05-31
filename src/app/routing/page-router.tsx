@@ -13,6 +13,7 @@ import {
   RegistrationForm,
   NotFound,
   LoadingPage,
+  ProfilePage,
 } from "../../pages";
 import { useAuth } from "../../shared";
 import { ObtainAnonymousAccessToken } from "../../shared/api";
@@ -71,6 +72,14 @@ export function PageRouter(): React.ReactNode {
             <GuestRoute>
               <RegistrationForm />
             </GuestRoute>
+          }
+        ></Route>
+        <Route
+          path="/profile"
+          element={
+            <>
+              <ProfilePage />
+            </>
           }
         ></Route>
         <Route path="*" element={<NotFound />}></Route>

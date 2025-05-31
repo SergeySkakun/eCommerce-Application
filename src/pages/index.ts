@@ -3,3 +3,4 @@ export { LoginPage } from "./login";
 export { RegistrationForm } from "./registration";
 export { NotFound } from "./not-found/";
 export { LoadingPage } from "./loading/";
+export { ProfilePage } from "./user-profile";

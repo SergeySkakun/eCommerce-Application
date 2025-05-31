@@ -72,6 +72,16 @@ export function BurgerMenu(): React.ReactElement {
                 >
                   LOGOUT
                 </button>
+                <Link to="/profile" className="link-menu">
+                  <button
+                    className="button button-logout"
+                    onClick={() => {
+                      handleClose();
+                    }}
+                  >
+                    PROFILE
+                  </button>
+                </Link>
               </>
             ) : (
               <>

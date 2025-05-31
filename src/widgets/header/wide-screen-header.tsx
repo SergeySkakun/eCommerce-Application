@@ -33,6 +33,9 @@ export function WideScreenHeader(): ReactNode {
               >
                 LOGOUT
               </button>
+              <Link to="/profile" className="link-menu">
+                <button className="button button-login">PROFILE</button>
+              </Link>
             </>
           ) : (
             <>
