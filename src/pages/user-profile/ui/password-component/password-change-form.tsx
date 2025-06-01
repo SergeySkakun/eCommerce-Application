@@ -32,7 +32,7 @@ export const PasswordChangeForm = (): React.ReactElement => {
     setOpenSnack(false);
   };
 
-  const { handleSubmit, control } = useForm<Passwords>({
+  const { handleSubmit, control, reset } = useForm<Passwords>({
     mode: "onChange",
     resolver: yupResolver(passwordValidationSchema),
     defaultValues: {
@@ -52,6 +52,7 @@ export const PasswordChangeForm = (): React.ReactElement => {
     if (answerFromApi === "Password successfully changed") {
       setOpenSnack(true);
       handleClose();
+      reset();
     } else {
       setOpenSnack(true);
     }
@@ -64,6 +65,7 @@ export const PasswordChangeForm = (): React.ReactElement => {
 
   const handleClose = (): void => {
     setOpen(false);
+    reset();
   };
 
   return (
