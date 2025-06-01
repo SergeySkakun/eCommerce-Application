@@ -12,6 +12,7 @@ import {
   LoginPage,
   RegistrationForm,
   CatalogProduct,
+  DetailedProduct,
   NotFound,
   LoadingPage,
   ProfilePage,
@@ -75,6 +76,10 @@ export function PageRouter(): React.ReactNode {
           }
         ></Route>
         <Route path="/catalog" element={<CatalogProduct />}></Route>
+        <Route
+          path="/product/:productKey"
+          element={<DetailedProduct />}
+        ></Route>
         <Route path="/profile" element={<ProfilePage />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

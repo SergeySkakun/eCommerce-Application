@@ -6,3 +6,4 @@ export {
   saveTokenCookie,
 } from "./token";
 export { parseMainProductData } from "./data-parsing";
+export type { ProductInfo } from "./data-parsing";
