@@ -35,9 +35,12 @@ export async function changePassword(
         message = "Password successfully changed";
         saveTokenCookie(data.version.toString(), TOKEN_NAMES.userVersion);
       } else {
-        console.error(data.message);
+        message = data.message;
       }
     })
-    .catch(() => console.log("No connection"));
+    .catch((error: Error) => {
+      message = error.message;
+      console.log("No connection");
+    });
   return message;
 }

@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { FormInputDropdown } from "./form-components/form-input-dropdown";
 import type { ReactElement } from "react";
 import { FormInputPassword } from "./form-components/form-input-password";
-import { Checkbox, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { countries } from "./form-components/countries-list";
 import {
   type BodySignUp,
@@ -23,11 +23,14 @@ import {
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React, { useState } from "react";
 import dayjs from "dayjs";
-import { AdditionalForm } from "../additional-form/form";
 import { Link } from "react-router-dom";
 import "./styles.css";
 import { RegistrationSuccessMessage } from "./index";
 import { useAuth } from "../../../../shared";
+import { FormInputCheckbox } from "./form-components/form-input-checkbox";
+// import { AdditionalForm } from "../additional-form/form";
+// import { AdditionalAddress } from "../additional-form/additional-address";
+// import { Checkbox } from "@mui/material";
 
 interface FormValues {
   email: string;
@@ -45,10 +48,8 @@ interface FormValues {
 }
 
 const RegistrationForm = (): ReactElement => {
+  // const [isDefaultBillingAddress, setIsDefaultBillingAddress] = useState(false);
   const [error, setError] = React.useState<DateValidationError | null>(null);
-  const [isDefaultShippingAddress, setIsDefaultShippingAddress] =
-    useState(false);
-  const [isDefaultBillingAddress, setIsDefaultBillingAddress] = useState(false);
   const [messageApi, setMessageApi] = useState("");
   const { login } = useAuth();
   const errorMessage = React.useMemo(() => {
@@ -85,7 +86,7 @@ const RegistrationForm = (): ReactElement => {
       // dateOfBirth: startValidDate as unknown as Date,
       dateOfBirth: "1981-01-01",
       defaultShippingAddress: true,
-      defaultBillingAddress: true,
+      defaultBillingAddress: false,
     },
   });
   const onSubmit = async (data: FormValues): Promise<void> => {
@@ -108,9 +109,10 @@ const RegistrationForm = (): ReactElement => {
       addresses: [address],
       dateOfBirth: resultDate,
       store: "rush-store",
-      defaultShippingAddress: isDefaultShippingAddress === false ? null : 0,
-      defaultBillingAddress: isDefaultBillingAddress === false ? null : 0,
+      defaultShippingAddress: data.defaultShippingAddress ? 0 : null,
+      defaultBillingAddress: data.defaultBillingAddress ? 0 : null,
     };
+
     setMessageApi(await sendingSignInOrSignUpRequest(body, "signup"));
     setTimeout(() => login(), 2700);
   };
@@ -223,7 +225,18 @@ const RegistrationForm = (): ReactElement => {
               />
             </Grid>
           </Grid>
-          <Grid>
+          <FormInputCheckbox
+            name="defaultShippingAddress"
+            control={control}
+            label="Set as default address"
+          />
+          <FormInputCheckbox
+            name="defaultBillingAddress"
+            control={control}
+            label="Set as default billing address"
+          />
+          {/* <AdditionalAddress control={control}/> */}
+          {/* <Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
               <label className="default-address">
                 <Checkbox
@@ -245,15 +258,15 @@ const RegistrationForm = (): ReactElement => {
                     setIsDefaultBillingAddress(event.target.checked);
                   }}
                 />
-                Set as default billing address
+                Add default billing address
               </label>
             </Grid>
-          </Grid>
-          {isDefaultBillingAddress ? (
+          </Grid> */}
+          {/* {isDefaultBillingAddress ? (
             <>
-              <AdditionalForm />
+              <AdditionalAddress control={control}/>
             </>
-          ) : null}
+          ) : null} */}
           <div className="message-api">{messageApi}</div>
           <Button
             type="submit"

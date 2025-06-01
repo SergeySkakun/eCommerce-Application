@@ -4,3 +4,4 @@ export { RegistrationForm } from "./registration";
 export { NotFound } from "./not-found/";
 export { LoadingPage } from "./loading/";
 export { CatalogProduct } from "./catalog-product";
+export { ProfilePage } from "./user-profile";
