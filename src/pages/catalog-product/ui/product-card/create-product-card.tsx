@@ -1,14 +1,14 @@
 import type { ReactElement } from "react";
 import type { MasterData } from "../../../../shared/";
 import { parseMainProductData } from "../../../../shared/";
-import type { PriceInfo } from "./price";
+import type { PriceInfo } from "../../../../shared/ui/price";
 import { ProductCard } from "./product-card";
 
 const FIRST_PRODUCT_IMAGE_NUMBER = 0;
 
 export function createProductCard(cardInfo: MasterData): ReactElement {
   const {
-    productID: id,
+    productKey: key,
     productName: name,
     productDescription: description,
     productImages,
@@ -27,7 +27,7 @@ export function createProductCard(cardInfo: MasterData): ReactElement {
   };
 
   const CardInfo = {
-    id,
+    key,
     name,
     description,
     imgUrl: productImg,
@@ -35,5 +35,5 @@ export function createProductCard(cardInfo: MasterData): ReactElement {
     priceInfo: priceInfo,
   };
 
-  return <ProductCard key={id} cardInfo={CardInfo} />;
+  return <ProductCard key={key} cardInfo={CardInfo} />;
 }

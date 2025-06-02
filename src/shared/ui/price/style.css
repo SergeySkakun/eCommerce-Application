@@ -21,15 +21,15 @@
 .price__amount,
 .price__amount_with-discount {
   font-weight: 500;
-  color: rgb(136, 187, 245);
+  color: var(--price-blue-color);
 }
 
 .price__amount_with-discount {
-  color: goldenrod;
+  color: var(--price-gold-color);
 }
 
 .price__amount_without-discount {
   text-decoration: line-through;
   font-weight: 300;
-  color: rgb(136, 187, 245);
+  color: var(--price-blue-color);
 }

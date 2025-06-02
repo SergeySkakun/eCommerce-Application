@@ -29,7 +29,7 @@ export function CatalogProduct(): ReactNode {
         setError(
           error_ instanceof Error
             ? error_
-            : new Error("An unknown error occurred"),
+            : new Error("An unknown error occurred")
         );
       } finally {
         setLoading(false);
@@ -44,9 +44,16 @@ export function CatalogProduct(): ReactNode {
   }
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      {loading ? <LoadingPlaceholder /> : <CardList products={products} />}
-    </ThemeProvider>
+    <main className="main">
+      <img
+        className="sale-board"
+        src="../../../../assets/catalog/sale-board.gif"
+        alt="sale-board"
+      ></img>
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        {loading ? <LoadingPlaceholder /> : <CardList products={products} />}
+      </ThemeProvider>
+    </main>
   );
 }

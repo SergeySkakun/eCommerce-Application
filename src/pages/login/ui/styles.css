@@ -2,26 +2,27 @@
   display: flex;
   justify-content: center;
   padding: 100px 0;
-  background-color: rgb(0, 0, 0);
+  background-color: var(--background-color);
 }
 
 .login-content {
+  height: 40vh;
   width: 30%;
   padding: 0px 20px 10px 20px;
-  border: 2px solid rgb(255, 255, 255);
-  background-color: rgb(61, 61, 61);
+  border: 2px solid var(--white-color);
+  background-color: var(--dark-gray);
 }
 
 .link-login-footer {
   text-decoration: none;
-  font-family: Roboto;
+  font-family: var(--font-family);
   font-weight: bold;
-  color: rgb(255, 255, 255);
+  color: var(--white-color);
 }
 
 .title-login {
   text-align: center;
-  color: white;
+  color: var(--white-color);
   font-weight: bold;
 }
 
