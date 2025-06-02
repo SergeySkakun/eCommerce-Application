@@ -21,7 +21,7 @@ type CardInfo = {
 
 export function ProductCard({ cardInfo }: { cardInfo: CardInfo }): ReactNode {
   const { id, name, description, imgUrl, imgLabel, priceInfo } = cardInfo;
-  const productURL = `/catalog/${id}`;
+  const productURL = `/product/${id}`;
 
   return (
     <Card sx={{ maxWidth: 345, display: "flex", flexDirection: "column" }}>
