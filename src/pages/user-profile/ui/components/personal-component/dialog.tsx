@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-base-to-string */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import * as React from "react";
 import Button from "@mui/material/Button";
@@ -8,11 +10,15 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { IconButton, Tooltip } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import { addChangeDeleteUserData } from "../../../api";
+import type { Action } from "../../../api/types";
+import { grey } from "@mui/material/colors";
 
 export const DialogWindow = ({
   type,
   name,
-  // setState
+  typeValue,
+  action,
 }): React.ReactElement => {
   const [open, setOpen] = React.useState(false);
 
@@ -42,17 +48,25 @@ export const DialogWindow = ({
             component: "form",
             onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
               event.preventDefault();
-              // const formData = new FormData(event.currentTarget);
-              // const formJson = Object.fromEntries((formData as any).entries());
-              // const data = formJson.data;
-              // console.log(data);
-              // setState(data);
-              handleClose();
+
+              const formData = new FormData(event.currentTarget);
+              const formJson = Object.fromEntries(formData.entries());
+              const data = formJson.data;
+
+              const body: Action = {
+                action: `${action}`,
+                [`${typeValue}`]: `${data}`,
+              };
+
+              void addChangeDeleteUserData(body);
+              // .then((response) => {
+              //   console.log(response, "from dialog")
+              // })
             },
           },
         }}
       >
-        <DialogTitle>{`${name}`}</DialogTitle>
+        <DialogTitle>{`Update ${name}`}</DialogTitle>
         <DialogContent>
           <TextField
             placeholder={`Type your new ${name}`}
@@ -66,9 +80,13 @@ export const DialogWindow = ({
             variant="standard"
           />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Update</Button>
+        <DialogActions sx={{ bgcolor: grey[900] }}>
+          <Button fullWidth variant="outlined" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button fullWidth variant="outlined" color="success" type="submit">
+            Submit
+          </Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

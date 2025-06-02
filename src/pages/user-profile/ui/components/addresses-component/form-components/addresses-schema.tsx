@@ -32,8 +32,6 @@ export const AddressSchema = yup.object({
   city: yup
     .string()
     .required("Required city")
-    .matches(/^[ A-Za-z]+$/, "City must contain only letters and spaces"),
+    .matches(/^[ A-Za-zА-я]+$/, "City must contain only letters and spaces"),
   country: yup.string().required("Required country"),
-  defaultShippingAddress: yup.bool().oneOf([true], "Field must be checked"),
-  defaultBillingAddress: yup.bool().oneOf([true], "Field must be checked"),
 });

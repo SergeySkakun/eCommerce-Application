@@ -7,6 +7,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Typography } from "@mui/material";
 import { grey, red } from "@mui/material/colors";
+import type { Action } from "../../../api/types";
+import { addChangeDeleteUserData } from "../../../api";
 
 export const DeleteAddress = ({ properties }): React.ReactElement => {
   const [open, setOpen] = React.useState(false);
@@ -41,40 +43,36 @@ export const DeleteAddress = ({ properties }): React.ReactElement => {
             component: "form",
             onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
               event.preventDefault();
-              // const formData = new FormData(event.currentTarget);
-              // const formJson = Object.fromEntries((formData).entries());
-              // const data = formJson.data;
-              // console.log(properties)
-              // setState(data);
+              const body: Action = {
+                action: "removeAddress",
+                addressId: `${properties.id}`,
+              };
+              void addChangeDeleteUserData(body);
               handleClose();
             },
           },
         }}
       >
-        <DialogTitle
-          variant="h5"
-          sx={{
-            bgcolor: grey[500],
-            color: grey[900],
-            textAlign: "center",
-            pb: 2,
-          }}
-        >
-          Delete address
+        <DialogTitle bgcolor="#232323" sx={{ boxSizing: "border-box" }}>
+          <Typography variant="h5" component={"span"}>
+            Delete current address
+          </Typography>
         </DialogTitle>
-        <DialogContent sx={{ bgcolor: grey[500], mb: 0 }}>
+        <DialogContent sx={{ bgcolor: "#232323" }}>
           <Typography
-            variant="button"
-            sx={{ color: grey[900], mb: 3, textAlign: "center" }}
+            variant="body1"
+            sx={{ color: red[200], my: 3, textAlign: "center" }}
           >
             Are you sure you want to delete the selected address?
           </Typography>
           <Typography
-            variant="h5"
-            sx={{ color: red[900], textAlign: "center", mt: 3 }}
-          >{`${properties.country} ${properties.city} ${properties.streetName} ${properties.streetNumber} ${properties.postalCode}`}</Typography>
+            variant="h4"
+            sx={{ color: grey[100], textAlign: "center", mt: 3 }}
+          >
+            {`${properties.country} ${properties.city} ${properties.streetName} ${properties.streetNumber} ${properties.postalCode}`}
+          </Typography>
         </DialogContent>
-        <DialogActions sx={{ bgcolor: grey[500], mt: -0.1 }}>
+        <DialogActions sx={{ bgcolor: "#232323" }}>
           <Button variant="outlined" fullWidth onClick={handleClose}>
             Cancel
           </Button>

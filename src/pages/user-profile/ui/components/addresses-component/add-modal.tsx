@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable unicorn/no-null */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
@@ -14,12 +13,14 @@ import {
   DialogContent,
   DialogTitle,
   Grid,
+  Typography,
 } from "@mui/material";
 import { countries } from "./form-components/countries-list";
 import React, { useState } from "react";
 import { AddressSchema } from "./form-components/addresses-schema";
-import { FormInputCheckbox } from "./form-components/form-input-checkbox";
-import { getUserInfoRequest } from "../../../api/user-information-request";
+import type { Action } from "../../../api/types";
+import { addChangeDeleteUserData } from "../../../api";
+import { grey } from "@mui/material/colors";
 
 interface Address {
   streetName: string;
@@ -27,17 +28,9 @@ interface Address {
   postalCode: string;
   city: string;
   country: string;
-  defaultShippingAddress: boolean;
-  defaultBillingAddress: boolean;
 }
 
 export const AddNewAddress = (): ReactElement => {
-  // const [isDefaultShippingAddress, setIsDefaultShippingAddress] =
-  //   useState(false);
-  const [isDefaultBillingAddress, setIsDefaultBillingAddress] = useState(false);
-
-  const [addressesList, setAddressesList] = React.useState([]);
-
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = (): void => {
@@ -46,9 +39,10 @@ export const AddNewAddress = (): ReactElement => {
 
   const handleClose = (): void => {
     setOpen(false);
+    reset();
   };
 
-  const { handleSubmit, control } = useForm<Address>({
+  const { handleSubmit, control, reset } = useForm<Address>({
     mode: "onChange",
     resolver: yupResolver(AddressSchema),
     defaultValues: {
@@ -57,30 +51,29 @@ export const AddNewAddress = (): ReactElement => {
       postalCode: "",
       city: "",
       country: "",
-      defaultShippingAddress: false,
-      defaultBillingAddress: false,
     },
   });
-  const onSubmit = async (data: Address): Promise<void> => {
+  const onSubmit = (data: Address): void => {
     const newAddress: Address = {
       streetName: data.streetName,
       streetNumber: data.streetNumber,
       postalCode: data.postalCode,
       city: data.city,
       country: data.country,
-      defaultShippingAddress: data.defaultShippingAddress,
-      defaultBillingAddress: data.defaultBillingAddress,
     };
 
-    await new Promise(function (resolve) {
-      resolve(
-        getUserInfoRequest().then((data) => {
-          const arrayAddresses = data.addresses;
-          arrayAddresses.push(newAddress);
-          setAddressesList(arrayAddresses);
-        }),
-      );
-    });
+    const body: Action = {
+      action: "addAddress",
+      address: {
+        streetName: data.streetName,
+        streetNumber: data.streetNumber,
+        postalCode: data.postalCode,
+        city: data.city,
+        country: data.country,
+      },
+    };
+
+    void addChangeDeleteUserData(body);
 
     handleClose();
   };
@@ -88,10 +81,10 @@ export const AddNewAddress = (): ReactElement => {
   return (
     <React.Fragment>
       <Button
-        color="inherit"
+        color="info"
         sx={{ mt: 2 }}
         fullWidth
-        variant="contained"
+        variant="outlined"
         aria-label="add"
         onClick={handleClickOpen}
       >
@@ -110,11 +103,15 @@ export const AddNewAddress = (): ReactElement => {
           },
         }}
       >
-        <DialogTitle bgcolor="#232323">Add new address</DialogTitle>
-        <DialogContent sx={{ bgcolor: "#232323" }}>
+        <DialogTitle sx={{ boxSizing: "border-box", bgcolor: grey[900] }}>
+          <Typography variant="h5" component={"span"}>
+            Add new address
+          </Typography>
+        </DialogTitle>
+        <DialogContent sx={{ bgcolor: grey[900] }}>
           <Paper
             elevation={10}
-            sx={{ mt: 8, p: 2, bgcolor: "#656565", color: "#ffffff" }}
+            sx={{ mt: 8, p: 2, bgcolor: grey[900], color: "#ffffff" }}
           >
             <Grid
               container
@@ -163,51 +160,6 @@ export const AddNewAddress = (): ReactElement => {
                 />
               </Grid>
             </Grid>
-            <Grid>
-              <Grid size={{ xs: 12, sm: 6 }}>
-                <FormInputCheckbox
-                  name="defaultShippingAddress"
-                  control={control}
-                  label="Set as default address"
-                />
-                <FormInputCheckbox
-                  name="defaultBillingAddress"
-                  control={control}
-                  label="Set as default address for billing"
-                />
-                {/* <label className="default-address">
-                <Checkbox
-                  name="defaultShippingAddress"
-                  onChange={(event) => {
-                    setIsDefaultShippingAddress(event.target.checked);
-                  }}
-                />
-                Set as default address
-              </label> */}
-              </Grid>
-              {/* <Grid size={{ xs: 12, sm: 6 }}>
-              <label className="default-billing-address">
-                <Checkbox
-                  name="defaultBillingAddress"
-                  onChange={(event) => {
-                    setIsDefaultBillingAddress(event.target.checked);
-                  }}
-                />
-                Set as default billing address
-              </label>
-            </Grid> */}
-            </Grid>
-            {isDefaultBillingAddress ? <>{/* <AdditionalForm /> */}</> : null}
-            {/* <div className="message-api">{messageApi}</div> */}
-            {/* <Button
-            type="submit"
-            variant={"contained"}
-            fullWidth
-            sx={{ mt: 2, mb: 2, display: "block" }}
-          >
-            Submit
-          </Button> */}
-            {/* </form> */}
           </Paper>
         </DialogContent>
         <DialogActions sx={{ bgcolor: "#232323" }}>
