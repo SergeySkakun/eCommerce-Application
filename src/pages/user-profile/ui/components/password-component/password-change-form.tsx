@@ -12,7 +12,7 @@ import { PasswordInput } from "./password-input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "./style.css";
 import { grey, red } from "@mui/material/colors";
-import { changePassword, getUserInfoRequest } from "../../api";
+import { changePassword, getUserInfoRequest } from "../../../api";
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 
