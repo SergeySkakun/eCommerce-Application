@@ -14,11 +14,10 @@ import {
   CatalogProduct,
   DetailedProduct,
   NotFound,
-  LoadingPage,
   ProfilePage,
 } from "../../pages";
 import { useAuth } from "../../shared";
-import { ObtainAnonymousAccessToken } from "../../shared/api";
+import { ObtainAnonymousAccessToken, LoadingPlaceholder } from "../../shared";
 import { Header, Footer } from "../../widgets";
 
 function MainRedirect(): undefined {
@@ -34,7 +33,7 @@ function GuestRoute({ children }: { children: ReactNode }): ReactNode {
   const { isLoggedIn, isAuthCheckReady } = useAuth();
 
   if (!isAuthCheckReady) {
-    return <LoadingPage />;
+    return <LoadingPlaceholder />;
   }
 
   if (!isLoggedIn) {
@@ -42,6 +41,20 @@ function GuestRoute({ children }: { children: ReactNode }): ReactNode {
   }
 
   return <Navigate to="/main" replace />;
+}
+
+function UserRoute({ children }: { children: ReactNode }): ReactNode {
+  const { isLoggedIn, isAuthCheckReady } = useAuth();
+
+  if (!isAuthCheckReady) {
+    return <LoadingPlaceholder />;
+  }
+
+  if (!isLoggedIn) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
 }
 
 export function PageRouter(): React.ReactNode {
@@ -80,7 +93,14 @@ export function PageRouter(): React.ReactNode {
           path="/product/:productKey"
           element={<DetailedProduct />}
         ></Route>
-        <Route path="/profile" element={<ProfilePage />}></Route>
+        <Route
+          path="/profile"
+          element={
+            <UserRoute>
+              <ProfilePage />
+            </UserRoute>
+          }
+        ></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
       <Footer />
