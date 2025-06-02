@@ -5,7 +5,7 @@ export type ProductInfo = {
   productName: string;
   productDescription: string;
   productImages: Images[];
-  productAttributes: Attributes[];
+  productAttributes?: Attributes[];
   currencyCode: string;
   rawPrice: number;
   discountedPrice: number;

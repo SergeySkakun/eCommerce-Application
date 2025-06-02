@@ -56,7 +56,7 @@ export interface DataProduct {
   offset: 0;
   count: 18;
   total: 18;
-  results: [MasterData];
+  results: [MasterData] | [Product];
 }
 
 export interface MasterData {
@@ -66,10 +66,18 @@ export interface MasterData {
 
 export interface Current {
   current: {
+    id: string;
     name: Name;
     description: Description;
     masterVariant: MasterVariant;
   };
+}
+
+export interface Product {
+  key: string;
+  name: Name;
+  description: Description;
+  masterVariant: MasterVariant;
 }
 
 interface Name {
