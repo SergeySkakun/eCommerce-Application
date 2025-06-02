@@ -7,7 +7,6 @@ import PersonPinIcon from "@mui/icons-material/PersonPin";
 import AddHomeSharpIcon from "@mui/icons-material/AddHomeSharp";
 import LockResetSharpIcon from "@mui/icons-material/LockResetSharp";
 import { grey } from "@mui/material/colors";
-// import "./style.css"
 
 interface TabPanelProperties {
   children?: React.ReactNode;
@@ -64,7 +63,12 @@ export function ProfileTabsPanel(): React.ReactElement {
           mb: "2rem",
         }}
       >
-        <Tabs value={value} onChange={handleChange} centered>
+        <Tabs
+          sx={{ width: "fir-content" }}
+          value={value}
+          onChange={handleChange}
+          centered
+        >
           <Tab
             icon={<PersonPinIcon />}
             sx={{ color: "#ffffff", fontSize: "0.8rem" }}

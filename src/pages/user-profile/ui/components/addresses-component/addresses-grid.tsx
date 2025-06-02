@@ -1,6 +1,5 @@
-/* eslint-disable no-dupe-else-if */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable unicorn/no-null */
 import * as React from "react";
@@ -17,6 +16,8 @@ import { SetDefaultShipping } from "./default-shipping-modal";
 import { SetDefaultBilling } from "./default-billing-modal";
 import { grey } from "@mui/material/colors";
 import { AddNewAddress } from "./add-modal";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 import "./style.css";
 
 interface CustomUser extends Customer {
@@ -25,7 +26,7 @@ interface CustomUser extends Customer {
 }
 
 type Address = {
-  [x: string]: IntrinsicAttributes & { properties: unknown };
+  isDefaultBillingAddress: { properties: any };
   id: string;
   streetName: string;
   streetNumber: string;
@@ -35,7 +36,6 @@ type Address = {
 };
 
 const columns: GridColDef<Address>[] = [
-  // { field: 'id', headerName: 'ID', width: 90 },
   {
     field: "isDefaultShipping",
     headerName: "Default shipping address",
@@ -106,16 +106,19 @@ const columns: GridColDef<Address>[] = [
   },
 ];
 
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
+
 function rowClassName(parameters): string {
-  if (parameters.isDefaultShipping) {
+  if (parameters.isDefaultShipping && parameters.isDefaultBillingAddress) {
+    return "default-address-row-highlighting";
+  } else if (parameters.isDefaultShipping) {
     return "default-shipping-row-highlighting";
   } else if (parameters.isDefaultBillingAddress) {
     return "default-building-row-highlighting";
-  } else if (
-    parameters.isDefaultShipping &&
-    parameters.isDefaultBillingAddress
-  ) {
-    return "default-address-row-highlighting";
   }
   return "";
 }
@@ -168,34 +171,37 @@ export function AddressesGrid(): React.ReactElement {
     );
   }
   return (
-    <Box
-      sx={{
-        height: 400,
-        width: "auto",
-        maxWidth: "fit-content",
-        margin: "auto",
-      }}
-    >
-      <DataGrid
-        rows={data}
-        columns={columns}
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Box
         sx={{
-          bgcolor: grey[400],
-          color: grey[1000],
+          height: 400,
+          width: "auto",
+          maxWidth: "fit-content",
+          margin: "auto",
         }}
-        getRowClassName={(parameters) => rowClassName(parameters.row)}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 5,
+      >
+        <DataGrid
+          rows={data}
+          columns={columns}
+          sx={{
+            bgcolor: grey[900],
+            color: grey[1000],
+          }}
+          getRowClassName={(parameters) => rowClassName(parameters.row)}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 5,
+              },
             },
-          },
-        }}
-        pageSizeOptions={[5]}
-        checkboxSelection
-        disableRowSelectionOnClick
-      />
-      <AddNewAddress />
-    </Box>
+          }}
+          pageSizeOptions={[5]}
+          checkboxSelection
+          disableRowSelectionOnClick
+        />
+        <AddNewAddress />
+      </Box>
+    </ThemeProvider>
   );
 }

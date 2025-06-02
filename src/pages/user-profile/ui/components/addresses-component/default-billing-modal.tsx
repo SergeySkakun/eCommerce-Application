@@ -7,6 +7,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import type { Action } from "../../../api/types";
+import { addChangeDeleteUserData } from "../../../api";
 
 export const SetDefaultBilling = ({ properties }): React.ReactElement => {
   const [open, setOpen] = React.useState(false);
@@ -22,7 +24,7 @@ export const SetDefaultBilling = ({ properties }): React.ReactElement => {
   return (
     <>
       <Button
-        disabled={!properties.isDefaultBillingAddress}
+        disabled={!!properties.isDefaultBillingAddress}
         variant="contained"
         size="small"
         color="info"
@@ -42,39 +44,41 @@ export const SetDefaultBilling = ({ properties }): React.ReactElement => {
             component: "form",
             onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
               event.preventDefault();
-              // const formData = new FormData(event.currentTarget);
-              // const formJson = Object.fromEntries((formData).entries());
-              // const data = formJson.data;
-              // console.log(properties)
-              // setState(data);
+              const body: Action = {
+                action: "setDefaultBillingAddress",
+                addressId: `${properties.id}`,
+              };
+
+              void addChangeDeleteUserData(body);
               handleClose();
             },
           },
         }}
       >
-        <DialogTitle
-          variant="h5"
-          sx={{ bgcolor: grey[500], color: grey[900], textAlign: "center" }}
-        >
-          Default billing
+        <DialogTitle bgcolor="#232323" sx={{ boxSizing: "border-box" }}>
+          <Typography variant="h5" component={"span"}>
+            Default billing address
+          </Typography>
         </DialogTitle>
-        <DialogContent sx={{ bgcolor: grey[500], mb: 0 }}>
+        <DialogContent sx={{ bgcolor: "#232323" }}>
           <Typography
-            variant="body2"
-            sx={{ color: grey[900], mb: 3, textAlign: "center" }}
+            variant="body1"
+            sx={{ color: grey[100], my: 3, textAlign: "center" }}
           >
             Select the following address as the new default billing address
           </Typography>
           <Typography
-            variant="h5"
-            sx={{ color: grey[100], textAlign: "center" }}
-          >{`${properties.country} ${properties.city} ${properties.streetName} ${properties.streetNumber} ${properties.postalCode}`}</Typography>
+            variant="h4"
+            sx={{ color: grey[100], textAlign: "center", mt: 3 }}
+          >
+            {`${properties.country} ${properties.city} ${properties.streetName} ${properties.streetNumber} ${properties.postalCode}`}
+          </Typography>
         </DialogContent>
-        <DialogActions sx={{ bgcolor: grey[500], mt: -0.1 }}>
-          <Button fullWidth onClick={handleClose}>
+        <DialogActions sx={{ bgcolor: "#232323" }}>
+          <Button variant="outlined" fullWidth onClick={handleClose}>
             Cancel
           </Button>
-          <Button fullWidth type="submit" color="error">
+          <Button variant="outlined" fullWidth type="submit" color="success">
             Select
           </Button>
         </DialogActions>
