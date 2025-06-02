@@ -7,11 +7,11 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
-import type { PriceInfo } from "./price";
-import { Price } from "./price";
+import type { PriceInfo } from "../../../../shared/ui/price";
+import { Price } from "../../../../shared/ui/price";
 
 type CardInfo = {
-  id: string;
+  key: string;
   name: string;
   description: string;
   imgUrl: string;
@@ -20,8 +20,8 @@ type CardInfo = {
 };
 
 export function ProductCard({ cardInfo }: { cardInfo: CardInfo }): ReactNode {
-  const { id, name, description, imgUrl, imgLabel, priceInfo } = cardInfo;
-  const productURL = `/product/${id}`;
+  const { key, name, description, imgUrl, imgLabel, priceInfo } = cardInfo;
+  const productURL = `/catalog/product/${key}`;
 
   return (
     <Card sx={{ maxWidth: 345, display: "flex", flexDirection: "column" }}>

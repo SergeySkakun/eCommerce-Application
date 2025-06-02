@@ -10,11 +10,11 @@
   padding: 0 2rem;
   padding-top: 3rem;
 
-  background-color: #2a2a2a;
+  background-color: var(--dark-gray);
 }
 
 .profile-page-title {
   font-size: 6rem;
   line-height: 10;
-  color: #ffff;
+  color: var(--white-color);
 }

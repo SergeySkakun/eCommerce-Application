@@ -1,26 +1,64 @@
 import type { ReactElement } from "react";
+import {
+  parseMainProductData,
+  Price,
+  type MasterData,
+  type PriceInfo,
+} from "../../../../shared";
+import { Button, CardActions } from "@mui/material";
+import { FullScreenImage } from ".";
 
 // ! TODO: реализация страницы продукта здесь и в этой папке
 // В аргументы можно передать распаршенный объект продукта вместо productName
 
 export function ProductContent({
-  productName,
+  product,
 }: {
-  productName: string;
+  product: MasterData;
 }): ReactElement {
+  const {
+    productName,
+    productDescription,
+    productImages,
+    productAttributes,
+    currencyCode,
+    rawPrice,
+    discountedPrice,
+  } = parseMainProductData(product);
+  const priceInfo: PriceInfo = {
+    currencyCode: currencyCode,
+    rawPrice: rawPrice,
+    discountedPrice: discountedPrice,
+  };
   return (
-    // Это можно удалить
-    <div
-      style={{
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <h1>Detailed Product</h1>
-      <p>{productName}</p>
-    </div>
+    <main className="main">
+      <div className="dialog-container">
+        <span className="dialog-name">{productName}</span>
+        <div className="dialog-content">
+          <FullScreenImage productImages={productImages} />
+          <span className="dialog-title">Description</span>
+          <p className="dialog-description">{productDescription}</p>
+          <span className="dialog-title">Attributes</span>
+          <ul className="dialog-attributes">
+            {productAttributes.map((item): React.ReactNode => {
+              return (
+                <li key={item.name} className="attribute">
+                  <p className="name-attribute">{item.name}</p>:
+                  <p className="value-attribute">{item.value}</p>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div className="dialog-footer">
+          <CardActions>
+            <Button size="small" sx={{ fontSize: "14px" }}>
+              ADD TO CART
+            </Button>
+          </CardActions>
+          <Price priceInfo={priceInfo} />
+        </div>
+      </div>
+    </main>
   );
 }

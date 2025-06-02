@@ -90,7 +90,7 @@ export function PageRouter(): React.ReactNode {
         ></Route>
         <Route path="/catalog" element={<CatalogProduct />}></Route>
         <Route
-          path="/product/:productKey"
+          path="/catalog/product/:productKey"
           element={<DetailedProduct />}
         ></Route>
         <Route

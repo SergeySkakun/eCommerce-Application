@@ -1,6 +1,6 @@
 hr {
   margin: 40px 0;
-  border: 1px solid #333;
+  border: 1px solid var(--dark-gray);
 }
 
 .input {
@@ -10,11 +10,11 @@ hr {
   width: 100%;
   margin-bottom: 10px;
   padding: 10px 15px;
-  border: 1px solid white;
+  border: 1px solid var(--white-color);
   border-radius: 4px;
 
   font-size: 14px;
-  color: black;
+  color: var(--background-color);
 }
 
 .label,
@@ -26,7 +26,7 @@ section > label {
   font-size: 14px;
   font-weight: 200;
   line-height: 2;
-  color: rgb(173 173 173);
+  color: var(--light-gray);
   text-align: left;
 }
 
@@ -39,17 +39,17 @@ section > label {
   font-weight: 200;
   font-style: normal;
   line-height: 2;
-  color: rgb(216 216 216);
+  color: var(--light-gray);
   text-align: left;
 }
 
 input {
-  color: black;
+  color: var(--background-color);
 }
 
 .button-black {
-  border: 1px solid white;
-  background: black;
+  border: 1px solid var(--white-color);
+  background: var(--background-color);
 }
 
 .container {
@@ -66,5 +66,5 @@ input {
 }
 
 .textfield {
-  color: blue;
+  color: var(--text-field-color);
 }

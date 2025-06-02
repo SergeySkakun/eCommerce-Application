@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.616);
+  background-color: var(--transparent-background-color);
   width: 100%;
   z-index: 100;
 }
@@ -13,9 +13,9 @@
   justify-content: center;
   width: 100%;
   font-size: 1.2rem;
-  color: rgb(202, 202, 202);
+  color: var(--light-gray);
   font-weight: bold;
-  font-family: Roboto;
+  font-family: var(--font-family);
 }
 
 .logo {
@@ -31,10 +31,10 @@
 
 .button {
   padding: 10px;
-  color: rgb(202, 202, 202);
-  background-color: rgba(0, 0, 0, 0);
+  color: var(--light-gray);
+  background-color: var(--transparent);
   border: none;
-  font-family: Roboto;
+  font-family: var(--font-family);
   font-weight: bold;
   cursor: pointer;
 }
@@ -45,11 +45,11 @@
 }
 
 .button:hover {
-  color: rgb(255, 255, 255);
+  color: var(--white-color);
 }
 
 .title:hover {
-  color: rgb(255, 255, 255);
+  color: var(--white-color);
 }
 
 .icon-burger-menu {
@@ -67,7 +67,7 @@
 }
 
 .burger-menu {
-  background-color: rgba(0, 0, 0, 0.514);
+  background-color: var(--transparent-background-color);
 }
 
 .burger-header {
@@ -75,7 +75,7 @@
   display: flex;
   justify-content: space-between;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.616);
+  background-color: var(--transparent-background-color);
   width: 100%;
   z-index: 100;
 }
@@ -89,10 +89,10 @@
 .burger-button {
   height: 25px;
   padding: 5px;
-  color: rgb(202, 202, 202);
-  background-color: rgb(0, 0, 0);
+  color: var(--light-gray);
+  background-color: var(--background-color);
   border: none;
-  font-family: Roboto;
+  font-family: var(--font-family);
   font-weight: bold;
   cursor: pointer;
 }
@@ -101,10 +101,10 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: rgb(0, 0, 0);
-  border: 2px solid rgb(53, 53, 53);
+  background-color: var(--background-color);
+  border: 2px solid var(--dark-gray);
 }
 
 .burger-button:hover {
-  color: rgb(255, 255, 255);
+  color: var(--white-color);
 }
