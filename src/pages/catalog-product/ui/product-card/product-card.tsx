@@ -6,8 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
-import type { PriceInfo } from "../../../../shared/ui/price";
-import { Price } from "../../../../shared/ui/price";
+import { Price, type PriceInfo } from "../../../../shared";
 import "./styles.css";
 
 type CardInfo = {
