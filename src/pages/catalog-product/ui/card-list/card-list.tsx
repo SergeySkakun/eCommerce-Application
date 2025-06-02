@@ -1,12 +1,16 @@
 import type { ReactNode, ReactElement } from "react";
 import Grid from "@mui/material/Grid";
-import type { MasterData } from "../../../shared/";
+import type { MasterData, Product } from "../../../../shared";
 import { createProductCard } from "./product-card";
 
-export function CardList({ products }: { products: MasterData[] }): ReactNode {
+export function CardList({
+  products,
+}: {
+  products: MasterData[] | Product[];
+}): ReactNode {
   const cards: ReactElement[] = [];
-  for (let index = 0; index < 18; index++) {
-    cards.push(createProductCard(products[index]));
+  for (const product of products) {
+    cards.push(createProductCard(product));
   }
 
   return (
