@@ -10,12 +10,7 @@ export function CardList({ products }: { products: MasterData[] }): ReactNode {
   }
 
   return (
-    <Grid
-      container
-      spacing={3}
-      justifyContent={"center"}
-      sx={{ paddingTop: "50px" }}
-    >
+    <Grid container spacing={3} justifyContent={"center"} paddingTop={2}>
       {cards}
     </Grid>
   );
