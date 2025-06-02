@@ -6,10 +6,11 @@ export function parseMainProductData(cardInfo: MasterData): ProductInfo {
   const currentProductPriceInfo =
     cardInfo.masterData.current.masterVariant.prices[0];
 
-  const productID = cardInfo.id;
+  const productKey = cardInfo.key;
   const productImages = currentProductBasicInfo.masterVariant.images;
   const productName = currentProductBasicInfo.name["en-US"];
   const productDescription = currentProductBasicInfo.description["en-US"];
+  const productAttributes = currentProductBasicInfo.masterVariant.attributes;
 
   const currencyCode = currentProductPriceInfo.value.currencyCode;
   const rawPrice = currentProductPriceInfo.value.centAmount;
@@ -19,10 +20,11 @@ export function parseMainProductData(cardInfo: MasterData): ProductInfo {
     : 0;
 
   return {
-    productID,
+    productKey,
     productName,
     productDescription,
     productImages,
+    productAttributes,
     currencyCode,
     rawPrice,
     discountedPrice,

@@ -1,6 +1,6 @@
 .alert-id {
   font-weight: "bold";
-  color: "red";
+  color: var(--red-color);
 }
 
 .default-shipping-row-highlighting {

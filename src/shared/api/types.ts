@@ -60,7 +60,7 @@ export interface DataProduct {
 }
 
 export interface MasterData {
-  id: string;
+  key: string;
   masterData: Current;
 }
 

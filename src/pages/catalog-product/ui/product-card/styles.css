@@ -1,0 +1,17 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  max-width: 345px;
+  box-shadow:
+    5px 5px 10px rgba(80, 80, 80, 0.3),
+    -5px -5px 10px rgba(80, 80, 80, 0.3);
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  box-shadow:
+    10px 10px 10px rgba(216, 216, 216, 0.3),
+    -10px -10px 10px rgba(216, 216, 216, 0.3);
+  transform: scale(1.02);
+}
