@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import { PasswordChangeForm } from "./password-component";
+import { ProfileTabsPanel } from "./components";
 import "./style.css";
 
 export function ProfilePage(): React.ReactElement {
@@ -8,7 +8,7 @@ export function ProfilePage(): React.ReactElement {
       <Typography className="profile-page-title" variant="button">
         My Profile
       </Typography>
-      <PasswordChangeForm />
+      <ProfileTabsPanel />
     </div>
   );
 }

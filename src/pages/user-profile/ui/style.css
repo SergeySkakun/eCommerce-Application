@@ -8,12 +8,13 @@
   width: 100vw;
   height: 100vh;
   padding: 0 2rem;
+  padding-top: 3rem;
 
-  background: black;
+  background-color: #2a2a2a;
 }
 
 .profile-page-title {
-  font-size: large;
+  font-size: 6rem;
   line-height: 10;
   color: #ffff;
 }
