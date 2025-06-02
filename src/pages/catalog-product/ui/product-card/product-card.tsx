@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Price, type PriceInfo } from "../../../../shared";
 import "./styles.css";
 
@@ -20,10 +20,11 @@ type CardInfo = {
 
 export function ProductCard({ cardInfo }: { cardInfo: CardInfo }): ReactNode {
   const { key, name, description, imgUrl, imgLabel, priceInfo } = cardInfo;
+  const navigateTo = useNavigate();
   const productURL = `/catalog/product/${key}`;
 
   return (
-    <div className="card">
+    <div onClick={() => void navigateTo(productURL)} className="card">
       <CardMedia component="img" alt={imgLabel} height="140" image={imgUrl} />
       <Box
         sx={{
