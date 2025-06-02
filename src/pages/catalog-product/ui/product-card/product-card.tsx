@@ -1,14 +1,13 @@
 import type { ReactNode } from "react";
 import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
-import type { PriceInfo } from "../../../../shared/ui/price";
-import { Price } from "../../../../shared/ui/price";
+import { Price, type PriceInfo } from "../../../../shared";
+import "./styles.css";
 
 type CardInfo = {
   key: string;
@@ -24,7 +23,7 @@ export function ProductCard({ cardInfo }: { cardInfo: CardInfo }): ReactNode {
   const productURL = `/catalog/product/${key}`;
 
   return (
-    <Card sx={{ maxWidth: 345, display: "flex", flexDirection: "column" }}>
+    <div className="card">
       <CardMedia component="img" alt={imgLabel} height="140" image={imgUrl} />
       <Box
         sx={{
@@ -56,6 +55,6 @@ export function ProductCard({ cardInfo }: { cardInfo: CardInfo }): ReactNode {
           <Price priceInfo={priceInfo} />
         </CardActions>
       </Box>
-    </Card>
+    </div>
   );
 }
