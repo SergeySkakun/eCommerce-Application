@@ -8,6 +8,7 @@ import { NoResultsFound } from "../../../shared";
 import { CardList } from "./card-list";
 import type { VisualFilterState, FilterSubmitData } from "./filters-list";
 import { FiltersList, SearchInput } from "./filters-list";
+import { SortSelect } from "./sort-select";
 import { AddBreadcrumb, CreateCategoriesButton } from ".";
 import "./styles.css";
 
@@ -27,21 +28,20 @@ const INITIAL_FILTERS_STATE: VisualFilterState = {
   categories: "",
 };
 
-const DEBOUNCE_DELAY = 2000;
-
 export function CatalogContent(): ReactElement {
   const [breadcrumb, setBreadcrumb] = useState<string>("CARS");
   const [currentFilters, setCurrentFilters] = useState<VisualFilterState>(
     () => INITIAL_FILTERS_STATE,
   );
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [currentSortOption, setCurrentSortOption] = useState<string>("");
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [products, setProducts] = useState<MasterData[] | Product[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const filterStrings = useMemo(() => {
-    const filters: string[] = [];
+  const filterAndSortStrings = useMemo(() => {
+    const parameters: string[] = [];
 
     if (currentFilters.priceMin || currentFilters.priceMax) {
       const from =
@@ -52,48 +52,56 @@ export function CatalogContent(): ReactElement {
         currentFilters.priceMax === ""
           ? "*"
           : String(+currentFilters.priceMax * 100);
-      filters.push(`${FILTER_REQUEST}price.centAmount:range(${from} to ${to})`);
+      parameters.push(
+        `${FILTER_REQUEST}price.centAmount:range(${from} to ${to})`,
+      );
     }
     if (currentFilters.year) {
-      filters.push(
+      parameters.push(
         `${ATTRIBUTE_FILTER_REQUEST}Year:"${String(currentFilters.year)}"`,
       );
     }
     if (currentFilters.fuel) {
-      filters.push(`${ATTRIBUTE_FILTER_REQUEST}Fuel:"${currentFilters.fuel}"`);
+      parameters.push(
+        `${ATTRIBUTE_FILTER_REQUEST}Fuel:"${currentFilters.fuel}"`,
+      );
     }
     if (currentFilters.power) {
-      filters.push(
-        `${ATTRIBUTE_FILTER_REQUEST}Power:"${String(currentFilters.power)}"`,
+      parameters.push(
+        `${ATTRIBUTE_FILTER_REQUEST}Power:range(0 to ${String(currentFilters.power)})`,
       );
     }
     if (currentFilters.gearbox) {
-      filters.push(
+      parameters.push(
         `${ATTRIBUTE_FILTER_REQUEST}Gearbox:"${currentFilters.gearbox}"`,
       );
     }
     if (currentFilters.capacity) {
-      filters.push(
-        `${ATTRIBUTE_FILTER_REQUEST}Capacity:"${String(currentFilters.capacity)}"`,
+      parameters.push(
+        `${ATTRIBUTE_FILTER_REQUEST}Capacity:range(0 to ${String(currentFilters.capacity)})`,
       );
     }
     if (currentFilters.payload) {
-      filters.push(
-        `${ATTRIBUTE_FILTER_REQUEST}Payload:"${String(currentFilters.payload)}"`,
+      parameters.push(
+        `${ATTRIBUTE_FILTER_REQUEST}Payload:range(0 to ${String(currentFilters.payload)})`,
       );
     }
     if (currentFilters.categories) {
-      filters.push(
+      parameters.push(
         `filter=categories.id:"${String(currentFilters.categories)}"`,
       );
     }
 
     if (searchQuery) {
-      filters.push(`${SEARCH_REQUEST}${encodeURIComponent(searchQuery)}`);
+      parameters.push(`${SEARCH_REQUEST}${encodeURIComponent(searchQuery)}`);
     }
 
-    return filters;
-  }, [currentFilters, searchQuery]);
+    if (currentSortOption) {
+      parameters.push(`sort=${encodeURIComponent(currentSortOption)}`);
+    }
+
+    return parameters;
+  }, [currentFilters, searchQuery, currentSortOption]);
 
   useEffect(() => {
     let isMounted = true;
@@ -102,14 +110,14 @@ export function CatalogContent(): ReactElement {
       setLoading(true);
       setError(null);
       try {
-        const hasActiveFilters = filterStrings.length > 0;
+        const hasActiveParameters = filterAndSortStrings.length > 0;
         const isCategorySelected = currentFilters.categories !== "";
         const shouldFetchAllProducts =
-          !hasActiveFilters && !isCategorySelected && !searchQuery;
+          !hasActiveParameters && !isCategorySelected;
 
         const data = await (shouldFetchAllProducts
           ? getAllProducts()
-          : sendingFilterSortingSearchRequest(filterStrings.join("&")));
+          : sendingFilterSortingSearchRequest(filterAndSortStrings.join("&")));
 
         const productList = data.results;
 
@@ -129,22 +137,13 @@ export function CatalogContent(): ReactElement {
 
     if (isFirstLoad) {
       setIsFirstLoad(false);
-      void fetchProducts();
-    } else {
-      const handler = setTimeout(() => {
-        void fetchProducts();
-      }, DEBOUNCE_DELAY);
-
-      return (): void => {
-        clearTimeout(handler);
-        isMounted = false;
-      };
     }
+    void fetchProducts();
 
     return (): void => {
       isMounted = false;
     };
-  }, [filterStrings, isFirstLoad, currentFilters, searchQuery]);
+  }, [filterAndSortStrings, isFirstLoad, currentFilters]);
 
   const handleFilterSubmit = useCallback((data: FilterSubmitData) => {
     setCurrentFilters((previousFilters) => ({
@@ -162,6 +161,7 @@ export function CatalogContent(): ReactElement {
         categories: categoryId || "",
       }));
       setSearchQuery("");
+      setCurrentSortOption("");
     },
     [],
   );
@@ -170,18 +170,24 @@ export function CatalogContent(): ReactElement {
     setSearchQuery(query);
   }, []);
 
+  const handleSortChange = useCallback((sortOption: string) => {
+    setCurrentSortOption(sortOption);
+  }, []);
+
   const handleResetAttributeFilters = useCallback(() => {
     setCurrentFilters((previousFilters) => ({
       ...INITIAL_FILTERS_STATE,
       categories: previousFilters.categories,
     }));
     setSearchQuery("");
+    setCurrentSortOption("");
   }, []);
 
   const handleFullReset = useCallback(() => {
     setCurrentFilters(INITIAL_FILTERS_STATE);
     setBreadcrumb("CARS");
     setSearchQuery("");
+    setCurrentSortOption("");
   }, []);
 
   return (
@@ -201,6 +207,10 @@ export function CatalogContent(): ReactElement {
         }}
       >
         <SearchInput onSearch={handleSearch} initialSearchQuery={searchQuery} />
+        <SortSelect
+          onSortChange={handleSortChange}
+          currentSortOption={currentSortOption}
+        />
         <FiltersList
           onFilterSubmit={handleFilterSubmit}
           initialFilters={currentFilters}
