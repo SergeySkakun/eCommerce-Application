@@ -12,7 +12,7 @@ export function PowerFilter({
 }: PowerFilterProperties): ReactElement {
   return (
     <TextField
-      label="Max Power"
+      label="Max Power < 1000"
       type="number"
       value={currentValue}
       onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +20,7 @@ export function PowerFilter({
       }}
       fullWidth
       size="small"
-      inputProps={{ min: 0 }}
+      inputProps={{ min: 0, max: 1000 }}
       sx={{ marginBottom: 2 }}
     />
   );
