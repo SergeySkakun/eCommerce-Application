@@ -12,7 +12,7 @@ export function CapacityFilter({
 }: CapacityFilterProperties): ReactElement {
   return (
     <TextField
-      label="Max Capacity < 1000"
+      label="Max Capacity < 30"
       type="number"
       value={currentValue}
       onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +20,7 @@ export function CapacityFilter({
       }}
       fullWidth
       size="small"
-      inputProps={{ min: 0, max: 1000 }}
+      inputProps={{ min: 0, max: 30 }}
       sx={{ marginBottom: 2 }}
     />
   );
