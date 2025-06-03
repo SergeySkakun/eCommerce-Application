@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -33,7 +34,7 @@ interface Address {
   country: string;
 }
 
-export const UpdateAddress = ({ properties }): ReactElement => {
+export const UpdateAddress = ({ properties, stetUpdate }): ReactElement => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = (): void => {
@@ -41,6 +42,7 @@ export const UpdateAddress = ({ properties }): ReactElement => {
   };
 
   const handleClose = (): void => {
+    stetUpdate(false);
     setOpen(false);
   };
 
@@ -67,8 +69,8 @@ export const UpdateAddress = ({ properties }): ReactElement => {
         country: data.country,
       },
     };
-
     void addChangeDeleteUserData(body);
+    stetUpdate(true);
     handleClose();
   };
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-base-to-string */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -19,14 +20,22 @@ export const DialogWindow = ({
   name,
   typeValue,
   action,
+  stateUpdate,
 }): React.ReactElement => {
   const [open, setOpen] = React.useState(false);
+
+  // const [formData, setFormData] = React.useState({});
+
+  // const handleSubmit = ():void => {
+  //   onSubmit(formData);
+  // };
 
   const handleClickOpen = (): void => {
     setOpen(true);
   };
 
   const handleClose = (): void => {
+    stateUpdate(false);
     setOpen(false);
   };
 
@@ -57,11 +66,9 @@ export const DialogWindow = ({
                 action: `${action}`,
                 [`${typeValue}`]: `${data}`,
               };
-
               void addChangeDeleteUserData(body);
-              // .then((response) => {
-              //   console.log(response, "from dialog")
-              // })
+              stateUpdate(true);
+              handleClose();
             },
           },
         }}

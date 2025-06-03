@@ -1,14 +1,14 @@
 .alert-id {
   font-weight: "bold";
-  color: var(--red-color);
+  color: "red";
 }
 
 .default-shipping-row-highlighting {
-  background-color: rgb(189 222 144);
+  background-color: rgb(134 182 68);
 }
 
 .default-building-row-highlighting {
-  background-color: rgb(129 142 197);
+  background-color: rgb(59 130 212);
 }
 
 .default-address-row-highlighting {

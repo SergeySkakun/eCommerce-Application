@@ -25,6 +25,12 @@ interface CustomUser extends Customer {
   defaultBillingAddressId: string;
 }
 
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
+
 type Address = {
   isDefaultBillingAddress: { properties: any };
   id: string;
@@ -34,83 +40,6 @@ type Address = {
   country: string;
   postalCode: string;
 };
-
-const columns: GridColDef<Address>[] = [
-  {
-    field: "isDefaultShipping",
-    headerName: "Default shipping address",
-    type: "boolean",
-    width: 150,
-  },
-  {
-    field: "isDefaultBillingAddress",
-    headerName: "Default billing address",
-    type: "boolean",
-    width: 150,
-  },
-  {
-    field: "setShipping",
-    headerName: "Set default Shipping Address",
-    width: 150,
-    renderCell: (parameters) => (
-      <SetDefaultShipping properties={parameters.row} />
-    ),
-  },
-  {
-    field: "setBilling",
-    headerName: "Set default Billing Address",
-    width: 150,
-    renderCell: (parameters) => (
-      <SetDefaultBilling
-        properties={parameters.row}
-        {...parameters.row.isDefaultBillingAddress}
-      />
-    ),
-  },
-  {
-    field: "editAddress",
-    headerName: "Edit address",
-    width: 150,
-    renderCell: (parameters) => <UpdateAddress properties={parameters.row} />,
-  },
-  {
-    field: "deleteAddress",
-    headerName: "Delete address",
-    width: 150,
-    renderCell: (parameters) => <DeleteAddress properties={parameters.row} />,
-  },
-  {
-    field: "country",
-    headerName: "Country",
-    width: 150,
-  },
-  {
-    field: "city",
-    headerName: "City",
-    width: 150,
-  },
-  {
-    field: "streetName",
-    headerName: "Street name",
-    width: 150,
-  },
-  {
-    field: "streetNumber",
-    headerName: "Street number",
-    width: 150,
-  },
-  {
-    field: "postalCode",
-    headerName: "Postal code",
-    width: 110,
-  },
-];
-
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
 
 function rowClassName(parameters): string {
   if (parameters.isDefaultShipping && parameters.isDefaultBillingAddress) {
@@ -127,30 +56,120 @@ export function AddressesGrid(): React.ReactElement {
   const [data, setData] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
+  const [stateUpdate, setStateUpdate] = React.useState(false);
+
+  const columns: GridColDef<Address>[] = [
+    {
+      field: "isDefaultShipping",
+      headerName: "Default shipping address",
+      type: "boolean",
+      width: 150,
+    },
+    {
+      field: "isDefaultBillingAddress",
+      headerName: "Default billing address",
+      type: "boolean",
+      width: 150,
+    },
+    {
+      field: "setShipping",
+      headerName: "Set default Shipping Address",
+      width: 150,
+      renderCell: (parameters) => (
+        <SetDefaultShipping
+          properties={parameters.row}
+          stetUpdate={setStateUpdate}
+        />
+      ),
+    },
+    {
+      field: "setBilling",
+      headerName: "Set default Billing Address",
+      width: 150,
+      renderCell: (parameters) => (
+        <SetDefaultBilling
+          properties={parameters.row}
+          {...parameters.row.isDefaultBillingAddress}
+          stetUpdate={setStateUpdate}
+        />
+      ),
+    },
+    {
+      field: "editAddress",
+      headerName: "Edit address",
+      width: 150,
+      renderCell: (parameters) => (
+        <UpdateAddress
+          properties={parameters.row}
+          stetUpdate={setStateUpdate}
+        />
+      ),
+    },
+    {
+      field: "deleteAddress",
+      headerName: "Delete address",
+      width: 150,
+      renderCell: (parameters) => (
+        <DeleteAddress
+          properties={parameters.row}
+          stetUpdate={setStateUpdate}
+        />
+      ),
+    },
+    {
+      field: "country",
+      headerName: "Country",
+      width: 150,
+    },
+    {
+      field: "city",
+      headerName: "City",
+      width: 150,
+    },
+    {
+      field: "streetName",
+      headerName: "Street name",
+      width: 150,
+    },
+    {
+      field: "streetNumber",
+      headerName: "Street number",
+      width: 150,
+    },
+    {
+      field: "postalCode",
+      headerName: "Postal code",
+      width: 110,
+    },
+  ];
 
   React.useEffect(() => {
-    const fetchData = async (): Promise<void> => {
-      try {
-        await getUserInfoRequest().then((data: CustomUser) => {
-          const defaultShippingAddress = data.defaultShippingAddressId;
-          const defaultBillingAddress = data.defaultBillingAddressId;
-          const modifiedData = data.addresses.flatMap((subArray) => {
-            return {
-              ...subArray,
-              isDefaultShipping: subArray.id === defaultShippingAddress,
-              isDefaultBillingAddress: subArray.id === defaultBillingAddress,
-            };
+    if (!stateUpdate) {
+      const fetchData = async (): Promise<void> => {
+        try {
+          await getUserInfoRequest().then((data: CustomUser) => {
+            const defaultShippingAddress = data.defaultShippingAddressId;
+            const defaultBillingAddress = data.defaultBillingAddressId;
+            const modifiedData = data.addresses.flatMap((subArray) => {
+              return {
+                ...subArray,
+                isDefaultShipping: subArray.id === defaultShippingAddress,
+                isDefaultBillingAddress: subArray.id === defaultBillingAddress,
+              };
+            });
+            setData(modifiedData);
           });
-          setData(modifiedData);
-        });
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
-    void fetchData();
-  }, []);
+          setLoading(false);
+        } catch (error) {
+          setError(error);
+          setLoading(false);
+        }
+      };
+      void fetchData();
+    }
+    setStateUpdate(true);
+  }, [stateUpdate]);
+
   if (loading) {
     return (
       <>
@@ -170,6 +189,8 @@ export function AddressesGrid(): React.ReactElement {
       </>
     );
   }
+  //
+
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
@@ -200,7 +221,7 @@ export function AddressesGrid(): React.ReactElement {
           checkboxSelection
           disableRowSelectionOnClick
         />
-        <AddNewAddress />
+        <AddNewAddress stetUpdate={setStateUpdate} />
       </Box>
     </ThemeProvider>
   );

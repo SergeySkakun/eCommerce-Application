@@ -28,6 +28,18 @@ export function PersonalBlock(): React.ReactElement {
   const [dateOfBirth, setDateOfBirth] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [isEditMode, setEditMode] = React.useState(false);
+  const [stateUpdate, setStateUpdate] = React.useState(false);
+
+  React.useEffect(() => {
+    if (stateUpdate) {
+      void getUserInfoRequest().then((data) => {
+        setFirstName(data.firstName);
+        setLastName(data.lastName);
+        setDateOfBirth(data.dateOfBirth);
+        setEmail(data.email);
+      });
+    }
+  });
 
   void getUserInfoRequest().then((data) => {
     setFirstName(data.firstName);
@@ -58,7 +70,6 @@ export function PersonalBlock(): React.ReactElement {
           <Paper
             elevation={10}
             sx={{
-              // bgcolor: grey[600],
               width: "100%",
               padding: "2rem",
               boxSizing: "border-box",
@@ -131,6 +142,7 @@ export function PersonalBlock(): React.ReactElement {
                       name="first name"
                       typeValue="firstName"
                       action="setFirstName"
+                      stateUpdate={setStateUpdate}
                     />
                   ) : null}
                 </Grid>
@@ -178,6 +190,7 @@ export function PersonalBlock(): React.ReactElement {
                       name="last name"
                       typeValue="lastName"
                       action="setLastName"
+                      stateUpdate={setStateUpdate}
                     />
                   ) : null}
                 </Grid>
@@ -225,6 +238,7 @@ export function PersonalBlock(): React.ReactElement {
                       name="date of birth"
                       typeValue="dateOfBirth"
                       action="setDateOfBirth"
+                      stateUpdate={setStateUpdate}
                     />
                   ) : null}
                 </Grid>
@@ -272,6 +286,7 @@ export function PersonalBlock(): React.ReactElement {
                       name="email"
                       typeValue="email"
                       action="changeEmail"
+                      stateUpdate={setStateUpdate}
                     />
                   ) : null}
                 </Grid>
