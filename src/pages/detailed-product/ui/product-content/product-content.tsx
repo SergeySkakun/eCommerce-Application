@@ -8,9 +8,6 @@ import {
 import { Button, CardActions } from "@mui/material";
 import { FullScreenImage } from ".";
 
-// ! TODO: реализация страницы продукта здесь и в этой папке
-// В аргументы можно передать распаршенный объект продукта вместо productName
-
 export function ProductContent({
   product,
 }: {

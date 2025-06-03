@@ -14,12 +14,7 @@ export function CardList({
   }
 
   return (
-    <Grid
-      container
-      spacing={3}
-      justifyContent={"center"}
-      sx={{ paddingTop: "50px" }}
-    >
+    <Grid container spacing={3} justifyContent={"center"} paddingTop={2}>
       {cards}
     </Grid>
   );
