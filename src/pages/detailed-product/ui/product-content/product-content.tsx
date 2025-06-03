@@ -7,12 +7,14 @@ import {
 } from "../../../../shared";
 import { Button, CardActions } from "@mui/material";
 import { FullScreenImage } from ".";
+import { useNavigate } from "react-router-dom";
 
 export function ProductContent({
   product,
 }: {
   product: MasterData;
 }): ReactElement {
+  const navigate = useNavigate();
   const {
     productName,
     productDescription,
@@ -30,6 +32,10 @@ export function ProductContent({
   return (
     <main className="main">
       <div className="dialog-container">
+        <button
+          className="button-back"
+          onClick={() => void navigate(-1)}
+        ></button>
         <span className="dialog-name">{productName}</span>
         <div className="dialog-content">
           <FullScreenImage productImages={productImages} />

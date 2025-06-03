@@ -7,9 +7,9 @@ export interface VisualFilterState {
   gearbox: "" | "automatic" | "manual";
   capacity: string | number;
   payload: string | number;
+  categories: string;
 }
 
 export interface FilterSubmitData {
-  filterStrings: string[];
   currentFilters: VisualFilterState;
 }

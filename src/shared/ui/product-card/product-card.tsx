@@ -6,8 +6,8 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link, useNavigate } from "react-router-dom";
-import { Price, type PriceInfo } from "../../../../../shared";
 import "./styles.css";
+import { Price, type PriceInfo } from "../price";
 
 type CardInfo = {
   key: string;
@@ -39,11 +39,11 @@ export function ProductCard({ cardInfo }: { cardInfo: CardInfo }): ReactNode {
             gutterBottom
             variant="h5"
             component="div"
-            sx={{ overflow: "hidden", whiteSpace: "nowrap" }}
+            sx={{ overflow: "hidden", whiteSpace: "nowrap", color: "white" }}
           >
             {name}
           </Typography>
-          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+          <Typography variant="body2" sx={{ color: "rgb(124, 124, 124)" }}>
             {description}
           </Typography>
         </CardContent>
