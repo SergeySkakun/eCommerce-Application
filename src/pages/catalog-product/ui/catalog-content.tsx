@@ -7,12 +7,13 @@ import type { MasterData, Product } from "../../../shared";
 import { NoResultsFound } from "../../../shared";
 import { CardList } from "./card-list";
 import type { VisualFilterState, FilterSubmitData } from "./filters-list";
-import { FiltersList } from "./filters-list";
+import { FiltersList, SearchInput } from "./filters-list";
 import { AddBreadcrumb, CreateCategoriesButton } from ".";
 import "./styles.css";
 
 const FILTER_REQUEST = "filter=variants.";
 const ATTRIBUTE_FILTER_REQUEST = "filter=variants.attributes.";
+const SEARCH_REQUEST = "fuzzy=true&text.en-US=";
 
 const INITIAL_FILTERS_STATE: VisualFilterState = {
   priceMin: "",
@@ -31,6 +32,7 @@ export function CatalogContent(): ReactElement {
   const [currentFilters, setCurrentFilters] = useState<VisualFilterState>(
     () => INITIAL_FILTERS_STATE,
   );
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [products, setProducts] = useState<MasterData[] | Product[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -84,8 +86,12 @@ export function CatalogContent(): ReactElement {
       );
     }
 
+    if (searchQuery) {
+      filters.push(`${SEARCH_REQUEST}${encodeURIComponent(searchQuery)}`);
+    }
+
     return filters;
-  }, [currentFilters]);
+  }, [currentFilters, searchQuery]);
 
   useEffect(() => {
     let isMounted = true;
@@ -96,8 +102,10 @@ export function CatalogContent(): ReactElement {
       try {
         const hasActiveFilters = filterStrings.length > 0;
         const isCategorySelected = currentFilters.categories !== "";
+        const shouldFetchAllProducts =
+          !hasActiveFilters && !isCategorySelected && !searchQuery;
 
-        const data = await (!hasActiveFilters && !isCategorySelected
+        const data = await (shouldFetchAllProducts
           ? getAllProducts()
           : sendingFilterSortingSearchRequest(filterStrings.join("&")));
 
@@ -125,7 +133,7 @@ export function CatalogContent(): ReactElement {
     return (): void => {
       isMounted = false;
     };
-  }, [filterStrings, isFirstLoad, currentFilters]);
+  }, [filterStrings, isFirstLoad, currentFilters, searchQuery]);
 
   const handleFilterSubmit = useCallback((data: FilterSubmitData) => {
     setCurrentFilters((previousFilters) => ({
@@ -142,20 +150,27 @@ export function CatalogContent(): ReactElement {
         ...previousFilters,
         categories: categoryId || "",
       }));
+      setSearchQuery("");
     },
     [],
   );
+
+  const handleSearch = useCallback((query: string) => {
+    setSearchQuery(query);
+  }, []);
 
   const handleResetAttributeFilters = useCallback(() => {
     setCurrentFilters((previousFilters) => ({
       ...INITIAL_FILTERS_STATE,
       categories: previousFilters.categories,
     }));
+    setSearchQuery("");
   }, []);
 
   const handleFullReset = useCallback(() => {
     setCurrentFilters(INITIAL_FILTERS_STATE);
-    setBreadcrumb("");
+    setBreadcrumb("CARS");
+    setSearchQuery("");
   }, []);
 
   return (
@@ -167,7 +182,14 @@ export function CatalogContent(): ReactElement {
         p: 3,
       }}
     >
-      <Box sx={{ flex: "0 0 280px", maxWidth: { xs: "100%", md: "280px" } }}>
+      <Box
+        sx={{
+          flex: "0 0 280px",
+          marginTop: "50px",
+          maxWidth: { xs: "100%", md: "280px" },
+        }}
+      >
+        <SearchInput onSearch={handleSearch} initialSearchQuery={searchQuery} />
         <FiltersList
           onFilterSubmit={handleFilterSubmit}
           initialFilters={currentFilters}
