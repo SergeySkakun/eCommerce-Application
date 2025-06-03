@@ -9,8 +9,9 @@ import type { Action } from "./types";
 
 export async function addChangeDeleteUserData(
   action: Action,
-): Promise<Customer> {
+): Promise<Customer | string> {
   let userInfo: Customer;
+  let errorInfo: string;
   const USER_ID = getTokenFromCookie(TOKEN_NAMES.activeUserID);
   const USER_VERSION = getTokenFromCookie(TOKEN_NAMES.userVersion);
   const BEARER_TOKEN = getTokenFromCookie(TOKEN_NAMES.successUserAccess);
@@ -31,9 +32,10 @@ export async function addChangeDeleteUserData(
         userInfo = data;
         saveTokenCookie(data.version.toString(), TOKEN_NAMES.userVersion);
       } else {
+        errorInfo = data.message;
         console.error(data.message);
       }
     })
     .catch(() => console.log("No connection"));
-  return userInfo;
+  return userInfo ?? errorInfo;
 }

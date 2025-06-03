@@ -18,8 +18,9 @@ export const DeleteAddress = ({
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = (): void => {
-    stetUpdate(false);
+    stetUpdate(true);
     setOpen(true);
+    stetUpdate(false);
   };
 
   const handleClose = (): void => {
