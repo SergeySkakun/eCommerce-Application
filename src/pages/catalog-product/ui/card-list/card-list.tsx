@@ -1,7 +1,10 @@
 import type { ReactNode, ReactElement } from "react";
 import Grid from "@mui/material/Grid";
-import type { MasterData, Product } from "../../../../shared";
-import { createProductCard } from "./product-card";
+import {
+  type MasterData,
+  type Product,
+  createProductCard,
+} from "../../../../shared";
 
 export function CardList({
   products,

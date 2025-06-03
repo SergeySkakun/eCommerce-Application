@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import "./style.css";
 import { Link } from "react-router-dom";
+import { ViewProducts } from "./view-products/view-products";
 
 export function Main(): ReactNode {
   return (
@@ -44,6 +45,7 @@ export function Main(): ReactNode {
         </div>
         <div className="best-product-container">
           <h2>OUR BEST CARS</h2>
+          <ViewProducts />
         </div>
         <div className="technology-container" id="technology">
           <h2>INNOVATION AND TECHNOLOGY</h2>
