@@ -1,12 +1,13 @@
 import type { ReactElement } from "react";
-import type { MasterData, Product, PriceInfo } from "../../../../../shared/";
-import { parseProductDataForCard } from "../../../../../shared/";
 import { ProductCard } from "./product-card";
+import type { MasterData, Product } from "../../api";
+import { parseProductDataForCard } from "../../lib";
+import type { PriceInfo } from "../price";
 
 const FIRST_PRODUCT_IMAGE_NUMBER = 0;
 
 export function createProductCard(
-  cardInfo: MasterData | Product
+  cardInfo: MasterData | Product,
 ): ReactElement {
   const {
     productKey: key,
