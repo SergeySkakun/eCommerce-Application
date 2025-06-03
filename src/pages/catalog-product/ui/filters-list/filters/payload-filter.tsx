@@ -12,7 +12,7 @@ export function PayloadFilter({
 }: PayloadFilterProperties): ReactElement {
   return (
     <TextField
-      label="Max Payload < 1000"
+      label="Max Payload (0 to X < 1000)"
       type="number"
       value={currentValue}
       onChange={(event: ChangeEvent<HTMLInputElement>) => {

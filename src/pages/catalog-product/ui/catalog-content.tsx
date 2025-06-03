@@ -68,7 +68,7 @@ export function CatalogContent(): ReactElement {
     }
     if (currentFilters.power) {
       parameters.push(
-        `${ATTRIBUTE_FILTER_REQUEST}Power:"${String(currentFilters.power)}"`,
+        `${ATTRIBUTE_FILTER_REQUEST}Power:range(0 to ${String(currentFilters.power)})`,
       );
     }
     if (currentFilters.gearbox) {
@@ -78,12 +78,12 @@ export function CatalogContent(): ReactElement {
     }
     if (currentFilters.capacity) {
       parameters.push(
-        `${ATTRIBUTE_FILTER_REQUEST}Capacity:"${String(currentFilters.capacity)}"`,
+        `${ATTRIBUTE_FILTER_REQUEST}Capacity:range(0 to ${String(currentFilters.capacity)})`,
       );
     }
     if (currentFilters.payload) {
       parameters.push(
-        `${ATTRIBUTE_FILTER_REQUEST}Payload:"${String(currentFilters.payload)}"`,
+        `${ATTRIBUTE_FILTER_REQUEST}Payload:range(0 to ${String(currentFilters.payload)})`,
       );
     }
     if (currentFilters.categories) {
