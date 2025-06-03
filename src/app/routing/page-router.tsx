@@ -59,51 +59,53 @@ function UserRoute({ children }: { children: ReactNode }): ReactNode {
 
 export function PageRouter(): React.ReactNode {
   return (
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<MainRedirect />}></Route>
-        <Route
-          path="/main"
-          element={
-            <>
-              <Main />
-              <ObtainAnonymousAccessToken />
-            </>
-          }
-        ></Route>
-        <Route
-          path="/login"
-          element={
-            <GuestRoute>
-              <LoginPage />
-            </GuestRoute>
-          }
-        ></Route>
-        <Route
-          path="/registration"
-          element={
-            <GuestRoute>
-              <RegistrationForm />
-            </GuestRoute>
-          }
-        ></Route>
-        <Route path="/catalog" element={<CatalogProduct />}></Route>
-        <Route
-          path="/catalog/product/:productKey"
-          element={<DetailedProduct />}
-        ></Route>
-        <Route
-          path="/profile"
-          element={
-            <UserRoute>
-              <ProfilePage />
-            </UserRoute>
-          }
-        ></Route>
-        <Route path="*" element={<NotFound />}></Route>
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <ObtainAnonymousAccessToken />
+        <Header />
+        <Routes>
+          <Route path="/" element={<MainRedirect />}></Route>
+          <Route
+            path="/main"
+            element={
+              <>
+                <Main />
+              </>
+            }
+          ></Route>
+          <Route
+            path="/login"
+            element={
+              <GuestRoute>
+                <LoginPage />
+              </GuestRoute>
+            }
+          ></Route>
+          <Route
+            path="/registration"
+            element={
+              <GuestRoute>
+                <RegistrationForm />
+              </GuestRoute>
+            }
+          ></Route>
+          <Route path="/catalog" element={<CatalogProduct />}></Route>
+          <Route
+            path="/catalog/product/:productKey"
+            element={<DetailedProduct />}
+          ></Route>
+          <Route
+            path="/profile"
+            element={
+              <UserRoute>
+                <ProfilePage />
+              </UserRoute>
+            }
+          ></Route>
+          <Route path="*" element={<NotFound />}></Route>
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </>
   );
 }

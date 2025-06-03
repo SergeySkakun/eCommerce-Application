@@ -117,10 +117,7 @@ export function FiltersList({
   };
 
   return (
-    <Paper
-      elevation={2}
-      sx={{ padding: 2, marginTop: "50px", borderRadius: 2 }}
-    >
+    <Paper elevation={2} sx={{ padding: 2, borderRadius: 2 }}>
       <Typography variant="h6" gutterBottom>
         Filters
       </Typography>

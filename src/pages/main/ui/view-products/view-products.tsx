@@ -12,12 +12,25 @@ export function ViewProducts(): ReactElement {
   const [products, setProducts] = useState<MasterData[] | Product[]>([]);
 
   useEffect(() => {
+    let isMounted = true;
+
     const loadData = async (): Promise<void> => {
       const data: DataProduct = await getProductsBigPrice();
       const productList = data.results;
-      setProducts(productList);
+
+      if (isMounted) {
+        setProducts(productList);
+      }
     };
-    void loadData();
+
+    const handler = setTimeout(() => {
+      void loadData();
+    }, 1500);
+
+    return (): void => {
+      clearTimeout(handler);
+      isMounted = false;
+    };
   }, []);
 
   const cards: ReactElement[] = [];
