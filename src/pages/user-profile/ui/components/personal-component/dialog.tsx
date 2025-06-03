@@ -104,7 +104,6 @@ export const DialogWindow = ({
         dateHandler(event.target.value);
         break;
       }
-      // No default
     }
   };
 
