@@ -3,32 +3,39 @@ import type { ReactElement } from "react";
 import { Box, CircularProgress, Alert } from "@mui/material";
 import { getAllProducts } from "../api";
 import { sendingFilterSortingSearchRequest } from "../api";
-import type { DataProduct, MasterData, Product } from "../../../shared";
+import type { MasterData, Product } from "../../../shared";
 import { NoResultsFound } from "../../../shared";
 import { CardList } from "./card-list";
 import type { VisualFilterState, FilterSubmitData } from "./filters-list";
 import { FiltersList } from "./filters-list";
+import { AddBreadcrumb, CreateCategoriesButton } from ".";
+import "./styles.css";
 
 const FILTER_REQUEST = "filter=variants.";
 const ATTRIBUTE_FILTER_REQUEST = "filter=variants.attributes.";
 
+const INITIAL_FILTERS_STATE: VisualFilterState = {
+  priceMin: "",
+  priceMax: "",
+  year: "",
+  fuel: "",
+  power: "",
+  gearbox: "",
+  capacity: "",
+  payload: "",
+  categories: "",
+};
+
 export function CatalogContent(): ReactElement {
+  const [breadcrumb, setBreadcrumb] = useState<string>("CARS");
   const [currentFilters, setCurrentFilters] = useState<VisualFilterState>(
-    () => ({
-      priceMin: "",
-      priceMax: "",
-      year: "",
-      fuel: "",
-      power: "",
-      gearbox: "",
-      capacity: "",
-      payload: "",
-    }),
+    () => INITIAL_FILTERS_STATE,
   );
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [products, setProducts] = useState<MasterData[] | Product[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+
   const filterStrings = useMemo(() => {
     const filters: string[] = [];
 
@@ -63,12 +70,17 @@ export function CatalogContent(): ReactElement {
     }
     if (currentFilters.capacity) {
       filters.push(
-        `${ATTRIBUTE_FILTER_REQUEST}Capacity:"${String(currentFilters.capacity)}")`,
+        `${ATTRIBUTE_FILTER_REQUEST}Capacity:"${String(currentFilters.capacity)}"`,
       );
     }
     if (currentFilters.payload) {
       filters.push(
         `${ATTRIBUTE_FILTER_REQUEST}Payload:"${String(currentFilters.payload)}"`,
+      );
+    }
+    if (currentFilters.categories) {
+      filters.push(
+        `filter=categories.id:"${String(currentFilters.categories)}"`,
       );
     }
 
@@ -78,26 +90,22 @@ export function CatalogContent(): ReactElement {
   useEffect(() => {
     let isMounted = true;
 
-    const getFilterProducts = async (): Promise<void> => {
+    const fetchProducts = async (): Promise<void> => {
       setLoading(true);
       setError(null);
-      const data = await sendingFilterSortingSearchRequest(
-        filterStrings.join("&"),
-      );
-      const productList = data.results;
-
-      if (isMounted) {
-        setProducts(productList);
-      }
-      setLoading(false);
-    };
-
-    const loadData = async (): Promise<void> => {
       try {
-        setLoading(true);
-        const data: DataProduct = await getAllProducts();
+        const hasActiveFilters = filterStrings.length > 0;
+        const isCategorySelected = currentFilters.categories !== "";
+
+        const data = await (!hasActiveFilters && !isCategorySelected
+          ? getAllProducts()
+          : sendingFilterSortingSearchRequest(filterStrings.join("&")));
+
         const productList = data.results;
-        setProducts(productList);
+
+        if (isMounted) {
+          setProducts(productList);
+        }
       } catch (error_) {
         setError(
           error_ instanceof Error
@@ -110,19 +118,44 @@ export function CatalogContent(): ReactElement {
     };
 
     if (isFirstLoad) {
-      void loadData();
       setIsFirstLoad(false);
-    } else {
-      void getFilterProducts();
     }
+    void fetchProducts();
 
     return (): void => {
       isMounted = false;
     };
-  }, [filterStrings]);
+  }, [filterStrings, isFirstLoad, currentFilters]);
 
   const handleFilterSubmit = useCallback((data: FilterSubmitData) => {
-    setCurrentFilters(data.currentFilters);
+    setCurrentFilters((previousFilters) => ({
+      ...previousFilters,
+      ...data.currentFilters,
+      categories: previousFilters.categories,
+    }));
+  }, []);
+
+  const handleCategoryChange = useCallback(
+    (categoryId: string | null, categoryName: string) => {
+      setBreadcrumb(categoryName.toUpperCase());
+      setCurrentFilters((previousFilters) => ({
+        ...previousFilters,
+        categories: categoryId || "",
+      }));
+    },
+    [],
+  );
+
+  const handleResetAttributeFilters = useCallback(() => {
+    setCurrentFilters((previousFilters) => ({
+      ...INITIAL_FILTERS_STATE,
+      categories: previousFilters.categories,
+    }));
+  }, []);
+
+  const handleFullReset = useCallback(() => {
+    setCurrentFilters(INITIAL_FILTERS_STATE);
+    setBreadcrumb("");
   }, []);
 
   return (
@@ -157,6 +190,26 @@ export function CatalogContent(): ReactElement {
             {error}
           </Alert>
         )}
+        <div className="main">
+          <img
+            className="sale-board"
+            src="../../../../assets/catalog/sale-board.gif"
+            alt="sale-board"
+          ></img>
+          <CreateCategoriesButton
+            onCategoryChange={handleCategoryChange}
+            currentActiveCategoryId={currentFilters.categories}
+          />
+          <div className="breadcrumb">
+            <button className="breadcrumb-button" onClick={handleFullReset}>
+              CATALOG
+            </button>
+            <AddBreadcrumb
+              buttonName={breadcrumb}
+              onClick={handleResetAttributeFilters}
+            />
+          </div>
+        </div>
         {!loading && !error && products.length > 0 && (
           <CardList products={products} />
         )}

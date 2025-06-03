@@ -12,7 +12,7 @@ export function YearFilter({
 }: YearFilterProperties): ReactElement {
   return (
     <TextField
-      label="Year (от)"
+      label="Year 2019-2025"
       type="number"
       value={currentValue}
       onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +20,7 @@ export function YearFilter({
       }}
       fullWidth
       size="small"
-      inputProps={{ min: 1900, max: new Date().getFullYear() }}
+      inputProps={{ min: 2019, max: new Date().getFullYear() }}
       sx={{ marginBottom: 2 }}
     />
   );
