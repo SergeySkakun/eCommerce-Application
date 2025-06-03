@@ -5,7 +5,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ProductContent } from "./product-content";
 import { getProduct } from "../api";
 import { LoadingPlaceholder, type MasterData } from "../../../shared";
-import "./styles.css";
 
 const darkTheme = createTheme({
   palette: {
