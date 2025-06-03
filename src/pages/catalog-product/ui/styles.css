@@ -1,0 +1,57 @@
+.categories-button {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  padding: 0 25% 20px 25%;
+  height: 8vh;
+  margin-top: 25px;
+  border-bottom: 2px solid var(--dark-gray);
+}
+
+.button-cars {
+  width: 40%;
+  background-color: var(--transparent);
+  border: none;
+  border-right: 2px solid var(--price-blue-color);
+  font-size: 17px;
+  font-family: var(--font-family);
+  color: var(--price-blue-color);
+  cursor: pointer;
+}
+
+.button-bus {
+  border: none;
+}
+
+.button-cars:hover {
+  color: var(--price-gold-color);
+}
+
+.button-cars:disabled {
+  color: var(--light-gray);
+}
+
+.breadcrumb {
+  display: flex;
+  flex-direction: row;
+  width: 78%;
+  padding: 10px;
+  gap: 10px;
+}
+
+.breadcrumb-button {
+  background-color: var(--price-blue-color);
+  border: none;
+  border-radius: 50px;
+  font-size: 15px;
+  padding: 5px 15px;
+  font-family: var(--font-family);
+  color: var(--white-color);
+  cursor: pointer;
+}
+
+@media screen and (width <= 600px) {
+  .categories-button {
+    padding: 0 0 20px 0;
+  }
+}
