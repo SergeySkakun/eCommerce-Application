@@ -27,6 +27,8 @@ const INITIAL_FILTERS_STATE: VisualFilterState = {
   categories: "",
 };
 
+const DEBOUNCE_DELAY = 2000;
+
 export function CatalogContent(): ReactElement {
   const [breadcrumb, setBreadcrumb] = useState<string>("CARS");
   const [currentFilters, setCurrentFilters] = useState<VisualFilterState>(
@@ -127,8 +129,17 @@ export function CatalogContent(): ReactElement {
 
     if (isFirstLoad) {
       setIsFirstLoad(false);
+      void fetchProducts();
+    } else {
+      const handler = setTimeout(() => {
+        void fetchProducts();
+      }, DEBOUNCE_DELAY);
+
+      return (): void => {
+        clearTimeout(handler);
+        isMounted = false;
+      };
     }
-    void fetchProducts();
 
     return (): void => {
       isMounted = false;
