@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import * as React from "react";
 import Button from "@mui/material/Button";
@@ -10,10 +11,14 @@ import { grey, red } from "@mui/material/colors";
 import type { Action } from "../../../api/types";
 import { addChangeDeleteUserData } from "../../../api";
 
-export const DeleteAddress = ({ properties }): React.ReactElement => {
+export const DeleteAddress = ({
+  properties,
+  stetUpdate,
+}): React.ReactElement => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = (): void => {
+    stetUpdate(false);
     setOpen(true);
   };
 
@@ -48,6 +53,7 @@ export const DeleteAddress = ({ properties }): React.ReactElement => {
                 addressId: `${properties.id}`,
               };
               void addChangeDeleteUserData(body);
+              stetUpdate(true);
               handleClose();
             },
           },

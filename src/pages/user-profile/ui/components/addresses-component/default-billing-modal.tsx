@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import * as React from "react";
 import Button from "@mui/material/Button";
@@ -10,7 +11,10 @@ import { grey } from "@mui/material/colors";
 import type { Action } from "../../../api/types";
 import { addChangeDeleteUserData } from "../../../api";
 
-export const SetDefaultBilling = ({ properties }): React.ReactElement => {
+export const SetDefaultBilling = ({
+  properties,
+  stetUpdate,
+}): React.ReactElement => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = (): void => {
@@ -18,6 +22,7 @@ export const SetDefaultBilling = ({ properties }): React.ReactElement => {
   };
 
   const handleClose = (): void => {
+    stetUpdate(false);
     setOpen(false);
   };
 
@@ -48,8 +53,8 @@ export const SetDefaultBilling = ({ properties }): React.ReactElement => {
                 action: "setDefaultBillingAddress",
                 addressId: `${properties.id}`,
               };
-
               void addChangeDeleteUserData(body);
+              stetUpdate(true);
               handleClose();
             },
           },

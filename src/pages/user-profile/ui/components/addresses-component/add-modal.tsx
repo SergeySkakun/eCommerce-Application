@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import Paper from "@mui/material/Paper";
@@ -30,7 +31,7 @@ interface Address {
   country: string;
 }
 
-export const AddNewAddress = (): ReactElement => {
+export const AddNewAddress = ({ stetUpdate }): ReactElement => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = (): void => {
@@ -38,6 +39,7 @@ export const AddNewAddress = (): ReactElement => {
   };
 
   const handleClose = (): void => {
+    stetUpdate(false);
     setOpen(false);
     reset();
   };
@@ -74,7 +76,7 @@ export const AddNewAddress = (): ReactElement => {
     };
 
     void addChangeDeleteUserData(body);
-
+    stetUpdate(true);
     handleClose();
   };
 

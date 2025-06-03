@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import * as React from "react";
 import Button from "@mui/material/Button";
@@ -10,7 +11,10 @@ import { grey } from "@mui/material/colors";
 import type { Action } from "../../../api/types";
 import { addChangeDeleteUserData } from "../../../api";
 
-export const SetDefaultShipping = ({ properties }): React.ReactElement => {
+export const SetDefaultShipping = ({
+  properties,
+  stetUpdate,
+}): React.ReactElement => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = (): void => {
@@ -18,6 +22,7 @@ export const SetDefaultShipping = ({ properties }): React.ReactElement => {
   };
 
   const handleClose = (): void => {
+    stetUpdate(false);
     setOpen(false);
   };
 
@@ -49,6 +54,7 @@ export const SetDefaultShipping = ({ properties }): React.ReactElement => {
                 addressId: `${properties.id}`,
               };
               void addChangeDeleteUserData(body);
+              stetUpdate(true);
               handleClose();
             },
           },
