@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import * as React from "react";
@@ -18,12 +19,11 @@ export const DeleteAddress = ({
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = (): void => {
-    stetUpdate(true);
     setOpen(true);
-    stetUpdate(false);
   };
 
   const handleClose = (): void => {
+    stetUpdate(false);
     setOpen(false);
   };
 
@@ -47,14 +47,15 @@ export const DeleteAddress = ({
         slotProps={{
           paper: {
             component: "form",
-            onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
+            onSubmit: async (event: React.FormEvent<HTMLFormElement>) => {
               event.preventDefault();
               const body: Action = {
                 action: "removeAddress",
                 addressId: `${properties.id}`,
               };
-              void addChangeDeleteUserData(body);
-              stetUpdate(true);
+              await addChangeDeleteUserData(body).then(() => {
+                stetUpdate(true);
+              });
               handleClose();
             },
           },

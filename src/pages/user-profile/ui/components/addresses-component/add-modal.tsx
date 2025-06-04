@@ -33,8 +33,10 @@ interface Address {
 
 export const AddNewAddress = ({ stetUpdate }): ReactElement => {
   const [open, setOpen] = React.useState(false);
+  const [isLoad, setIsLoad] = React.useState(false);
 
   const handleClickOpen = (): void => {
+    setIsLoad(false);
     setOpen(true);
   };
 
@@ -55,7 +57,8 @@ export const AddNewAddress = ({ stetUpdate }): ReactElement => {
       country: "",
     },
   });
-  const onSubmit = (data: Address): void => {
+  const onSubmit = async (data: Address): Promise<void> => {
+    setIsLoad(true);
     const newAddress: Address = {
       streetName: data.streetName,
       streetNumber: data.streetNumber,
@@ -75,9 +78,11 @@ export const AddNewAddress = ({ stetUpdate }): ReactElement => {
       },
     };
 
-    void addChangeDeleteUserData(body);
-    stetUpdate(true);
-    handleClose();
+    const result = await addChangeDeleteUserData(body).then((data) => {
+      stetUpdate(true);
+      setIsLoad(false);
+      handleClose();
+    });
   };
 
   return (
