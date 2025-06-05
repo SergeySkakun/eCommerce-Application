@@ -5,4 +5,6 @@ export const TOKEN_NAMES = {
   guestRefresh: "anonymous_refresh_token",
   activeUserID: "active_user_ID",
   userVersion: "user_version",
+  cartID: "cart_ID",
+  cartVersion: "cart_version",
 };
