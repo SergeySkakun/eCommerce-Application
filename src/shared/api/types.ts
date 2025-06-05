@@ -113,3 +113,23 @@ export interface Attributes {
   name: string;
   value: number;
 }
+
+export interface Cart {
+  id: string;
+  version: number;
+  lineItems: [ProductInCart];
+  totalPrice: Value;
+  discountOnTotalPrice: {
+    discountedAmount: Value;
+  };
+  totalLineItemQuantity: number;
+}
+
+interface ProductInCart {
+  id: string;
+  name: Name;
+  variant: MasterVariant;
+  price: Prices;
+  quantity: number;
+  totalPrice: Value;
+}
