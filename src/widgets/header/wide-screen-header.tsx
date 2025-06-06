@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./styles.css";
 import { useAuth } from "../../shared";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Cart } from "../../pages/basket";
 
 export function WideScreenHeader(): ReactNode {
   const { isLoggedIn, logout } = useAuth();
@@ -52,7 +53,7 @@ export function WideScreenHeader(): ReactNode {
             <button className="button button-about">ABOUT</button>
           </Link>
           <Link to="/cart" className="link-menu">
-            <button className="button button-cart">
+            <button className="button button-cart" onClick={void Cart}>
               <ShoppingCartIcon fontSize="large" />
             </button>
             <div className="quantity-item"></div>
