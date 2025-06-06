@@ -11,7 +11,7 @@ export function WideScreenHeader(): ReactNode {
   const [lightMode, setLightMode] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
   const { totalLineItemQuantity, setIsDownloadPage } = useContext(
-    TotalLineItemQuantityContext,
+    TotalLineItemQuantityContext
   );
 
   const colorModeHandler = (): void => {
