@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./styles.css";
 import { TotalLineItemQuantityContext, useAuth } from "../../shared";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Cart } from "../../pages/basket";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 
@@ -75,7 +74,7 @@ export function WideScreenHeader(): ReactNode {
             <button className="button button-about">ABOUT</button>
           </Link>
           <Link to="/cart" className="link-menu">
-            <button className="button button-cart" onClick={Cart}>
+            <button className="button button-cart">
               <ShoppingCartIcon fontSize="large" />
               <div className="quantity-item">{totalLineItemQuantity}</div>
             </button>
