@@ -20,6 +20,7 @@ import {
 import { useAuth } from "../../shared";
 import { ObtainAnonymousAccessToken, LoadingPlaceholder } from "../../shared";
 import { Header, Footer } from "../../widgets";
+import { Cart } from "../../pages/basket";
 
 function MainRedirect(): undefined {
   const navigate = useNavigate();
@@ -104,6 +105,7 @@ export function PageRouter(): React.ReactNode {
               </UserRoute>
             }
           ></Route>
+          <Route path="/cart" element={<Cart />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
         <Footer />
