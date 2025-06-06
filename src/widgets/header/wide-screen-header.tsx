@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import "./styles.css";
 import { useAuth } from "../../shared";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 export function WideScreenHeader(): ReactNode {
   const { isLoggedIn, logout } = useAuth();
@@ -49,6 +50,12 @@ export function WideScreenHeader(): ReactNode {
           )}
           <Link to="/about" className="link-menu">
             <button className="button button-about">ABOUT</button>
+          </Link>
+          <Link to="/cart" className="link-menu">
+            <button className="button button-cart">
+              <ShoppingCartIcon fontSize="large" />
+            </button>
+            <div className="quantity-item"></div>
           </Link>
         </div>
       </header>
