@@ -16,20 +16,12 @@ import { SetDefaultShipping } from "./default-shipping-modal";
 import { SetDefaultBilling } from "./default-billing-modal";
 import { grey } from "@mui/material/colors";
 import { AddNewAddress } from "./add-modal";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 import "./style.css";
 
 interface CustomUser extends Customer {
   defaultShippingAddressId: string;
   defaultBillingAddressId: string;
 }
-
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
 
 type Address = {
   isDefaultBillingAddress: { properties: any };
@@ -189,40 +181,36 @@ export function AddressesGrid(): React.ReactElement {
       </>
     );
   }
-  //
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <Box
+    <Box
+      sx={{
+        height: 400,
+        width: "auto",
+        maxWidth: "fit-content",
+        margin: "auto",
+      }}
+    >
+      <DataGrid
+        rows={data}
+        columns={columns}
         sx={{
-          height: 400,
-          width: "auto",
-          maxWidth: "fit-content",
-          margin: "auto",
+          bgcolor: grey[900],
+          color: grey[1000],
         }}
-      >
-        <DataGrid
-          rows={data}
-          columns={columns}
-          sx={{
-            bgcolor: grey[900],
-            color: grey[1000],
-          }}
-          getRowClassName={(parameters) => rowClassName(parameters.row)}
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 5,
-              },
+        getRowClassName={(parameters) => rowClassName(parameters.row)}
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 5,
             },
-          }}
-          pageSizeOptions={[5]}
-          checkboxSelection
-          disableRowSelectionOnClick
-        />
-        <AddNewAddress stetUpdate={setStateUpdate} />
-      </Box>
-    </ThemeProvider>
+          },
+        }}
+        pageSizeOptions={[5]}
+        checkboxSelection
+        disableRowSelectionOnClick
+      />
+      <AddNewAddress stetUpdate={setStateUpdate} />
+    </Box>
   );
 }

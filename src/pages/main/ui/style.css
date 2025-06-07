@@ -1,52 +1,66 @@
-@import url("../../../shared/variables.css");
+@import "../../../shared/variables.css";
 
 html {
   scroll-behavior: smooth;
 }
 
 body {
+  width: 100%;
+  height: 100vh;
   margin: 0;
   padding: 0;
-  width: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .main {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   width: 100%;
   margin: 0 auto;
 }
 
 .head-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+
   width: 100%;
   height: 100vh;
-  text-align: center;
+
   font-size: 100px;
   color: var(--white-color);
+  text-align: center;
+
   background-image: url("../../../../assets/main/image_1.jpg");
-  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  gap: 30px;
+  background-size: cover;
 }
 
 .button-main-head {
-  padding: 10px;
-  color: var(--light-gray);
-  border: 2px solid var(--light-gray);
-  background-color: var(--transparent);
   cursor: pointer;
-}
 
-.button-main-head:hover {
-  color: var(--white-color);
-  border-color: var(--light-gray);
+  padding: 10px;
+  border: 2px solid var(--light-gray);
+
+  color: var(--light-gray);
+
+  background-color: var(--transparent);
+
+  &:hover {
+    border-color: var(--light-gray);
+    color: var(--white-color);
+  }
 }
 
 .link {
@@ -57,63 +71,70 @@ body {
 
 .history-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   min-height: 50vh;
-  background-color: var(--background-color);
   padding-bottom: 20px;
+
+  background-color: var(--background-color);
 }
 
 .content-history {
   display: flex;
-  align-items: center;
   flex-direction: row;
+  align-items: center;
   width: 95%;
 }
 
 h2 {
   width: 100%;
-  color: var(--white-color);
   font-family: var(--font-family);
+  color: var(--white-color);
   text-align: center;
 }
 
 .image-history {
   width: 50%;
   height: 270px;
+
   background-image: url("../../../../assets/main/img_2.jpg");
-  background-size: 68%;
   background-repeat: no-repeat;
   background-position: center;
+  background-size: 68%;
 }
 
 .text-history {
   width: 50%;
-  color: var(--white-color);
   font-family: var(--font-family);
   font-size: 20px;
+  color: var(--white-color);
 }
 
 .best-product-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  background-color: var(--light-background-color);
+  align-items: center;
+  justify-content: center;
+
   width: 100%;
   min-height: 520px;
   padding-bottom: 20px;
+
+  background-color: var(--light-background-color);
 }
 
 .technology-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   min-height: 50vh;
-  background-color: var(--background-color);
   padding-bottom: 20px;
+
+  background-color: var(--background-color);
 }
 
 .content-technology {
@@ -125,18 +146,19 @@ h2 {
 
 .text-technology {
   width: 50%;
-  color: var(--white-color);
   font-family: var(--font-family);
   font-size: 20px;
+  color: var(--white-color);
 }
 
 .image-technology {
   width: 50%;
   height: 40vh;
+
   background-image: url("../../../../assets/main/img_3.jpg");
-  background-size: 45%;
   background-repeat: no-repeat;
   background-position: center;
+  background-size: 45%;
 }
 
 .sale-board {
@@ -161,6 +183,7 @@ h2 {
   .text-technology {
     font-size: 10px;
   }
+
   .image-technology {
     width: 70%;
   }
@@ -177,8 +200,8 @@ h2 {
   }
 
   .text-technology {
-    font-size: 8px;
     width: 90%;
+    font-size: 8px;
   }
 
   .button-main-head {
@@ -217,8 +240,8 @@ h2 {
   }
 
   .text-technology {
-    font-size: 12px;
     width: 90%;
+    font-size: 12px;
   }
 
   h2 {
@@ -242,7 +265,7 @@ h2 {
 
   .image-technology {
     width: 100%;
-    background-size: 50%;
     height: 220px;
+    background-size: 50%;
   }
 }

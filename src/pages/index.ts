@@ -6,3 +6,4 @@ export { LoadingPage } from "./loading/";
 export { CatalogProduct } from "./catalog-product";
 export { ProfilePage } from "./user-profile";
 export { DetailedProduct } from "./detailed-product";
+export { BasketPage } from "./basket";

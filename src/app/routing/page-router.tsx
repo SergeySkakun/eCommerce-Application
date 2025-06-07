@@ -15,6 +15,7 @@ import {
   DetailedProduct,
   NotFound,
   ProfilePage,
+  BasketPage,
 } from "../../pages";
 import { useAuth } from "../../shared";
 import { ObtainAnonymousAccessToken, LoadingPlaceholder } from "../../shared";
@@ -90,6 +91,7 @@ export function PageRouter(): React.ReactNode {
             }
           ></Route>
           <Route path="/catalog" element={<CatalogProduct />}></Route>
+          <Route path="/basket" element={<BasketPage />}></Route>
           <Route
             path="/catalog/product/:productKey"
             element={<DetailedProduct />}

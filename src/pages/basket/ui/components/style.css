@@ -1,0 +1,9 @@
+.basket-title {
+  display: "flex";
+  align-items: "center";
+  justify-content: "center";
+
+  padding-top: "4rem";
+
+  font-size: 5rem;
+}
