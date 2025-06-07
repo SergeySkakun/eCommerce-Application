@@ -1,12 +1,52 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { Box, IconButton, Paper, Tooltip, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { CartItem } from "./cart-item";
-import type { ReactElement } from "react";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { useEffect, useState, type ReactElement } from "react";
+import { getCart } from "../../api/get-cart";
+import { EmptyCart } from "./empty-cart";
+import { type Cart } from "../../../../shared";
+import { CartSkeleton } from "./skeleton";
 
 export function CartList({ products }): ReactElement {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<unknown>();
+
+  useEffect(() => {
+    const fetchData = async (): Promise<void> => {
+      try {
+        await getCart().then((data: Cart) => {
+          void data;
+          // console.log(data)
+        });
+        setLoading(false);
+      } catch (error: unknown) {
+        setError(error);
+        setLoading(false);
+      }
+    };
+    void fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <>
+        <CartSkeleton />
+      </>
+    );
+  }
+  if (error) {
+    return (
+      <>
+        <EmptyCart />
+        {/* <Typography sx={{ width: "100%", margin: "auto", color: "#ffffff" }}>
+            Error: {error.message}
+          </Typography> */}
+      </>
+    );
+  }
+
   return (
     <Box
       sx={{
@@ -16,38 +56,9 @@ export function CartList({ products }): ReactElement {
         gap: "0.5rem",
       }}
     >
-      {products.length > 0 ? (
-        products.map((product) => (
-          <CartItem key={product.id} product={product} />
-        ))
-      ) : (
-        <Paper
-          elevation={5}
-          sx={{
-            display: "flex",
-            width: "auto",
-            maxWidth: "40rem",
-            margin: "auto",
-            padding: "1.5rem",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-            textAlign: "center",
-          }}
-        >
-          <Tooltip title="Go to Catalog" placement="top">
-            <IconButton aria-label="go to catalog">
-              <AddShoppingCartIcon sx={{ margin: 2 }} />
-            </IconButton>
-          </Tooltip>
-          <Typography gutterBottom variant="button" sx={{ mt: 2 }}>
-            Your Cart is currently Empty
-          </Typography>
-          <Typography color="textSecondary" gutterBottom variant="body2">
-            Is your journey to your perfect car just beginning?{" "}
-          </Typography>
-        </Paper>
-      )}
+      {products.map((product) => (
+        <CartItem key={product.id} product={product} />
+      ))}
     </Box>
   );
 }
