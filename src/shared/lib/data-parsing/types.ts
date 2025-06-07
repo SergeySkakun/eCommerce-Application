@@ -1,6 +1,7 @@
-import type { Attributes, Images } from "../../api";
+import type { Attributes, Images, ProductInCart } from "../../api";
 
-export type ProductInfo = {
+export interface ProductInfo {
+  productId: string;
   productKey: string;
   productName: string;
   productDescription: string;
@@ -9,4 +10,11 @@ export type ProductInfo = {
   currencyCode: string;
   rawPrice: number;
   discountedPrice: number;
-};
+}
+
+export interface CartInfo {
+  allProductInCart: [ProductInCart];
+  totalPrice: number;
+  discountOnTotalPrice: number;
+  totalLineItemQuantity: number;
+}

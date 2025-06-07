@@ -3,23 +3,16 @@ import Box from "@mui/material/Box";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./styles.css";
-import { Price, type PriceInfo } from "../price";
-
-type CardInfo = {
-  key: string;
-  name: string;
-  description: string;
-  imgUrl: string;
-  imgLabel: string;
-  priceInfo: PriceInfo;
-};
+import { Price } from "../price";
+import { ButtonAddToCart } from "../button-add-to-cart";
+import type { CardInfo } from "./types";
 
 export function ProductCard({ cardInfo }: { cardInfo: CardInfo }): ReactNode {
-  const { key, name, description, imgUrl, imgLabel, priceInfo } = cardInfo;
+  const { productId, key, name, description, imgUrl, imgLabel, priceInfo } =
+    cardInfo;
   const navigateTo = useNavigate();
   const productURL = `/catalog/product/${key}`;
 
@@ -48,11 +41,7 @@ export function ProductCard({ cardInfo }: { cardInfo: CardInfo }): ReactNode {
           </Typography>
         </CardContent>
         <CardActions sx={{ marginTop: "auto", p: "0 12px" }}>
-          <Link to={productURL}>
-            <Button size="small" sx={{ fontSize: "14px" }}>
-              More Info
-            </Button>
-          </Link>
+          <ButtonAddToCart productId={productId} />
           <Price priceInfo={priceInfo} />
         </CardActions>
       </Box>

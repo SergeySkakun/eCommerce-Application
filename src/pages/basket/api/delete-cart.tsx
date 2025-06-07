@@ -8,7 +8,7 @@ export async function DeleteCart(): Promise<void> {
   const cartID = getTokenFromCookie(TOKEN_NAMES.cartID);
   const cartVersion = getTokenFromCookie(TOKEN_NAMES.cartVersion);
   await fetch(
-    `${API_HOST}/${PROJECT_KEY}}/me/carts/${cartID}?version=${cartVersion}`,
+    `${API_HOST}/${PROJECT_KEY}/me/carts/${cartID}?version=${cartVersion}`,
     {
       method: "DELETE",
       headers: {

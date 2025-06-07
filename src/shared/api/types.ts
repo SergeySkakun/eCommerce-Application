@@ -60,6 +60,7 @@ export interface DataProduct {
 }
 
 export interface MasterData {
+  id: string;
   key: string;
   masterData: Current;
 }
@@ -74,6 +75,7 @@ export interface Current {
 }
 
 export interface Product {
+  id: string;
   key: string;
   name: Name;
   description: Description;
@@ -125,8 +127,9 @@ export interface Cart {
   totalLineItemQuantity: number;
 }
 
-interface ProductInCart {
+export interface ProductInCart {
   id: string;
+  productId: string;
   name: Name;
   variant: MasterVariant;
   price: Prices;

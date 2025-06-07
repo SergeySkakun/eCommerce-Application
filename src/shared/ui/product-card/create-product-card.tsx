@@ -10,6 +10,7 @@ export function createProductCard(
   cardInfo: MasterData | Product,
 ): ReactElement {
   const {
+    productId,
     productKey: key,
     productName: name,
     productDescription: description,
@@ -29,6 +30,7 @@ export function createProductCard(
   };
 
   const CardInfo = {
+    productId,
     key,
     name,
     description,
@@ -36,6 +38,5 @@ export function createProductCard(
     imgLabel: productImgLabel,
     priceInfo: priceInfo,
   };
-
   return <ProductCard key={key} cardInfo={CardInfo} />;
 }

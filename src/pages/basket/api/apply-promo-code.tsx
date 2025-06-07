@@ -33,7 +33,7 @@ export async function ApplyPromoCode(actions: Actions): Promise<Cart> {
     version: cartVersion,
     actions: [actions],
   };
-  await fetch(`${API_HOST}/${PROJECT_KEY}}/me/carts/${cartID}`, {
+  await fetch(`${API_HOST}/${PROJECT_KEY}/me/carts/${cartID}`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${BEARER_TOKEN}`,

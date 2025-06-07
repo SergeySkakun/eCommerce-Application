@@ -7,6 +7,7 @@ export {
   saveTokenCookie,
   parseMainProductData,
   parseProductDataForCard,
+  parseCartData,
 } from "./lib";
 export type { ProductInfo } from "./lib";
 export {
@@ -15,5 +16,6 @@ export {
   Price,
   type PriceInfo,
   createProductCard,
+  ButtonAddToCart,
 } from "./ui";
 export * from "./api";

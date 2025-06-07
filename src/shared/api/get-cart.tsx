@@ -1,16 +1,16 @@
-import { API_HOST, PROJECT_KEY } from "../../../project-config";
+import { API_HOST, PROJECT_KEY } from "../../project-config";
 import {
   type Cart,
   getTokenFromCookie,
   saveTokenCookie,
   TOKEN_NAMES,
-} from "../../../shared";
+} from "..";
 
 export async function getCart(): Promise<Cart> {
   let cart: Cart;
   const BEARER_TOKEN = getTokenFromCookie(TOKEN_NAMES.successUserAccess);
   const cartID = getTokenFromCookie(TOKEN_NAMES.cartID);
-  await fetch(`${API_HOST}/${PROJECT_KEY}}/me/carts/${cartID}`, {
+  await fetch(`${API_HOST}/${PROJECT_KEY}/me/carts/${cartID}`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${BEARER_TOKEN}`,

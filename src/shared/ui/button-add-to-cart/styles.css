@@ -1,0 +1,51 @@
+.in-cart {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 45px;
+  padding: 0 15px 0 25px;
+  background-color: var(--item-in-cart-bgcolor);
+  border-radius: 10px;
+}
+
+.text-in-cart {
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--item-in-cart-color);
+  height: 50%;
+}
+
+.button-add-to-cart {
+  height: 45px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 0 10px;
+  color: var(--price-blue-color);
+  background-color: var(--transparent);
+  border: none;
+  cursor: pointer;
+  z-index: 50;
+}
+
+.button-add-to-cart:hover {
+  background-color: rgba(73, 102, 134, 0.315);
+}
+
+.button-remove-from-cart {
+  height: 45px;
+  width: 45%;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 0 10px;
+  color: var(--item-remove-cart-color);
+  background-color: var(--transparent);
+  border: none;
+  cursor: pointer;
+  z-index: 50;
+}
+
+.button-remove-from-cart:hover {
+  background-color: var(--item-remove-cart-bgcolor);
+}
