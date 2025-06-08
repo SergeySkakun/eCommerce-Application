@@ -14,21 +14,16 @@ export function ButtonAddToCart({
     productId: productId,
   };
 
-  useEffect(() => {
-    const productInCartId = [];
+useEffect(() => {
     const productCheckout = async (): Promise<void> => {
       const cart = await getCart();
       const productInCart = cart.lineItems;
       if (productInCart.length > 0) {
-        productInCart.map((item) => {
-          productInCartId.push(item.productId);
-        });
+        const hasProductInCart = productInCart.some(
+          (product) => product.productId === productId
+        );
+        setIsProductInCart(hasProductInCart);
       }
-      productInCartId.map((item) => {
-        if (item === productId) {
-          setIsProductInCart(true);
-        }
-      });
     };
     void productCheckout();
   }, []);
