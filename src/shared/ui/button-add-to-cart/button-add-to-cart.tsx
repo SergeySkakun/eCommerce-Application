@@ -15,20 +15,15 @@ export function ButtonAddToCart({
   };
 
   useEffect(() => {
-    const productInCartId = [];
     const productCheckout = async (): Promise<void> => {
       const cart = await getCart();
       const productInCart = cart.lineItems;
       if (productInCart.length > 0) {
-        productInCart.map((item) => {
-          productInCartId.push(item.productId);
-        });
+        const hasProductInCart = productInCart.some(
+          (product) => product.productId === productId,
+        );
+        setIsProductInCart(hasProductInCart);
       }
-      productInCartId.map((item) => {
-        if (item === productId) {
-          setIsProductInCart(true);
-        }
-      });
     };
     void productCheckout();
   }, []);
@@ -52,7 +47,7 @@ export function ButtonAddToCart({
       className="button-remove-from-cart"
       onClick={(event) => {
         event.stopPropagation();
-        //void rmeoveProductFromCart();
+        //void removeProductFromCart();
       }}
     >
       REMOVE FROM CART

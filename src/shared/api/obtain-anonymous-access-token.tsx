@@ -6,7 +6,7 @@ import {
   CLIENT_SECRET,
   PROJECT_KEY,
 } from "../../project-config";
-import { CreateCart, saveTokenCookie, TOKEN_NAMES } from "../";
+import { createCart, saveTokenCookie, TOKEN_NAMES } from "../";
 import type { AccessToken } from ".";
 
 export function ObtainAnonymousAccessToken(): ReactElement {
@@ -24,7 +24,7 @@ export function ObtainAnonymousAccessToken(): ReactElement {
       .then(async (data: AccessToken) => {
         saveTokenCookie(data.access_token, TOKEN_NAMES.guestAccess);
         saveTokenCookie(data.refresh_token, TOKEN_NAMES.guestRefresh);
-        await CreateCart();
+        await createCart();
       })
       .catch(() => console.error("No connection"));
   }, []);
