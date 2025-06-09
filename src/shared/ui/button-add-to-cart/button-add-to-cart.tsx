@@ -29,6 +29,10 @@ export function ButtonAddToCart({
     setIsProductInCart(true);
   };
 
+  const removeProductFromCart = async (): Promise<void> => {
+    setIsProductInCart(false);
+  };
+
   return isProductInCart === false ? (
     <button
       className="button-add-to-cart"
@@ -44,7 +48,7 @@ export function ButtonAddToCart({
       className="button-remove-from-cart"
       onClick={(event) => {
         event.stopPropagation();
-        //void removeProductFromCart();
+        void removeProductFromCart();
       }}
     >
       REMOVE FROM CART
