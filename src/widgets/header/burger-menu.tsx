@@ -1,12 +1,13 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../shared";
+import { TotalLineItemQuantityContext, useAuth } from "../../shared";
 import { IconButton, Popover } from "@mui/material";
 import "./styles.css";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Cart } from "../../pages/basket";
+import { useContext } from "react";
 
 export function BurgerMenu(): React.ReactElement {
   const { isLoggedIn, logout } = useAuth();
@@ -14,6 +15,7 @@ export function BurgerMenu(): React.ReactElement {
   const [darkMode, setDarkMode] = React.useState(true);
   const [anchorElement, setAnchorElement] =
     React.useState<null | HTMLElement>();
+  const { totalLineItemQuantity } = useContext(TotalLineItemQuantityContext);
   const open = Boolean(anchorElement);
   const handleClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     setAnchorElement(event.currentTarget);
@@ -131,7 +133,9 @@ export function BurgerMenu(): React.ReactElement {
               <Link to="/cart" className="burger-link-menu">
                 <button className="button burger-button-cart" onClick={Cart}>
                   <ShoppingCartIcon fontSize="large" />
-                  <div className="burger-quantity-item"></div>
+                  <div className="burger-quantity-item">
+                    {totalLineItemQuantity}
+                  </div>
                 </button>
               </Link>
             </div>
