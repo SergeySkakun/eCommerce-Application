@@ -12,7 +12,7 @@ export function ButtonAddToCart({
 }): ReactElement {
   const [isProductInCart, setIsProductInCart] = useState(false);
   const { setTotalLineItemQuantity, productsCheckout } = useContext(
-    TotalLineItemQuantityContext,
+    TotalLineItemQuantityContext
   );
   const actions = {
     action: "addLineItem",

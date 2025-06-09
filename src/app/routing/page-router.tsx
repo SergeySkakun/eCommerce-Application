@@ -23,7 +23,6 @@ import {
   LoadingPlaceholder,
 } from "../../shared";
 import { Header, Footer } from "../../widgets";
-import { Cart } from "../../pages/basket";
 
 function MainRedirect(): undefined {
   const navigate = useNavigate();
