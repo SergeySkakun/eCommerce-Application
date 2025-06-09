@@ -8,6 +8,8 @@ export {
   parseMainProductData,
   parseProductDataForCard,
   parseCartData,
+  TotalQuantityContextProvider,
+  TotalLineItemQuantityContext,
 } from "./lib";
 export type { ProductInfo } from "./lib";
 export {

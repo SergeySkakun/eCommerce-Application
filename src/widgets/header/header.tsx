@@ -14,5 +14,5 @@ export function Header(): ReactElement {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  return <>{screenWidth > 710 ? <WideScreenHeader /> : <BurgerMenu />}</>;
+  return <>{screenWidth > 915 ? <WideScreenHeader /> : <BurgerMenu />}</>;
 }
