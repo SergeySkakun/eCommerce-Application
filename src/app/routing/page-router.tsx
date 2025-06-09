@@ -108,7 +108,6 @@ export function PageRouter(): React.ReactNode {
             <Route path="*" element={<NotFound />}></Route>
           </Routes>
         </TotalQuantityContextProvider>
-
         <Footer />
       </BrowserRouter>
     </>
