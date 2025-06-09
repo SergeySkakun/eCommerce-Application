@@ -79,6 +79,18 @@
   font-size: 12px;
 }
 
+@media screen and (max-width: 1030px) {
+  .content {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .content {
+    width: 90%;
+  }
+}
+
 @media screen and (max-width: 575px) {
   .footer {
     height: 45vh;
@@ -91,6 +103,6 @@
 
   .authors {
     padding: 5px 0;
-    width: 150px;
+    width: 60%;
   }
 }

@@ -26,7 +26,7 @@
 .menu {
   display: flex;
   justify-content: center;
-  width: 20rem;
+  width: 22rem;
 }
 
 .button {
@@ -66,11 +66,6 @@
   background-position: center;
 }
 
-.burger-button {
-  padding: 0;
-  height: 30px;
-}
-
 .burger-menu {
   background-color: var(--transparent-background-color);
 }
@@ -86,19 +81,21 @@
 }
 
 .burger-logo {
-  width: 9rem;
+  width: 11rem;
   padding-top: 5px;
   text-decoration: none;
+  line-height: 1.2;
 }
 
 .burger-button {
-  height: 25px;
+  height: 30px;
   padding: 5px;
   color: var(--light-gray);
   background-color: var(--background-color);
   border: none;
   font-family: var(--font-family);
   font-weight: bold;
+  font-size: 20px;
   cursor: pointer;
 }
 
@@ -106,6 +103,8 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: 200px;
+  gap: 10px;
   background-color: var(--background-color);
   border: 2px solid var(--dark-gray);
 }
@@ -115,9 +114,27 @@
 }
 
 .quantity-item {
-  position: absolute;
-  right: 10px;
+  position: fixed;
+  margin-left: 22px;
   top: 5px;
+  background-color: brown;
+  width: 23px;
+  height: 13px;
+  padding: 5px 0 5px 0;
+  font-size: 12px;
+  font-family: var(--font-family);
+  font-weight: bold;
+  text-align: center;
+  color: var(--white-color);
+  border-radius: 50px;
+  box-sizing: content-box;
+  line-height: 1.2;
+}
+
+.burger-quantity-item {
+  position: fixed;
+  top: 280px;
+  margin-left: 22px;
   background-color: brown;
   width: 23px;
   height: 13px;

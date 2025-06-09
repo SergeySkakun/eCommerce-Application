@@ -1,4 +1,9 @@
-export { useAuth, AuthUserContext } from "./auth";
+export {
+  useAuth,
+  AuthUserContext,
+  TotalQuantityContextProvider,
+  TotalLineItemQuantityContext,
+} from "./context";
 export {
   hasLoggedInToken,
   TOKEN_NAMES,
