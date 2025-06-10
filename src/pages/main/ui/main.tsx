@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import "./style.css";
-import { Link } from "react-router-dom";
 import { ViewProducts } from "./view-products/view-products";
+import { ToCatalogButton } from "../../../shared";
 
 export function Main(): ReactNode {
   return (
@@ -9,11 +9,7 @@ export function Main(): ReactNode {
       <main className="main">
         <div className="head-container">
           THIS IS FOR<br></br>ETERNITY
-          <Link to="/catalog" className="link">
-            <button className="button-main-head">
-              CHOOSE THE RIGHT COMPANION
-            </button>
-          </Link>
+          <ToCatalogButton />
         </div>
         <div className="history-container" id="history">
           <h2>COMPANY HISTORY</h2>

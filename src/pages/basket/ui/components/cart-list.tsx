@@ -1,15 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-import { Box } from "@mui/material";
-import { CartItem } from "./cart-item";
 import { useEffect, useState, type ReactElement } from "react";
 import { getCart } from "../../api/get-cart";
 import { EmptyCart } from "./empty-cart";
-import { type Cart } from "../../../../shared";
-import { CartSkeleton } from "./skeleton";
+import { LoadingPlaceholder, type Cart } from "../../../../shared";
 
-export function CartList({ products }): ReactElement {
+export function CartList(): ReactElement {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>();
 
@@ -18,7 +12,6 @@ export function CartList({ products }): ReactElement {
       try {
         await getCart().then((data: Cart) => {
           void data;
-          // console.log(data)
         });
         setLoading(false);
       } catch (error: unknown) {
@@ -32,7 +25,7 @@ export function CartList({ products }): ReactElement {
   if (loading) {
     return (
       <>
-        <CartSkeleton />
+        <LoadingPlaceholder />
       </>
     );
   }
@@ -40,25 +33,23 @@ export function CartList({ products }): ReactElement {
     return (
       <>
         <EmptyCart />
-        {/* <Typography sx={{ width: "100%", margin: "auto", color: "#ffffff" }}>
-            Error: {error.message}
-          </Typography> */}
       </>
     );
   }
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        padding: 2,
-        flexDirection: "column",
-        gap: "0.5rem",
-      }}
-    >
-      {products.map((product) => (
-        <CartItem key={product.id} product={product} />
-      ))}
-    </Box>
+    <></> // код ниже заккоментирован, но так как он пригодится в дальнейшем я его не удаляю )
+    // <Box
+    //   sx={{
+    //     display: "flex",
+    //     padding: 2,
+    //     flexDirection: "column",
+    //     gap: "0.5rem",
+    //   }}
+    // >
+    //   {products.map((product) => (
+    //     <CartItem key={product.id} product={product} />
+    //   ))}
+    // </Box>
   );
 }
