@@ -1,11 +1,11 @@
 import type { ReactElement } from "react";
 import {
+  ButtonAddToCart,
   parseMainProductData,
   Price,
   type MasterData,
   type PriceInfo,
 } from "../../../../shared";
-import { Button, CardActions } from "@mui/material";
 import { FullScreenImage } from ".";
 import { useNavigate } from "react-router-dom";
 
@@ -16,6 +16,7 @@ export function ProductContent({
 }): ReactElement {
   const navigate = useNavigate();
   const {
+    productId,
     productName,
     productDescription,
     productImages,
@@ -54,11 +55,7 @@ export function ProductContent({
           </ul>
         </div>
         <div className="dialog-footer">
-          <CardActions>
-            <Button size="small" sx={{ fontSize: "14px" }}>
-              ADD TO CART
-            </Button>
-          </CardActions>
+          <ButtonAddToCart productId={productId} />
           <Price priceInfo={priceInfo} />
         </div>
       </div>

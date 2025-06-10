@@ -6,8 +6,8 @@ import {
   CLIENT_SECRET,
   PROJECT_KEY,
 } from "../../project-config";
-import { saveTokenCookie, TOKEN_NAMES } from "../";
-import type { AccessToken } from "./index";
+import { createCart, saveTokenCookie, TOKEN_NAMES } from "../";
+import type { AccessToken } from ".";
 
 export function ObtainAnonymousAccessToken(): ReactElement {
   useEffect(function GetToken(): void {
@@ -21,9 +21,10 @@ export function ObtainAnonymousAccessToken(): ReactElement {
       },
     )
       .then((response) => response.json())
-      .then((data: AccessToken) => {
+      .then(async (data: AccessToken) => {
         saveTokenCookie(data.access_token, TOKEN_NAMES.guestAccess);
         saveTokenCookie(data.refresh_token, TOKEN_NAMES.guestRefresh);
+        await createCart();
       })
       .catch(() => console.error("No connection"));
   }, []);

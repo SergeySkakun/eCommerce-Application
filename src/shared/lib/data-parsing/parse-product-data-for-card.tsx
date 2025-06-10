@@ -9,8 +9,9 @@ function isMasterData(data: MasterData | Product): data is MasterData {
 }
 
 export function parseProductDataForCard(
-  cardInfo: MasterData | Product
+  cardInfo: MasterData | Product,
 ): ProductInfo {
+  let productId: string;
   let productKey: string;
   let productImages: [Images];
   let productName: string;
@@ -24,7 +25,7 @@ export function parseProductDataForCard(
     const currentProductPriceInfo =
       cardInfo.masterData.current.masterVariant.prices[0];
     const isDiscountedProduct = Boolean(currentProductPriceInfo.discounted);
-
+    productId = cardInfo.id;
     productKey = cardInfo.key;
     productImages = currentProductBasicInfo.masterVariant.images;
     productName = currentProductBasicInfo.name["en-US"];
@@ -37,7 +38,7 @@ export function parseProductDataForCard(
   } else {
     const currentProductPriceInfo = cardInfo.masterVariant.prices[0];
     const isDiscountedProduct = Boolean(currentProductPriceInfo.discounted);
-
+    productId = cardInfo.id;
     productKey = cardInfo.key;
     productImages = cardInfo.masterVariant.images;
     productName = cardInfo.name["en-US"];
@@ -50,6 +51,7 @@ export function parseProductDataForCard(
   }
 
   return {
+    productId,
     productKey,
     productName,
     productDescription,

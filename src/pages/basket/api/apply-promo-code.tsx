@@ -30,10 +30,10 @@ export async function ApplyPromoCode(actions: Actions): Promise<Cart> {
   const cartID = getTokenFromCookie(TOKEN_NAMES.cartID);
   const cartVersion = getTokenFromCookie(TOKEN_NAMES.cartVersion);
   const body = {
-    version: cartVersion,
+    version: Number(cartVersion),
     actions: [actions],
   };
-  await fetch(`${API_HOST}/${PROJECT_KEY}}/me/carts/${cartID}`, {
+  await fetch(`${API_HOST}/${PROJECT_KEY}/me/carts/${cartID}`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${BEARER_TOKEN}`,

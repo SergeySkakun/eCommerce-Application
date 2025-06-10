@@ -5,5 +5,9 @@ export {
   getTokenFromCookie,
   saveTokenCookie,
 } from "./token";
-export { parseMainProductData, parseProductDataForCard } from "./data-parsing";
+export {
+  parseMainProductData,
+  parseProductDataForCard,
+  parseCartData,
+} from "./data-parsing";
 export type { ProductInfo } from "./data-parsing";

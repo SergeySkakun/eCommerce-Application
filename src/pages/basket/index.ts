@@ -1,2 +1,2 @@
-export { AddingDeletingModifyingItemsInCart } from "./api";
+export { AddingDeletingModifyingItemsInCart, deleteCart } from "./api";
 export * from "./ui";
