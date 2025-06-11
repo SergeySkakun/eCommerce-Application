@@ -37,8 +37,8 @@ export function ButtonAddToCart({
     const cart = await AddingDeletingModifyingItemsInCart(actions);
     setTotalLineItemQuantity(cart.totalLineItemQuantity);
     setIsProductInCart(true);
-    const lastItem = cart.lineItems.slice(-1);
-    setLineItemId(lastItem[0].id);
+    const lastItem = cart.lineItems.at(-1);
+    setLineItemId(lastItem.id);
   };
 
   const removeProductFromCart = async (): Promise<void> => {
