@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import type { ReactNode } from "react";
+import React, { useEffect, type ReactNode } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -17,8 +16,12 @@ import {
   ProfilePage,
   BasketPage,
 } from "../../pages";
-import { TotalQuantityContextProvider, useAuth } from "../../shared";
-import { ObtainAnonymousAccessToken, LoadingPlaceholder } from "../../shared";
+import {
+  TotalQuantityContextProvider,
+  useAuth,
+  ObtainAnonymousAccessToken,
+  LoadingPlaceholder,
+} from "../../shared";
 import { Header, Footer } from "../../widgets";
 
 function MainRedirect(): undefined {

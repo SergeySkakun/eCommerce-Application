@@ -1,7 +1,6 @@
 import { type ReactElement } from "react";
 import "./styles.css";
-import type { Cart } from "../../../shared";
-import { getCart } from "../api";
+import { getCart } from "../../../pages/basket/api";
 
 const getCurrentCart = async (): Promise<void> => {
   await getCart();

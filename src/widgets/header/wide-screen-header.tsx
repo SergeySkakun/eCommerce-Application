@@ -10,7 +10,9 @@ export function WideScreenHeader(): ReactNode {
   const { isLoggedIn, logout } = useAuth();
   const [lightMode, setLightMode] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
-  const { totalLineItemQuantity } = useContext(TotalLineItemQuantityContext);
+  const { totalLineItemQuantity, setIsDownloadPage } = useContext(
+    TotalLineItemQuantityContext,
+  );
 
   const colorModeHandler = (): void => {
     if (darkMode) {
@@ -39,7 +41,12 @@ export function WideScreenHeader(): ReactNode {
             <button className="button button-technology">TECHNOLOGY</button>
           </a>
           <Link to="/catalog" className="link-menu">
-            <button className="button button-product">CATALOG</button>
+            <button
+              className="button button-product"
+              onClick={() => setIsDownloadPage(true)}
+            >
+              CATALOG
+            </button>
           </Link>
         </div>
         <Link to="/main" className="logo">

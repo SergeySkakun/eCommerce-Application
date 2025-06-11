@@ -1,7 +1,6 @@
 import { useEffect, useState, type ReactElement } from "react";
-import { getCart } from "../../api/get-cart";
 import { EmptyCart } from "./empty-cart";
-import { LoadingPlaceholder, type Cart } from "../../../../shared";
+import { getCart, LoadingPlaceholder, type Cart } from "../../../../shared";
 
 export function CartList(): ReactElement {
   const [loading, setLoading] = useState(true);

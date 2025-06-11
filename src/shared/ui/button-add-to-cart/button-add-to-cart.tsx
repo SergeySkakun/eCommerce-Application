@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState, type ReactElement } from "react";
 import { AddingDeletingModifyingItemsInCart } from "../../../pages/basket";
 import "./styles.css";
-import { getCart } from "../../api";
 import { TotalLineItemQuantityContext } from "../..";
 
 export function ButtonAddToCart({
@@ -10,26 +9,17 @@ export function ButtonAddToCart({
   productId: string;
 }): ReactElement {
   const [isProductInCart, setIsProductInCart] = useState(false);
-  const { setTotalLineItemQuantity } = useContext(TotalLineItemQuantityContext);
-
+  const { setTotalLineItemQuantity, productsCheckout } = useContext(
+    TotalLineItemQuantityContext,
+  );
   const actions = {
     action: "addLineItem",
     productId: productId,
   };
-
   useEffect(() => {
-    const productCheckout = async (): Promise<void> => {
-      const cart = await getCart();
-      const productInCart = cart.lineItems;
-      if (productInCart.length > 0) {
-        const hasProductInCart = productInCart.some(
-          (product) => product.productId === productId,
-        );
-        setIsProductInCart(hasProductInCart);
-      }
-    };
-    void productCheckout();
-  }, []);
+    const hasProductInCart = productsCheckout.includes(productId);
+    setIsProductInCart(hasProductInCart);
+  }, [productId, productsCheckout]);
 
   const addProductToCart = async (): Promise<void> => {
     const cart = await AddingDeletingModifyingItemsInCart(actions);

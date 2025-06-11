@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useContext, type ReactNode } from "react";
 import Box from "@mui/material/Box";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -9,15 +9,20 @@ import "./styles.css";
 import { Price } from "../price";
 import { ButtonAddToCart } from "../button-add-to-cart";
 import type { CardInfo } from "./types";
+import { TotalLineItemQuantityContext } from "../../lib";
 
 export function ProductCard({ cardInfo }: { cardInfo: CardInfo }): ReactNode {
   const { productId, key, name, description, imgUrl, imgLabel, priceInfo } =
     cardInfo;
+  const { setIsDownloadPage } = useContext(TotalLineItemQuantityContext);
   const navigateTo = useNavigate();
   const productURL = `/catalog/product/${key}`;
+  const clickOnCard = (): void => {
+    void (navigateTo(productURL), setIsDownloadPage(true));
+  };
 
   return (
-    <div onClick={() => void navigateTo(productURL)} className="card">
+    <div onClick={() => clickOnCard()} className="card">
       <CardMedia component="img" alt={imgLabel} height="140" image={imgUrl} />
       <Box
         sx={{
