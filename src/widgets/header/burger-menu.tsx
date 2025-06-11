@@ -6,7 +6,6 @@ import "./styles.css";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Cart } from "../../pages/basket";
 import { useContext } from "react";
 
 export function BurgerMenu(): React.ReactElement {
@@ -131,7 +130,7 @@ export function BurgerMenu(): React.ReactElement {
                 )}
               </button>
               <Link to="/cart" className="burger-link-menu">
-                <button className="button burger-button-cart" onClick={Cart}>
+                <button className="button burger-button-cart">
                   <ShoppingCartIcon fontSize="large" />
                   <div className="burger-quantity-item">
                     {totalLineItemQuantity}

@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import type { ReactNode } from "react";
+import React, { useEffect, type ReactNode } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -16,10 +15,14 @@ import {
   NotFound,
   ProfilePage,
 } from "../../pages";
-import { TotalQuantityContextProvider, useAuth } from "../../shared";
-import { ObtainAnonymousAccessToken, LoadingPlaceholder } from "../../shared";
+import {
+  Cart,
+  TotalQuantityContextProvider,
+  useAuth,
+  ObtainAnonymousAccessToken,
+  LoadingPlaceholder,
+} from "../../shared";
 import { Header, Footer } from "../../widgets";
-import { Cart } from "../../pages/basket";
 
 function MainRedirect(): undefined {
   const navigate = useNavigate();

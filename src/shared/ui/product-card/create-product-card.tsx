@@ -1,4 +1,4 @@
-import type { ReactElement } from "react";
+import { type ReactElement } from "react";
 import { ProductCard } from "./product-card";
 import type { MasterData, Product } from "../../api";
 import { parseProductDataForCard } from "../../lib";
@@ -6,7 +6,7 @@ import type { PriceInfo } from "../price";
 
 const FIRST_PRODUCT_IMAGE_NUMBER = 0;
 
-export function createProductCard(
+export function CreateProductCard(
   cardInfo: MasterData | Product,
 ): ReactElement {
   const {
@@ -38,5 +38,6 @@ export function createProductCard(
     imgLabel: productImgLabel,
     priceInfo: priceInfo,
   };
+
   return <ProductCard key={key} cardInfo={CardInfo} />;
 }

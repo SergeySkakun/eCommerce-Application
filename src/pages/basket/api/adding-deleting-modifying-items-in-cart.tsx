@@ -3,8 +3,8 @@ import {
   getTokenFromCookie,
   saveTokenCookie,
   TOKEN_NAMES,
-  type Cart,
 } from "../../../shared";
+import type { Cart } from "../../../shared/api";
 import type { Actions } from "./types";
 
 // Принимает обьект actions:

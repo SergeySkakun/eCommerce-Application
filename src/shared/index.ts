@@ -17,7 +17,8 @@ export {
   NoResultsFound,
   Price,
   type PriceInfo,
-  createProductCard,
+  CreateProductCard,
   ButtonAddToCart,
+  Cart,
 } from "./ui";
 export * from "./api";
