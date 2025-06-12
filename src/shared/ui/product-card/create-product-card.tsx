@@ -6,7 +6,7 @@ import type { PriceInfo } from "../price";
 
 const FIRST_PRODUCT_IMAGE_NUMBER = 0;
 
-export function CreateProductCard(
+export function сreateProductCard(
   cardInfo: MasterData | Product,
 ): ReactElement {
   const {

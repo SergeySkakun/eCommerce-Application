@@ -5,7 +5,7 @@ import {
   type MasterData,
   type Product,
   TotalLineItemQuantityContext,
-  CreateProductCard,
+  сreateProductCard,
 } from "../../../../shared";
 import { Grid } from "@mui/material";
 
@@ -37,7 +37,7 @@ export function ViewProducts(): ReactElement {
 
   const cards: ReactElement[] = [];
   for (const product of products) {
-    cards.push(CreateProductCard(product));
+    cards.push(сreateProductCard(product));
   }
 
   return (

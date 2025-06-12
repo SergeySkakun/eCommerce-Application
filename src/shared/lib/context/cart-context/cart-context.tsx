@@ -9,13 +9,10 @@ export function TotalQuantityContextProvider({ children }): ReactElement {
 
   useEffect(() => {
     const CheckProductInCart = async (): Promise<void> => {
-      const productIdInCart: string[] = [];
+      let productIdInCart: string[] = [];
       if (isDownloadPage) {
         const cart = await getCart();
-        const productInCart = cart.lineItems;
-        productInCart.map((product) => {
-          productIdInCart.push(product.productId);
-        });
+        productIdInCart = cart.lineItems.map((product) => product.productId);
         setProductCheckout(productIdInCart);
         setIsDownloadPage(false);
       }

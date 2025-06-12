@@ -1,7 +1,9 @@
 import { useContext, useEffect, useState, type ReactElement } from "react";
-import { AddingDeletingModifyingItemsInCart } from "../../../pages/basket";
+import {
+  AddingDeletingModifyingItemsInCart,
+  TotalLineItemQuantityContext,
+} from "../..";
 import "./styles.css";
-import { TotalLineItemQuantityContext } from "../..";
 
 export function ButtonAddToCart({
   productId,

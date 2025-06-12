@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-type value = {
+type Value = {
   totalLineItemQuantity: number;
   setTotalLineItemQuantity: React.Dispatch<React.SetStateAction<number>>;
   productsCheckout: string[];
@@ -8,7 +8,7 @@ type value = {
   setIsDownloadPage: React.Dispatch<boolean>;
 };
 
-export const TotalLineItemQuantityContext = createContext<value>({
+export const TotalLineItemQuantityContext = createContext<Value>({
   totalLineItemQuantity: 0,
   setTotalLineItemQuantity: () => {},
   productsCheckout: [""],

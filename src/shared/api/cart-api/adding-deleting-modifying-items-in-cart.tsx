@@ -1,11 +1,7 @@
 import { API_HOST, PROJECT_KEY } from "../../../project-config";
-import {
-  getTokenFromCookie,
-  saveTokenCookie,
-  TOKEN_NAMES,
-} from "../../../shared";
-import type { Cart } from "../../../shared/api";
-import type { Actions } from "./types";
+import { getTokenFromCookie, saveTokenCookie, TOKEN_NAMES } from "../..";
+import type { Cart } from "..";
+import type { Actions } from "../../../pages/basket/api/types";
 
 // Принимает обьект actions:
 //        для добавления товара в корзину:

@@ -1,6 +1,6 @@
-import type { Cart } from ".";
-import { API_HOST, PROJECT_KEY } from "../../project-config";
-import { getTokenFromCookie, saveTokenCookie, TOKEN_NAMES } from "../lib";
+import type { Cart } from "..";
+import { API_HOST, PROJECT_KEY } from "../../../project-config";
+import { getTokenFromCookie, saveTokenCookie, TOKEN_NAMES } from "../../lib";
 
 // Создаёт новую корзину, сохраняет ID корзины и Version в куки
 

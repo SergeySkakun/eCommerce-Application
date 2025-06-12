@@ -2,12 +2,9 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState, type ReactElement } from "react";
-import { PasswordInput } from "./form-components";
-import { SubmitButton } from "./form-components";
+import { PasswordInput, SubmitButton, EmailInput } from "./form-components";
 import { LogInSchema } from "./login-schema";
-import { sendingSignInOrSignUpRequest } from "../../../../shared/api";
-import { EmailInput } from "./form-components";
-import { useAuth } from "../../../../shared";
+import { sendingSignInOrSignUpRequest, useAuth } from "../../../../shared";
 
 interface ILoginForm {
   email: string;

@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import {
   type MasterData,
   type Product,
-  CreateProductCard,
+  сreateProductCard,
 } from "../../../../shared";
 
 export function CardList({
@@ -13,7 +13,7 @@ export function CardList({
 }): ReactNode {
   const cards: ReactElement[] = [];
   for (const product of products) {
-    cards.push(CreateProductCard(product));
+    cards.push(сreateProductCard(product));
   }
 
   return (
