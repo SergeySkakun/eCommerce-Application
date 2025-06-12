@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactElement } from "react";
-import { EmptyCart } from "./empty-cart";
+import { EmptyCart } from ".";
 import { getCart, LoadingPlaceholder, type Cart } from "../../../../shared";
 
 export function CartList(): ReactElement {

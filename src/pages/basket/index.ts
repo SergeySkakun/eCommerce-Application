@@ -1,2 +1,2 @@
 export { AddingDeletingModifyingItemsInCart, deleteCart } from "./api";
-export { BasketPage } from "./ui";
+export * from "./ui";

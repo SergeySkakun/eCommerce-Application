@@ -3,8 +3,8 @@ import {
   getTokenFromCookie,
   saveTokenCookie,
   TOKEN_NAMES,
+  type Cart,
 } from "../../../shared";
-import type { Cart } from "../../../shared/api";
 
 export async function getCart(): Promise<Cart> {
   let cart: Cart;

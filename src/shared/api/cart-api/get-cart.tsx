@@ -1,6 +1,6 @@
 import { API_HOST, PROJECT_KEY } from "../../../project-config";
 import { getTokenFromCookie, saveTokenCookie, TOKEN_NAMES } from "../..";
-import type { Cart } from "../types";
+import type { Cart } from "..";
 
 export async function getCart(): Promise<Cart> {
   let cart: Cart;
