@@ -1,1 +1,1 @@
-export { сreateProductCard } from "./create-product-card";
+export { createProductCard } from "./create-product-card";

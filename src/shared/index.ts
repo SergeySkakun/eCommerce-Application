@@ -1,9 +1,10 @@
 export {
   createCart,
-  AddingDeletingModifyingItemsInCart,
+  addingDeletingModifyingItemsInCart,
   getCart,
   sendingSignInOrSignUpRequest,
   ObtainAnonymousAccessToken,
+  type Actions,
 } from "./api";
 export {
   useAuth,
@@ -24,7 +25,7 @@ export {
   NoResultsFound,
   Price,
   type PriceInfo,
-  сreateProductCard,
+  createProductCard,
   ButtonAddToCart,
   ToCatalogButton,
 } from "./ui";

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState, type ReactElement } from "react";
 import {
-  AddingDeletingModifyingItemsInCart,
+  addingDeletingModifyingItemsInCart,
   TotalLineItemQuantityContext,
 } from "../..";
 import "./styles.css";
@@ -24,7 +24,7 @@ export function ButtonAddToCart({
   }, [productId, productsCheckout]);
 
   const addProductToCart = async (): Promise<void> => {
-    const cart = await AddingDeletingModifyingItemsInCart(actions);
+    const cart = await addingDeletingModifyingItemsInCart(actions);
     setTotalLineItemQuantity(cart.totalLineItemQuantity);
     setIsProductInCart(true);
   };
