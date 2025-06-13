@@ -23,6 +23,7 @@ export function TotalQuantityContextProvider({ children }): ReactElement {
     totalLineItemQuantity,
     setTotalLineItemQuantity,
     productsCheckout,
+    setProductsCheckout,
     setIsDownloadPage,
   };
 

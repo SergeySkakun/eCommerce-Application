@@ -19,7 +19,6 @@ import {
 import {
   TotalQuantityContextProvider,
   useAuth,
-  ObtainAnonymousAccessToken,
   LoadingPlaceholder,
 } from "../../shared";
 import { Header, Footer } from "../../widgets";
@@ -65,7 +64,6 @@ export function PageRouter(): React.ReactNode {
   return (
     <>
       <BrowserRouter>
-        <ObtainAnonymousAccessToken />
         <TotalQuantityContextProvider>
           <Header />
           <Routes>

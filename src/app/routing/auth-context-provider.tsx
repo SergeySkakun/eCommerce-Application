@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { AuthUserContext, hasLoggedInToken } from "../../shared";
+import {
+  AuthUserContext,
+  hasLoggedInToken,
+  obtainAnonymousAccessToken,
+} from "../../shared";
 import type { ReactNode } from "react";
 
 export function AuthUserContextProvider({
@@ -7,10 +11,16 @@ export function AuthUserContextProvider({
 }: {
   children: ReactNode;
 }): ReactNode {
+  const [isGuestAccess, setIsGuestAccess] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAuthCheckReady, setIsAuthCheckReady] = useState(false);
 
+  const getGuestToken = async (): Promise<void> => {
+    await obtainAnonymousAccessToken().then(() => setIsGuestAccess(true));
+  };
+
   useEffect(() => {
+    void getGuestToken();
     setIsLoggedIn(hasLoggedInToken());
     setIsAuthCheckReady(true);
   }, []);
@@ -29,11 +39,13 @@ export function AuthUserContextProvider({
     document.cookie =
       "active_user_ID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     setIsLoggedIn(false);
+    setIsGuestAccess(false);
+    void getGuestToken();
   }
 
   return (
     <AuthUserContext.Provider
-      value={{ isLoggedIn, isAuthCheckReady, login, logout }}
+      value={{ isGuestAccess, isLoggedIn, isAuthCheckReady, login, logout }}
     >
       {children}
     </AuthUserContext.Provider>

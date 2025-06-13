@@ -5,6 +5,7 @@ type Value = {
   totalLineItemQuantity: number;
   setTotalLineItemQuantity: React.Dispatch<React.SetStateAction<number>>;
   productsCheckout: [LineItem];
+  setProductsCheckout: React.Dispatch<React.SetStateAction<[LineItem]>>;
   setIsDownloadPage: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -12,5 +13,6 @@ export const TotalLineItemQuantityContext = createContext<Value>({
   totalLineItemQuantity: 0,
   setTotalLineItemQuantity: () => {},
   productsCheckout: [{ id: "", productId: "" }],
+  setProductsCheckout: () => {},
   setIsDownloadPage: () => {},
 });

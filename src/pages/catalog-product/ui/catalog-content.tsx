@@ -4,7 +4,7 @@ import { Box, CircularProgress, Alert } from "@mui/material";
 import { getAllProducts } from "../api";
 import { sendingFilterSortingSearchRequest } from "../api";
 import type { MasterData, Product } from "../../../shared";
-import { NoResultsFound } from "../../../shared";
+import { NoResultsFound, useAuth, LoadingPlaceholder } from "../../../shared";
 import { CardList } from "./card-list";
 import type { VisualFilterState, FilterSubmitData } from "./filters-list";
 import { FiltersList, SearchInput } from "./filters-list";
@@ -35,10 +35,10 @@ export function CatalogContent(): ReactElement {
   );
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [currentSortOption, setCurrentSortOption] = useState<string>("");
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [products, setProducts] = useState<MasterData[] | Product[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const { isGuestAccess } = useAuth();
 
   const filterAndSortStrings = useMemo(() => {
     const parameters: string[] = [];
@@ -135,15 +135,14 @@ export function CatalogContent(): ReactElement {
       }
     };
 
-    if (isFirstLoad) {
-      setIsFirstLoad(false);
+    if (isGuestAccess) {
+      void fetchProducts();
     }
-    void fetchProducts();
 
     return (): void => {
       isMounted = false;
     };
-  }, [filterAndSortStrings, isFirstLoad, currentFilters]);
+  }, [filterAndSortStrings, currentFilters, isGuestAccess]);
 
   const handleFilterSubmit = useCallback((data: FilterSubmitData) => {
     setCurrentFilters((previousFilters) => ({
@@ -189,6 +188,10 @@ export function CatalogContent(): ReactElement {
     setSearchQuery("");
     setCurrentSortOption("");
   }, []);
+
+  if (!isGuestAccess) {
+    return <LoadingPlaceholder />;
+  }
 
   return (
     <Box

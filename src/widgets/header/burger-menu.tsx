@@ -1,22 +1,23 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { TotalLineItemQuantityContext, useAuth } from "../../shared";
-import { IconButton, Popover } from "@mui/material";
+import type { HeaderPropertiesType } from "./types";
 import "./styles.css";
+import { IconButton, Popover } from "@mui/material";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { useContext } from "react";
 
-export function BurgerMenu(): React.ReactElement {
-  const { isLoggedIn, logout } = useAuth();
+export function BurgerMenu({
+  headerProperties,
+}: {
+  headerProperties: HeaderPropertiesType;
+}): React.ReactElement {
   const [lightMode, setLightMode] = React.useState(false);
   const [darkMode, setDarkMode] = React.useState(true);
   const [anchorElement, setAnchorElement] =
     React.useState<null | HTMLElement>();
-  const { totalLineItemQuantity, setIsDownloadPage } = useContext(
-    TotalLineItemQuantityContext,
-  );
+  const { isLoggedIn, setIsDownloadPage, totalLineItemQuantity, actOnLogout } =
+    headerProperties;
   const open = Boolean(anchorElement);
   const handleClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     setAnchorElement(event.currentTarget);
@@ -87,7 +88,7 @@ export function BurgerMenu(): React.ReactElement {
                 <button
                   className="button button-logout"
                   onClick={() => {
-                    logout();
+                    actOnLogout();
                     handleClose();
                   }}
                 >
