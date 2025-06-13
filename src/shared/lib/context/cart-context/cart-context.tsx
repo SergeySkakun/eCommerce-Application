@@ -1,19 +1,18 @@
 import { useEffect, useState, type ReactElement } from "react";
 import { TotalLineItemQuantityContext } from ".";
 import { getCart } from "../../..";
+import { type LineItem } from ".";
 
 export function TotalQuantityContextProvider({ children }): ReactElement {
   const [totalLineItemQuantity, setTotalLineItemQuantity] = useState(0);
-  const [productsCheckout, setProductCheckout] = useState<string[]>([]);
+  const [productsCheckout, setProductsCheckout] = useState<[LineItem]>();
   const [isDownloadPage, setIsDownloadPage] = useState<boolean>(false);
 
   useEffect(() => {
     const CheckProductInCart = async (): Promise<void> => {
-      let productIdInCart: string[] = [];
       if (isDownloadPage) {
         const cart = await getCart();
-        productIdInCart = cart.lineItems.map((product) => product.productId);
-        setProductCheckout(productIdInCart);
+        setProductsCheckout(cart.lineItems);
         setIsDownloadPage(false);
       }
     };
@@ -24,7 +23,6 @@ export function TotalQuantityContextProvider({ children }): ReactElement {
     totalLineItemQuantity,
     setTotalLineItemQuantity,
     productsCheckout,
-    setProductCheckout,
     setIsDownloadPage,
   };
 

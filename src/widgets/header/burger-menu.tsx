@@ -14,7 +14,9 @@ export function BurgerMenu(): React.ReactElement {
   const [darkMode, setDarkMode] = React.useState(true);
   const [anchorElement, setAnchorElement] =
     React.useState<null | HTMLElement>();
-  const { totalLineItemQuantity } = useContext(TotalLineItemQuantityContext);
+  const { totalLineItemQuantity, setIsDownloadPage } = useContext(
+    TotalLineItemQuantityContext,
+  );
   const open = Boolean(anchorElement);
   const handleClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     setAnchorElement(event.currentTarget);
@@ -31,6 +33,9 @@ export function BurgerMenu(): React.ReactElement {
       setDarkMode(true);
       setLightMode(false);
     }
+  };
+  const clickOnCatalog = (): void => {
+    void (handleClose(), setIsDownloadPage(true));
   };
   return (
     <>
@@ -73,7 +78,7 @@ export function BurgerMenu(): React.ReactElement {
               </button>
             </a>
             <Link to="/catalog" className="link-menu">
-              <button onClick={handleClose} className="burger-button">
+              <button onClick={clickOnCatalog} className="burger-button">
                 CATALOG
               </button>
             </Link>

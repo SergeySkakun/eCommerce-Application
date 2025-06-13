@@ -1,17 +1,16 @@
 import { createContext } from "react";
+import { type LineItem } from "./types";
 
 type Value = {
   totalLineItemQuantity: number;
   setTotalLineItemQuantity: React.Dispatch<React.SetStateAction<number>>;
-  productsCheckout: string[];
-  setProductCheckout: React.Dispatch<React.SetStateAction<string[]>>;
-  setIsDownloadPage: React.Dispatch<boolean>;
+  productsCheckout: [LineItem];
+  setIsDownloadPage: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const TotalLineItemQuantityContext = createContext<Value>({
   totalLineItemQuantity: 0,
   setTotalLineItemQuantity: () => {},
-  productsCheckout: [""],
-  setProductCheckout: () => {},
+  productsCheckout: [{ id: "", productId: "" }],
   setIsDownloadPage: () => {},
 });
