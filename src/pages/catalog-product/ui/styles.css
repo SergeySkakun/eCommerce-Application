@@ -1,3 +1,7 @@
+.product-conteiner {
+  background-color: var(--background-color);
+}
+
 .categories-button {
   display: flex;
   flex-direction: row;
@@ -48,6 +52,13 @@
   font-family: var(--font-family);
   color: var(--white-color);
   cursor: pointer;
+}
+
+.sort-container {
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  background-color: var(--dark-gray);
 }
 
 @media screen and (width <= 950px) {

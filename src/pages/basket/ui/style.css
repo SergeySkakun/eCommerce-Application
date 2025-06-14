@@ -1,4 +1,11 @@
 .basket-page {
   flex-grow: 1;
   width: 100%;
+  background-color: var(--background-color);
+}
+
+.title-cart {
+  margin-top: 60px;
+  font-size: 30px;
+  color: var(--white-color);
 }

@@ -33,14 +33,7 @@ export function ProductCard({ cardInfo }: { cardInfo: CardInfo }): ReactNode {
         }}
       >
         <CardContent>
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="div"
-            sx={{ overflow: "hidden", whiteSpace: "nowrap", color: "white" }}
-          >
-            {name}
-          </Typography>
+          <p className="card-name">{name}</p>
           <Typography variant="body2" sx={{ color: "rgb(124, 124, 124)" }}>
             {description}
           </Typography>

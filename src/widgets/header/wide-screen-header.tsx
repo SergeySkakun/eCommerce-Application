@@ -5,6 +5,7 @@ import "./styles.css";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { changeMode } from ".";
 
 export function WideScreenHeader({
   headerProperties,
@@ -20,9 +21,11 @@ export function WideScreenHeader({
     if (darkMode) {
       setDarkMode(false);
       setLightMode(true);
+      changeMode();
     } else {
       setDarkMode(true);
       setLightMode(false);
+      changeMode();
     }
   };
   return (

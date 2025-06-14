@@ -6,6 +6,7 @@ import { IconButton, Popover } from "@mui/material";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { changeMode } from ".";
 
 export function BurgerMenu({
   headerProperties,
@@ -31,10 +32,12 @@ export function BurgerMenu({
       setDarkMode(false);
       setLightMode(true);
       handleClose();
+      changeMode();
     } else {
       setDarkMode(true);
       setLightMode(false);
       handleClose();
+      changeMode();
     }
   };
   const clickOnCatalog = (): void => {

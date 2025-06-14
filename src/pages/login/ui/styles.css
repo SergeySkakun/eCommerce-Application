@@ -1,14 +1,15 @@
 .login-page {
   display: flex;
   justify-content: center;
-  padding: 100px 0;
+  min-height: 70%;
   background-color: var(--background-color);
 }
 
 .login-content {
-  height: 40vh;
+  height: 360px;
   width: 30%;
   padding: 0px 20px 10px 20px;
+  margin: 150px 0 100px 0;
   border: 2px solid var(--white-color);
   background-color: var(--dark-gray);
 }

@@ -1,10 +1,10 @@
-import { CartList, Title } from "./components";
+import { CartList } from "./components";
 import "./style.css";
 
 export function BasketPage(): React.ReactElement {
   return (
     <div className="basket-page">
-      <Title titleText={"Cart"} />
+      <h2 className="title-cart">CART</h2>
       <CartList />
     </div>
   );

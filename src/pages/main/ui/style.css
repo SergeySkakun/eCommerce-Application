@@ -25,6 +25,7 @@ body {
 
   width: 100%;
   margin: 0 auto;
+  background-color: var(--background-color);
 }
 
 .head-container {
@@ -36,35 +37,35 @@ body {
 
   width: 100%;
   height: 100vh;
-  text-align: center;
-  font-size: 120px;
-  color: var(--white-color);
-  text-align: center;
 
-  background-image: url("../../../../assets/main/image_1.jpg");
+  background-image: var(--main-image);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
 
+.head-text {
+  width: 100%;
+  height: 45vh;
+  margin: 0;
+  font-size: 140px;
+  color: var(--main-text-color);
+  text-align: center;
+  font-family: "Times New Roman";
+  -webkit-text-stroke: 1px var(--head-text-stroke);
+}
+
 .button-main-head {
   padding: 10px;
-  color: var(--light-gray);
-  border: 2px solid var(--light-gray);
+  color: var(--button-head);
+  border: 2px solid var(--button-head);
   background-color: var(--transparent);
   font-size: 1rem;
   cursor: pointer;
 
-  padding: 10px;
-  border: 2px solid var(--light-gray);
-
-  color: var(--light-gray);
-
-  background-color: var(--transparent);
-
   &:hover {
-    border-color: var(--light-gray);
-    color: var(--white-color);
+    border-color: var(--dark-gray);
+    color: var(--dark-gray);
   }
 }
 
@@ -72,6 +73,25 @@ body {
   display: flex;
   height: 40px;
   text-decoration: none;
+}
+
+.sale-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 400px;
+  background-color: var(--light-background-color);
+}
+
+.sale-content {
+  width: 70%;
+  height: 300px;
+  background-image: var(--sale-image);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  box-shadow: var(--sale-shadow-color) 0px 20px 30px -5px;
 }
 
 .history-container {
@@ -102,9 +122,9 @@ h2 {
 
 .image-history {
   width: 50%;
-  height: 270px;
+  height: 400px;
 
-  background-image: url("../../../../assets/main/img_2.jpg");
+  background-image: var(--history-image);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 68%;
@@ -174,11 +194,32 @@ h2 {
   .image-technology {
     background-size: 80%;
   }
+
+  .sale-content {
+    width: 85%;
+  }
+}
+
+@media screen and (width <= 800px) {
+  .head-text {
+    font-size: 100px;
+    height: 35vh;
+  }
+
+  .sale-content {
+    width: 90%;
+    height: 200px;
+  }
+
+  .sale-container {
+    height: 300px;
+  }
 }
 
 @media screen and (width <= 600px) {
-  .head-container {
+  .head-text {
     font-size: 60px;
+    height: 30vh;
   }
 
   .text-history {
@@ -191,50 +232,6 @@ h2 {
 
   .image-technology {
     width: 70%;
-  }
-}
-
-@media screen and (width <= 380px) {
-  .head-container {
-    font-size: 45px;
-  }
-
-  .text-history {
-    width: 90%;
-    font-size: 8px;
-  }
-
-  .text-technology {
-    width: 90%;
-    font-size: 8px;
-  }
-
-  .button-main-head {
-    font-size: 10px;
-  }
-
-  h2 {
-    font-size: 13px;
-  }
-
-  .content-history {
-    flex-direction: column;
-    width: 95%;
-  }
-
-  .image-history {
-    width: 100%;
-    height: 100px;
-  }
-
-  .content-technology {
-    flex-direction: column-reverse;
-    width: 95%;
-  }
-
-  .image-technology {
-    width: 100%;
-    height: 100px;
   }
 }
 
@@ -272,5 +269,13 @@ h2 {
     width: 100%;
     height: 220px;
     background-size: 50%;
+  }
+
+  .sale-content {
+    height: 100px;
+  }
+
+  .sale-container {
+    height: 200px;
   }
 }
