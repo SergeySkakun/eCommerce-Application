@@ -25,6 +25,7 @@
   --text-field-color: rgb(0 0 255);
   --item-remove-cart-color: rgb(150 0 0);
   --item-remove-cart-bgcolor: rgb(78 0 0 / 34.2%);
+  --rs-school: rgb(255, 230, 0);
   --main-image: url("../../../../assets/main/main_image_1.jpg");
   --history-image: url("../../../../assets/main/history_image_1.jpg");
   --button-back: url("../../../../assets/detailed-product/button-back-black.png");
@@ -56,6 +57,7 @@
   --text-field-color: rgb(0 0 255);
   --item-remove-cart-color: rgb(150 0 0);
   --item-remove-cart-bgcolor: rgb(78 0 0 / 34.2%);
+  --rs-school: rgb(255, 230, 0);
   --main-image: url("../../../../assets/main/main_image_2.jpg");
   --history-image: url("../../../../assets/main/history_image_2.jpg");
   --button-back: url("../../../../assets/detailed-product/button-back-white.png");
