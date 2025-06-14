@@ -36,6 +36,7 @@ export interface CustomerAllInfo {
   statusCode: number;
   message: string;
   customer: Customer;
+  cart: CustomerCart;
 }
 
 export interface Customer {
@@ -135,4 +136,9 @@ export interface ProductInCart {
   price: Prices;
   quantity: number;
   totalPrice: Value;
+}
+
+export interface CustomerCart {
+  id: string;
+  version: number;
 }

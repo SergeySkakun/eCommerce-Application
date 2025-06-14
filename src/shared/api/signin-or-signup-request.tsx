@@ -46,6 +46,8 @@ export async function sendingSignInOrSignUpRequest(
           data.customer.version.toString(),
           TOKEN_NAMES.userVersion,
         );
+        saveTokenCookie(data.cart.id, TOKEN_NAMES.cartID);
+        saveTokenCookie(data.cart.version.toString(), TOKEN_NAMES.cartVersion);
         if (typeRequest === "signup") {
           goAnimationAlert();
           setTimeout(() => {

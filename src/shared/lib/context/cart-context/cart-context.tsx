@@ -14,6 +14,7 @@ export function TotalQuantityContextProvider({ children }): ReactElement {
         const cart = await getCart();
         setProductsCheckout(cart.lineItems);
         setIsDownloadPage(false);
+        setTotalLineItemQuantity(cart.totalLineItemQuantity ?? 0);
       }
     };
     void CheckProductInCart();
