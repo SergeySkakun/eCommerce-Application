@@ -30,9 +30,11 @@ export function BurgerMenu({
     if (darkMode) {
       setDarkMode(false);
       setLightMode(true);
+      handleClose();
     } else {
       setDarkMode(true);
       setLightMode(false);
+      handleClose();
     }
   };
   const clickOnCatalog = (): void => {
@@ -136,7 +138,10 @@ export function BurgerMenu({
                 )}
               </button>
               <Link to="/cart" className="burger-link-menu">
-                <button className="button burger-button-cart">
+                <button
+                  className="button burger-button-cart"
+                  onClick={handleClose}
+                >
                   <ShoppingCartIcon fontSize="large" />
                   <div className="burger-quantity-item">
                     {totalLineItemQuantity}
