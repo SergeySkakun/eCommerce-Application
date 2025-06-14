@@ -5,7 +5,7 @@
   --grey-border: rgb(34 34 34);
   --main-text-color: rgb(255 255 255);
   --transparent: rgb(0 0 0 / 0%);
-  --transparent-hover: rgba(0 0 0 0.199);
+  --transparent-hover: rgba(0 0 0 / 0.199);
   --head-text-stroke: rgb(255 255 255);
   --sale-shadow-color: rgb(255 255 255);
   --button-head: rgb(124 124 124);
@@ -16,7 +16,7 @@
   --button-apply-filters-text: rgb(255 255 255);
   --price-gold-color: rgb(218 165 32);
   --price-blue-color: rgb(136 187 245);
-  --card-hover-shadow: rgba(216 216 216 0.3);
+  --card-hover-shadow: rgba(216 216 216 / 0.3);
   --light-gray: rgb(124 124 124);
   --dark-gray: rgb(61 61 61);
   --red-color: rgb(255 0 0);
@@ -45,14 +45,14 @@
   --button-apply-filters: rgb(36 136 250);
   --price-gold-color: rgb(218 165 32);
   --price-blue-color: rgb(36, 136, 250);
-  --card-hover-shadow: rgba(0 0 0 0.473);
+  --card-hover-shadow: rgba(0 0 0 / 0.473);
   --white-color: rgb(0 0 0);
   --transparent: rgb(0 0 0 / 0%);
   --light-gray: rgb(155 155 155);
   --dark-gray: rgb(153 153 153);
   --red-color: rgb(255 0 0);
   --burger-button: rgb(207 207 207);
-  --transparent-background-color: rgba(233 233 233 0.616);
+  --transparent-background-color: rgba(233 233 233 / 0.616);
   --text-field-color: rgb(0 0 255);
   --item-remove-cart-color: rgb(150 0 0);
   --item-remove-cart-bgcolor: rgb(78 0 0 / 34.2%);
