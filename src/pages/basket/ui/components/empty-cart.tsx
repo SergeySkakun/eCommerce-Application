@@ -2,7 +2,7 @@ import { Box, IconButton, Paper, Tooltip, Typography } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { type ReactElement } from "react";
 import { Link } from "react-router-dom";
-import { ToCatalogButton } from "../../../../shared";
+import { ToCatalogButton } from "@/shared";
 
 export function EmptyCart(): ReactElement {
   return (
