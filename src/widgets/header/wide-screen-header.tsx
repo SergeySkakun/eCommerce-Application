@@ -60,17 +60,17 @@ export function WideScreenHeader({
         <div className="menu">
           {isLoggedIn ? (
             <>
-              <button className="button button-logout" onClick={actOnLogout}>
+              <button className="button" onClick={actOnLogout}>
                 LOGOUT
               </button>
               <Link to="/profile" className="link-menu">
-                <button className="button button-login">PROFILE</button>
+                <button className="button">PROFILE</button>
               </Link>
             </>
           ) : (
             <>
               <Link to="/login" className="link-menu">
-                <button className="button button-login">LOGIN</button>
+                <button className="button">LOGIN</button>
               </Link>
               <Link to="/registration" className="link-menu">
                 <button className="button button-reg">REGISTRATION</button>
