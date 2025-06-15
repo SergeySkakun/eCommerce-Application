@@ -23,7 +23,9 @@ export const CardList = forwardRef<HTMLDivElement, CardListProperties>(
 
     const lastProductCard = cards.pop();
     const newLastProductCardWithReference = (
-      <div ref={ref}>{lastProductCard}</div>
+      <div ref={ref} key={lastProductCard.key}>
+        {lastProductCard}
+      </div>
     );
     cards.push(newLastProductCardWithReference);
 
