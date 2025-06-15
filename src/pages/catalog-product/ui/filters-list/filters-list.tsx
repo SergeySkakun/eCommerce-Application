@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import type { ReactElement, FormEvent } from "react";
-import { Box, Typography, Paper } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import type { VisualFilterState, FilterSubmitData } from "./types";
 import {
   PriceFilter,
@@ -12,6 +12,7 @@ import {
   PayloadFilter,
 } from "./filters";
 import { FilterSubmit } from "./filter-submit";
+import "./styles.css";
 
 interface FiltersListProperties {
   onFilterSubmit: (data: FilterSubmitData) => void;
@@ -117,7 +118,7 @@ export function FiltersList({
   };
 
   return (
-    <Paper elevation={2} sx={{ padding: 2, borderRadius: 2 }}>
+    <div className="filters-container">
       <Typography variant="h6" gutterBottom>
         Filters
       </Typography>
@@ -146,6 +147,6 @@ export function FiltersList({
 
         <FilterSubmit onReset={handleReset} />
       </Box>
-    </Paper>
+    </div>
   );
 }

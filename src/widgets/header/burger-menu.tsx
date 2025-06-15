@@ -1,20 +1,24 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { TotalLineItemQuantityContext, useAuth } from "../../shared";
-import { IconButton, Popover } from "@mui/material";
+import type { HeaderPropertiesType } from "./types";
 import "./styles.css";
+import { IconButton, Popover } from "@mui/material";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { useContext } from "react";
+import { changeMode } from ".";
 
-export function BurgerMenu(): React.ReactElement {
-  const { isLoggedIn, logout } = useAuth();
+export function BurgerMenu({
+  headerProperties,
+}: {
+  headerProperties: HeaderPropertiesType;
+}): React.ReactElement {
   const [lightMode, setLightMode] = React.useState(false);
   const [darkMode, setDarkMode] = React.useState(true);
   const [anchorElement, setAnchorElement] =
     React.useState<null | HTMLElement>();
-  const { totalLineItemQuantity } = useContext(TotalLineItemQuantityContext);
+  const { isLoggedIn, setIsDownloadPage, totalLineItemQuantity, actOnLogout } =
+    headerProperties;
   const open = Boolean(anchorElement);
   const handleClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     setAnchorElement(event.currentTarget);
@@ -27,10 +31,17 @@ export function BurgerMenu(): React.ReactElement {
     if (darkMode) {
       setDarkMode(false);
       setLightMode(true);
+      handleClose();
+      changeMode();
     } else {
       setDarkMode(true);
       setLightMode(false);
+      handleClose();
+      changeMode();
     }
+  };
+  const clickOnCatalog = (): void => {
+    void (handleClose(), setIsDownloadPage(true));
   };
   return (
     <>
@@ -73,7 +84,7 @@ export function BurgerMenu(): React.ReactElement {
               </button>
             </a>
             <Link to="/catalog" className="link-menu">
-              <button onClick={handleClose} className="burger-button">
+              <button onClick={clickOnCatalog} className="burger-button">
                 CATALOG
               </button>
             </Link>
@@ -82,7 +93,7 @@ export function BurgerMenu(): React.ReactElement {
                 <button
                   className="button button-logout"
                   onClick={() => {
-                    logout();
+                    actOnLogout();
                     handleClose();
                   }}
                 >
@@ -130,7 +141,10 @@ export function BurgerMenu(): React.ReactElement {
                 )}
               </button>
               <Link to="/cart" className="burger-link-menu">
-                <button className="button burger-button-cart">
+                <button
+                  className="button burger-button-cart"
+                  onClick={handleClose}
+                >
                   <ShoppingCartIcon fontSize="large" />
                   <div className="burger-quantity-item">
                     {totalLineItemQuantity}

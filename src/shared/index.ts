@@ -3,7 +3,7 @@ export {
   addingDeletingModifyingItemsInCart,
   getCart,
   sendingSignInOrSignUpRequest,
-  ObtainAnonymousAccessToken,
+  obtainAnonymousAccessToken,
   type Actions,
 } from "./api";
 export {

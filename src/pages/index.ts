@@ -7,3 +7,4 @@ export { CatalogProduct } from "./catalog-product";
 export { ProfilePage } from "./user-profile";
 export { DetailedProduct } from "./detailed-product";
 export { BasketPage } from "./basket";
+export { About } from "./about-us";

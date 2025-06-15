@@ -1,26 +1,31 @@
-import { useContext, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
+import type { HeaderPropertiesType } from "./types";
 import "./styles.css";
-import { TotalLineItemQuantityContext, useAuth } from "../../shared";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { changeMode } from ".";
 
-export function WideScreenHeader(): ReactNode {
-  const { isLoggedIn, logout } = useAuth();
+export function WideScreenHeader({
+  headerProperties,
+}: {
+  headerProperties: HeaderPropertiesType;
+}): ReactNode {
   const [lightMode, setLightMode] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
-  const { totalLineItemQuantity, setIsDownloadPage } = useContext(
-    TotalLineItemQuantityContext,
-  );
+  const { isLoggedIn, totalLineItemQuantity, setIsDownloadPage, actOnLogout } =
+    headerProperties;
 
   const colorModeHandler = (): void => {
     if (darkMode) {
       setDarkMode(false);
       setLightMode(true);
+      changeMode();
     } else {
       setDarkMode(true);
       setLightMode(false);
+      changeMode();
     }
   };
   return (
@@ -55,12 +60,7 @@ export function WideScreenHeader(): ReactNode {
         <div className="menu">
           {isLoggedIn ? (
             <>
-              <button
-                className="button button-logout"
-                onClick={() => {
-                  logout();
-                }}
-              >
+              <button className="button button-logout" onClick={actOnLogout}>
                 LOGOUT
               </button>
               <Link to="/profile" className="link-menu">

@@ -9,9 +9,17 @@
   transition: transform 0.3s ease-in-out;
 }
 
+.card-name {
+  overflow: "hidden";
+  white-space: "nowrap";
+  margin: 10px;
+  font-size: 25px;
+  color: var(--white-color);
+}
+
 .card:hover {
   box-shadow:
-    10px 10px 10px rgba(216, 216, 216, 0.3),
-    -10px -10px 10px rgba(216, 216, 216, 0.3);
+    10px 10px 10px var(--card-hover-shadow),
+    -10px -10px 10px var(--card-hover-shadow);
   transform: scale(1.02);
 }

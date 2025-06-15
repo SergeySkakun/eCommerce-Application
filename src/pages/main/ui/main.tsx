@@ -8,8 +8,13 @@ export function Main(): ReactNode {
     <>
       <main className="main">
         <div className="head-container">
-          THIS IS FOR<br></br>ETERNITY
+          <p className="head-text">
+            THIS IS FOR<br></br>ETERNITY
+          </p>
           <ToCatalogButton />
+        </div>
+        <div className="sale-container">
+          <div className="sale-content"></div>
         </div>
         <div className="history-container" id="history">
           <h2>COMPANY HISTORY</h2>

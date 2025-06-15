@@ -1,41 +1,48 @@
-import { useEffect, useState, type ReactElement } from "react";
+import { useContext, useEffect, useState, type ReactElement } from "react";
 import { EmptyCart } from "./empty-cart";
 import {
-  type Cart,
-  getCart,
   LoadingPlaceholder,
   type ProductInCart,
+  TotalLineItemQuantityContext,
 } from "@/shared";
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import { CartItem } from "./cart-item";
+import { type LineItem } from "@/shared/lib/context/cart-context";
 
 export function CartList(): ReactElement {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>();
-  const [cart, setCart] = useState<ProductInCart[]>(null);
+  const [basket, setBasket] = useState<LineItem[]>(null);
   const [totalPrice, setTotalPrice] = useState<number>(null);
   const [isUpdatedCart, setIsUpdatedCart] = useState(false);
-  // const [itemIds, setItemIds] = useState()
 
-  const fetchData = async (): Promise<void> => {
+  const { productsCheckout, cart } = useContext(TotalLineItemQuantityContext);
+
+  const fetchData = (): void => {
     try {
-      await getCart().then((data: Cart) => {
-        setCart(data.lineItems);
-        setTotalPrice(Math.ceil(data.totalPrice.centAmount / 100));
-        void data;
-      });
-
-      setIsUpdatedCart(true);
+      setBasket(productsCheckout);
+      setTotalPrice(Math.ceil(cart.totalPrice.centAmount / 100));
       setLoading(false);
+      void cart;
     } catch (error: unknown) {
       setError(error);
       setLoading(false);
     }
   };
-
   useEffect(() => {
+    const fetchData = (): void => {
+      try {
+        setBasket(productsCheckout);
+        setTotalPrice(Math.ceil(cart.totalPrice.centAmount / 100));
+        setLoading(false);
+        void cart;
+      } catch (error: unknown) {
+        setError(error);
+        setLoading(false);
+      }
+    };
     void fetchData();
-  }, [isUpdatedCart]);
+  }, [isUpdatedCart, cart, productsCheckout]);
 
   if (loading) {
     return (
@@ -44,7 +51,7 @@ export function CartList(): ReactElement {
       </>
     );
   }
-  if (cart.length === 0) {
+  if (basket.length === 0) {
     return (
       <>
         <EmptyCart />
@@ -62,7 +69,12 @@ export function CartList(): ReactElement {
   const removeItem = (id: string): void => {
     setIsUpdatedCart(true);
     void fetchData();
-    setCart(cart.filter((item) => id !== item.id));
+    setBasket(basket.filter((item) => id !== item.id));
+  };
+
+  const changeCountItem = (): void => {
+    setIsUpdatedCart(true);
+    void fetchData();
   };
 
   return (
@@ -83,13 +95,14 @@ export function CartList(): ReactElement {
           justifyContent: "space-around",
         }}
       >
-        {cart.map((cartItem, id) => (
+        {basket.map((cartItem: ProductInCart, id) => (
           <CartItem
             key={id}
             productId={cartItem.id}
-            product={cartItem}
-            setIsUpdatedCart={setIsUpdatedCart}
+            productsCheckout={cartItem}
             removeItem={removeItem}
+            changeCountItem={changeCountItem}
+            setIsUpdatedCart={setIsUpdatedCart}
           />
         ))}
         <Grid sx={{ width: "100%", textAlign: "center" }}>

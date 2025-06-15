@@ -5,9 +5,10 @@ import {
   type ChangeEvent,
   type FormEvent,
 } from "react";
-import { TextField, InputAdornment, IconButton, Paper } from "@mui/material";
+import { TextField, InputAdornment, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
+import "./styles.css";
 
 interface SearchInputProperties {
   onSearch: (query: string) => void;
@@ -40,7 +41,7 @@ export function SearchInput({
   };
 
   return (
-    <Paper elevation={2} sx={{ padding: 2, borderRadius: 2, marginBottom: 2 }}>
+    <div className="search-conteiner">
       <form onSubmit={handleSubmit}>
         <TextField
           fullWidth
@@ -76,6 +77,6 @@ export function SearchInput({
           }}
         />
       </form>
-    </Paper>
+    </div>
   );
 }

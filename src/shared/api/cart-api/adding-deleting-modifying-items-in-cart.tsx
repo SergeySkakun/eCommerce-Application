@@ -13,12 +13,12 @@ import type { Cart } from "..";
 //                                  полностью, не зависимо от их количества в корзине:
 //                                                   const actions = {
 //                                                              action : "removeLineItem",
-//                                                              productId : "{{lineItemId}}"
+//                                                              lineItemId : "{{lineItemId}}"
 //                                                        }
 //                                  по одному:
 //                                                   const actions = {
 //                                                              action : "removeLineItem",
-//                                                              productId : "{{lineItemId}}"
+//                                                              lineItemId : "{{lineItemId}}"
 //                                                              quantity : 1
 //                                                        }
 // Возвращает полностью корзину

@@ -15,11 +15,11 @@ import {
   NotFound,
   ProfilePage,
   BasketPage,
+  About,
 } from "../../pages";
 import {
   TotalQuantityContextProvider,
   useAuth,
-  ObtainAnonymousAccessToken,
   LoadingPlaceholder,
 } from "../../shared";
 import { Header, Footer } from "../../widgets";
@@ -65,7 +65,6 @@ export function PageRouter(): React.ReactNode {
   return (
     <>
       <BrowserRouter>
-        <ObtainAnonymousAccessToken />
         <TotalQuantityContextProvider>
           <Header />
           <Routes>
@@ -107,6 +106,7 @@ export function PageRouter(): React.ReactNode {
                 </UserRoute>
               }
             ></Route>
+            <Route path="/about" element={<About />}></Route>
             <Route path="/cart" element={<BasketPage />}></Route>
             <Route path="*" element={<NotFound />}></Route>
           </Routes>

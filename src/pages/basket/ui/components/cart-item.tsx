@@ -17,51 +17,57 @@ import { Clear } from "@mui/icons-material";
 
 interface CartItem {
   readonly productId: string;
-  readonly product: ProductInCart;
-  setIsUpdatedCart: React.Dispatch<React.SetStateAction<boolean>>;
+  readonly productsCheckout: ProductInCart;
   removeItem: (index: string) => void;
+  changeCountItem: () => void;
+  setIsUpdatedCart: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function CartItem({
   productId,
-  product,
-  setIsUpdatedCart,
+  productsCheckout,
   removeItem,
+  changeCountItem,
+  setIsUpdatedCart,
 }: CartItem): React.ReactElement {
-  console.log("start cart item");
-  const [count, setCount] = React.useState<number>(null);
-
-  const itemName = product.name["en-US"];
-  const itemImgUrl = product.variant.images[0].url;
-  const price = product.price.value.centAmount / 100;
-  const quantity = product.quantity;
+  const itemName = productsCheckout.name["en-US"];
+  const itemImgUrl = productsCheckout.variant.images[0].url;
+  const price = productsCheckout.price.value.centAmount / 100;
+  const quantity = productsCheckout.quantity;
 
   const handleIncrement = (): void => {
-    setCount(count + 1);
+    const actions = {
+      action: "addLineItem",
+      productId: productsCheckout.productId,
+      quantity: 1,
+    };
+
+    void addingDeletingModifyingItemsInCart(actions).then(() => {
+      changeCountItem();
+    });
   };
 
   const handleDecrement = (): void => {
-    // const actions = {
-    //   action : "removeLineItem",
-    //   productId : product.id,
-    //   quantity : 1,
-    // }
+    const actions = {
+      action: "removeLineItem",
+      lineItemId: productsCheckout.id,
+      quantity: 1,
+    };
 
-    // void addingDeletingModifyingItemsInCart(actions)
-    setCount(1);
+    void addingDeletingModifyingItemsInCart(actions).then(() => {
+      changeCountItem();
+    });
   };
 
   const handleRemoveItem = (): void => {
     setIsUpdatedCart(true);
     const actions = {
       action: "removeLineItem",
-      lineItemId: product.id,
+      lineItemId: productsCheckout.id,
     };
     void addingDeletingModifyingItemsInCart(actions).then(() => {
-      console.log("remove");
       removeItem(productId);
     });
-
     setIsUpdatedCart(false);
   };
 
@@ -73,9 +79,7 @@ export function CartItem({
         image={itemImgUrl}
         alt={itemName}
       />
-      <Typography variant="h6" className={styles.title}>
-        {itemName}
-      </Typography>
+      <Typography className={styles.title}>{itemName}</Typography>
       <hr className={styles.separator} />
       <CardContent className={styles.block} sx={{ p: "0.7rem" }}>
         <Typography variant="body1" className={styles.subtitle}>

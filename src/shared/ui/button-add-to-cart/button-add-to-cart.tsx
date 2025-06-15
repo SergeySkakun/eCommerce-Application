@@ -11,22 +11,47 @@ export function ButtonAddToCart({
   productId: string;
 }): ReactElement {
   const [isProductInCart, setIsProductInCart] = useState(false);
+  const [lineItemId, setLineItemId] = useState<string>();
   const { setTotalLineItemQuantity, productsCheckout } = useContext(
     TotalLineItemQuantityContext,
   );
-  const actions = {
-    action: "addLineItem",
-    productId: productId,
-  };
+
   useEffect(() => {
-    const hasProductInCart = productsCheckout.includes(productId);
-    setIsProductInCart(hasProductInCart);
+    if (productsCheckout) {
+      const productInCart = productsCheckout.find(
+        (lineItem) => lineItem.productId === productId,
+      );
+      if (productInCart) {
+        setIsProductInCart(true);
+        setLineItemId(productInCart.id);
+      }
+    }
   }, [productId, productsCheckout]);
 
   const addProductToCart = async (): Promise<void> => {
+    const actions = {
+      action: "addLineItem",
+      productId: productId,
+    };
     const cart = await addingDeletingModifyingItemsInCart(actions);
     setTotalLineItemQuantity(cart.totalLineItemQuantity);
     setIsProductInCart(true);
+    const productInCart = cart.lineItems.find(
+      (lineItem) => lineItem.productId === productId,
+    );
+    if (productInCart) {
+      setLineItemId(productInCart.id);
+    }
+  };
+
+  const removeProductFromCart = async (): Promise<void> => {
+    const actions = {
+      action: "removeLineItem",
+      lineItemId: lineItemId,
+    };
+    const cart = await addingDeletingModifyingItemsInCart(actions);
+    setTotalLineItemQuantity(cart.totalLineItemQuantity);
+    setIsProductInCart(false);
   };
 
   return isProductInCart === false ? (
@@ -44,7 +69,7 @@ export function ButtonAddToCart({
       className="button-remove-from-cart"
       onClick={(event) => {
         event.stopPropagation();
-        //void removeProductFromCart();
+        void removeProductFromCart();
       }}
     >
       REMOVE FROM CART
