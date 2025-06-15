@@ -46,11 +46,13 @@ import { getTokenFromCookie, TOKEN_NAMES } from "../../../shared";
 
 export async function sendingFilterSortingSearchRequest(
   token: string,
+  limit: number,
+  offset: number,
 ): Promise<DataProduct> {
   let products: DataProduct;
   const BEARER_TOKEN = getTokenFromCookie(TOKEN_NAMES.successUserAccess);
   await fetch(
-    `${API_HOST}/${PROJECT_KEY}/product-projections/search?${token}`,
+    `${API_HOST}/${PROJECT_KEY}/product-projections/search?${token}&limit=${limit}&offset=${offset}`,
     {
       method: "GET",
       headers: {

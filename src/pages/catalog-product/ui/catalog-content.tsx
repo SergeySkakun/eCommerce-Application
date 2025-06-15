@@ -17,6 +17,7 @@ const ATTRIBUTE_FILTER_REQUEST = "filter=variants.attributes.";
 const SEARCH_REQUEST = "fuzzy=true&text.en-US=";
 
 const LIMIT_OF_PRODUCTS_IN_RESPONSE = 6;
+const START_NUMBER_OF_PRODUCT_IN_RESPONSE = 0;
 const INITIAL_FILTERS_STATE: VisualFilterState = {
   priceMin: "",
   priceMax: "",
@@ -34,7 +35,7 @@ export function CatalogContent(): ReactElement {
   const [error, setError] = useState<string | null>(null);
 
   const { isGuestAccess } = useAuth();
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useState(START_NUMBER_OF_PRODUCT_IN_RESPONSE);
   const [totalNumberOfResults, setTotalNumberOfResults] = useState(0);
   const [products, setProducts] = useState([]);
   const observer = useRef<IntersectionObserver | null>(null);
@@ -123,7 +124,11 @@ export function CatalogContent(): ReactElement {
 
         const data = await (shouldFetchAllProducts
           ? getAllProducts(LIMIT_OF_PRODUCTS_IN_RESPONSE, offset)
-          : sendingFilterSortingSearchRequest(filterAndSortStrings.join("&")));
+          : sendingFilterSortingSearchRequest(
+              filterAndSortStrings.join("&"),
+              LIMIT_OF_PRODUCTS_IN_RESPONSE,
+              offset,
+            ));
         setTotalNumberOfResults(data.total);
         const productList = data.results;
         setProducts((previousProductList: MasterData[] | Product[]) => [
@@ -172,6 +177,8 @@ export function CatalogContent(): ReactElement {
   }, [loading]);
 
   const handleFilterSubmit = useCallback((data: FilterSubmitData) => {
+    setOffset(START_NUMBER_OF_PRODUCT_IN_RESPONSE);
+    setProducts([]);
     setCurrentFilters((previousFilters) => ({
       ...previousFilters,
       ...data.currentFilters,
@@ -181,6 +188,8 @@ export function CatalogContent(): ReactElement {
 
   const handleCategoryChange = useCallback(
     (categoryId: string | null, categoryName: string) => {
+      setOffset(START_NUMBER_OF_PRODUCT_IN_RESPONSE);
+      setProducts([]);
       setBreadcrumb(categoryName.toUpperCase());
       setCurrentFilters((previousFilters) => ({
         ...previousFilters,
@@ -193,14 +202,20 @@ export function CatalogContent(): ReactElement {
   );
 
   const handleSearch = useCallback((query: string) => {
+    setOffset(START_NUMBER_OF_PRODUCT_IN_RESPONSE);
+    setProducts([]);
     setSearchQuery(query);
   }, []);
 
   const handleSortChange = useCallback((sortOption: string) => {
+    setOffset(START_NUMBER_OF_PRODUCT_IN_RESPONSE);
+    setProducts([]);
     setCurrentSortOption(sortOption);
   }, []);
 
   const handleResetAttributeFilters = useCallback(() => {
+    setOffset(START_NUMBER_OF_PRODUCT_IN_RESPONSE);
+    setProducts([]);
     setCurrentFilters((previousFilters) => ({
       ...INITIAL_FILTERS_STATE,
       categories: previousFilters.categories,
@@ -210,6 +225,8 @@ export function CatalogContent(): ReactElement {
   }, []);
 
   const handleFullReset = useCallback(() => {
+    setOffset(START_NUMBER_OF_PRODUCT_IN_RESPONSE);
+    setProducts([]);
     setCurrentFilters(INITIAL_FILTERS_STATE);
     setBreadcrumb("CARS");
     setSearchQuery("");
