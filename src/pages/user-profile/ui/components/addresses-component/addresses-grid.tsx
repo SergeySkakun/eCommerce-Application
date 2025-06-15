@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable unicorn/no-null */
 import * as React from "react";
 import Box from "@mui/material/Box";
 import type { GridColDef } from "@mui/x-data-grid";

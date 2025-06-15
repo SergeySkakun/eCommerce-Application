@@ -50,6 +50,12 @@
   cursor: pointer;
 }
 
+@media screen and (width <= 950px) {
+  .sale-board {
+    width: 95%;
+  }
+}
+
 @media screen and (width <= 600px) {
   .categories-button {
     padding: 0 0 20px 0;

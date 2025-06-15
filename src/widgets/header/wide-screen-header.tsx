@@ -1,14 +1,39 @@
-import type { ReactNode } from "react";
+import { useContext, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import "./styles.css";
-import { useAuth } from "../../shared";
+import { TotalLineItemQuantityContext, useAuth } from "../../shared";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 export function WideScreenHeader(): ReactNode {
   const { isLoggedIn, logout } = useAuth();
+  const [lightMode, setLightMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
+  const { totalLineItemQuantity, setIsDownloadPage } = useContext(
+    TotalLineItemQuantityContext,
+  );
+
+  const colorModeHandler = (): void => {
+    if (darkMode) {
+      setDarkMode(false);
+      setLightMode(true);
+    } else {
+      setDarkMode(true);
+      setLightMode(false);
+    }
+  };
   return (
     <>
       <header className="header">
         <div className="menu">
+          <button className="button button-mode" onClick={colorModeHandler}>
+            {lightMode ? (
+              <LightModeIcon fontSize="large" />
+            ) : (
+              <DarkModeIcon fontSize="large" />
+            )}
+          </button>
           <a href="#history" className="link-menu">
             <button className="button button-history">HISTORY</button>
           </a>
@@ -16,7 +41,12 @@ export function WideScreenHeader(): ReactNode {
             <button className="button button-technology">TECHNOLOGY</button>
           </a>
           <Link to="/catalog" className="link-menu">
-            <button className="button button-product">CATALOG</button>
+            <button
+              className="button button-product"
+              onClick={() => setIsDownloadPage(true)}
+            >
+              CATALOG
+            </button>
           </Link>
         </div>
         <Link to="/main" className="logo">
@@ -49,6 +79,12 @@ export function WideScreenHeader(): ReactNode {
           )}
           <Link to="/about" className="link-menu">
             <button className="button button-about">ABOUT</button>
+          </Link>
+          <Link to="/cart" className="link-menu">
+            <button className="button button-cart">
+              <ShoppingCartIcon fontSize="large" />
+              <div className="quantity-item">{totalLineItemQuantity}</div>
+            </button>
           </Link>
         </div>
       </header>

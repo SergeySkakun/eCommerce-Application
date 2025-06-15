@@ -1,13 +1,20 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../shared";
+import { TotalLineItemQuantityContext, useAuth } from "../../shared";
 import { IconButton, Popover } from "@mui/material";
 import "./styles.css";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useContext } from "react";
 
 export function BurgerMenu(): React.ReactElement {
   const { isLoggedIn, logout } = useAuth();
+  const [lightMode, setLightMode] = React.useState(false);
+  const [darkMode, setDarkMode] = React.useState(true);
   const [anchorElement, setAnchorElement] =
     React.useState<null | HTMLElement>();
+  const { totalLineItemQuantity } = useContext(TotalLineItemQuantityContext);
   const open = Boolean(anchorElement);
   const handleClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     setAnchorElement(event.currentTarget);
@@ -16,6 +23,15 @@ export function BurgerMenu(): React.ReactElement {
     setAnchorElement(undefined);
   };
 
+  const colorModeHandler = (): void => {
+    if (darkMode) {
+      setDarkMode(false);
+      setLightMode(true);
+    } else {
+      setDarkMode(true);
+      setLightMode(false);
+    }
+  };
   return (
     <>
       <header className="burger-header">
@@ -102,6 +118,26 @@ export function BurgerMenu(): React.ReactElement {
                 ABOUT
               </button>
             </Link>
+            <div className="button-icon">
+              <button
+                className="button burger-button-mode"
+                onClick={colorModeHandler}
+              >
+                {lightMode ? (
+                  <LightModeIcon fontSize="large" />
+                ) : (
+                  <DarkModeIcon fontSize="large" />
+                )}
+              </button>
+              <Link to="/cart" className="burger-link-menu">
+                <button className="button burger-button-cart">
+                  <ShoppingCartIcon fontSize="large" />
+                  <div className="burger-quantity-item">
+                    {totalLineItemQuantity}
+                  </div>
+                </button>
+              </Link>
+            </div>
           </div>
         </Popover>
         <Link to="/main" className="burger-logo">

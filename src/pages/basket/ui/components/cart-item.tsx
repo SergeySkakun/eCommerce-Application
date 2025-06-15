@@ -9,27 +9,60 @@ import { Grid } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import styles from "../basket-page.module.css";
-import { type ProductInCart } from "@/shared";
+import {
+  addingDeletingModifyingItemsInCart,
+  type ProductInCart,
+} from "@/shared";
+import { Clear } from "@mui/icons-material";
 
 interface CartItem {
   readonly productId: string;
   readonly product: ProductInCart;
+  setIsUpdatedCart: React.Dispatch<React.SetStateAction<boolean>>;
+  removeItem: (index: string) => void;
 }
 
-export function CartItem({ productId, product }: CartItem): React.ReactElement {
-  const [count, setCount] = React.useState(1);
+export function CartItem({
+  productId,
+  product,
+  setIsUpdatedCart,
+  removeItem,
+}: CartItem): React.ReactElement {
+  console.log("start cart item");
+  const [count, setCount] = React.useState<number>(null);
 
   const itemName = product.name["en-US"];
   const itemImgUrl = product.variant.images[0].url;
-  const price = product.price.value.centAmount;
+  const price = product.price.value.centAmount / 100;
+  const quantity = product.quantity;
 
   const handleIncrement = (): void => {
     setCount(count + 1);
   };
 
   const handleDecrement = (): void => {
-    if (count > 1) setCount(count - 1);
-    else setCount(1);
+    // const actions = {
+    //   action : "removeLineItem",
+    //   productId : product.id,
+    //   quantity : 1,
+    // }
+
+    // void addingDeletingModifyingItemsInCart(actions)
+    setCount(1);
+  };
+
+  const handleRemoveItem = (): void => {
+    setIsUpdatedCart(true);
+    const actions = {
+      action: "removeLineItem",
+      lineItemId: product.id,
+    };
+    void addingDeletingModifyingItemsInCart(actions).then(() => {
+      console.log("remove");
+      removeItem(productId);
+    });
+
+    setIsUpdatedCart(false);
   };
 
   return (
@@ -67,7 +100,7 @@ export function CartItem({ productId, product }: CartItem): React.ReactElement {
             <RemoveIcon sx={{ fontSize: "0.7rem" }} />
           </IconButton>
           <Typography variant="body1" style={{ margin: "0 0.2rem" }}>
-            {count}
+            {quantity}
           </Typography>
           <IconButton
             sx={{ pr: 0, display: "flex", alignItems: "center" }}
@@ -83,14 +116,14 @@ export function CartItem({ productId, product }: CartItem): React.ReactElement {
           Total price:
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          $ {price * count}
+          $ {price * quantity}
         </Typography>
       </CardContent>
-      {/* <CardContent className={styles.block}>
-          <IconButton onClick={handleDecrement}>
-            <Clear />
-          </IconButton>
-        </CardContent> */}
+      <CardContent className={styles.block}>
+        <IconButton onClick={handleRemoveItem}>
+          <Clear />
+        </IconButton>
+      </CardContent>
     </Card>
   );
 }

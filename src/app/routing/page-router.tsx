@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import type { ReactNode } from "react";
+import React, { useEffect, type ReactNode } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -17,8 +16,12 @@ import {
   ProfilePage,
   BasketPage,
 } from "../../pages";
-import { useAuth } from "../../shared";
-import { ObtainAnonymousAccessToken, LoadingPlaceholder } from "../../shared";
+import {
+  TotalQuantityContextProvider,
+  useAuth,
+  ObtainAnonymousAccessToken,
+  LoadingPlaceholder,
+} from "../../shared";
 import { Header, Footer } from "../../widgets";
 
 function MainRedirect(): undefined {
@@ -63,49 +66,52 @@ export function PageRouter(): React.ReactNode {
     <>
       <BrowserRouter>
         <ObtainAnonymousAccessToken />
-        <Header />
-        <Routes>
-          <Route path="/" element={<MainRedirect />}></Route>
-          <Route
-            path="/main"
-            element={
-              <>
-                <Main />
-              </>
-            }
-          ></Route>
-          <Route
-            path="/login"
-            element={
-              <GuestRoute>
-                <LoginPage />
-              </GuestRoute>
-            }
-          ></Route>
-          <Route
-            path="/registration"
-            element={
-              <GuestRoute>
-                <RegistrationForm />
-              </GuestRoute>
-            }
-          ></Route>
-          <Route path="/catalog" element={<CatalogProduct />}></Route>
-          <Route path="/basket" element={<BasketPage />}></Route>
-          <Route
-            path="/catalog/product/:productKey"
-            element={<DetailedProduct />}
-          ></Route>
-          <Route
-            path="/profile"
-            element={
-              <UserRoute>
-                <ProfilePage />
-              </UserRoute>
-            }
-          ></Route>
-          <Route path="*" element={<NotFound />}></Route>
-        </Routes>
+        <TotalQuantityContextProvider>
+          <Header />
+          <Routes>
+            <Route path="/" element={<MainRedirect />}></Route>
+            <Route
+              path="/main"
+              element={
+                <>
+                  <Main />
+                </>
+              }
+            ></Route>
+            <Route
+              path="/login"
+              element={
+                <GuestRoute>
+                  <LoginPage />
+                </GuestRoute>
+              }
+            ></Route>
+            <Route
+              path="/registration"
+              element={
+                <GuestRoute>
+                  <RegistrationForm />
+                </GuestRoute>
+              }
+            ></Route>
+            <Route path="/catalog" element={<CatalogProduct />}></Route>
+            <Route
+              path="/catalog/product/:productKey"
+              element={<DetailedProduct />}
+            ></Route>
+            <Route
+              path="/profile"
+              element={
+                <UserRoute>
+                  <ProfilePage />
+                </UserRoute>
+              }
+            ></Route>
+            <Route path="/cart" element={<BasketPage />}></Route>
+            <Route path="*" element={<NotFound />}></Route>
+          </Routes>
+        </TotalQuantityContextProvider>
+
         <Footer />
       </BrowserRouter>
     </>

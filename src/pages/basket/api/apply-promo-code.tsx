@@ -1,11 +1,11 @@
 import { API_HOST, PROJECT_KEY } from "../../../project-config";
 import {
-  type Cart,
   getTokenFromCookie,
   saveTokenCookie,
   TOKEN_NAMES,
+  type Cart,
+  type Actions,
 } from "../../../shared";
-import type { Actions } from "./types";
 
 // Передаём в функцию:
 //              добавить промокод:

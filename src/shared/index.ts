@@ -1,4 +1,12 @@
 export {
+  createCart,
+  addingDeletingModifyingItemsInCart,
+  getCart,
+  sendingSignInOrSignUpRequest,
+  ObtainAnonymousAccessToken,
+  type Actions,
+} from "./api";
+export {
   useAuth,
   AuthUserContext,
   hasLoggedInToken,
@@ -8,8 +16,10 @@ export {
   parseMainProductData,
   parseProductDataForCard,
   parseCartData,
+  TotalQuantityContextProvider,
+  TotalLineItemQuantityContext,
+  type ProductInfo,
 } from "./lib";
-export type { ProductInfo } from "./lib";
 export {
   LoadingPlaceholder,
   NoResultsFound,

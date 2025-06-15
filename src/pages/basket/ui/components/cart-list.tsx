@@ -13,22 +13,29 @@ export function CartList(): ReactElement {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>();
   const [cart, setCart] = useState<ProductInCart[]>(null);
+  const [totalPrice, setTotalPrice] = useState<number>(null);
+  const [isUpdatedCart, setIsUpdatedCart] = useState(false);
+  // const [itemIds, setItemIds] = useState()
+
+  const fetchData = async (): Promise<void> => {
+    try {
+      await getCart().then((data: Cart) => {
+        setCart(data.lineItems);
+        setTotalPrice(Math.ceil(data.totalPrice.centAmount / 100));
+        void data;
+      });
+
+      setIsUpdatedCart(true);
+      setLoading(false);
+    } catch (error: unknown) {
+      setError(error);
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async (): Promise<void> => {
-      try {
-        await getCart().then((data: Cart) => {
-          setCart(data.lineItems);
-          void data;
-        });
-        setLoading(false);
-      } catch (error: unknown) {
-        setError(error);
-        setLoading(false);
-      }
-    };
     void fetchData();
-  }, []);
+  }, [isUpdatedCart]);
 
   if (loading) {
     return (
@@ -52,6 +59,12 @@ export function CartList(): ReactElement {
     );
   }
 
+  const removeItem = (id: string): void => {
+    setIsUpdatedCart(true);
+    void fetchData();
+    setCart(cart.filter((item) => id !== item.id));
+  };
+
   return (
     <Box
       sx={{
@@ -71,12 +84,18 @@ export function CartList(): ReactElement {
         }}
       >
         {cart.map((cartItem, id) => (
-          <CartItem key={id} productId={cartItem.id} product={cartItem} />
+          <CartItem
+            key={id}
+            productId={cartItem.id}
+            product={cartItem}
+            setIsUpdatedCart={setIsUpdatedCart}
+            removeItem={removeItem}
+          />
         ))}
         <Grid sx={{ width: "100%", textAlign: "center" }}>
           <Paper>
-            <Typography gutterBottom variant="h5">
-              Total cost: {}
+            <Typography gutterBottom variant="button">
+              Total cost: $ {totalPrice}
             </Typography>
           </Paper>
         </Grid>

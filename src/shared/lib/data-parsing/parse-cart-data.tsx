@@ -1,4 +1,4 @@
-import type { Cart } from "../../api";
+import type { Cart } from "../..";
 import type { CartInfo } from "./types";
 
 export function parseCartData(cart: Cart): CartInfo {

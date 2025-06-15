@@ -1,11 +1,7 @@
 import { API_HOST, PROJECT_KEY } from "../../../project-config";
-import {
-  getTokenFromCookie,
-  saveTokenCookie,
-  TOKEN_NAMES,
-  type Cart,
-} from "../../../shared";
+import { getTokenFromCookie, saveTokenCookie, TOKEN_NAMES } from "../..";
 import type { Actions } from "./types";
+import type { Cart } from "..";
 
 // Принимает обьект actions:
 //        для добавления товара в корзину:
@@ -28,7 +24,7 @@ import type { Actions } from "./types";
 // Возвращает полностью корзину
 // lineItemId это id продукта из корзины, а не самого продукта, они разные
 
-export async function AddingDeletingModifyingItemsInCart(
+export async function addingDeletingModifyingItemsInCart(
   actions: Actions,
 ): Promise<Cart> {
   let cart: Cart;

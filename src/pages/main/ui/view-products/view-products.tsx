@@ -1,15 +1,17 @@
-import { useEffect, useState, type ReactElement } from "react";
+import { useContext, useEffect, useState, type ReactElement } from "react";
 import { getProductsBigPrice } from "../../api";
 import {
   type DataProduct,
   type MasterData,
   type Product,
+  TotalLineItemQuantityContext,
   createProductCard,
 } from "../../../../shared";
 import { Grid } from "@mui/material";
 
 export function ViewProducts(): ReactElement {
   const [products, setProducts] = useState<MasterData[] | Product[]>([]);
+  const { setIsDownloadPage } = useContext(TotalLineItemQuantityContext);
 
   useEffect(() => {
     let isMounted = true;
@@ -25,8 +27,8 @@ export function ViewProducts(): ReactElement {
 
     const handler = setTimeout(() => {
       void loadData();
+      setIsDownloadPage(true);
     }, 1500);
-
     return (): void => {
       clearTimeout(handler);
       isMounted = false;

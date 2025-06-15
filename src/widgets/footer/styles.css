@@ -13,9 +13,8 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 80%;
-  width: 80%;
-  gap: 10px;
+  height: 100%;
+  width: 50%;
 }
 
 .button-footer {
@@ -24,7 +23,9 @@
   border: none;
   font-family: var(--font-family);
   font-weight: bold;
+  font-size: 1rem;
   cursor: pointer;
+  margin-bottom: 10px;
 }
 
 .button-footer:hover {
@@ -35,12 +36,12 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 20px 0 10px 0;
+  margin: 30px 0 40px 0;
   width: 100%;
 }
 .github {
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   background-image: url("../../../assets/footer/gh.png");
   background-size: 100%;
   border-radius: 100%;
@@ -53,14 +54,15 @@
   justify-content: center;
   width: 33%;
   color: var(--white-color);
-  font-size: 12px;
+  font-size: 15px;
+  font-weight: bold;
   font-family: var(--font-family);
   color: var(--light-gray);
 }
 
 .rs-icon {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   background-image: url("../../../assets/footer/rs.png");
   background-size: 100%;
   border-radius: 100%;
@@ -68,12 +70,25 @@
 
 .rs-school {
   display: flex;
+  margin-top: 30px;
 }
 
 .description {
   color: var(--light-gray);
   font-family: var(--font-family);
-  font-size: 8px;
+  font-size: 12px;
+}
+
+@media screen and (max-width: 1030px) {
+  .content {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .content {
+    width: 90%;
+  }
 }
 
 @media screen and (max-width: 575px) {
@@ -88,6 +103,6 @@
 
   .authors {
     padding: 5px 0;
-    width: 150px;
+    width: 60%;
   }
 }
