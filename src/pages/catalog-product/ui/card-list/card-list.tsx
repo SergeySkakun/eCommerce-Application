@@ -1,4 +1,5 @@
-import type { ReactNode, ReactElement } from "react";
+import type { ReactNode, RefObject } from "react";
+import { forwardRef } from "react";
 import Grid from "@mui/material/Grid";
 import {
   type MasterData,
@@ -6,19 +7,30 @@ import {
   createProductCard,
 } from "../../../../shared";
 
-export function CardList({
-  products,
-}: {
+interface CardListProperties {
   products: MasterData[] | Product[];
-}): ReactNode {
-  const cards: ReactElement[] = [];
-  for (const product of products) {
-    cards.push(createProductCard(product));
-  }
-
-  return (
-    <Grid container spacing={3} justifyContent={"center"} paddingTop={2}>
-      {cards}
-    </Grid>
-  );
 }
+
+export const CardList = forwardRef<HTMLDivElement, CardListProperties>(
+  (
+    { products }: CardListProperties,
+    // eslint-disable-next-line unicorn/prevent-abbreviations
+    ref: RefObject<HTMLDivElement>,
+  ): ReactNode => {
+    const cards = products.map((product: MasterData | Product) => {
+      return createProductCard(product);
+    });
+
+    const lastProductCard = cards.pop();
+    const newLastProductCardWithReference = (
+      <div ref={ref}>{lastProductCard}</div>
+    );
+    cards.push(newLastProductCardWithReference);
+
+    return (
+      <Grid container spacing={3} justifyContent={"center"} paddingTop={2}>
+        {cards}
+      </Grid>
+    );
+  },
+);

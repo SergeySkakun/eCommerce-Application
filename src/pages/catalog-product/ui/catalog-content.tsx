@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import type { ReactElement } from "react";
 import { Box, CircularProgress, Alert } from "@mui/material";
 import { getAllProducts } from "../api";
@@ -16,6 +16,7 @@ const FILTER_REQUEST = "filter=variants.";
 const ATTRIBUTE_FILTER_REQUEST = "filter=variants.attributes.";
 const SEARCH_REQUEST = "fuzzy=true&text.en-US=";
 
+const LIMIT_OF_PRODUCTS_IN_RESPONSE = 6;
 const INITIAL_FILTERS_STATE: VisualFilterState = {
   priceMin: "",
   priceMax: "",
@@ -29,16 +30,23 @@ const INITIAL_FILTERS_STATE: VisualFilterState = {
 };
 
 export function CatalogContent(): ReactElement {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const { isGuestAccess } = useAuth();
+  const [offset, setOffset] = useState(0);
+  const [totalNumberOfResults, setTotalNumberOfResults] = useState(0);
+  const [products, setProducts] = useState([]);
+  const observer = useRef<IntersectionObserver | null>(null);
+  const lastItemReference = useRef<HTMLDivElement | null>(null);
+
   const [breadcrumb, setBreadcrumb] = useState<string>("CARS");
+
   const [currentFilters, setCurrentFilters] = useState<VisualFilterState>(
     () => INITIAL_FILTERS_STATE,
   );
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [currentSortOption, setCurrentSortOption] = useState<string>("");
-  const [products, setProducts] = useState<MasterData[] | Product[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-  const { isGuestAccess } = useAuth();
 
   const filterAndSortStrings = useMemo(() => {
     const parameters: string[] = [];
@@ -104,8 +112,6 @@ export function CatalogContent(): ReactElement {
   }, [currentFilters, searchQuery, currentSortOption]);
 
   useEffect(() => {
-    let isMounted = true;
-
     const fetchProducts = async (): Promise<void> => {
       setLoading(true);
       setError(null);
@@ -116,14 +122,14 @@ export function CatalogContent(): ReactElement {
           !hasActiveParameters && !isCategorySelected;
 
         const data = await (shouldFetchAllProducts
-          ? getAllProducts()
+          ? getAllProducts(LIMIT_OF_PRODUCTS_IN_RESPONSE, offset)
           : sendingFilterSortingSearchRequest(filterAndSortStrings.join("&")));
-
+        setTotalNumberOfResults(data.total);
         const productList = data.results;
-
-        if (isMounted) {
-          setProducts(productList);
-        }
+        setProducts((previousProductList: MasterData[] | Product[]) => [
+          ...previousProductList,
+          ...productList,
+        ]);
       } catch (error_) {
         setError(
           error_ instanceof Error
@@ -138,11 +144,32 @@ export function CatalogContent(): ReactElement {
     if (isGuestAccess) {
       void fetchProducts();
     }
+  }, [filterAndSortStrings, currentFilters, isGuestAccess, offset]);
+
+  useEffect(() => {
+    if (loading) return;
+
+    if (offset >= totalNumberOfResults - LIMIT_OF_PRODUCTS_IN_RESPONSE) {
+      return;
+    }
+
+    const observerCallback = (entries: IntersectionObserverEntry[]): void => {
+      if (entries[0].isIntersecting) {
+        setOffset((offset) => offset + LIMIT_OF_PRODUCTS_IN_RESPONSE);
+      }
+    };
+
+    observer.current = new IntersectionObserver(observerCallback);
+    if (lastItemReference.current) {
+      observer.current.observe(lastItemReference.current);
+    }
 
     return (): void => {
-      isMounted = false;
+      if (observer.current) {
+        observer.current.disconnect();
+      }
     };
-  }, [filterAndSortStrings, currentFilters, isGuestAccess]);
+  }, [loading]);
 
   const handleFilterSubmit = useCallback((data: FilterSubmitData) => {
     setCurrentFilters((previousFilters) => ({
@@ -257,7 +284,7 @@ export function CatalogContent(): ReactElement {
           </div>
         </div>
         {!loading && !error && products.length > 0 && (
-          <CardList products={products} />
+          <CardList products={products} ref={lastItemReference} />
         )}
         {!loading && !error && products.length === 0 && <NoResultsFound />}
       </Box>
