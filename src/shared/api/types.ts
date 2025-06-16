@@ -53,10 +53,10 @@ export interface Customer {
 }
 
 export interface DataProduct {
-  limit: 20;
-  offset: 0;
-  count: 18;
-  total: 18;
+  limit: number;
+  offset: number;
+  count: number;
+  total: number;
   results: [MasterData] | [Product];
 }
 

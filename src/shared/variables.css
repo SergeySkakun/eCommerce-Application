@@ -25,15 +25,15 @@
   --text-field-color: rgb(0 0 255);
   --item-remove-cart-color: rgb(150 0 0);
   --item-remove-cart-bgcolor: rgb(78 0 0 / 34.2%);
-  --rs-school: rgb(255, 230, 0);
-  --my-team: rgb(80, 184, 67);
-  --team-color: rgb(39, 37, 110);
-  --main-image: url("../../../../assets/main/main_image_1.jpg");
-  --history-image: url("../../../../assets/main/history_image_1.jpg");
-  --button-back: url("../../../../assets/detailed-product/button-back-black.png");
-  --burger-menu-icon: url("../../../assets/header/burger_menu_black.png");
-  --sale-image: url("../../../../assets/main/sale_image_1.jpg");
-  --icon-gh-about: url("../../../assets/about/logo-gh-black.png");
+  --rs-school: rgb(255 230 0);
+  --my-team: rgb(80 184 67);
+  --team-color: rgb(39 37 110);
+  --main-image: url("assets/main/main_image_1.jpg");
+  --history-image: url("assets/main/history_image_1.jpg");
+  --button-back: url("assets/detailed-product/button-back-black.png");
+  --burger-menu-icon: url("assets/header/burger_menu_black.png");
+  --sale-image: url("assets/main/sale_image_1.jpg");
+  --icon-gh-about: url("assets/about/logo-gh-black.png");
 }
 
 .light-mode {
@@ -48,7 +48,7 @@
   --header-button-color: rgb(112 112 112);
   --button-apply-filters: rgb(36 136 250);
   --price-gold-color: rgb(218 165 32);
-  --price-blue-color: rgb(36, 136, 250);
+  --price-blue-color: rgb(36 136 250);
   --card-hover-shadow: rgba(0 0 0 / 0.473);
   --white-color: rgb(0 0 0);
   --transparent: rgb(0 0 0 / 0%);
@@ -60,13 +60,13 @@
   --text-field-color: rgb(0 0 255);
   --item-remove-cart-color: rgb(150 0 0);
   --item-remove-cart-bgcolor: rgb(78 0 0 / 34.2%);
-  --rs-school: rgb(255, 230, 0);
-  --my-team: rgb(80, 184, 67);
-  --team-color: rgb(117, 112, 255);
-  --main-image: url("../../../../assets/main/main_image_2.jpg");
-  --history-image: url("../../../../assets/main/history_image_2.jpg");
-  --button-back: url("../../../../assets/detailed-product/button-back-white.png");
-  --burger-menu-icon: url("../../../assets/header/burger_menu_white.png");
-  --sale-image: url("../../../../assets/main/sale_image_2.jpg");
-  --icon-gh-about: url("../../../assets/about/logo-gh-white.png");
+  --rs-school: rgb(255 230 0);
+  --my-team: rgb(80 184 67);
+  --team-color: rgb(117 112 255);
+  --main-image: url("assets/main/main_image_2.jpg");
+  --history-image: url("assets/main/history_image_2.jpg");
+  --button-back: url("assets/detailed-product/button-back-white.png");
+  --burger-menu-icon: url("assets/header/burger_menu_white.png");
+  --sale-image: url("assets/main/sale_image_2.jpg");
+  --icon-gh-about: url("assets/about/logo-gh-white.png");
 }

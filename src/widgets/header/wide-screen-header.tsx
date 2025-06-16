@@ -1,39 +1,34 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import type { HeaderPropertiesType } from "./types";
 import "./styles.css";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { changeMode } from ".";
+import { colorModeHandler, saveColorMode } from ".";
 
 export function WideScreenHeader({
   headerProperties,
 }: {
   headerProperties: HeaderPropertiesType;
 }): ReactNode {
-  const [lightMode, setLightMode] = useState(false);
-  const [darkMode, setDarkMode] = useState(true);
+  const [colorMode, setColorMode] = useState(false);
   const { isLoggedIn, totalLineItemQuantity, setIsDownloadPage, actOnLogout } =
     headerProperties;
 
-  const colorModeHandler = (): void => {
-    if (darkMode) {
-      setDarkMode(false);
-      setLightMode(true);
-      changeMode();
-    } else {
-      setDarkMode(true);
-      setLightMode(false);
-      changeMode();
-    }
-  };
+  useEffect(() => {
+    saveColorMode(setColorMode);
+  }, []);
+
   return (
     <>
       <header className="header">
         <div className="menu">
-          <button className="button button-mode" onClick={colorModeHandler}>
-            {lightMode ? (
+          <button
+            className="button button-mode"
+            onClick={() => colorModeHandler(colorMode, setColorMode)}
+          >
+            {colorMode ? (
               <LightModeIcon fontSize="large" />
             ) : (
               <DarkModeIcon fontSize="large" />

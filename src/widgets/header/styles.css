@@ -5,6 +5,7 @@
   top: 0;
   background-color: var(--transparent-background-color);
   width: 100%;
+  max-width: 1920px;
   z-index: 100;
 }
 

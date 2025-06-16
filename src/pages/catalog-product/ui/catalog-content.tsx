@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo } from "react";
 import type { ReactElement } from "react";
 import { Box, CircularProgress, Alert } from "@mui/material";
 import { getAllProducts } from "../api";
@@ -30,6 +30,7 @@ const INITIAL_FILTERS_STATE: VisualFilterState = {
 
 export function CatalogContent(): ReactElement {
   const [breadcrumb, setBreadcrumb] = useState<string>("CARS");
+
   const [currentFilters, setCurrentFilters] = useState<VisualFilterState>(
     () => INITIAL_FILTERS_STATE,
   );
@@ -143,7 +144,6 @@ export function CatalogContent(): ReactElement {
       isMounted = false;
     };
   }, [filterAndSortStrings, currentFilters, isGuestAccess]);
-
   const handleFilterSubmit = useCallback((data: FilterSubmitData) => {
     setCurrentFilters((previousFilters) => ({
       ...previousFilters,
@@ -216,22 +216,6 @@ export function CatalogContent(): ReactElement {
         />
       </Box>
       <Box sx={{ flexGrow: 1 }}>
-        {loading && (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              p: 4,
-            }}
-          >
-            <CircularProgress />
-          </Box>
-        )}
-        {error && (
-          <Alert severity="error" sx={{ mb: 2 }}>
-            {error}
-          </Alert>
-        )}
         <div className="main">
           <img
             className="sale-board"
@@ -252,10 +236,7 @@ export function CatalogContent(): ReactElement {
             />
           </div>
         </div>
-        {!loading && !error && products.length > 0 && (
-          <CardList products={products} />
-        )}
-        {!loading && !error && products.length === 0 && <NoResultsFound />}
+        <CardList filterAndSortString={filterAndSortStrings.join("&")} />
       </Box>
     </Box>
   );

@@ -1,3 +1,10 @@
+.catalog-loader {
+  display: flex;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
+}
+
 .product-conteiner {
   background-color: var(--background-color);
 }
