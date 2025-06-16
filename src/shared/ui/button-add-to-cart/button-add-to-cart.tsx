@@ -14,9 +14,8 @@ export function ButtonAddToCart({
   const [isLoading, setIsLoading] = useState(false);
   const [isProductInCart, setIsProductInCart] = useState(false);
   const [lineItemId, setLineItemId] = useState<string>();
-  const { setTotalLineItemQuantity, productsCheckout } = useContext(
-    TotalLineItemQuantityContext,
-  );
+  const { setTotalLineItemQuantity, productsCheckout, setProductsCheckout } =
+    useContext(TotalLineItemQuantityContext);
 
   useEffect(() => {
     if (productsCheckout) {
@@ -37,6 +36,7 @@ export function ButtonAddToCart({
       productId: productId,
     };
     const cart = await addingDeletingModifyingItemsInCart(actions);
+    setProductsCheckout(cart.lineItems);
     setTotalLineItemQuantity(cart.totalLineItemQuantity);
     const productInCart = cart.lineItems.find(
       (lineItem) => lineItem.productId === productId,
@@ -55,6 +55,7 @@ export function ButtonAddToCart({
       lineItemId: lineItemId,
     };
     const cart = await addingDeletingModifyingItemsInCart(actions);
+    setProductsCheckout(cart.lineItems);
     setTotalLineItemQuantity(cart.totalLineItemQuantity);
     setIsProductInCart(false);
     setIsLoading(false);
