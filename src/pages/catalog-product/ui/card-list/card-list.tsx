@@ -23,7 +23,7 @@ export const CardList = ({
 }: CardListProperties): ReactNode => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const { isGuestAccess } = useAuth();
+  const { isGuestAccess, isLoggedIn } = useAuth();
   const [offset, setOffset] = useState(START_NUMBER_OF_PRODUCT_IN_RESPONSE);
   const [totalNumberOfResults, setTotalNumberOfResults] = useState(0);
   const [products, setProducts] = useState<(MasterData | Product)[]>([]);
@@ -61,7 +61,7 @@ export const CardList = ({
       }
     };
 
-    if (isGuestAccess) {
+    if (isGuestAccess || isLoggedIn) {
       void fetchProducts();
     }
   }, [isGuestAccess, offset, filterAndSortString]);
