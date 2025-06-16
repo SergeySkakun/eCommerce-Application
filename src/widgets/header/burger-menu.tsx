@@ -91,7 +91,7 @@ export function BurgerMenu({
             {isLoggedIn ? (
               <>
                 <button
-                  className="button button-logout"
+                  className="burger-button"
                   onClick={() => {
                     actOnLogout();
                     handleClose();
@@ -101,7 +101,7 @@ export function BurgerMenu({
                 </button>
                 <Link to="/profile" className="link-menu">
                   <button
-                    className="button button-logout"
+                    className="burger-button"
                     onClick={() => {
                       handleClose();
                     }}
