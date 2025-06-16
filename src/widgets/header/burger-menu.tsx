@@ -6,15 +6,14 @@ import { IconButton, Popover } from "@mui/material";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { changeMode } from ".";
+import { colorModeHandler, saveColorMode } from ".";
 
 export function BurgerMenu({
   headerProperties,
 }: {
   headerProperties: HeaderPropertiesType;
 }): React.ReactElement {
-  const [lightMode, setLightMode] = React.useState(false);
-  const [darkMode, setDarkMode] = React.useState(true);
+  const [colorMode, setColorMode] = React.useState(false);
   const [anchorElement, setAnchorElement] =
     React.useState<null | HTMLElement>();
   const { isLoggedIn, setIsDownloadPage, totalLineItemQuantity, actOnLogout } =
@@ -27,19 +26,10 @@ export function BurgerMenu({
     setAnchorElement(undefined);
   };
 
-  const colorModeHandler = (): void => {
-    if (darkMode) {
-      setDarkMode(false);
-      setLightMode(true);
-      handleClose();
-      changeMode();
-    } else {
-      setDarkMode(true);
-      setLightMode(false);
-      handleClose();
-      changeMode();
-    }
-  };
+  React.useEffect(() => {
+    saveColorMode(setColorMode);
+  }, []);
+
   const clickOnCatalog = (): void => {
     void (handleClose(), setIsDownloadPage(true));
   };
@@ -132,9 +122,11 @@ export function BurgerMenu({
             <div className="button-icon">
               <button
                 className="button burger-button-mode"
-                onClick={colorModeHandler}
+                onClick={() =>
+                  colorModeHandler(colorMode, setColorMode, handleClose)
+                }
               >
-                {lightMode ? (
+                {colorMode ? (
                   <LightModeIcon fontSize="large" />
                 ) : (
                   <DarkModeIcon fontSize="large" />

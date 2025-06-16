@@ -239,7 +239,7 @@ export function CatalogContent(): ReactElement {
         <div className="main">
           <img
             className="sale-board"
-            src="../../../../assets/catalog/sale-board.gif"
+            src="assets/catalog/sale-board.gif"
             alt="sale-board"
           ></img>
           <CreateCategoriesButton

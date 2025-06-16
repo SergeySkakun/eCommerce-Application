@@ -23,6 +23,7 @@ export function ProductCard({ cardInfo }: { cardInfo: CardInfo }): ReactNode {
 
   return (
     <div onClick={() => clickOnCard()} className="card">
+      {priceInfo.discountedPrice > 0 ? <div className="icon-sale"></div> : null}
       <CardMedia component="img" alt={imgLabel} height="140" image={imgUrl} />
       <Box
         sx={{
