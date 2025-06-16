@@ -1,48 +1,65 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+
 import { useContext, useEffect, useState, type ReactElement } from "react";
 import { EmptyCart } from "./empty-cart";
 import {
+  addingDeletingModifyingItemsInCart,
+  type Cart,
+  getCart,
   LoadingPlaceholder,
   type ProductInCart,
   TotalLineItemQuantityContext,
+  useAuth,
 } from "@/shared";
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import { CartItem } from "./cart-item";
 import { type LineItem } from "@/shared/lib/context/cart-context";
+import { UnauthorizedCart } from "./unauthorized-cart";
 
 export function CartList(): ReactElement {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<unknown>();
+  // const [error, setError] = useState<unknown>();
   const [basket, setBasket] = useState<LineItem[]>(null);
   const [totalPrice, setTotalPrice] = useState<number>(null);
-  const [isUpdatedCart, setIsUpdatedCart] = useState(false);
+  const [isUpdatedCart, setIsUpdatedCart] = useState(true);
+  const { isLoggedIn, isAuthCheckReady } = useAuth();
+  const { cart, setTotalLineItemQuantity } = useContext(
+    TotalLineItemQuantityContext,
+  );
 
-  const { productsCheckout, cart } = useContext(TotalLineItemQuantityContext);
-
-  const fetchData = (): void => {
-    try {
-      setBasket(productsCheckout);
-      setTotalPrice(Math.ceil(cart.totalPrice.centAmount / 100));
-      setLoading(false);
-      void cart;
-    } catch (error: unknown) {
-      setError(error);
-      setLoading(false);
-    }
+  const fetchData = (productsCheckout: [LineItem], cart: Cart): void => {
+    setBasket(productsCheckout);
+    setTotalPrice(Math.ceil(cart.totalPrice.centAmount / 100));
+    setTotalLineItemQuantity(cart.totalLineItemQuantity ?? 0);
+    setLoading(false);
+    setIsUpdatedCart(false);
   };
+
+  if (!isAuthCheckReady) {
+    return <LoadingPlaceholder />;
+  }
+  if (!isLoggedIn) {
+    if (cart) {
+      // console.log("где то здесь падает ошибка при разлогинивании со страницы корзины")
+      void getCart();
+    } else {
+      return <UnauthorizedCart />;
+    }
+  }
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    const fetchData = (): void => {
-      try {
-        setBasket(productsCheckout);
-        setTotalPrice(Math.ceil(cart.totalPrice.centAmount / 100));
-        setLoading(false);
-        void cart;
-      } catch (error: unknown) {
-        setError(error);
-        setLoading(false);
-      }
-    };
-    void fetchData();
-  }, [isUpdatedCart, cart, productsCheckout]);
+    if (isUpdatedCart) {
+      // try {
+      void getCart().then((data) => {
+        setBasket(data.lineItems);
+        void fetchData(data.lineItems, data);
+      });
+      // } catch (error: unknown) {
+      //   setError(error)
+      // }
+    }
+  });
 
   if (loading) {
     return (
@@ -51,30 +68,43 @@ export function CartList(): ReactElement {
       </>
     );
   }
-  if (basket.length === 0) {
+  if (basket.length === 0 && !isLoggedIn) {
+    return (
+      <>
+        <UnauthorizedCart />
+      </>
+    );
+  }
+  if (basket.length === 0 && isLoggedIn) {
     return (
       <>
         <EmptyCart />
       </>
     );
   }
-  if (error) {
-    return (
-      <>
-        <EmptyCart />
-      </>
-    );
-  }
+  // if (error) {
+  //   console.log("error ?")
+  //   return (
+  //     <>
+  //       <EmptyCart />
+  //     </>
+  //   );
+  // }
 
-  const removeItem = (id: string): void => {
-    setIsUpdatedCart(true);
-    void fetchData();
-    setBasket(basket.filter((item) => id !== item.id));
+  const removeItem = (actions, id): void => {
+    void addingDeletingModifyingItemsInCart(actions).then((data) => {
+      setTotalLineItemQuantity(data.totalLineItemQuantity);
+      setBasket(data.lineItems.filter((item) => id !== item.id));
+      setIsUpdatedCart(true);
+      void fetchData(data.lineItems, data);
+    });
   };
 
-  const changeCountItem = (): void => {
-    setIsUpdatedCart(true);
-    void fetchData();
+  const changeCountItem = (actions): void => {
+    void addingDeletingModifyingItemsInCart(actions).then((data) => {
+      setTotalLineItemQuantity(data.totalLineItemQuantity);
+      void fetchData(data.lineItems, data);
+    });
   };
 
   return (

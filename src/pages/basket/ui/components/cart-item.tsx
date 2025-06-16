@@ -9,17 +9,20 @@ import { Grid } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import styles from "../basket-page.module.css";
-import {
-  addingDeletingModifyingItemsInCart,
-  type ProductInCart,
-} from "@/shared";
+import { type ProductInCart } from "@/shared";
 import { Clear } from "@mui/icons-material";
+
+type Action = {
+  action: string;
+  lineItemId: string;
+  quantity: number;
+};
 
 interface CartItem {
   readonly productId: string;
   readonly productsCheckout: ProductInCart;
-  removeItem: (index: string) => void;
-  changeCountItem: () => void;
+  removeItem: (actions: [Action], index: string) => void;
+  changeCountItem: (actions: [Action]) => void;
   setIsUpdatedCart: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -41,10 +44,7 @@ export function CartItem({
       productId: productsCheckout.productId,
       quantity: 1,
     };
-
-    void addingDeletingModifyingItemsInCart(actions).then(() => {
-      changeCountItem();
-    });
+    changeCountItem(actions);
   };
 
   const handleDecrement = (): void => {
@@ -53,10 +53,7 @@ export function CartItem({
       lineItemId: productsCheckout.id,
       quantity: 1,
     };
-
-    void addingDeletingModifyingItemsInCart(actions).then(() => {
-      changeCountItem();
-    });
+    changeCountItem(actions);
   };
 
   const handleRemoveItem = (): void => {
@@ -65,10 +62,10 @@ export function CartItem({
       action: "removeLineItem",
       lineItemId: productsCheckout.id,
     };
-    void addingDeletingModifyingItemsInCart(actions).then(() => {
-      removeItem(productId);
-    });
-    setIsUpdatedCart(false);
+    // void addingDeletingModifyingItemsInCart(actions).then(() => {
+    removeItem(actions, productsCheckout.id);
+    // });
+    // setIsUpdatedCart(false);
   };
 
   return (
