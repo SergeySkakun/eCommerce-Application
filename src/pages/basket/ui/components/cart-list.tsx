@@ -1,54 +1,192 @@
-import { useEffect, useState, type ReactElement } from "react";
-import { EmptyCart } from ".";
-import { getCart, LoadingPlaceholder, type Cart } from "../../../../shared";
+import { useContext, useEffect, useState, type ReactElement } from "react";
+import {
+  type Cart,
+  getCart,
+  hasLoggedInToken,
+  type ProductInCart,
+  TotalLineItemQuantityContext,
+} from "@/shared";
+import { Box, Grid } from "@mui/material";
+import { CartItem } from "./cart-item";
+import { UnauthorizedCart } from "./unauthorized-cart";
+import { DialogClearCart, EmptyCart } from ".";
+import style from "./cart-list.module.css";
+import { applyPromoCode, deleteCart } from "../..";
 
 export function CartList(): ReactElement {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<unknown>();
+  const [totalPriceCart, setTotalPriceCart] = useState<string>();
+  const [cart, setCart] = useState<Cart>();
+  const [isUpdatedCart, setIsUpdatedCart] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>("");
+  const [messagePromo, setMessagePromo] = useState<string>();
+  const [discountCost, setDiscountCost] = useState<string>();
+  const [openDialog, setOpenDialog] = useState(false);
+  const { totalLineItemQuantity, setTotalLineItemQuantity } = useContext(
+    TotalLineItemQuantityContext,
+  );
 
   useEffect(() => {
-    const fetchData = async (): Promise<void> => {
-      try {
-        await getCart().then((data: Cart) => {
-          void data;
-        });
-        setLoading(false);
-      } catch (error: unknown) {
-        setError(error);
-        setLoading(false);
-      }
+    const handlerCart = async (): Promise<void> => {
+      setCart(await getCart());
     };
-    void fetchData();
+    void handlerCart();
   }, []);
 
-  if (loading) {
+  useEffect(() => {
+    if (cart) {
+      setTotalLineItemQuantity(cart.totalLineItemQuantity);
+      const totalPrice = Math.trunc(
+        cart.totalPrice.centAmount / 100,
+      ).toLocaleString();
+      setTotalPriceCart(totalPrice);
+      if (cart.discountOnTotalPrice) {
+        const discPrice = Math.trunc(
+          -cart.discountOnTotalPrice.discountedAmount.centAmount / 100,
+        ).toLocaleString();
+        setDiscountCost(discPrice);
+      }
+    }
+  }, [cart]);
+
+  if (isUpdatedCart) {
     return (
       <>
-        <LoadingPlaceholder />
-      </>
-    );
-  }
-  if (error) {
-    return (
-      <>
-        <EmptyCart />
+        <CartList />
       </>
     );
   }
 
-  return (
-    <></> // код ниже заккоментирован, но так как он пригодится в дальнейшем я его не удаляю )
-    // <Box
-    //   sx={{
-    //     display: "flex",
-    //     padding: 2,
-    //     flexDirection: "column",
-    //     gap: "0.5rem",
-    //   }}
-    // >
-    //   {products.map((product) => (
-    //     <CartItem key={product.id} product={product} />
-    //   ))}
-    // </Box>
+  const clearCart = async (): Promise<void> => {
+    const cart = await deleteCart();
+    setTotalLineItemQuantity(cart.totalLineItemQuantity);
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+    void handlerPromoCode(inputValue);
+  };
+
+  const handleClickOpen = (): void => {
+    setOpenDialog(true);
+  };
+
+  const handleClose = (): void => {
+    setOpenDialog(false);
+  };
+
+  const handlerPromoCode = async (inputValue: string): Promise<void> => {
+    if (inputValue === "FaR7") {
+      const actions = {
+        action: "addDiscountCode",
+        code: inputValue,
+      };
+      const cart = await applyPromoCode(actions);
+      setCart(cart);
+      const discPrice = Math.trunc(
+        -cart.discountOnTotalPrice.discountedAmount.centAmount / 100,
+      ).toLocaleString();
+      setDiscountCost(discPrice);
+      setMessagePromo("PROMO CODE APPLIED");
+      setTimeout(() => {
+        setMessagePromo("");
+      }, 4000);
+    } else {
+      setMessagePromo("YOU HAVE ENTERED AN INCORRECT PROMO CODE");
+      setTimeout(() => {
+        setMessagePromo("");
+      }, 4000);
+    }
+  };
+
+  const removePromoCode = async (): Promise<void> => {
+    const actions = {
+      action: "removeDiscountCode",
+      discountCode: {
+        typeId: "discount-code",
+        id: "f5e85e1f-f16b-43dd-b481-ae8486203abc",
+      },
+    };
+    const cart = await applyPromoCode(actions);
+    setCart(cart);
+    setDiscountCost(null);
+  };
+
+  if (!hasLoggedInToken() && totalLineItemQuantity === undefined) {
+    return (
+      <>
+        <UnauthorizedCart />
+      </>
+    );
+  }
+
+  return totalLineItemQuantity === undefined ? (
+    <>
+      <EmptyCart />
+    </>
+  ) : (
+    <Box className={style.cartConteiner}>
+      <Grid
+        container
+        className={style.cartContent}
+        sx={{
+          width: "100%",
+          gap: 2,
+          display: "flex",
+          justifyContent: "space-around",
+        }}
+      >
+        {cart
+          ? cart.lineItems.map((cartItem: ProductInCart, id) => (
+              <CartItem
+                key={id}
+                productsCheckout={cartItem}
+                setTotalPriceCart={setTotalPriceCart}
+                setTotalLineItemQuantity={setTotalLineItemQuantity}
+                setIsUpdatedCart={setIsUpdatedCart}
+                setDiscountCost={setDiscountCost}
+              />
+            ))
+          : null}
+      </Grid>
+      <button className={style.clearCart} onClick={handleClickOpen}>
+        CLEAR CART
+      </button>
+      <form className={style.formPromo} onSubmit={handleSubmit}>
+        <div
+          className={style.clearPromo}
+          onClick={() => void removePromoCode()}
+        >
+          X
+        </div>
+        <input
+          className={style.inputPromo}
+          type="text"
+          value={inputValue}
+          onChange={handleChange}
+          placeholder="ENTER PROMO CODE"
+        />
+        <button className={style.buttonPromo} type="submit">
+          APPLY
+        </button>
+      </form>
+      <div className={style.messagePromo}>{messagePromo}</div>
+      <Grid className={style.totalCost}>
+        <div className={style.totalCostConteiner}>
+          <div className={style.totalCostText}>
+            Total cost: $ {totalPriceCart}
+            <div className={style.discountCost}>{discountCost}</div>
+          </div>
+        </div>
+      </Grid>
+      <DialogClearCart
+        clearCart={clearCart}
+        openDialog={openDialog}
+        handleClose={handleClose}
+      />
+    </Box>
   );
 }

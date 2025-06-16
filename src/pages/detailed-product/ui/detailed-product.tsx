@@ -1,16 +1,9 @@
 import { useState, useEffect, type ReactElement } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ProductContent } from "./product-content";
 import { getProduct } from "../api";
 import { LoadingPlaceholder, type MasterData } from "../../../shared";
-
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
 
 export function DetailedProduct(): ReactElement {
   const { productKey } = useParams();
@@ -43,13 +36,13 @@ export function DetailedProduct(): ReactElement {
   }, [productKey, navigateTo]);
 
   return (
-    <ThemeProvider theme={darkTheme}>
+    <>
       <CssBaseline />
       {isLoading ? (
         <LoadingPlaceholder />
       ) : (
         <ProductContent product={product} />
       )}
-    </ThemeProvider>
+    </>
   );
 }

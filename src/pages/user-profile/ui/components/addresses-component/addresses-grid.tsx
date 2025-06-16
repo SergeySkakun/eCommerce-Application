@@ -1,17 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable unicorn/no-null */
 import * as React from "react";
 import Box from "@mui/material/Box";
 import type { GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
-import { getUserInfoRequest } from "../../../api";
+import { getUserInfoRequest } from "@/pages//user-profile/api";
 import { UpdateAddress } from "./update-modal";
 import { DeleteAddress } from "./delete-modal";
 import { AddressTableSkeleton } from "./skeleton";
 import { Typography } from "@mui/material";
-import type { Customer } from "../../../../../shared/api/types";
+import type { Customer } from "@/shared";
 import { SetDefaultShipping } from "./default-shipping-modal";
 import { SetDefaultBilling } from "./default-billing-modal";
 import { grey } from "@mui/material/colors";

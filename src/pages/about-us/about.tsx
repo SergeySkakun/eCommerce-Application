@@ -121,7 +121,8 @@ export function About(): ReactElement {
                   <p className={styles.rank}>Contribution</p>
                   <p className={styles.textAuthor1}>
                     CommerceToolsAPI requests and tokens, basket context, main
-                    page, detailed product page, about page, design and styles.
+                    page, detailed product page, about page, basket page, design
+                    and styles.
                   </p>
                 </div>
               </div>

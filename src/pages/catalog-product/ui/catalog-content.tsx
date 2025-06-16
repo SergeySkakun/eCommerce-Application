@@ -1,6 +1,10 @@
 import { useState, useCallback, useMemo } from "react";
 import type { ReactElement } from "react";
-import { Box } from "@mui/material";
+import { Box, CircularProgress, Alert } from "@mui/material";
+import { getAllProducts } from "../api";
+import { sendingFilterSortingSearchRequest } from "../api";
+import type { MasterData, Product } from "../../../shared";
+import { NoResultsFound, useAuth } from "../../../shared";
 import { CardList } from "./card-list";
 import type { VisualFilterState, FilterSubmitData } from "./filters-list";
 import { FiltersList, SearchInput } from "./filters-list";
@@ -32,6 +36,10 @@ export function CatalogContent(): ReactElement {
   );
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [currentSortOption, setCurrentSortOption] = useState<string>("");
+  const [products, setProducts] = useState<MasterData[] | Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const { isGuestAccess, isLoggedIn } = useAuth();
 
   const filterAndSortStrings = useMemo(() => {
     const parameters: string[] = [];
@@ -96,6 +104,46 @@ export function CatalogContent(): ReactElement {
     return parameters;
   }, [currentFilters, searchQuery, currentSortOption]);
 
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchProducts = async (): Promise<void> => {
+      setLoading(true);
+      setError(null);
+      try {
+        const hasActiveParameters = filterAndSortStrings.length > 0;
+        const isCategorySelected = currentFilters.categories !== "";
+        const shouldFetchAllProducts =
+          !hasActiveParameters && !isCategorySelected;
+
+        const data = await (shouldFetchAllProducts
+          ? getAllProducts()
+          : sendingFilterSortingSearchRequest(filterAndSortStrings.join("&")));
+
+        const productList = data.results;
+
+        if (isMounted) {
+          setProducts(productList);
+        }
+      } catch (error_) {
+        setError(
+          error_ instanceof Error
+            ? error_.message
+            : "An unknown error occurred",
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (isGuestAccess || isLoggedIn) {
+      void fetchProducts();
+    }
+
+    return (): void => {
+      isMounted = false;
+    };
+  }, [filterAndSortStrings, currentFilters, isGuestAccess]);
   const handleFilterSubmit = useCallback((data: FilterSubmitData) => {
     setCurrentFilters((previousFilters) => ({
       ...previousFilters,

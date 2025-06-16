@@ -1,10 +1,10 @@
 import { CartList } from "./components";
-import "./style.css";
+import styles from "./basket-page.module.css";
 
 export function BasketPage(): React.ReactElement {
   return (
-    <div className="basket-page">
-      <h2 className="title-cart">CART</h2>
+    <div className={styles.basket}>
+      <div className={styles.title}>CART</div>
       <CartList />
     </div>
   );

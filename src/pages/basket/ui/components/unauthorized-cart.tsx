@@ -2,9 +2,8 @@ import { Box, IconButton, Paper, Tooltip, Typography } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { type ReactElement } from "react";
 import { Link } from "react-router-dom";
-import { ToCatalogButton } from "@/shared";
 
-export function EmptyCart(): ReactElement {
+export function UnauthorizedCart(): ReactElement {
   return (
     <Box
       sx={{
@@ -43,7 +42,11 @@ export function EmptyCart(): ReactElement {
             Is your journey to your perfect car just beginning?{" "}
           </Typography>
         </Box>
-        <ToCatalogButton />
+        <Link to="/login" className="link">
+          <button className="button-main-head">
+            ИДИ КА ЛУЧШЕ ЗАРЕГИСТРИРУЙСЯ И НЕ ВАЛЯЙ ДУПАКА
+          </button>
+        </Link>
       </Paper>
     </Box>
   );

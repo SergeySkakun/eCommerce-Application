@@ -4,7 +4,8 @@ import { getTokenFromCookie, saveTokenCookie, TOKEN_NAMES } from "../../lib";
 
 // Создаёт новую корзину, сохраняет ID корзины и Version в куки
 
-export async function createCart(): Promise<void> {
+export async function createCart(): Promise<Cart> {
+  let cart: Cart;
   const body = {
     currency: "USD",
   };
@@ -18,7 +19,9 @@ export async function createCart(): Promise<void> {
   })
     .then((response) => response.json())
     .then((data: Cart) => {
+      cart = data;
       saveTokenCookie(data.id, TOKEN_NAMES.cartID);
       saveTokenCookie(data.version.toString(), TOKEN_NAMES.cartVersion);
     });
+  return cart;
 }

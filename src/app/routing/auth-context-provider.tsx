@@ -16,7 +16,9 @@ export function AuthUserContextProvider({
   const [isAuthCheckReady, setIsAuthCheckReady] = useState(false);
 
   const getGuestToken = async (): Promise<void> => {
-    await obtainAnonymousAccessToken().then(() => setIsGuestAccess(true));
+    if (!hasLoggedInToken()) {
+      await obtainAnonymousAccessToken().then(() => setIsGuestAccess(true));
+    }
   };
 
   useEffect(() => {

@@ -1,9 +1,13 @@
 import { API_HOST, PROJECT_KEY } from "../../../project-config";
-import { createCart, getTokenFromCookie, TOKEN_NAMES } from "../../../shared";
+import {
+  type Cart,
+  createCart,
+  getTokenFromCookie,
+  TOKEN_NAMES,
+} from "../../../shared";
 
-// Удаляет полностью корзину и создаёт новую
-
-export async function deleteCart(): Promise<void> {
+export async function deleteCart(): Promise<Cart> {
+  let cart: Cart;
   const BEARER_TOKEN = getTokenFromCookie(TOKEN_NAMES.successUserAccess);
   const cartID = getTokenFromCookie(TOKEN_NAMES.cartID);
   const cartVersion = getTokenFromCookie(TOKEN_NAMES.cartVersion);
@@ -18,6 +22,7 @@ export async function deleteCart(): Promise<void> {
   )
     .then((response) => response.json())
     .then(async () => {
-      await createCart();
+      cart = await createCart();
     });
+  return cart;
 }
