@@ -12,6 +12,8 @@ body {
 }
 
 #root {
+  max-width: 1920px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   height: 100%;
