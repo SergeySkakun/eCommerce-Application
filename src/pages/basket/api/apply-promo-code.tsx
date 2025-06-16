@@ -24,7 +24,7 @@ import {
 // возвращает польностью всю корзину. (промокод FaR7), надо будет сделать валидацию на промокод,
 // что б с сервера не возвращать ошибку, наверно будет проще, а может и нет :), тогда скажи, переделаю
 
-export async function ApplyPromoCode(actions: Actions): Promise<Cart> {
+export async function applyPromoCode(actions: Actions): Promise<Cart> {
   let cart: Cart;
   const BEARER_TOKEN = getTokenFromCookie(TOKEN_NAMES.successUserAccess);
   const cartID = getTokenFromCookie(TOKEN_NAMES.cartID);

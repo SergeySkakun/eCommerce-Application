@@ -1,6 +1,21 @@
 .basket {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   flex-grow: 1;
   width: 100%;
+  background-color: var(--background-color);
+}
+
+.title {
+  width: 30%;
+  height: 5rem;
+  padding: 0;
+  margin-top: 60px;
+  color: var(--white-color);
+  font-size: 3rem;
+  text-align: center;
 }
 
 .card {
@@ -8,17 +23,14 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  background-color: var(--dark-gray);
+  border-radius: 10px;
 }
 
 .image {
   max-width: 133px;
   height: 100%;
-}
-
-.title {
-  width: 20rem;
-  padding: 0.8rem;
-  font-size: 1rem;
+  border-radius: 10px;
 }
 
 .block {

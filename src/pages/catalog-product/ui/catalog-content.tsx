@@ -4,7 +4,7 @@ import { Box, CircularProgress, Alert } from "@mui/material";
 import { getAllProducts } from "../api";
 import { sendingFilterSortingSearchRequest } from "../api";
 import type { MasterData, Product } from "../../../shared";
-import { NoResultsFound, useAuth, LoadingPlaceholder } from "../../../shared";
+import { NoResultsFound, useAuth } from "../../../shared";
 import { CardList } from "./card-list";
 import type { VisualFilterState, FilterSubmitData } from "./filters-list";
 import { FiltersList, SearchInput } from "./filters-list";
@@ -38,7 +38,7 @@ export function CatalogContent(): ReactElement {
   const [products, setProducts] = useState<MasterData[] | Product[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const { isGuestAccess } = useAuth();
+  const { isGuestAccess, isLoggedIn } = useAuth();
 
   const filterAndSortStrings = useMemo(() => {
     const parameters: string[] = [];
@@ -135,7 +135,7 @@ export function CatalogContent(): ReactElement {
       }
     };
 
-    if (isGuestAccess) {
+    if (isGuestAccess || isLoggedIn) {
       void fetchProducts();
     }
 
@@ -189,10 +189,6 @@ export function CatalogContent(): ReactElement {
     setCurrentSortOption("");
   }, []);
 
-  if (!isGuestAccess) {
-    return <LoadingPlaceholder />;
-  }
-
   return (
     <Box
       sx={{
@@ -239,7 +235,7 @@ export function CatalogContent(): ReactElement {
         <div className="main">
           <img
             className="sale-board"
-            src="../../../../assets/catalog/sale-board.gif"
+            src="assets/catalog/sale-board.gif"
             alt="sale-board"
           ></img>
           <CreateCategoriesButton
