@@ -43,7 +43,7 @@
 .iconRS {
   position: absolute;
   width: 90%;
-  height: 15.5%;
+  height: 13%;
   left: 5%;
   padding: 100px 0 0 30px;
   border-radius: 35px;
@@ -90,7 +90,7 @@
 .iconTeam {
   position: absolute;
   width: 90%;
-  height: 15.5%;
+  height: 13%;
   right: 5%;
   padding: 100px 30px 0 0;
   border-radius: 35px;
@@ -150,7 +150,8 @@
 
 .imageAuthor1,
 .imageAuthor2,
-.imageAuthor3 {
+.imageAuthor3,
+.imageMentor {
   height: 100%;
   width: 35%;
   border-radius: 35px;
@@ -208,7 +209,8 @@
 .author:hover {
   .iconAuthor1,
   .iconAuthor2,
-  .iconAuthor3 {
+  .iconAuthor3,
+  .iconMentor {
     animation: animation-author-out 3s forwards;
   }
 }
@@ -216,12 +218,14 @@
 .author:not(hover) {
   .iconAuthor1,
   .iconAuthor2,
-  .iconAuthor3 {
+  .iconAuthor3,
+  .iconMentor {
     animation: animation-author-go 3s forwards;
   }
 }
 
-.iconAuthor2 {
+.iconAuthor2,
+.iconMentor {
   padding-top: 40px;
   overflow: hidden;
   right: 5%;
@@ -259,6 +263,14 @@
 
 .imageAuthor3 {
   background-image: url(../../../assets/about/dima.jpg);
+}
+
+.imageMentor {
+  background-image: url(../../../assets/about/best-mentor.jpg);
+}
+
+.iconMentor {
+  font-size: 100px;
 }
 
 @keyframes animation-author-go {
@@ -344,6 +356,16 @@
   .rank {
     font-size: 16px;
   }
+
+  .iconMentor {
+    font-size: 70px;
+  }
+}
+
+@media screen and (width <= 1000px) {
+  .iconMentor {
+    font-size: 60px;
+  }
 }
 
 @media screen and (width <= 860px) {
@@ -357,14 +379,16 @@
     .iconTeam,
     .iconAuthor1,
     .iconAuthor2,
-    .iconAuthor3 {
+    .iconAuthor3,
+    .iconMentor {
       animation-play-state: paused;
     }
   }
 
   .iconAuthor1,
   .iconAuthor2,
-  .iconAuthor3 {
+  .iconAuthor3,
+  .iconMentor {
     display: none;
   }
 
@@ -401,7 +425,8 @@
 
   .imageAuthor1,
   .imageAuthor2,
-  .imageAuthor3 {
+  .imageAuthor3,
+  .imageMentor {
     height: 300px;
     width: 50%;
   }
@@ -415,7 +440,8 @@
 
   .iconAuthor1,
   .iconAuthor2,
-  .iconAuthor3 {
+  .iconAuthor3,
+  .iconMentor {
     height: 60%;
   }
   .textAuthor1,
@@ -464,7 +490,8 @@
 
   .imageAuthor1,
   .imageAuthor2,
-  .imageAuthor3 {
+  .imageAuthor3,
+  .imageMentor {
     width: 70%;
   }
 

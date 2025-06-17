@@ -127,6 +127,35 @@ export function About(): ReactElement {
                 </div>
               </div>
             </div>
+            <div className={styles.author}>
+              <div className={styles.iconMentor}>MENTOR</div>
+              <div className={styles.author2Content}>
+                <div className={styles.textContent}>
+                  <div className={styles.nameAuthor2}>
+                    <a
+                      className={styles.iconGH}
+                      href="https://github.com/evgenklo"
+                    ></a>
+                    Evgenii Klokov{" "}
+                  </div>
+                  <p className={styles.rank}>Mentor</p>
+                  <p className={styles.textAuthor2}>
+                    Yevgeny, our outstanding mentor, provided invaluable
+                    assistance in the creation of this course. He generously
+                    shared his extensive programming knowledge, pointed out
+                    critical errors in both code and project architecture on
+                    GitHub, and consistently fostered a friendly team
+                    atmosphere, making the learning process truly enjoyable and
+                    productive. Yevgeny was always available, ready to answer
+                    any questions and help us tackle even the most challenging
+                    problems. His unwavering support and belief in us were key
+                    factors in our success. We are sincerely grateful to Yevgeny
+                    for his contributions!
+                  </p>
+                </div>
+                <div className={styles.imageMentor}></div>
+              </div>
+            </div>
           </div>
         </div>
       </main>
