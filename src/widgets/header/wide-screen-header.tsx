@@ -83,7 +83,11 @@ export function WideScreenHeader({
           <Link to="/cart" className="link-menu">
             <button className="button button-cart">
               <ShoppingCartIcon fontSize="large" />
-              <div className="quantity-item">{totalLineItemQuantity}</div>
+              <div className="quantity-item">
+                {totalLineItemQuantity === undefined
+                  ? 0
+                  : totalLineItemQuantity}
+              </div>
             </button>
           </Link>
         </div>

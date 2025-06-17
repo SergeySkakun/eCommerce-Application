@@ -144,7 +144,9 @@ export function BurgerMenu({
                 >
                   <ShoppingCartIcon fontSize="large" />
                   <div className="burger-quantity-item">
-                    {totalLineItemQuantity}
+                    {totalLineItemQuantity === undefined
+                      ? 0
+                      : totalLineItemQuantity}
                   </div>
                 </button>
               </Link>
