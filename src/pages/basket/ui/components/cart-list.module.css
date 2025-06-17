@@ -142,6 +142,30 @@
   text-align: center;
 }
 
+.placeOrder {
+  cursor: pointer;
+
+  width: 100%;
+  max-width: 24.5rem;
+  height: 45px;
+  margin: 20px 0;
+  padding: 10px;
+  border: 2px solid var(--team-color);
+  border-radius: 5px;
+
+  font-family: var(--font-family);
+  font-weight: bold;
+  color: var(--team-color);
+
+  background-color: var(--transparent);
+
+  &:hover {
+    color: var(--button-apply-filters);
+    border-color: var(--button-apply-filters);
+    background-color: var(--item-place-order-bgcolor);
+  }
+}
+
 @media only screen and (width <= 500px) {
   .totalCostText {
     font-size: 14px;

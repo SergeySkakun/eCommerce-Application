@@ -16,7 +16,7 @@ import {
 import { Box, Button, Grid } from "@mui/material";
 import { CartItem } from "./cart-item";
 import { UnauthorizedCart } from "./unauthorized-cart";
-import { DialogClearCart, EmptyCart } from ".";
+import { DialogClearCart, DialogPlaceOrder, EmptyCart } from ".";
 import style from "./cart-list.module.css";
 import { applyPromoCode, deleteCart } from "../..";
 import { LoadingPage } from "@/pages/loading";
@@ -28,7 +28,8 @@ export function CartList(): ReactElement {
   const [inputValue, setInputValue] = useState<string>("");
   const [messagePromo, setMessagePromo] = useState<string>();
   const [discountCost, setDiscountCost] = useState<string>();
-  const [openDialog, setOpenDialog] = useState(false);
+  const [openDialogClearCart, setOpenDialogClearCart] = useState(false);
+  const [openDialogPlaceOrder, setOpenDialogPlaceOrder] = useState(false);
   const {
     totalLineItemQuantity,
     setTotalLineItemQuantity,
@@ -96,12 +97,20 @@ export function CartList(): ReactElement {
     void handlerPromoCode(inputValue);
   };
 
-  const handleClickOpen = (): void => {
-    setOpenDialog(true);
+  const handleClickOpenClearCart = (): void => {
+    setOpenDialogClearCart(true);
   };
 
-  const handleClose = (): void => {
-    setOpenDialog(false);
+  const handleCloseClearCart = (): void => {
+    setOpenDialogClearCart(false);
+  };
+
+  const handleClickOpenPlaceOrder = (): void => {
+    setOpenDialogPlaceOrder(true);
+  };
+
+  const handleClosePlaceOrder = (): void => {
+    setOpenDialogPlaceOrder(false);
   };
 
   const handlerPromoCode = async (inputValue: string): Promise<void> => {
@@ -197,7 +206,7 @@ export function CartList(): ReactElement {
             ))
           : null}
       </Grid>
-      <button className={style.clearCart} onClick={handleClickOpen}>
+      <button className={style.clearCart} onClick={handleClickOpenClearCart}>
         CLEAR CART
       </button>
       <form className={style.formPromo} onSubmit={handleSubmit}>
@@ -236,10 +245,17 @@ export function CartList(): ReactElement {
           </div>
         </div>
       </Grid>
+      <button className={style.placeOrder} onClick={handleClickOpenPlaceOrder}>
+        PLACE AN ORDER
+      </button>
       <DialogClearCart
         clearCart={clearCart}
-        openDialog={openDialog}
-        handleClose={handleClose}
+        openDialog={openDialogClearCart}
+        handleClose={handleCloseClearCart}
+      />
+      <DialogPlaceOrder
+        openDialog={openDialogPlaceOrder}
+        handleClose={handleClosePlaceOrder}
       />
     </Box>
   );

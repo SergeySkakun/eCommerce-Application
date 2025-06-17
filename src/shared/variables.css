@@ -25,6 +25,7 @@
   --text-field-color: rgb(0 0 255);
   --item-remove-cart-color: rgb(150 0 0);
   --item-remove-cart-bgcolor: rgb(78 0 0 / 34.2%);
+  --item-place-order-bgcolor: rgba(0, 1, 78, 0.342);
   --rs-school: rgb(255 230 0);
   --my-team: rgb(80 184 67);
   --team-color: rgb(39 37 110);
@@ -60,6 +61,7 @@
   --text-field-color: rgb(0 0 255);
   --item-remove-cart-color: rgb(150 0 0);
   --item-remove-cart-bgcolor: rgb(78 0 0 / 34.2%);
+  --item-place-order-bgcolor: rgba(0, 1, 78, 0.342);
   --rs-school: rgb(255 230 0);
   --my-team: rgb(80 184 67);
   --team-color: rgb(117 112 255);
