@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import type { HeaderPropertiesType } from "./types";
 import "./styles.css";
@@ -12,9 +12,14 @@ export function WideScreenHeader({
 }: {
   headerProperties: HeaderPropertiesType;
 }): ReactNode {
-  const [colorMode, setColorMode] = useState(false);
-  const { isLoggedIn, totalLineItemQuantity, setIsDownloadPage, actOnLogout } =
-    headerProperties;
+  const {
+    isLoggedIn,
+    totalLineItemQuantity,
+    setIsDownloadPage,
+    actOnLogout,
+    colorMode,
+    setColorMode,
+  } = headerProperties;
 
   useEffect(() => {
     saveColorMode(setColorMode);

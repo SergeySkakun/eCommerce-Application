@@ -64,7 +64,7 @@ export const CardList = ({
     if (isGuestAccess || isLoggedIn) {
       void fetchProducts();
     }
-  }, [isGuestAccess, offset, filterAndSortString]);
+  }, [offset, filterAndSortString]);
 
   useEffect(() => {
     if (offset >= totalNumberOfResults && totalNumberOfResults > 0) {

@@ -43,8 +43,7 @@
 .iconRS {
   position: absolute;
   width: 90%;
-  height: 36%;
-  max-height: 300px;
+  height: 15.5%;
   left: 5%;
   padding: 100px 0 0 30px;
   border-radius: 35px;
@@ -91,8 +90,7 @@
 .iconTeam {
   position: absolute;
   width: 90%;
-  height: 36%;
-  max-height: 300px;
+  height: 15.5%;
   right: 5%;
   padding: 100px 30px 0 0;
   border-radius: 35px;
@@ -323,7 +321,7 @@
   }
   .iconRS {
     padding: 80px 0 0 30px;
-    height: 30%;
+    height: 12.5%;
     font-size: 50px;
   }
 
@@ -335,7 +333,7 @@
 
   .iconTeam {
     padding: 80px 30px 0 0;
-    height: 30%;
+    height: 12.5%;
     font-size: 50px;
   }
   .textAuthor1,
@@ -372,6 +370,7 @@
 
   .iconRS,
   .iconTeam {
+    height: 9%;
     width: 30%;
     padding: 80px 0 0 20px;
     font-size: 45px;
@@ -445,7 +444,7 @@
   .iconRS,
   .iconTeam {
     padding: 60px 0 0 20px;
-    height: 20%;
+    height: 6.5%;
     font-size: 30px;
   }
 
@@ -483,7 +482,7 @@
   .iconRS,
   .iconTeam {
     padding: 50px 0 0 10px;
-    height: 20%;
+    height: 6.5%;
     font-size: 25px;
   }
 

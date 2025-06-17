@@ -4,6 +4,7 @@ import { BurgerMenu, WideScreenHeader } from ".";
 import { TotalLineItemQuantityContext, useAuth } from "../../shared";
 
 export function Header(): ReactElement {
+  const [colorMode, setColorMode] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const {
     totalLineItemQuantity,
@@ -28,6 +29,8 @@ export function Header(): ReactElement {
     totalLineItemQuantity,
     setIsDownloadPage,
     actOnLogout,
+    setColorMode,
+    colorMode,
   };
 
   useEffect(() => {

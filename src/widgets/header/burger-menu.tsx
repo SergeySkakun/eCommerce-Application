@@ -13,11 +13,16 @@ export function BurgerMenu({
 }: {
   headerProperties: HeaderPropertiesType;
 }): React.ReactElement {
-  const [colorMode, setColorMode] = React.useState(false);
   const [anchorElement, setAnchorElement] =
     React.useState<null | HTMLElement>();
-  const { isLoggedIn, setIsDownloadPage, totalLineItemQuantity, actOnLogout } =
-    headerProperties;
+  const {
+    isLoggedIn,
+    setIsDownloadPage,
+    totalLineItemQuantity,
+    actOnLogout,
+    colorMode,
+    setColorMode,
+  } = headerProperties;
   const open = Boolean(anchorElement);
   const handleClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     setAnchorElement(event.currentTarget);
