@@ -1,21 +1,15 @@
 import { useState, useCallback, useMemo } from "react";
 import type { ReactElement } from "react";
-import { Box, CircularProgress, Alert } from "@mui/material";
-import { getAllProducts } from "../api";
-import { sendingFilterSortingSearchRequest } from "../api";
-import type { MasterData, Product } from "../../../shared";
-import { NoResultsFound, useAuth } from "../../../shared";
+import { Box } from "@mui/material";
 import { CardList } from "./card-list";
 import type { VisualFilterState, FilterSubmitData } from "./filters-list";
 import { FiltersList, SearchInput } from "./filters-list";
 import { SortSelect } from "./sort-select";
 import { AddBreadcrumb, CreateCategoriesButton } from ".";
 import "./styles.css";
-
 const FILTER_REQUEST = "filter=variants.";
 const ATTRIBUTE_FILTER_REQUEST = "filter=variants.attributes.";
 const SEARCH_REQUEST = "fuzzy=true&text.en-US=";
-
 const INITIAL_FILTERS_STATE: VisualFilterState = {
   priceMin: "",
   priceMax: "",
@@ -36,14 +30,9 @@ export function CatalogContent(): ReactElement {
   );
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [currentSortOption, setCurrentSortOption] = useState<string>("");
-  const [products, setProducts] = useState<MasterData[] | Product[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-  const { isGuestAccess, isLoggedIn } = useAuth();
 
   const filterAndSortStrings = useMemo(() => {
     const parameters: string[] = [];
-
     if (currentFilters.priceMin || currentFilters.priceMax) {
       const from =
         currentFilters.priceMin === ""
@@ -92,58 +81,15 @@ export function CatalogContent(): ReactElement {
         `filter=categories.id:"${String(currentFilters.categories)}"`,
       );
     }
-
     if (searchQuery) {
       parameters.push(`${SEARCH_REQUEST}${encodeURIComponent(searchQuery)}`);
     }
-
     if (currentSortOption) {
       parameters.push(`sort=${encodeURIComponent(currentSortOption)}`);
     }
-
     return parameters;
   }, [currentFilters, searchQuery, currentSortOption]);
 
-  useEffect(() => {
-    let isMounted = true;
-
-    const fetchProducts = async (): Promise<void> => {
-      setLoading(true);
-      setError(null);
-      try {
-        const hasActiveParameters = filterAndSortStrings.length > 0;
-        const isCategorySelected = currentFilters.categories !== "";
-        const shouldFetchAllProducts =
-          !hasActiveParameters && !isCategorySelected;
-
-        const data = await (shouldFetchAllProducts
-          ? getAllProducts()
-          : sendingFilterSortingSearchRequest(filterAndSortStrings.join("&")));
-
-        const productList = data.results;
-
-        if (isMounted) {
-          setProducts(productList);
-        }
-      } catch (error_) {
-        setError(
-          error_ instanceof Error
-            ? error_.message
-            : "An unknown error occurred",
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (isGuestAccess || isLoggedIn) {
-      void fetchProducts();
-    }
-
-    return (): void => {
-      isMounted = false;
-    };
-  }, [filterAndSortStrings, currentFilters, isGuestAccess]);
   const handleFilterSubmit = useCallback((data: FilterSubmitData) => {
     setCurrentFilters((previousFilters) => ({
       ...previousFilters,
@@ -151,7 +97,6 @@ export function CatalogContent(): ReactElement {
       categories: previousFilters.categories,
     }));
   }, []);
-
   const handleCategoryChange = useCallback(
     (categoryId: string | null, categoryName: string) => {
       setBreadcrumb(categoryName.toUpperCase());
@@ -164,15 +109,12 @@ export function CatalogContent(): ReactElement {
     },
     [],
   );
-
   const handleSearch = useCallback((query: string) => {
     setSearchQuery(query);
   }, []);
-
   const handleSortChange = useCallback((sortOption: string) => {
     setCurrentSortOption(sortOption);
   }, []);
-
   const handleResetAttributeFilters = useCallback(() => {
     setCurrentFilters((previousFilters) => ({
       ...INITIAL_FILTERS_STATE,
@@ -181,7 +123,6 @@ export function CatalogContent(): ReactElement {
     setSearchQuery("");
     setCurrentSortOption("");
   }, []);
-
   const handleFullReset = useCallback(() => {
     setCurrentFilters(INITIAL_FILTERS_STATE);
     setBreadcrumb("CARS");
