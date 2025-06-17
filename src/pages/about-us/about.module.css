@@ -339,6 +339,7 @@
   .myTeam {
     height: 220px;
   }
+
   .iconRS {
     padding: 80px 0 0 30px;
     height: 12.5%;
@@ -367,6 +368,10 @@
 
   .iconMentor {
     font-size: 70px;
+  }
+  .rankMentor {
+    margin: 0 0 0 90%;
+    font-size: 16px;
   }
 }
 
@@ -506,6 +511,10 @@
   .textAuthor1,
   .textAuthor2 {
     font-size: 12px;
+  }
+
+  .rankMentor {
+    margin: 0 0 0 80%;
   }
 }
 
