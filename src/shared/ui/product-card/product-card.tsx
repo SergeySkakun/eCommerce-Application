@@ -54,6 +54,9 @@ export const ProductCard = memo(
 
     return (
       <div onClick={() => clickOnCard()} className="card">
+        {priceInfo.discountedPrice > 0 ? (
+          <div className="icon-sale"></div>
+        ) : null}
         <CardMedia
           component="img"
           alt={imgLabel}
