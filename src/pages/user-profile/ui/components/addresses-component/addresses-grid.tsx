@@ -13,7 +13,6 @@ import { Typography } from "@mui/material";
 import type { Customer } from "@/shared";
 import { SetDefaultShipping } from "./default-shipping-modal";
 import { SetDefaultBilling } from "./default-billing-modal";
-import { grey } from "@mui/material/colors";
 import { AddNewAddress } from "./add-modal";
 import "./style.css";
 
@@ -194,8 +193,7 @@ export function AddressesGrid(): React.ReactElement {
         rows={data}
         columns={columns}
         sx={{
-          bgcolor: grey[900],
-          color: grey[1000],
+          backgroundColor: "var(--dark-gray)",
         }}
         getRowClassName={(parameters) => rowClassName(parameters.row)}
         initialState={{

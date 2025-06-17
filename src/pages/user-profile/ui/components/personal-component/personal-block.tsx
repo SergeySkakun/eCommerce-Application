@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/no-null */
 import {
   Box,
   Button,
@@ -11,16 +10,7 @@ import {
 import { DialogWindow } from "./dialog";
 import React from "react";
 import { getUserInfoRequest } from "../../../api";
-import { grey } from "@mui/material/colors";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 import "./style.css";
-
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
 
 export function PersonalBlock(): React.ReactElement {
   const [firstName, setFirstName] = React.useState("");
@@ -49,276 +39,274 @@ export function PersonalBlock(): React.ReactElement {
   });
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <Container
+    <Container
+      sx={{
+        height: "auto-fit",
+        width: "auto",
+        minHeight: "100%",
+        maxWidth: "40rem",
+        margin: "auto",
+      }}
+    >
+      <Box
         sx={{
-          height: "auto-fit",
           width: "auto",
-          minHeight: "100%",
           maxWidth: "40rem",
           margin: "auto",
         }}
       >
-        <Box
-          sx={{
-            width: "auto",
-            maxWidth: "40rem",
-            margin: "auto",
-          }}
-        >
-          <Paper
-            elevation={10}
-            sx={{
-              width: "100%",
-              padding: "2rem",
-              boxSizing: "border-box",
-              margin: "auto",
-            }}
-          >
-            <div className="title-block">
-              <Typography gutterBottom variant="h5" sx={{ color: grey[400] }}>
-                Personal Information
-              </Typography>
-            </div>
-            <hr
-              style={{
-                margin: "0.5rem 0",
-                width: "100%",
-                height: "1px",
-                color: "#ffffff",
-              }}
-            />
-            <Grid
-              container
-              sx={{
-                p: "1rem 0.5rem",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "start",
-                color: grey[300],
-              }}
-            >
-              <Grid
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  mb: "2",
-                  width: "100%",
-                }}
-              >
-                <span className="input-label">First Name</span>
-                <Grid
-                  sx={{
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <TextField
-                    variant="standard"
-                    value={firstName}
-                    slotProps={{
-                      input: {
-                        readOnly: true,
-                        disableUnderline: true,
-                      },
-                      htmlInput: {
-                        style: {
-                          width: "100%",
-                          fontSize: "1.2rem",
-                          fontWeight: "200",
-                          fontStyle: "200",
-                          lineHeight: 1.5,
-                          fontFamily: "monospace",
-                        },
-                      },
-                    }}
-                  />
-                  {isEditMode ? (
-                    <DialogWindow
-                      type="text"
-                      name="first name"
-                      typeValue="firstName"
-                      action="setFirstName"
-                      stateUpdate={setStateUpdate}
-                    />
-                  ) : null}
-                </Grid>
-              </Grid>
-              <Grid
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  mb: "2",
-                  width: "100%",
-                }}
-              >
-                <span className="input-label">Last Name</span>
-                <Grid
-                  sx={{
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <TextField
-                    variant="standard"
-                    value={lastName}
-                    slotProps={{
-                      input: {
-                        readOnly: true,
-                        disableUnderline: true,
-                      },
-                      htmlInput: {
-                        style: {
-                          width: "100px",
-                          fontSize: "1.2rem",
-                          fontWeight: "200",
-                          fontStyle: "200",
-                          lineHeight: 1.5,
-                          fontFamily: "monospace",
-                        },
-                      },
-                    }}
-                  />
-                  {isEditMode ? (
-                    <DialogWindow
-                      type="text"
-                      name="last name"
-                      typeValue="lastName"
-                      action="setLastName"
-                      stateUpdate={setStateUpdate}
-                    />
-                  ) : null}
-                </Grid>
-              </Grid>
-              <Grid
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  mb: "2",
-                  width: "100%",
-                }}
-              >
-                <span className="input-label">Date of Birth</span>
-                <Grid
-                  sx={{
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <TextField
-                    type="date"
-                    variant="standard"
-                    value={dateOfBirth}
-                    slotProps={{
-                      input: {
-                        readOnly: true,
-                        disableUnderline: true,
-                      },
-                      htmlInput: {
-                        style: {
-                          fontSize: "1.2rem",
-                          fontWeight: "200",
-                          fontStyle: "200",
-                          lineHeight: 1.5,
-                          fontFamily: "monospace",
-                        },
-                      },
-                    }}
-                  />
-                  {isEditMode ? (
-                    <DialogWindow
-                      type="date"
-                      name="date of birth"
-                      typeValue="dateOfBirth"
-                      action="setDateOfBirth"
-                      stateUpdate={setStateUpdate}
-                    />
-                  ) : null}
-                </Grid>
-              </Grid>
-              <Grid
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  mb: "2",
-                  width: "100%",
-                }}
-              >
-                <span className="input-label">Email</span>
-                <Grid
-                  sx={{
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <TextField
-                    type="email"
-                    variant="standard"
-                    value={email}
-                    slotProps={{
-                      input: {
-                        readOnly: true,
-                        disableUnderline: true,
-                      },
-                      htmlInput: {
-                        style: {
-                          fontSize: "1.2rem",
-                          fontWeight: "200",
-                          fontStyle: "200",
-                          lineHeight: 1.5,
-                          fontFamily: "monospace",
-                        },
-                      },
-                    }}
-                  />{" "}
-                  {isEditMode ? (
-                    <DialogWindow
-                      type="email"
-                      name="email"
-                      typeValue="email"
-                      action="changeEmail"
-                      stateUpdate={setStateUpdate}
-                    />
-                  ) : null}
-                </Grid>
-              </Grid>
-            </Grid>
-          </Paper>
-        </Box>
-        <Grid
+        <Paper
+          elevation={10}
           sx={{
             width: "100%",
+            padding: "2rem",
+            boxSizing: "border-box",
             margin: "auto",
-            maxWidth: "40rem",
-            mt: 2,
+            backgroundColor: "var(--dark-gray)",
           }}
         >
-          <Button
-            aria-label="add"
-            variant="outlined"
-            fullWidth
+          <div className="title-block">
+            <Typography gutterBottom variant="h5">
+              Personal Information
+            </Typography>
+          </div>
+          <hr
+            style={{
+              margin: "0.5rem 0",
+              width: "100%",
+              height: "1px",
+              color: "#ffffff",
+            }}
+          />
+          <Grid
+            container
             sx={{
-              maxWidth: "40rem",
-              mb: "1rem",
+              p: "1rem 0.5rem",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "start",
             }}
-            onClick={() => {
-              setEditMode(!isEditMode);
-            }}
-            color={isEditMode ? "success" : "primary"}
           >
-            {isEditMode ? "Done" : "Edit mode"}
-          </Button>
-        </Grid>
-      </Container>
-    </ThemeProvider>
+            <Grid
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                mb: "2",
+                width: "100%",
+              }}
+            >
+              <span className="input-label">First Name</span>
+              <Grid
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <TextField
+                  variant="standard"
+                  value={firstName}
+                  slotProps={{
+                    input: {
+                      readOnly: true,
+                      disableUnderline: true,
+                    },
+                    htmlInput: {
+                      style: {
+                        width: "100%",
+                        fontSize: "1.2rem",
+                        fontWeight: "200",
+                        fontStyle: "200",
+                        lineHeight: 1.5,
+                        fontFamily: "monospace",
+                      },
+                    },
+                  }}
+                />
+                {isEditMode ? (
+                  <DialogWindow
+                    type="text"
+                    name="first name"
+                    typeValue="firstName"
+                    action="setFirstName"
+                    stateUpdate={setStateUpdate}
+                  />
+                ) : null}
+              </Grid>
+            </Grid>
+            <Grid
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                mb: "2",
+                width: "100%",
+              }}
+            >
+              <span className="input-label">Last Name</span>
+              <Grid
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <TextField
+                  variant="standard"
+                  value={lastName}
+                  slotProps={{
+                    input: {
+                      readOnly: true,
+                      disableUnderline: true,
+                    },
+                    htmlInput: {
+                      style: {
+                        width: "100px",
+                        fontSize: "1.2rem",
+                        fontWeight: "200",
+                        fontStyle: "200",
+                        lineHeight: 1.5,
+                        fontFamily: "monospace",
+                      },
+                    },
+                  }}
+                />
+                {isEditMode ? (
+                  <DialogWindow
+                    type="text"
+                    name="last name"
+                    typeValue="lastName"
+                    action="setLastName"
+                    stateUpdate={setStateUpdate}
+                  />
+                ) : null}
+              </Grid>
+            </Grid>
+            <Grid
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                mb: "2",
+                width: "100%",
+              }}
+            >
+              <span className="input-label">Date of Birth</span>
+              <Grid
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <TextField
+                  type="date"
+                  variant="standard"
+                  value={dateOfBirth}
+                  slotProps={{
+                    input: {
+                      readOnly: true,
+                      disableUnderline: true,
+                    },
+                    htmlInput: {
+                      style: {
+                        fontSize: "1.2rem",
+                        fontWeight: "200",
+                        fontStyle: "200",
+                        lineHeight: 1.5,
+                        fontFamily: "monospace",
+                      },
+                    },
+                  }}
+                />
+                {isEditMode ? (
+                  <DialogWindow
+                    type="date"
+                    name="date of birth"
+                    typeValue="dateOfBirth"
+                    action="setDateOfBirth"
+                    stateUpdate={setStateUpdate}
+                  />
+                ) : null}
+              </Grid>
+            </Grid>
+            <Grid
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                mb: "2",
+                width: "100%",
+              }}
+            >
+              <span className="input-label">Email</span>
+              <Grid
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <TextField
+                  type="email"
+                  variant="standard"
+                  value={email}
+                  slotProps={{
+                    input: {
+                      readOnly: true,
+                      disableUnderline: true,
+                    },
+                    htmlInput: {
+                      style: {
+                        fontSize: "1.2rem",
+                        fontWeight: "200",
+                        fontStyle: "200",
+                        lineHeight: 1.5,
+                        fontFamily: "monospace",
+                      },
+                    },
+                  }}
+                />{" "}
+                {isEditMode ? (
+                  <DialogWindow
+                    type="email"
+                    name="email"
+                    typeValue="email"
+                    action="changeEmail"
+                    stateUpdate={setStateUpdate}
+                  />
+                ) : null}
+              </Grid>
+            </Grid>
+          </Grid>
+        </Paper>
+      </Box>
+      <Grid
+        sx={{
+          width: "100%",
+          margin: "auto",
+          maxWidth: "40rem",
+          mt: 2,
+        }}
+      >
+        <Button
+          aria-label="add"
+          variant="outlined"
+          fullWidth
+          sx={{
+            maxWidth: "40rem",
+            mb: "1rem",
+          }}
+          onClick={() => {
+            setEditMode(!isEditMode);
+          }}
+          color={isEditMode ? "success" : "primary"}
+        >
+          {isEditMode ? "Done" : "Edit mode"}
+        </Button>
+      </Grid>
+    </Container>
+    // </ThemeProvider>
   );
 }
