@@ -1,38 +1,46 @@
 .cartConteiner {
   display: flex;
-  align-items: center;
   flex-direction: column;
-  width: 80%;
-  padding: 10px 20px;
-  margin-bottom: 30px;
   gap: "0.5rem";
+  align-items: center;
+
+  width: 80%;
+  margin-bottom: 30px;
+  padding: 10px 20px;
   border-radius: 15px;
+
   background-color: var(--light-background-color);
 }
 
 .cartContent {
-  width: 70%;
-  gap: 15px;
   display: flex;
   flex-direction: column;
+  gap: 15px;
   justify-content: space-around;
+
+  width: 70%;
 }
 
 .clearCart {
-  width: 110px;
+  cursor: pointer;
+
+  width: 100%;
+  max-width: 24.5rem;
   height: 45px;
-  padding: 10px;
   margin: 20px 0;
-  font-family: var(--font-family);
-  font-weight: bold;
-  background-color: var(--transparent);
-  color: var(--item-remove-cart-color);
+  padding: 10px;
   border: 2px solid var(--item-remove-cart-color);
   border-radius: 5px;
-  cursor: pointer;
+
+  font-family: var(--font-family);
+  font-weight: bold;
+  color: var(--item-remove-cart-color);
+
+  background-color: var(--transparent);
+
   &:hover {
-    background-color: var(--item-remove-cart-bgcolor);
     color: var(--red-color);
+    background-color: var(--item-remove-cart-bgcolor);
   }
 }
 
@@ -41,39 +49,50 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+
   height: 45px;
+  margin-bottom: 20px;
 }
 
 .clearPromo {
-  font-size: 30px;
-  font-family: var(--font-family);
-  color: var(--red-color);
   cursor: pointer;
+
+  height: 45px;
+  padding: 10px;
+
+  font-family: var(--font-family);
+  font-size: 30px;
+  color: var(--red-color);
 }
 
 .inputPromo {
   width: 61%;
+  margin: 0 15px;
   padding: 10px;
-  font-size: 18px;
-  text-align: center;
-  background-color: var(--transparent);
   border: 2px solid var(--my-team);
   border-radius: 10px;
+
+  font-size: 18px;
   color: var(--white-color);
-  margin: 0 15px;
+  text-align: center;
+
+  background-color: var(--transparent);
 }
 
 .buttonPromo {
+  cursor: pointer;
+
   height: 45px;
   padding: 10px;
-  font-family: var(--font-family);
-  font-weight: bold;
-  background-color: var(--transparent);
-  color: var(--my-team);
   border: 2px solid var(--my-team);
   border-radius: 10px;
-  cursor: pointer;
+
+  font-family: var(--font-family);
+  font-weight: bold;
+  color: var(--my-team);
+
+  background-color: var(--transparent);
+
   &:hover {
     background-color: var(--transparent-hover);
   }
@@ -92,10 +111,12 @@
 
 .totalCostConteiner {
   display: flex;
-  justify-content: center;
   align-items: center;
-  background-color: var(--background-color);
+  justify-content: center;
+
   height: 40px;
+
+  background-color: var(--background-color);
 }
 
 .totalCostText {
@@ -103,25 +124,29 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+
   width: 80%;
-  text-align: center;
   margin: 0;
+
   font-family: var(--font-family);
   color: var(--white-color);
+  text-align: center;
 }
 
 .discountCost {
-  font-size: 12px;
-  text-align: center;
   margin-left: 20px;
+
   font-family: var(--font-family);
+  font-size: 12px;
   color: var(--red-color);
+  text-align: center;
 }
 
 @media only screen and (width <= 500px) {
   .totalCostText {
     font-size: 14px;
   }
+
   .totalCostText {
     width: 90%;
   }

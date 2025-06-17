@@ -1,20 +1,22 @@
 .basket {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+
   width: 100%;
+
   background-color: var(--background-color);
 }
 
 .title {
-  width: 30%;
-  height: 5rem;
-  padding: 0;
+  width: 15rem;
   margin-top: 60px;
-  color: var(--white-color);
+  padding: 0;
+
   font-size: 3rem;
+  color: var(--white-color);
   text-align: center;
 }
 
@@ -22,9 +24,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   width: 100%;
-  background-color: var(--dark-gray);
   border-radius: 10px;
+
+  background-color: var(--dark-gray);
 }
 
 .image {
@@ -51,7 +55,7 @@
   display: none;
 }
 
-@media only screen and (width <= 768px) {
+@media only screen and (width <= 968px) {
   .card {
     flex-direction: column;
     justify-content: center;
@@ -67,6 +71,7 @@
 
   .title {
     width: auto;
+    padding: 1rem 0;
   }
 
   .block {

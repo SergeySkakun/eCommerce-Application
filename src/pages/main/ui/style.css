@@ -12,11 +12,12 @@ body {
 }
 
 #root {
-  max-width: 1920px;
-  margin: auto;
   display: flex;
   flex-direction: column;
+
+  max-width: 1920px;
   height: 100%;
+  margin: auto;
 }
 
 .main {
@@ -27,6 +28,7 @@ body {
 
   width: 100%;
   margin: 0 auto;
+
   background-color: var(--background-color);
 }
 
@@ -50,24 +52,30 @@ body {
   width: 100%;
   height: 45vh;
   margin: 0;
+
+  font-family: "Times New Roman";
   font-size: 140px;
   color: var(--main-text-color);
   text-align: center;
-  font-family: "Times New Roman";
+
   -webkit-text-stroke: 1px var(--head-text-stroke);
 }
 
 .button-main-head {
-  padding: 10px;
-  color: var(--button-head);
-  border: 2px solid var(--button-head);
-  background-color: var(--transparent);
-  font-size: 1rem;
   cursor: pointer;
 
+  padding: 10px;
+  border: 2px solid var(--button-head);
+
+  font-size: 1rem;
+  color: var(--light-gray);
+
+  background-color: var(--transparent);
+
   &:hover {
-    border-color: var(--dark-gray);
-    color: var(--dark-gray);
+    border-color: var(--button-head);
+    color: var(--white-color);
+    transition: 0.4s;
   }
 }
 
@@ -81,19 +89,22 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+
   width: 100%;
   height: 400px;
+
   background-color: var(--light-background-color);
 }
 
 .sale-content {
   width: 70%;
   height: 300px;
+
   background-image: var(--sale-image);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  box-shadow: var(--sale-shadow-color) 0px 20px 30px -5px;
+  box-shadow: var(--sale-shadow-color) 0 20px 30px -5px;
 }
 
 .history-container,
@@ -181,8 +192,8 @@ h2 {
 
 @media screen and (width <= 800px) {
   .head-text {
-    font-size: 100px;
     height: 35vh;
+    font-size: 100px;
   }
 
   .sale-content {
@@ -197,8 +208,8 @@ h2 {
 
 @media screen and (width <= 600px) {
   .head-text {
-    font-size: 60px;
     height: 30vh;
+    font-size: 60px;
   }
 
   .text-history,

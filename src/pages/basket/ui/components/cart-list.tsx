@@ -1,17 +1,25 @@
-import { useContext, useEffect, useState, type ReactElement } from "react";
+import {
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useState,
+  type ReactElement,
+} from "react";
 import {
   type Cart,
   getCart,
   hasLoggedInToken,
   type ProductInCart,
   TotalLineItemQuantityContext,
+  useAuth,
 } from "@/shared";
-import { Box, Grid } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import { CartItem } from "./cart-item";
 import { UnauthorizedCart } from "./unauthorized-cart";
 import { DialogClearCart, EmptyCart } from ".";
 import style from "./cart-list.module.css";
 import { applyPromoCode, deleteCart } from "../..";
+import { LoadingPage } from "@/pages/loading";
 
 export function CartList(): ReactElement {
   const [totalPriceCart, setTotalPriceCart] = useState<string>();
@@ -21,20 +29,38 @@ export function CartList(): ReactElement {
   const [messagePromo, setMessagePromo] = useState<string>();
   const [discountCost, setDiscountCost] = useState<string>();
   const [openDialog, setOpenDialog] = useState(false);
-  const { totalLineItemQuantity, setTotalLineItemQuantity } = useContext(
-    TotalLineItemQuantityContext,
-  );
+  const [isHasDiscount, setIsHasDiscount] = useState<boolean>(false);
+  const {
+    totalLineItemQuantity,
+    setTotalLineItemQuantity,
+    setProductsCheckout,
+  } = useContext(TotalLineItemQuantityContext);
 
-  useEffect(() => {
-    const handlerCart = async (): Promise<void> => {
-      setCart(await getCart());
-    };
-    void handlerCart();
+  const { isLoggedIn } = useAuth();
+
+  useLayoutEffect(() => {
+    <LoadingPage />;
   }, []);
 
   useEffect(() => {
+    const handlerCart = async (): Promise<void> => {
+      await getCart().then((data) => {
+        if (data.lineItems) {
+          setCart(data);
+          return;
+        }
+      });
+    };
+    if (totalLineItemQuantity !== 0 && !isLoggedIn) {
+      void handlerCart();
+    } else if (isLoggedIn && totalLineItemQuantity) {
+      void handlerCart();
+    }
+  }, [isLoggedIn, totalLineItemQuantity]);
+
+  useEffect(() => {
     if (cart) {
-      setTotalLineItemQuantity(cart.totalLineItemQuantity);
+      setTotalLineItemQuantity(cart.totalLineItemQuantity ?? 0);
       const totalPrice = Math.trunc(
         cart.totalPrice.centAmount / 100,
       ).toLocaleString();
@@ -46,7 +72,7 @@ export function CartList(): ReactElement {
         setDiscountCost(discPrice);
       }
     }
-  }, [cart]);
+  }, [cart, setTotalLineItemQuantity]);
 
   if (isUpdatedCart) {
     return (
@@ -59,6 +85,8 @@ export function CartList(): ReactElement {
   const clearCart = async (): Promise<void> => {
     const cart = await deleteCart();
     setTotalLineItemQuantity(cart.totalLineItemQuantity);
+    setProductsCheckout([{ id: "", productId: "" }]);
+    setTotalLineItemQuantity(0);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -91,6 +119,7 @@ export function CartList(): ReactElement {
       ).toLocaleString();
       setDiscountCost(discPrice);
       setMessagePromo("PROMO CODE APPLIED");
+      setIsHasDiscount(true);
       setTimeout(() => {
         setMessagePromo("");
       }, 4000);
@@ -113,9 +142,12 @@ export function CartList(): ReactElement {
     const cart = await applyPromoCode(actions);
     setCart(cart);
     setDiscountCost(null);
+    setIsHasDiscount(false);
+    setInputValue("");
   };
 
   if (!hasLoggedInToken() && totalLineItemQuantity === undefined) {
+    void clearCart();
     return (
       <>
         <UnauthorizedCart />
@@ -123,6 +155,32 @@ export function CartList(): ReactElement {
     );
   }
 
+  if (!isLoggedIn && totalLineItemQuantity === 0) {
+    void clearCart();
+    return (
+      <>
+        <UnauthorizedCart />
+      </>
+    );
+  }
+
+  if (isLoggedIn && totalLineItemQuantity === 0) {
+    void clearCart();
+    return (
+      <>
+        <EmptyCart />
+      </>
+    );
+  }
+
+  if (totalLineItemQuantity === undefined) {
+    void clearCart();
+    return (
+      <>
+        <EmptyCart />
+      </>
+    );
+  }
   return totalLineItemQuantity === undefined ? (
     <>
       <EmptyCart />
@@ -156,22 +214,31 @@ export function CartList(): ReactElement {
         CLEAR CART
       </button>
       <form className={style.formPromo} onSubmit={handleSubmit}>
-        <div
+        <Button
+          variant="outlined"
+          disabled={!isHasDiscount}
           className={style.clearPromo}
           onClick={() => void removePromoCode()}
         >
-          X
-        </div>
+          Clear
+        </Button>
         <input
+          disabled={isHasDiscount}
           className={style.inputPromo}
           type="text"
           value={inputValue}
           onChange={handleChange}
           placeholder="ENTER PROMO CODE"
         />
-        <button className={style.buttonPromo} type="submit">
+        <Button
+          disabled={isHasDiscount}
+          variant="outlined"
+          color="success"
+          className={style.buttonPromo}
+          type="submit"
+        >
           APPLY
-        </button>
+        </Button>
       </form>
       <div className={style.messagePromo}>{messagePromo}</div>
       <Grid className={style.totalCost}>

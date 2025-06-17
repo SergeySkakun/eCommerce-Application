@@ -17,6 +17,8 @@ export function EmptyCart(): ReactElement {
       <Paper
         elevation={5}
         sx={{
+          backgroundColor: "var(--transparent)",
+          color: "var(--white-color)",
           display: "flex",
           width: "auto",
           maxWidth: "40rem",
@@ -30,8 +32,13 @@ export function EmptyCart(): ReactElement {
       >
         <Tooltip title="Go to Catalog" placement="top">
           <Link to="/catalog">
-            <IconButton aria-label="go to catalog">
-              <AddShoppingCartIcon sx={{ margin: 2 }} />
+            <IconButton
+              aria-label="go to catalog"
+              sx={{ backgroundColor: "cvar(--ard-hover-shadow)" }}
+            >
+              <AddShoppingCartIcon
+                sx={{ margin: 2, color: "var(--white-color)" }}
+              />
             </IconButton>
           </Link>
         </Tooltip>
@@ -39,7 +46,7 @@ export function EmptyCart(): ReactElement {
           <Typography gutterBottom variant="button" sx={{ mt: 2 }}>
             Your Cart is currently Empty
           </Typography>
-          <Typography color="textSecondary" gutterBottom variant="body2">
+          <Typography color="info" gutterBottom variant="body2">
             Is your journey to your perfect car just beginning?{" "}
           </Typography>
         </Box>

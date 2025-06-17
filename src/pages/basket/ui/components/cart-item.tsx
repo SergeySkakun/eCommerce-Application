@@ -73,7 +73,12 @@ export function CartItem(properties: CartItem): React.ReactElement {
         }
       }
     }
-  }, [currentCart]);
+  }, [
+    currentCart,
+    productsCheckout.id,
+    setTotalLineItemQuantity,
+    setTotalPriceCart,
+  ]);
 
   const handleIncrement = async (): Promise<void> => {
     const actions = {

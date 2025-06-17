@@ -70,7 +70,7 @@ export default tseslint.config(
         },
         alias: {
           extensions: [".tsx", ".js", ".ts", ".scss", ".css", ".d.ts"],
-          map: [["@/shared", "./src/shared"]],
+          map: ["@/shared", "./src/shared"],
         },
       },
     },

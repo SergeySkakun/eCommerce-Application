@@ -16,6 +16,9 @@ export function UnauthorizedCart(): ReactElement {
       <Paper
         elevation={5}
         sx={{
+          boxShadow: "cvar(--ard-hover-shadow)",
+          color: "var(--white-color)",
+          backgroundColor: "var(--transparent)",
           display: "flex",
           width: "auto",
           maxWidth: "40rem",
@@ -29,8 +32,13 @@ export function UnauthorizedCart(): ReactElement {
       >
         <Tooltip title="Go to Catalog" placement="top">
           <Link to="/catalog">
-            <IconButton aria-label="go to catalog">
-              <AddShoppingCartIcon sx={{ margin: 2 }} />
+            <IconButton
+              aria-label="go to catalog"
+              sx={{ backgroundColor: "cvar(--ard-hover-shadow)" }}
+            >
+              <AddShoppingCartIcon
+                sx={{ margin: 2, color: "var(--white-color)" }}
+              />
             </IconButton>
           </Link>
         </Tooltip>
@@ -38,13 +46,13 @@ export function UnauthorizedCart(): ReactElement {
           <Typography gutterBottom variant="button" sx={{ mt: 2 }}>
             Your Cart is currently Empty
           </Typography>
-          <Typography color="textSecondary" gutterBottom variant="body2">
+          <Typography color="info" gutterBottom variant="body2">
             Is your journey to your perfect car just beginning?{" "}
           </Typography>
         </Box>
         <Link to="/login" className="link">
-          <button className="button-main-head">
-            ИДИ КА ЛУЧШЕ ЗАРЕГИСТРИРУЙСЯ И НЕ ВАЛЯЙ ДУПАКА
+          <button color="var(--light-gray)" className="button-main-head">
+            LOGIN TO PLACE AN ORDER
           </button>
         </Link>
       </Paper>

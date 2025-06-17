@@ -23,6 +23,7 @@ export function DialogClearCart(properties: Properties): React.ReactElement {
   return (
     <React.Fragment>
       <Dialog
+        closeAfterTransition={false}
         open={openDialog}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
