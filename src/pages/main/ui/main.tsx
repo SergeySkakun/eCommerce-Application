@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import "./style.css";
 import { ViewProducts } from "./view-products/view-products";
 import { ToCatalogButton } from "../../../shared";
+import { RunningLine } from "./running-line";
 
 export function Main(): ReactNode {
   return (
@@ -68,6 +69,7 @@ export function Main(): ReactNode {
             </p>
             <div className="image-technology"></div>
           </div>
+          <RunningLine />
         </div>
       </main>
     </>
