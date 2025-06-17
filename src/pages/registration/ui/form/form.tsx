@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/no-null */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -28,9 +27,6 @@ import "./styles.css";
 import { RegistrationSuccessMessage } from "./index";
 import { useAuth } from "../../../../shared";
 import { FormInputCheckbox } from "./form-components/form-input-checkbox";
-// import { AdditionalForm } from "../additional-form/form";
-// import { AdditionalAddress } from "../additional-form/additional-address";
-// import { Checkbox } from "@mui/material";
 
 interface FormValues {
   email: string;
@@ -48,7 +44,6 @@ interface FormValues {
 }
 
 const RegistrationForm = (): ReactElement => {
-  // const [isDefaultBillingAddress, setIsDefaultBillingAddress] = useState(false);
   const [error, setError] = React.useState<DateValidationError | null>(null);
   const [messageApi, setMessageApi] = useState("");
   const { login } = useAuth();
@@ -83,7 +78,6 @@ const RegistrationForm = (): ReactElement => {
       postalCode: "",
       city: "",
       country: "",
-      // dateOfBirth: startValidDate as unknown as Date,
       dateOfBirth: "1981-01-01",
       defaultShippingAddress: true,
       defaultBillingAddress: false,
@@ -235,38 +229,6 @@ const RegistrationForm = (): ReactElement => {
             control={control}
             label="Set as default billing address"
           />
-          {/* <AdditionalAddress control={control}/> */}
-          {/* <Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <label className="default-address">
-                <Checkbox
-                  className="checkbox"
-                  name="defaultShippingAddress"
-                  onChange={(event) => {
-                    setIsDefaultShippingAddress(event.target.checked);
-                  }}
-                />
-                Set as default address
-              </label>
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <label className="default-address">
-                <Checkbox
-                  className="checkbox"
-                  name="defaultBillingAddress"
-                  onChange={(event) => {
-                    setIsDefaultBillingAddress(event.target.checked);
-                  }}
-                />
-                Add default billing address
-              </label>
-            </Grid>
-          </Grid> */}
-          {/* {isDefaultBillingAddress ? (
-            <>
-              <AdditionalAddress control={control}/>
-            </>
-          ) : null} */}
           <div className="message-api">{messageApi}</div>
           <Button
             type="submit"

@@ -12,10 +12,6 @@ import {
 } from "../../../shared";
 import type { AccessToken, Customer } from "../../../shared";
 
-// Изменение пароля:
-// передаём в функцию, введённый пользователем старый и новый пароль
-// возвращает сообщение об успешной смене или ошибку
-
 export async function changePassword(
   currentPassword: string,
   newPassword: string,

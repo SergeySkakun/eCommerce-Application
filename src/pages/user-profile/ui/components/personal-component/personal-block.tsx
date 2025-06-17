@@ -307,6 +307,5 @@ export function PersonalBlock(): React.ReactElement {
         </Button>
       </Grid>
     </Container>
-    // </ThemeProvider>
   );
 }

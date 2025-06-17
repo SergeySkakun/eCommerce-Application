@@ -13,7 +13,7 @@ import { TotalLineItemQuantityContext } from "../../lib";
 
 const arePropertiesEqual = (
   previousProperties: { cardInfo: CardInfo },
-  nextProperties: { cardInfo: CardInfo }
+  nextProperties: { cardInfo: CardInfo },
 ): boolean => {
   if (
     previousProperties.cardInfo.productId !==
@@ -83,5 +83,5 @@ export const ProductCard = memo(
       </div>
     );
   },
-  arePropertiesEqual
+  arePropertiesEqual,
 );
