@@ -138,7 +138,7 @@ export function About(): ReactElement {
                     ></a>
                     Evgenii Klokov{" "}
                   </div>
-                  <p className={styles.rank}>Mentor</p>
+                  <p className={styles.rankMentor}>Mentor</p>
                   <p className={styles.textAuthor2}>
                     Yevgeny, our outstanding mentor, provided invaluable
                     assistance in the creation of this course. He generously

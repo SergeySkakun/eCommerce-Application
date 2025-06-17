@@ -197,6 +197,14 @@
   font-family: var(--font-family);
   color: var(--price-gold-color);
 }
+
+.rankMentor {
+  margin: 0 0 0 94%;
+  font-size: 20px;
+  font-family: var(--font-family);
+  color: var(--price-gold-color);
+}
+
 .textAuthor1,
 .textAuthor2 {
   width: 100%;
