@@ -8,6 +8,7 @@ export function TotalQuantityContextProvider({ children }): ReactElement {
   const [productsCheckout, setProductsCheckout] = useState<[LineItem]>();
   const [isDownloadPage, setIsDownloadPage] = useState<boolean>(false);
   const [cart, setCart] = useState<Cart>(null);
+  const [isHasDiscount, setIsHasDiscount] = useState<boolean>(false);
 
   useEffect(() => {
     const CheckProductInCart = async (): Promise<void> => {
@@ -29,6 +30,8 @@ export function TotalQuantityContextProvider({ children }): ReactElement {
     setProductsCheckout,
     setIsDownloadPage,
     cart,
+    isHasDiscount,
+    setIsHasDiscount,
   };
 
   return (

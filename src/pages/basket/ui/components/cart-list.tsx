@@ -29,11 +29,12 @@ export function CartList(): ReactElement {
   const [messagePromo, setMessagePromo] = useState<string>();
   const [discountCost, setDiscountCost] = useState<string>();
   const [openDialog, setOpenDialog] = useState(false);
-  const [isHasDiscount, setIsHasDiscount] = useState<boolean>(false);
   const {
     totalLineItemQuantity,
     setTotalLineItemQuantity,
     setProductsCheckout,
+    isHasDiscount,
+    setIsHasDiscount,
   } = useContext(TotalLineItemQuantityContext);
 
   const { isLoggedIn } = useAuth();
@@ -51,12 +52,8 @@ export function CartList(): ReactElement {
         }
       });
     };
-    if (totalLineItemQuantity !== 0 && !isLoggedIn) {
-      void handlerCart();
-    } else if (isLoggedIn && totalLineItemQuantity) {
-      void handlerCart();
-    }
-  }, [isLoggedIn, totalLineItemQuantity]);
+    void handlerCart();
+  }, []);
 
   useEffect(() => {
     if (cart) {
@@ -70,6 +67,7 @@ export function CartList(): ReactElement {
           -cart.discountOnTotalPrice.discountedAmount.centAmount / 100,
         ).toLocaleString();
         setDiscountCost(discPrice);
+        setIsHasDiscount(true);
       }
     }
   }, [cart, setTotalLineItemQuantity]);
@@ -147,7 +145,6 @@ export function CartList(): ReactElement {
   };
 
   if (!hasLoggedInToken() && totalLineItemQuantity === undefined) {
-    void clearCart();
     return (
       <>
         <UnauthorizedCart />
@@ -156,7 +153,6 @@ export function CartList(): ReactElement {
   }
 
   if (!isLoggedIn && totalLineItemQuantity === 0) {
-    void clearCart();
     return (
       <>
         <UnauthorizedCart />
@@ -165,7 +161,6 @@ export function CartList(): ReactElement {
   }
 
   if (isLoggedIn && totalLineItemQuantity === 0) {
-    void clearCart();
     return (
       <>
         <EmptyCart />
@@ -173,14 +168,6 @@ export function CartList(): ReactElement {
     );
   }
 
-  if (totalLineItemQuantity === undefined) {
-    void clearCart();
-    return (
-      <>
-        <EmptyCart />
-      </>
-    );
-  }
   return totalLineItemQuantity === undefined ? (
     <>
       <EmptyCart />

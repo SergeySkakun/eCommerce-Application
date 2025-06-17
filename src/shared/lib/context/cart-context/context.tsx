@@ -9,6 +9,8 @@ type Value = {
   setProductsCheckout: React.Dispatch<React.SetStateAction<[LineItem]>>;
   setIsDownloadPage: React.Dispatch<React.SetStateAction<boolean>>;
   cart: Cart;
+  isHasDiscount: boolean;
+  setIsHasDiscount: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const TotalLineItemQuantityContext = createContext<Value>({
@@ -18,4 +20,6 @@ export const TotalLineItemQuantityContext = createContext<Value>({
   setProductsCheckout: () => {},
   setIsDownloadPage: () => {},
   cart: null,
+  isHasDiscount: false,
+  setIsHasDiscount: () => {},
 });
