@@ -36,16 +36,18 @@ export function ButtonAddToCart({
       productId: productId,
     };
     const cart = await addingDeletingModifyingItemsInCart(actions);
-    setProductsCheckout(cart.lineItems);
-    setTotalLineItemQuantity(cart.totalLineItemQuantity);
     const productInCart = cart.lineItems.find(
       (lineItem) => lineItem.productId === productId,
     );
-    if (productInCart) {
-      setLineItemId(productInCart.id);
-    }
-    setIsProductInCart(true);
-    setIsLoading(false);
+    setTimeout(() => {
+      if (productInCart) {
+        setLineItemId(productInCart.id);
+      }
+      setTotalLineItemQuantity(cart.totalLineItemQuantity);
+      setProductsCheckout(cart.lineItems);
+      setIsProductInCart(true);
+      setIsLoading(false);
+    }, 800);
   };
 
   const removeProductFromCart = async (): Promise<void> => {
@@ -55,10 +57,12 @@ export function ButtonAddToCart({
       lineItemId: lineItemId,
     };
     const cart = await addingDeletingModifyingItemsInCart(actions);
-    setProductsCheckout(cart.lineItems);
-    setTotalLineItemQuantity(cart.totalLineItemQuantity);
-    setIsProductInCart(false);
-    setIsLoading(false);
+    setTimeout(() => {
+      setTotalLineItemQuantity(cart.totalLineItemQuantity);
+      setProductsCheckout(cart.lineItems);
+      setIsLoading(false);
+      setIsProductInCart(false);
+    }, 800);
   };
 
   return isProductInCart === false ? (
