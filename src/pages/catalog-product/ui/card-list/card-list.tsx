@@ -37,7 +37,6 @@ export const CardList = ({
       setError(null);
       try {
         const hasActiveParameters = filterAndSortString.length > 0;
-        // const isNotOverYet = offset < totalNumberOfResults && totalNumberOfResults > 0
         const isNewFiltersRequest =
           previousFilterString.current !== filterAndSortString;
 
