@@ -28,10 +28,18 @@
   padding-top: 15px;
   text-decoration: none;
 }
-.menu {
+.menu-left,
+.menu-right {
   display: flex;
-  justify-content: center;
   width: 22rem;
+}
+
+.menu-left {
+  justify-content: left;
+}
+
+.menu-right {
+  justify-content: right;
 }
 
 .button {
@@ -141,9 +149,13 @@
   line-height: 1.2;
 }
 
+.burger-button-cart {
+  position: relative;
+}
+
 .burger-quantity-item {
   position: absolute;
-  top: 265px;
+  top: 2px;
   margin-left: 22px;
   background-color: brown;
   width: 23px;

@@ -1,10 +1,11 @@
 import { Box, IconButton, Paper, Tooltip, Typography } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { type ReactElement } from "react";
+import { useContext, type ReactElement } from "react";
 import { Link } from "react-router-dom";
-import { ToCatalogButton } from "@/shared";
+import { ToCatalogButton, TotalLineItemQuantityContext } from "@/shared";
 
 export function EmptyCart(): ReactElement {
+  const { setIsDownloadPage } = useContext(TotalLineItemQuantityContext);
   return (
     <Box
       sx={{
@@ -33,6 +34,7 @@ export function EmptyCart(): ReactElement {
         <Tooltip title="Go to Catalog" placement="top">
           <Link to="/catalog">
             <IconButton
+              onClick={() => setIsDownloadPage(true)}
               aria-label="go to catalog"
               sx={{ backgroundColor: "cvar(--ard-hover-shadow)" }}
             >
@@ -50,7 +52,7 @@ export function EmptyCart(): ReactElement {
             Is your journey to your perfect car just beginning?{" "}
           </Typography>
         </Box>
-        <ToCatalogButton />
+        <ToCatalogButton setIsDownloadPage={setIsDownloadPage} />
       </Paper>
     </Box>
   );

@@ -68,16 +68,26 @@ export function BurgerMenu({
           }}
         >
           <div className="button-burger-menu">
-            <a href="#history" className="link-menu">
-              <button onClick={handleClose} className="burger-button">
-                HISTORY
-              </button>
-            </a>
-            <a href="#technology" className="link-menu">
-              <button onClick={handleClose} className="burger-button">
-                TECHNOLOGY
-              </button>
-            </a>
+            {location.pathname === "/main" ? (
+              <>
+                <a href="#history" className="link-menu">
+                  <button onClick={handleClose} className="burger-button">
+                    HISTORY
+                  </button>
+                </a>
+                <a href="#technology" className="link-menu">
+                  <button onClick={handleClose} className="burger-button">
+                    TECHNOLOGY
+                  </button>
+                </a>
+              </>
+            ) : (
+              <Link to="/main" className="link-menu">
+                <button className="burger-button" onClick={handleClose}>
+                  MAIN
+                </button>
+              </Link>
+            )}
             <Link to="/catalog" className="link-menu">
               <button onClick={clickOnCatalog} className="burger-button">
                 CATALOG

@@ -1,5 +1,5 @@
 import { useEffect, type ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import type { HeaderPropertiesType } from "./types";
 import "./styles.css";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -12,6 +12,8 @@ export function WideScreenHeader({
 }: {
   headerProperties: HeaderPropertiesType;
 }): ReactNode {
+  const location = useLocation();
+
   const {
     isLoggedIn,
     totalLineItemQuantity,
@@ -28,7 +30,7 @@ export function WideScreenHeader({
   return (
     <>
       <header className="header">
-        <div className="menu">
+        <div className="menu-left">
           <button
             className="button button-mode"
             onClick={() => colorModeHandler(colorMode, setColorMode)}
@@ -39,12 +41,20 @@ export function WideScreenHeader({
               <DarkModeIcon fontSize="large" />
             )}
           </button>
-          <a href="#history" className="link-menu">
-            <button className="button button-history">HISTORY</button>
-          </a>
-          <a href="#technology" className="link-menu">
-            <button className="button button-technology">TECHNOLOGY</button>
-          </a>
+          {location.pathname === "/main" ? (
+            <>
+              <a href="#history" className="link-menu">
+                <button className="button">HISTORY</button>
+              </a>
+              <a href="#technology" className="link-menu">
+                <button className="button">TECHNOLOGY</button>
+              </a>
+            </>
+          ) : (
+            <Link to="/main" className="link-menu">
+              <button className="button">MAIN</button>
+            </Link>
+          )}
           <Link to="/catalog" className="link-menu">
             <button
               className="button button-product"
@@ -57,7 +67,7 @@ export function WideScreenHeader({
         <Link to="/main" className="logo">
           <span className="title">Fast and RUSH</span>
         </Link>
-        <div className="menu">
+        <div className="menu-right">
           {isLoggedIn ? (
             <>
               <button className="button" onClick={actOnLogout}>
