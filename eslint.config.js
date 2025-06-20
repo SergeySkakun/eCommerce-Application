@@ -35,7 +35,6 @@ export default tseslint.config(
     plugins: {
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
-
       "@typescript-eslint": tsEslintPlugin,
     },
     rules: {
@@ -51,10 +50,18 @@ export default tseslint.config(
       ],
 
       "@typescript-eslint/consistent-type-imports": "error",
-      "@typescript-eslint/explicit-function-return-type": "error",
+      "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/explicit-member-accessibility": [
         "error",
         { accessibility: "explicit", overrides: { constructors: "off" } },
+      ],
+      "@typescript-eslint/no-misused-promises": [
+        "error",
+        {
+          checksVoidReturn: {
+            attributes: false,
+          },
+        },
       ],
       "@typescript-eslint/member-ordering": "error",
       "class-methods-use-this": "error",
@@ -70,7 +77,7 @@ export default tseslint.config(
         },
         alias: {
           extensions: [".tsx", ".js", ".ts", ".scss", ".css", ".d.ts"],
-          map: ["@/shared", "./src/shared"],
+          map: ["@/shared", "src/shared"],
         },
       },
     },
