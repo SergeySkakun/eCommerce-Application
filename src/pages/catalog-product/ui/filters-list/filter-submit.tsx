@@ -1,5 +1,5 @@
 import type { ReactElement } from "react";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 
 interface FilterSubmitProperties {
   onReset: () => void;
@@ -10,18 +10,12 @@ export function FilterSubmit({
 }: FilterSubmitProperties): ReactElement {
   return (
     <Box sx={{ display: "flex", gap: 1, marginTop: 2 }}>
-      <Button type="submit" variant="contained" color="primary" fullWidth>
-        Apply Filters
-      </Button>
-      <Button
-        type="button"
-        onClick={onReset}
-        variant="outlined"
-        color="secondary"
-        fullWidth
-      >
-        Reset
-      </Button>
+      <button className="button-apply-filters" type="submit">
+        APPLY FILTERS
+      </button>
+      <button className="button-reset-filters" type="button" onClick={onReset}>
+        RESET
+      </button>
     </Box>
   );
 }

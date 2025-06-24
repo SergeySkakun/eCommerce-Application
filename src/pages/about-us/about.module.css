@@ -1,0 +1,552 @@
+.aboutPage {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 1920px;
+  background-color: var(--background-color);
+}
+
+.aboutContainer {
+  width: 90%;
+  margin-top: 60px;
+}
+
+.title {
+  font-family: var(--font-family);
+  font-size: 40px;
+  font-weight: bold;
+  color: var(--white-color);
+  margin: 30px 0 0 0;
+}
+
+.aboutContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px 0 30px 0;
+  gap: 60px;
+}
+
+.rsSchool,
+.myTeam {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  border-radius: 35px;
+  width: 100%;
+  height: 300px;
+  background-color: var(--light-background-color);
+}
+
+.iconRS {
+  position: absolute;
+  width: 90%;
+  height: 13%;
+  left: 5%;
+  padding: 100px 0 0 30px;
+  border-radius: 35px;
+  background-color: var(--rs-school);
+  z-index: 10;
+  font-size: 70px;
+  font-weight: bold;
+  font-family: var(--font-family);
+  color: rgb(0 0 0);
+  text-decoration: none;
+}
+
+.textRS,
+.textTeam {
+  width: 60%;
+  height: 90%;
+  margin: 0 15px 0 20px;
+  padding-top: 30px;
+  font-size: 25px;
+  font-family: var(--font-family);
+  color: var(--white-color);
+}
+
+.rsSchool:hover,
+.myTeam:hover {
+  .iconRS,
+  .iconTeam {
+    animation: animation-go 2s forwards;
+  }
+}
+
+.rsSchool:not(hover),
+.myTeam:not(hover) {
+  .iconRS,
+  .iconTeam {
+    animation: animation-out 2s forwards;
+  }
+}
+
+.myTeam {
+  justify-content: left;
+}
+
+.iconTeam {
+  position: absolute;
+  width: 90%;
+  height: 13%;
+  right: 5%;
+  padding: 100px 30px 0 0;
+  border-radius: 35px;
+  background-color: var(--my-team);
+  z-index: 10;
+  font-size: 70px;
+  font-weight: bold;
+  font-family: var(--font-family);
+  text-align: right;
+  color: rgb(0 0 0);
+}
+
+.textTeam {
+  margin: 0 20px 0 50px;
+}
+
+.author {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  border-radius: 35px;
+  width: 100%;
+  height: 300px;
+  background-color: var(--light-background-color);
+}
+
+.iconAuthor1,
+.iconAuthor3 {
+  position: absolute;
+  width: 90%;
+  height: 36%;
+  max-height: 300px;
+  left: 5%;
+  border-radius: 35px;
+  background-color: var(--team-color);
+  z-index: 10;
+  font-size: 150px;
+  font-weight: bold;
+  font-family: var(--font-family);
+  text-align: center;
+  color: var(--white-color);
+}
+
+.teamLead {
+  margin: 0;
+  font-size: 50px;
+}
+
+.author1Content,
+.author2Content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.imageAuthor1,
+.imageAuthor2,
+.imageAuthor3,
+.imageMentor {
+  height: 100%;
+  width: 35%;
+  border-radius: 35px;
+  background-image: url(../../../assets/about/sergey.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.textContent,
+.textContent {
+  height: 100%;
+  width: 70%;
+  padding-left: 40px;
+}
+
+.nameAuthor1,
+.nameAuthor2 {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  font-size: 30px;
+  font-family: var(--font-family);
+  font-weight: bold;
+  color: var(--white-color);
+  padding-top: 15px;
+}
+
+.iconGH {
+  display: block;
+  width: 60px;
+  height: 40px;
+  margin-right: 40px;
+  background-image: var(--icon-gh-about);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.rank {
+  margin: 0;
+  font-size: 20px;
+  font-family: var(--font-family);
+  color: var(--price-gold-color);
+}
+
+.rankMentor {
+  margin: 0 0 0 94%;
+  font-size: 20px;
+  font-family: var(--font-family);
+  color: var(--price-gold-color);
+}
+
+.textAuthor1,
+.textAuthor2 {
+  width: 100%;
+  margin: 0 15px 10px 20px;
+  font-size: 16px;
+  font-family: var(--font-family);
+  color: var(--white-color);
+}
+
+.author:hover {
+  .iconAuthor1,
+  .iconAuthor2,
+  .iconAuthor3,
+  .iconMentor {
+    animation: animation-author-out 3s forwards;
+  }
+}
+
+.author:not(hover) {
+  .iconAuthor1,
+  .iconAuthor2,
+  .iconAuthor3,
+  .iconMentor {
+    animation: animation-author-go 3s forwards;
+  }
+}
+
+.iconAuthor2,
+.iconMentor {
+  padding-top: 40px;
+  overflow: hidden;
+  right: 5%;
+  position: absolute;
+  width: 90%;
+  height: 36%;
+  max-height: 300px;
+  border-radius: 35px;
+  background-color: var(--team-color);
+  z-index: 10;
+  font-size: 150px;
+  font-weight: bold;
+  font-family: var(--font-family);
+  text-align: center;
+  color: var(--white-color);
+}
+
+.imageAuthor2 {
+  background-image: url(../../../assets/about/roma.jpg);
+}
+
+.textContent {
+  padding: 0 40px 0 40px;
+}
+
+.textAuthor2 {
+  margin: 0 15px 0 20px;
+  padding-top: 30px;
+  font-size: 16px;
+}
+
+.iconAuthor3 {
+  padding-top: 40px;
+}
+
+.imageAuthor3 {
+  background-image: url(../../../assets/about/dima.jpg);
+}
+
+.imageMentor {
+  background-image: url(../../../assets/about/best-mentor.jpg);
+}
+
+.iconMentor {
+  font-size: 100px;
+}
+
+@keyframes animation-author-go {
+  100% {
+    width: 90%;
+    opacity: 1;
+  }
+  40% {
+    width: 30%;
+    opacity: 1;
+  }
+  0% {
+    width: 30%;
+    opacity: 0;
+  }
+}
+
+@keyframes animation-author-out {
+  100% {
+    opacity: 0;
+    width: 30%;
+  }
+  60% {
+    width: 30%;
+    opacity: 1;
+  }
+  0% {
+    width: 90%;
+    opacity: 1;
+  }
+}
+
+@keyframes animation-go {
+  from {
+    width: 90%;
+  }
+  to {
+    width: 30%;
+  }
+}
+
+@keyframes animation-out {
+  from {
+    width: 30%;
+  }
+  to {
+    width: 90%;
+  }
+}
+@media screen and (width <= 1450px) {
+  .textAuthor1,
+  .textAuthor2 {
+    font-size: 14px;
+  }
+}
+@media screen and (width <= 1110px) {
+  .rsSchool,
+  .myTeam {
+    height: 220px;
+  }
+
+  .iconRS {
+    padding: 80px 0 0 30px;
+    height: 12.5%;
+    font-size: 50px;
+  }
+
+  .textRS,
+  .textTeam {
+    padding-top: 10px;
+    font-size: 20px;
+  }
+
+  .iconTeam {
+    padding: 80px 30px 0 0;
+    height: 12.5%;
+    font-size: 50px;
+  }
+  .textAuthor1,
+  .textAuthor2 {
+    font-size: 12px;
+  }
+
+  .rank {
+    font-size: 16px;
+  }
+
+  .iconMentor {
+    font-size: 70px;
+  }
+  .rankMentor {
+    margin: 0 0 0 90%;
+    font-size: 16px;
+  }
+}
+
+@media screen and (width <= 1000px) {
+  .iconMentor {
+    font-size: 60px;
+  }
+}
+
+@media screen and (width <= 860px) {
+  .rsSchool:hover,
+  .rsSchool:not(hover),
+  .myTeam:hover,
+  .myTeam:not(hover),
+  .author:hover,
+  .author:not(hover) {
+    .iconRS,
+    .iconTeam,
+    .iconAuthor1,
+    .iconAuthor2,
+    .iconAuthor3,
+    .iconMentor {
+      animation-play-state: paused;
+    }
+  }
+
+  .iconAuthor1,
+  .iconAuthor2,
+  .iconAuthor3,
+  .iconMentor {
+    display: none;
+  }
+
+  .iconRS,
+  .iconTeam {
+    height: 9%;
+    width: 30%;
+    padding: 80px 0 0 20px;
+    font-size: 45px;
+  }
+
+  .textRS,
+  .textTeam {
+    padding-top: 10px;
+    font-size: 18px;
+  }
+
+  .iconTeam {
+    padding: 80px 20px 0 0;
+  }
+  .teamLead {
+    font-size: 35px;
+  }
+
+  .author1Content,
+  .author2Content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .author2Content {
+    flex-direction: column-reverse;
+  }
+
+  .imageAuthor1,
+  .imageAuthor2,
+  .imageAuthor3,
+  .imageMentor {
+    height: 300px;
+    width: 50%;
+  }
+
+  .author {
+    height: 500px;
+  }
+  .textContent {
+    width: 100%;
+  }
+
+  .iconAuthor1,
+  .iconAuthor2,
+  .iconAuthor3,
+  .iconMentor {
+    height: 60%;
+  }
+  .textAuthor1,
+  .textAuthor2 {
+    font-size: 14px;
+  }
+}
+
+@media screen and (width <= 760px) {
+  .iconRS {
+    padding: 55px 0 0 20px;
+  }
+  .iconTeam {
+    padding: 80px 10px 0 0;
+  }
+  .textTeam {
+    margin: 0 20px 0 30px;
+  }
+}
+
+@media screen and (width <= 600px) {
+  .rsSchool,
+  .myTeam {
+    height: 150px;
+  }
+  .iconRS,
+  .iconTeam {
+    padding: 60px 0 0 20px;
+    height: 6.5%;
+    font-size: 30px;
+  }
+
+  .iconTeam {
+    padding: 60px 20px 0 0;
+  }
+
+  .textRS,
+  .textTeam {
+    padding-top: 5px;
+    font-size: 12px;
+  }
+  .nameAuthor1,
+  .nameAuthor2 {
+    font-size: 20px;
+  }
+
+  .imageAuthor1,
+  .imageAuthor2,
+  .imageAuthor3,
+  .imageMentor {
+    width: 70%;
+  }
+
+  .textAuthor1,
+  .textAuthor2 {
+    font-size: 12px;
+  }
+
+  .rankMentor {
+    margin: 0 0 0 80%;
+  }
+}
+
+@media screen and (width <= 550px) {
+  .rsSchool,
+  .myTeam {
+    height: 150px;
+  }
+  .iconRS,
+  .iconTeam {
+    padding: 50px 0 0 10px;
+    height: 6.5%;
+    font-size: 25px;
+  }
+
+  .iconTeam {
+    padding: 50px 20px 0 0;
+    margin: 0 0 0 30px;
+  }
+
+  .textRS,
+  .textTeam {
+    padding-top: 5px;
+    font-size: 11px;
+  }
+
+  .textTeam {
+    padding: 0 15px 0 0;
+  }
+
+  .textAuthor1,
+  .textAuthor2 {
+    margin: 0 15px 10px 0px;
+  }
+}

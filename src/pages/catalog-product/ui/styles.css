@@ -1,3 +1,14 @@
+.catalog-loader {
+  display: flex;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-conteiner {
+  background-color: var(--background-color);
+}
+
 .categories-button {
   display: flex;
   flex-direction: row;
@@ -48,6 +59,19 @@
   font-family: var(--font-family);
   color: var(--white-color);
   cursor: pointer;
+}
+
+.sort-container {
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  background-color: var(--dark-gray);
+}
+
+@media screen and (width <= 950px) {
+  .sale-board {
+    width: 95%;
+  }
 }
 
 @media screen and (width <= 600px) {

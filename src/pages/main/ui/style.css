@@ -1,52 +1,82 @@
-@import url("../../../shared/variables.css");
+@import "../../../shared/variables.css";
 
 html {
   scroll-behavior: smooth;
 }
 
 body {
+  width: 100%;
+  height: 100vh;
   margin: 0;
   padding: 0;
-  width: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 1920px;
+  height: 100%;
+  margin: auto;
 }
 
 .main {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   width: 100%;
   margin: 0 auto;
+
+  background-color: var(--background-color);
 }
 
 .head-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+
   width: 100%;
   height: 100vh;
-  text-align: center;
-  font-size: 100px;
-  color: var(--white-color);
-  background-image: url("../../../../assets/main/image_1.jpg");
-  background-size: cover;
+
+  background-image: var(--main-image);
   background-repeat: no-repeat;
   background-position: center;
-  gap: 30px;
+  background-size: cover;
+}
+
+.head-text {
+  width: 100%;
+  height: 45vh;
+  margin: 0;
+
+  font-family: "Times New Roman";
+  font-size: 140px;
+  color: var(--main-text-color);
+  text-align: center;
+
+  -webkit-text-stroke: 1px var(--head-text-stroke);
 }
 
 .button-main-head {
-  padding: 10px;
-  color: var(--light-gray);
-  border: 2px solid var(--light-gray);
-  background-color: var(--transparent);
   cursor: pointer;
-}
 
-.button-main-head:hover {
-  color: var(--white-color);
-  border-color: var(--light-gray);
+  padding: 10px;
+  border: 2px solid var(--button-head);
+
+  font-size: 1rem;
+  color: var(--light-gray);
+
+  background-color: var(--transparent);
+
+  &:hover {
+    border-color: var(--button-head);
+    color: var(--white-color);
+    transition: 0.4s;
+  }
 }
 
 .link {
@@ -55,67 +85,42 @@ body {
   text-decoration: none;
 }
 
-.history-container {
+.sale-container {
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  min-height: 50vh;
-  background-color: var(--background-color);
-  padding-bottom: 20px;
-}
 
-.content-history {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  width: 95%;
-}
-
-h2 {
   width: 100%;
-  color: var(--white-color);
-  font-family: var(--font-family);
-  text-align: center;
+  height: 400px;
+
+  background-color: var(--light-background-color);
 }
 
-.image-history {
-  width: 50%;
-  height: 270px;
-  background-image: url("../../../../assets/main/img_2.jpg");
-  background-size: 68%;
+.sale-content {
+  width: 70%;
+  height: 300px;
+
+  background-image: var(--sale-image);
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
+  box-shadow: var(--sale-shadow-color) 0 20px 30px -5px;
 }
 
-.text-history {
-  width: 50%;
-  color: var(--white-color);
-  font-family: var(--font-family);
-  font-size: 20px;
-}
-
-.best-product-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: var(--light-background-color);
-  width: 100%;
-  min-height: 520px;
-  padding-bottom: 20px;
-}
-
+.history-container,
 .technology-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   min-height: 50vh;
-  background-color: var(--background-color);
   padding-bottom: 20px;
+
+  background-color: var(--background-color);
 }
 
+.content-history,
 .content-technology {
   display: flex;
   flex-direction: row;
@@ -123,20 +128,52 @@ h2 {
   width: 95%;
 }
 
+h2 {
+  width: 100%;
+  font-family: var(--font-family);
+  color: var(--white-color);
+  text-align: center;
+}
+
+.image-history {
+  width: 50%;
+  height: 400px;
+
+  background-image: var(--history-image);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 68%;
+}
+
+.text-history,
 .text-technology {
   width: 50%;
-  color: var(--white-color);
   font-family: var(--font-family);
   font-size: 20px;
+  color: var(--white-color);
+}
+
+.best-product-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 520px;
+  padding-bottom: 20px;
+
+  background-color: var(--light-background-color);
 }
 
 .image-technology {
   width: 50%;
   height: 40vh;
+
   background-image: url("../../../../assets/main/img_3.jpg");
-  background-size: 45%;
   background-repeat: no-repeat;
   background-position: center;
+  background-size: 45%;
 }
 
 .sale-board {
@@ -147,66 +184,41 @@ h2 {
   .image-technology {
     background-size: 80%;
   }
+
+  .sale-content {
+    width: 85%;
+  }
+}
+
+@media screen and (width <= 800px) {
+  .head-text {
+    height: 35vh;
+    font-size: 100px;
+  }
+
+  .sale-content {
+    width: 90%;
+    height: 200px;
+  }
+
+  .sale-container {
+    height: 300px;
+  }
 }
 
 @media screen and (width <= 600px) {
-  .head-container {
+  .head-text {
+    height: 30vh;
     font-size: 60px;
   }
 
-  .text-history {
-    font-size: 10px;
-  }
-
+  .text-history,
   .text-technology {
     font-size: 10px;
-  }
-  .image-technology {
-    width: 70%;
-  }
-}
-
-@media screen and (width <= 380px) {
-  .head-container {
-    font-size: 45px;
-  }
-
-  .text-history {
-    width: 90%;
-    font-size: 8px;
-  }
-
-  .text-technology {
-    font-size: 8px;
-    width: 90%;
-  }
-
-  .button-main-head {
-    font-size: 10px;
-  }
-
-  h2 {
-    font-size: 13px;
-  }
-
-  .content-history {
-    flex-direction: column;
-    width: 95%;
-  }
-
-  .image-history {
-    width: 100%;
-    height: 100px;
-  }
-
-  .content-technology {
-    flex-direction: column-reverse;
-    width: 95%;
   }
 
   .image-technology {
-    width: 100%;
-    height: 100px;
+    width: 70%;
   }
 }
 
@@ -217,8 +229,8 @@ h2 {
   }
 
   .text-technology {
-    font-size: 12px;
     width: 90%;
+    font-size: 12px;
   }
 
   h2 {
@@ -242,7 +254,15 @@ h2 {
 
   .image-technology {
     width: 100%;
-    background-size: 50%;
     height: 220px;
+    background-size: 50%;
+  }
+
+  .sale-content {
+    height: 100px;
+  }
+
+  .sale-container {
+    height: 200px;
   }
 }

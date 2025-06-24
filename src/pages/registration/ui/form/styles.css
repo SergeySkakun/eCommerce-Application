@@ -1,14 +1,15 @@
 .registration-page {
   display: flex;
   justify-content: center;
-  padding: 60px 0;
   background-color: var(--background-color);
   margin: 0;
 }
 
 .registration-content {
   width: 40%;
+  min-height: 815px;
   padding: 0px 20px 10px 20px;
+  margin: 100px 0 60px 0;
   border: 2px solid var(--white-color);
   background-color: var(--dark-gray);
 }

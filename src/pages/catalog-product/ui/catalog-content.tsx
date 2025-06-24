@@ -1,21 +1,22 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import type { ReactElement } from "react";
-import { Box, CircularProgress, Alert } from "@mui/material";
-import { getAllProducts } from "../api";
-import { sendingFilterSortingSearchRequest } from "../api";
-import type { MasterData, Product } from "../../../shared";
-import { NoResultsFound } from "../../../shared";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Typography,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CardList } from "./card-list";
 import type { VisualFilterState, FilterSubmitData } from "./filters-list";
 import { FiltersList, SearchInput } from "./filters-list";
 import { SortSelect } from "./sort-select";
 import { AddBreadcrumb, CreateCategoriesButton } from ".";
 import "./styles.css";
-
 const FILTER_REQUEST = "filter=variants.";
 const ATTRIBUTE_FILTER_REQUEST = "filter=variants.attributes.";
 const SEARCH_REQUEST = "fuzzy=true&text.en-US=";
-
 const INITIAL_FILTERS_STATE: VisualFilterState = {
   priceMin: "",
   priceMax: "",
@@ -30,19 +31,15 @@ const INITIAL_FILTERS_STATE: VisualFilterState = {
 
 export function CatalogContent(): ReactElement {
   const [breadcrumb, setBreadcrumb] = useState<string>("CARS");
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [currentFilters, setCurrentFilters] = useState<VisualFilterState>(
     () => INITIAL_FILTERS_STATE,
   );
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [currentSortOption, setCurrentSortOption] = useState<string>("");
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
-  const [products, setProducts] = useState<MasterData[] | Product[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
 
   const filterAndSortStrings = useMemo(() => {
     const parameters: string[] = [];
-
     if (currentFilters.priceMin || currentFilters.priceMax) {
       const from =
         currentFilters.priceMin === ""
@@ -91,59 +88,14 @@ export function CatalogContent(): ReactElement {
         `filter=categories.id:"${String(currentFilters.categories)}"`,
       );
     }
-
     if (searchQuery) {
       parameters.push(`${SEARCH_REQUEST}${encodeURIComponent(searchQuery)}`);
     }
-
     if (currentSortOption) {
       parameters.push(`sort=${encodeURIComponent(currentSortOption)}`);
     }
-
     return parameters;
   }, [currentFilters, searchQuery, currentSortOption]);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    const fetchProducts = async (): Promise<void> => {
-      setLoading(true);
-      setError(null);
-      try {
-        const hasActiveParameters = filterAndSortStrings.length > 0;
-        const isCategorySelected = currentFilters.categories !== "";
-        const shouldFetchAllProducts =
-          !hasActiveParameters && !isCategorySelected;
-
-        const data = await (shouldFetchAllProducts
-          ? getAllProducts()
-          : sendingFilterSortingSearchRequest(filterAndSortStrings.join("&")));
-
-        const productList = data.results;
-
-        if (isMounted) {
-          setProducts(productList);
-        }
-      } catch (error_) {
-        setError(
-          error_ instanceof Error
-            ? error_.message
-            : "An unknown error occurred",
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (isFirstLoad) {
-      setIsFirstLoad(false);
-    }
-    void fetchProducts();
-
-    return (): void => {
-      isMounted = false;
-    };
-  }, [filterAndSortStrings, isFirstLoad, currentFilters]);
 
   const handleFilterSubmit = useCallback((data: FilterSubmitData) => {
     setCurrentFilters((previousFilters) => ({
@@ -152,7 +104,6 @@ export function CatalogContent(): ReactElement {
       categories: previousFilters.categories,
     }));
   }, []);
-
   const handleCategoryChange = useCallback(
     (categoryId: string | null, categoryName: string) => {
       setBreadcrumb(categoryName.toUpperCase());
@@ -165,15 +116,12 @@ export function CatalogContent(): ReactElement {
     },
     [],
   );
-
   const handleSearch = useCallback((query: string) => {
     setSearchQuery(query);
   }, []);
-
   const handleSortChange = useCallback((sortOption: string) => {
     setCurrentSortOption(sortOption);
   }, []);
-
   const handleResetAttributeFilters = useCallback(() => {
     setCurrentFilters((previousFilters) => ({
       ...INITIAL_FILTERS_STATE,
@@ -182,12 +130,23 @@ export function CatalogContent(): ReactElement {
     setSearchQuery("");
     setCurrentSortOption("");
   }, []);
-
   const handleFullReset = useCallback(() => {
     setCurrentFilters(INITIAL_FILTERS_STATE);
     setBreadcrumb("CARS");
     setSearchQuery("");
     setCurrentSortOption("");
+  }, []);
+
+  const handleResize = (): void => {
+    setScreenWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return (): void => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (
@@ -199,44 +158,79 @@ export function CatalogContent(): ReactElement {
         p: 3,
       }}
     >
-      <Box
-        sx={{
-          flex: "0 0 280px",
-          marginTop: "50px",
-          maxWidth: { xs: "100%", md: "280px" },
-        }}
-      >
-        <SearchInput onSearch={handleSearch} initialSearchQuery={searchQuery} />
-        <SortSelect
-          onSortChange={handleSortChange}
-          currentSortOption={currentSortOption}
-        />
-        <FiltersList
-          onFilterSubmit={handleFilterSubmit}
-          initialFilters={currentFilters}
-        />
-      </Box>
-      <Box sx={{ flexGrow: 1 }}>
-        {loading && (
+      {screenWidth > 915 ? (
+        <>
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              p: 4,
+              flex: "0 0 280px",
+              marginTop: "50px",
+              maxWidth: { xs: "100%", md: "280px" },
             }}
           >
-            <CircularProgress />
+            <SearchInput
+              onSearch={handleSearch}
+              initialSearchQuery={searchQuery}
+            />
+            <SortSelect
+              onSortChange={handleSortChange}
+              currentSortOption={currentSortOption}
+            />
+            <FiltersList
+              onFilterSubmit={handleFilterSubmit}
+              initialFilters={currentFilters}
+            />
           </Box>
-        )}
-        {error && (
-          <Alert severity="error" sx={{ mb: 2 }}>
-            {error}
-          </Alert>
-        )}
+        </>
+      ) : (
+        <>
+          <Accordion
+            sx={{
+              marginTop: "50px",
+            }}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1-content"
+              id="panel1-header"
+            >
+              <Typography
+                component="span"
+                sx={{
+                  fontSize: "25px",
+                }}
+              >
+                Filters
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Box
+                sx={{
+                  flex: "0 0 280px",
+                  maxWidth: { xs: "100%", md: "280px" },
+                }}
+              >
+                <SearchInput
+                  onSearch={handleSearch}
+                  initialSearchQuery={searchQuery}
+                />
+                <SortSelect
+                  onSortChange={handleSortChange}
+                  currentSortOption={currentSortOption}
+                />
+                <FiltersList
+                  onFilterSubmit={handleFilterSubmit}
+                  initialFilters={currentFilters}
+                />
+              </Box>
+            </AccordionDetails>
+          </Accordion>
+        </>
+      )}
+      <Box sx={{ flexGrow: 1 }}>
         <div className="main">
           <img
             className="sale-board"
-            src="../../../../assets/catalog/sale-board.gif"
+            src="assets/catalog/sale-board.gif"
             alt="sale-board"
           ></img>
           <CreateCategoriesButton
@@ -253,10 +247,7 @@ export function CatalogContent(): ReactElement {
             />
           </div>
         </div>
-        {!loading && !error && products.length > 0 && (
-          <CardList products={products} />
-        )}
-        {!loading && !error && products.length === 0 && <NoResultsFound />}
+        <CardList filterAndSortString={filterAndSortStrings.join("&")} />
       </Box>
     </Box>
   );

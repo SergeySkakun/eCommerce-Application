@@ -1,4 +1,4 @@
-import type { ReactElement } from "react";
+import { type ReactElement } from "react";
 import { ProductCard } from "./product-card";
 import type { MasterData, Product } from "../../api";
 import { parseProductDataForCard } from "../../lib";
@@ -10,6 +10,7 @@ export function createProductCard(
   cardInfo: MasterData | Product,
 ): ReactElement {
   const {
+    productId,
     productKey: key,
     productName: name,
     productDescription: description,
@@ -29,6 +30,7 @@ export function createProductCard(
   };
 
   const CardInfo = {
+    productId,
     key,
     name,
     description,

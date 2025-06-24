@@ -1,46 +1,86 @@
-import type { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, type ReactNode } from "react";
+import { Link, useLocation } from "react-router-dom";
+import type { HeaderPropertiesType } from "./types";
 import "./styles.css";
-import { useAuth } from "../../shared";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { colorModeHandler, saveColorMode } from ".";
 
-export function WideScreenHeader(): ReactNode {
-  const { isLoggedIn, logout } = useAuth();
+export function WideScreenHeader({
+  headerProperties,
+}: {
+  headerProperties: HeaderPropertiesType;
+}): ReactNode {
+  const location = useLocation();
+
+  const {
+    isLoggedIn,
+    totalLineItemQuantity,
+    setIsDownloadPage,
+    actOnLogout,
+    colorMode,
+    setColorMode,
+  } = headerProperties;
+
+  useEffect(() => {
+    saveColorMode(setColorMode);
+  }, []);
+
   return (
     <>
       <header className="header">
-        <div className="menu">
-          <a href="#history" className="link-menu">
-            <button className="button button-history">HISTORY</button>
-          </a>
-          <a href="#technology" className="link-menu">
-            <button className="button button-technology">TECHNOLOGY</button>
-          </a>
+        <div className="menu-left">
+          <button
+            className="button button-mode"
+            onClick={() => colorModeHandler(colorMode, setColorMode)}
+          >
+            {colorMode ? (
+              <LightModeIcon fontSize="large" />
+            ) : (
+              <DarkModeIcon fontSize="large" />
+            )}
+          </button>
+          {location.pathname === "/main" ? (
+            <>
+              <a href="#history" className="link-menu">
+                <button className="button">HISTORY</button>
+              </a>
+              <a href="#technology" className="link-menu">
+                <button className="button">TECHNOLOGY</button>
+              </a>
+            </>
+          ) : (
+            <Link to="/main" className="link-menu">
+              <button className="button">MAIN</button>
+            </Link>
+          )}
           <Link to="/catalog" className="link-menu">
-            <button className="button button-product">CATALOG</button>
+            <button
+              className="button button-product"
+              onClick={() => setIsDownloadPage(true)}
+            >
+              CATALOG
+            </button>
           </Link>
         </div>
         <Link to="/main" className="logo">
           <span className="title">Fast and RUSH</span>
         </Link>
-        <div className="menu">
+        <div className="menu-right">
           {isLoggedIn ? (
             <>
-              <button
-                className="button button-logout"
-                onClick={() => {
-                  logout();
-                }}
-              >
+              <button className="button" onClick={actOnLogout}>
                 LOGOUT
               </button>
               <Link to="/profile" className="link-menu">
-                <button className="button button-login">PROFILE</button>
+                <button className="button">PROFILE</button>
               </Link>
             </>
           ) : (
             <>
               <Link to="/login" className="link-menu">
-                <button className="button button-login">LOGIN</button>
+                <button className="button">LOGIN</button>
               </Link>
               <Link to="/registration" className="link-menu">
                 <button className="button button-reg">REGISTRATION</button>
@@ -49,6 +89,16 @@ export function WideScreenHeader(): ReactNode {
           )}
           <Link to="/about" className="link-menu">
             <button className="button button-about">ABOUT</button>
+          </Link>
+          <Link to="/cart" className="link-menu">
+            <button className="button button-cart">
+              <ShoppingCartIcon fontSize="large" />
+              <div className="quantity-item">
+                {totalLineItemQuantity === undefined
+                  ? 0
+                  : totalLineItemQuantity}
+              </div>
+            </button>
           </Link>
         </div>
       </header>

@@ -5,7 +5,7 @@ export function parseMainProductData(cardInfo: MasterData): ProductInfo {
   const currentProductBasicInfo = cardInfo.masterData.current;
   const currentProductPriceInfo =
     cardInfo.masterData.current.masterVariant.prices[0];
-
+  const productId = cardInfo.id;
   const productKey = cardInfo.key;
   const productImages = currentProductBasicInfo.masterVariant.images;
   const productName = currentProductBasicInfo.name["en-US"];
@@ -20,6 +20,7 @@ export function parseMainProductData(cardInfo: MasterData): ProductInfo {
     : 0;
 
   return {
+    productId,
     productKey,
     productName,
     productDescription,

@@ -36,6 +36,7 @@ export interface CustomerAllInfo {
   statusCode: number;
   message: string;
   customer: Customer;
+  cart: CustomerCart;
 }
 
 export interface Customer {
@@ -52,14 +53,15 @@ export interface Customer {
 }
 
 export interface DataProduct {
-  limit: 20;
-  offset: 0;
-  count: 18;
-  total: 18;
+  limit: number;
+  offset: number;
+  count: number;
+  total: number;
   results: [MasterData] | [Product];
 }
 
 export interface MasterData {
+  id: string;
   key: string;
   masterData: Current;
 }
@@ -74,6 +76,7 @@ export interface Current {
 }
 
 export interface Product {
+  id: string;
   key: string;
   name: Name;
   description: Description;
@@ -112,4 +115,30 @@ export interface Images {
 export interface Attributes {
   name: string;
   value: number;
+}
+
+export interface Cart {
+  id: string;
+  version: number;
+  lineItems: [ProductInCart];
+  totalPrice: Value;
+  discountOnTotalPrice: {
+    discountedAmount: Value;
+  };
+  totalLineItemQuantity: number;
+}
+
+export interface ProductInCart {
+  id: string;
+  productId: string;
+  name: Name;
+  variant: MasterVariant;
+  price: Prices;
+  quantity: number;
+  totalPrice: Value;
+}
+
+export interface CustomerCart {
+  id: string;
+  version: number;
 }

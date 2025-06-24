@@ -1,13 +1,28 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../shared";
-import { IconButton, Popover } from "@mui/material";
+import type { HeaderPropertiesType } from "./types";
 import "./styles.css";
+import { IconButton, Popover } from "@mui/material";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { colorModeHandler, saveColorMode } from ".";
 
-export function BurgerMenu(): React.ReactElement {
-  const { isLoggedIn, logout } = useAuth();
+export function BurgerMenu({
+  headerProperties,
+}: {
+  headerProperties: HeaderPropertiesType;
+}): React.ReactElement {
   const [anchorElement, setAnchorElement] =
     React.useState<null | HTMLElement>();
+  const {
+    isLoggedIn,
+    setIsDownloadPage,
+    totalLineItemQuantity,
+    actOnLogout,
+    colorMode,
+    setColorMode,
+  } = headerProperties;
   const open = Boolean(anchorElement);
   const handleClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     setAnchorElement(event.currentTarget);
@@ -16,6 +31,13 @@ export function BurgerMenu(): React.ReactElement {
     setAnchorElement(undefined);
   };
 
+  React.useEffect(() => {
+    saveColorMode(setColorMode);
+  }, []);
+
+  const clickOnCatalog = (): void => {
+    void (handleClose(), setIsDownloadPage(true));
+  };
   return (
     <>
       <header className="burger-header">
@@ -46,27 +68,37 @@ export function BurgerMenu(): React.ReactElement {
           }}
         >
           <div className="button-burger-menu">
-            <a href="#history" className="link-menu">
-              <button onClick={handleClose} className="burger-button">
-                HISTORY
-              </button>
-            </a>
-            <a href="#technology" className="link-menu">
-              <button onClick={handleClose} className="burger-button">
-                TECHNOLOGY
-              </button>
-            </a>
+            {location.pathname === "/main" ? (
+              <>
+                <a href="#history" className="link-menu">
+                  <button onClick={handleClose} className="burger-button">
+                    HISTORY
+                  </button>
+                </a>
+                <a href="#technology" className="link-menu">
+                  <button onClick={handleClose} className="burger-button">
+                    TECHNOLOGY
+                  </button>
+                </a>
+              </>
+            ) : (
+              <Link to="/main" className="link-menu">
+                <button className="burger-button" onClick={handleClose}>
+                  MAIN
+                </button>
+              </Link>
+            )}
             <Link to="/catalog" className="link-menu">
-              <button onClick={handleClose} className="burger-button">
+              <button onClick={clickOnCatalog} className="burger-button">
                 CATALOG
               </button>
             </Link>
             {isLoggedIn ? (
               <>
                 <button
-                  className="button button-logout"
+                  className="burger-button"
                   onClick={() => {
-                    logout();
+                    actOnLogout();
                     handleClose();
                   }}
                 >
@@ -74,7 +106,7 @@ export function BurgerMenu(): React.ReactElement {
                 </button>
                 <Link to="/profile" className="link-menu">
                   <button
-                    className="button button-logout"
+                    className="burger-button"
                     onClick={() => {
                       handleClose();
                     }}
@@ -102,6 +134,33 @@ export function BurgerMenu(): React.ReactElement {
                 ABOUT
               </button>
             </Link>
+            <div className="button-icon">
+              <button
+                className="button burger-button-mode"
+                onClick={() =>
+                  colorModeHandler(colorMode, setColorMode, handleClose)
+                }
+              >
+                {colorMode ? (
+                  <LightModeIcon fontSize="large" />
+                ) : (
+                  <DarkModeIcon fontSize="large" />
+                )}
+              </button>
+              <Link to="/cart" className="burger-link-menu">
+                <button
+                  className="button burger-button-cart"
+                  onClick={handleClose}
+                >
+                  <ShoppingCartIcon fontSize="large" />
+                  <div className="burger-quantity-item">
+                    {totalLineItemQuantity === undefined
+                      ? 0
+                      : totalLineItemQuantity}
+                  </div>
+                </button>
+              </Link>
+            </div>
           </div>
         </Popover>
         <Link to="/main" className="burger-logo">

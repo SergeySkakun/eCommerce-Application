@@ -6,7 +6,6 @@ import {
   Select,
   MenuItem,
   type SelectChangeEvent,
-  Box,
 } from "@mui/material";
 
 interface SortSelectProperties {
@@ -23,7 +22,7 @@ export function SortSelect({
   };
 
   return (
-    <Box sx={{ marginBottom: 2 }}>
+    <div className="sort-container">
       <FormControl fullWidth variant="outlined">
         <InputLabel id="sort-select-label">Sort By</InputLabel>
         <Select
@@ -46,6 +45,6 @@ export function SortSelect({
           </MenuItem>
         </Select>
       </FormControl>
-    </Box>
+    </div>
   );
 }

@@ -7,10 +7,6 @@ import City from "./city";
 import Postindex from "./postindex";
 import Country from "./country";
 
-// const handleSubmit = (event_: FormEvent<HTMLFormElement>): void => {
-//   event_.preventDefault();
-// };
-
 export function AdditionalForm(): ReactNode {
   const [streetName, setStreetName] = useState("");
   const [streetNameError, setStreetNameError] = useState("");

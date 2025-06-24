@@ -1,35 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable unicorn/no-null */
 import * as React from "react";
 import Box from "@mui/material/Box";
 import type { GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
-import { getUserInfoRequest } from "../../../api";
+import { getUserInfoRequest } from "@/pages//user-profile/api";
 import { UpdateAddress } from "./update-modal";
 import { DeleteAddress } from "./delete-modal";
 import { AddressTableSkeleton } from "./skeleton";
 import { Typography } from "@mui/material";
-import type { Customer } from "../../../../../shared/api/types";
+import type { Customer } from "@/shared";
 import { SetDefaultShipping } from "./default-shipping-modal";
 import { SetDefaultBilling } from "./default-billing-modal";
-import { grey } from "@mui/material/colors";
 import { AddNewAddress } from "./add-modal";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 import "./style.css";
 
 interface CustomUser extends Customer {
   defaultShippingAddressId: string;
   defaultBillingAddressId: string;
 }
-
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
 
 type Address = {
   isDefaultBillingAddress: { properties: any };
@@ -189,40 +179,35 @@ export function AddressesGrid(): React.ReactElement {
       </>
     );
   }
-  //
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <Box
+    <Box
+      sx={{
+        height: 400,
+        width: "auto",
+        maxWidth: "fit-content",
+        margin: "auto",
+      }}
+    >
+      <DataGrid
+        rows={data}
+        columns={columns}
         sx={{
-          height: 400,
-          width: "auto",
-          maxWidth: "fit-content",
-          margin: "auto",
+          backgroundColor: "var(--dark-gray)",
         }}
-      >
-        <DataGrid
-          rows={data}
-          columns={columns}
-          sx={{
-            bgcolor: grey[900],
-            color: grey[1000],
-          }}
-          getRowClassName={(parameters) => rowClassName(parameters.row)}
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 5,
-              },
+        getRowClassName={(parameters) => rowClassName(parameters.row)}
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 5,
             },
-          }}
-          pageSizeOptions={[5]}
-          checkboxSelection
-          disableRowSelectionOnClick
-        />
-        <AddNewAddress stetUpdate={setStateUpdate} />
-      </Box>
-    </ThemeProvider>
+          },
+        }}
+        pageSizeOptions={[5]}
+        checkboxSelection
+        disableRowSelectionOnClick
+      />
+      <AddNewAddress stetUpdate={setStateUpdate} />
+    </Box>
   );
 }

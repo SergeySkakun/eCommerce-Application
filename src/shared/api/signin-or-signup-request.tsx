@@ -25,7 +25,7 @@ function removeAnimationAlert(): void {
 
 export async function sendingSignInOrSignUpRequest(
   body: BodySignUp | BodyLogin,
-  typeRequest: string
+  typeRequest: string,
 ): Promise<string> {
   let errorMessage = "";
   const BEARER_TOKEN = getTokenFromCookie(TOKEN_NAMES.guestAccess);
@@ -44,8 +44,10 @@ export async function sendingSignInOrSignUpRequest(
         saveTokenCookie(data.customer.id, TOKEN_NAMES.activeUserID);
         saveTokenCookie(
           data.customer.version.toString(),
-          TOKEN_NAMES.userVersion
+          TOKEN_NAMES.userVersion,
         );
+        saveTokenCookie(data.cart.id, TOKEN_NAMES.cartID);
+        saveTokenCookie(data.cart.version.toString(), TOKEN_NAMES.cartVersion);
         if (typeRequest === "signup") {
           goAnimationAlert();
           setTimeout(() => {
@@ -59,7 +61,7 @@ export async function sendingSignInOrSignUpRequest(
             headers: {
               Authorization: `Basic ${btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)}`,
             },
-          }
+          },
         )
           .then((response) => response.json())
           .then((data: AccessToken) => {

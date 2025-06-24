@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-// import dayjs from "dayjs";
 import { postcodeValidator } from "postcode-validator";
 import * as yup from "yup";
 
@@ -68,18 +67,6 @@ const ValidationSchema = yup.object({
     .string()
     .required("Date required")
     .typeError("Invalid format date"),
-  // .test("isValid", "Invalid date", (value) => {
-  //   const now = dayjs();
-  //   const dayjsDate = dayjs(value, "YYYY-MM-DD", true);
-  //   const thirteenYearsAgo = now.subtract(13, "year");
-  //   if (!value || dayjsDate.isBefore(thirteenYearsAgo)) {
-  //     return false;
-  //   }
-  //   if (dayjs(value).isValid()) {
-  //     return true;
-  //   }
-  //   return false;
-  // }),
   defaultShippingAddress: yup.bool().oneOf([true], "Field must be checked"),
   defaultBillingAddress: yup.bool().oneOf([true], "Field must be checked"),
 });

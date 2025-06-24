@@ -6,7 +6,6 @@ import { PasswordChangeForm, PersonalBlock, AddressesGrid } from "./index";
 import PersonPinIcon from "@mui/icons-material/PersonPin";
 import AddHomeSharpIcon from "@mui/icons-material/AddHomeSharp";
 import LockResetSharpIcon from "@mui/icons-material/LockResetSharp";
-import { grey } from "@mui/material/colors";
 
 interface TabPanelProperties {
   children?: React.ReactNode;
@@ -58,7 +57,7 @@ export function ProfileTabsPanel(): React.ReactElement {
           width: "100%",
           borderBottom: 1,
           borderColor: "divider",
-          bgcolor: grey[900],
+          backgroundColor: "var(--card-hover-shadow)",
           borderRadius: "0.2rem",
           mb: "2rem",
         }}
