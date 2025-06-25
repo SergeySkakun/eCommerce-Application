@@ -27,6 +27,7 @@ export const CardList = ({
   const [offset, setOffset] = useState(START_NUMBER_OF_PRODUCT_IN_RESPONSE);
   const [totalNumberOfResults, setTotalNumberOfResults] = useState(0);
   const [products, setProducts] = useState<(MasterData | Product)[]>([]);
+  const previousFilterString = useRef(filterAndSortString);
   const observer = useRef<IntersectionObserver | null>(null);
   const lastItemReference = useRef<HTMLDivElement | null>(null);
 
@@ -36,6 +37,16 @@ export const CardList = ({
       setError(null);
       try {
         const hasActiveParameters = filterAndSortString.length > 0;
+        const isNewFiltersRequest =
+          previousFilterString.current !== filterAndSortString;
+
+        if (isNewFiltersRequest) {
+          previousFilterString.current = filterAndSortString;
+          setTotalNumberOfResults(0);
+          setOffset(START_NUMBER_OF_PRODUCT_IN_RESPONSE);
+          setProducts([]);
+        }
+
         const data = await (hasActiveParameters
           ? sendingFilterSortingSearchRequest(
               filterAndSortString,

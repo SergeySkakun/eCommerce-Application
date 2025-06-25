@@ -35,10 +35,18 @@
   text-decoration: none;
 }
 
-.menu {
+.menu-left,
+.menu-right {
   display: flex;
-  justify-content: center;
   width: 22rem;
+}
+
+.menu-left {
+  justify-content: left;
+}
+
+.menu-right {
+  justify-content: right;
 }
 
 .button {
@@ -145,7 +153,6 @@
 .quantity-item {
   position: fixed;
   top: 5px;
-
   box-sizing: content-box;
   width: 23px;
   height: 13px;
@@ -158,16 +165,16 @@
   font-weight: bold;
   line-height: 1.2;
   color: rgb(255 255 255);
-  text-align: center;
+}
 
-  background-color: brown;
+.burger-button-cart {
+  position: relative;
 }
 
 .burger-quantity-item {
   position: absolute;
-  top: 265px;
+  top: 2px;
 
-  box-sizing: content-box;
   width: 23px;
   height: 13px;
   margin-left: 22px;
@@ -180,6 +187,5 @@
   line-height: 1.2;
   color: rgb(255 255 255);
   text-align: center;
-
   background-color: brown;
 }

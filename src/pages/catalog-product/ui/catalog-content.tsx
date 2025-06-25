@@ -1,6 +1,13 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import type { ReactElement } from "react";
-import { Box } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Typography,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { CardList } from "./card-list";
 import type { VisualFilterState, FilterSubmitData } from "./filters-list";
 import { FiltersList, SearchInput } from "./filters-list";
@@ -24,7 +31,7 @@ const INITIAL_FILTERS_STATE: VisualFilterState = {
 
 export function CatalogContent(): ReactElement {
   const [breadcrumb, setBreadcrumb] = useState<string>("CARS");
-
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [currentFilters, setCurrentFilters] = useState<VisualFilterState>(
     () => INITIAL_FILTERS_STATE,
   );
@@ -130,6 +137,18 @@ export function CatalogContent(): ReactElement {
     setCurrentSortOption("");
   }, []);
 
+  const handleResize = (): void => {
+    setScreenWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return (): void => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <Box
       sx={{
@@ -139,23 +158,74 @@ export function CatalogContent(): ReactElement {
         p: 3,
       }}
     >
-      <Box
-        sx={{
-          flex: "0 0 280px",
-          marginTop: "50px",
-          maxWidth: { xs: "100%", md: "280px" },
-        }}
-      >
-        <SearchInput onSearch={handleSearch} initialSearchQuery={searchQuery} />
-        <SortSelect
-          onSortChange={handleSortChange}
-          currentSortOption={currentSortOption}
-        />
-        <FiltersList
-          onFilterSubmit={handleFilterSubmit}
-          initialFilters={currentFilters}
-        />
-      </Box>
+      {screenWidth > 915 ? (
+        <>
+          <Box
+            sx={{
+              flex: "0 0 280px",
+              marginTop: "50px",
+              maxWidth: { xs: "100%", md: "280px" },
+            }}
+          >
+            <SearchInput
+              onSearch={handleSearch}
+              initialSearchQuery={searchQuery}
+            />
+            <SortSelect
+              onSortChange={handleSortChange}
+              currentSortOption={currentSortOption}
+            />
+            <FiltersList
+              onFilterSubmit={handleFilterSubmit}
+              initialFilters={currentFilters}
+            />
+          </Box>
+        </>
+      ) : (
+        <>
+          <Accordion
+            sx={{
+              marginTop: "50px",
+            }}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1-content"
+              id="panel1-header"
+            >
+              <Typography
+                component="span"
+                sx={{
+                  fontSize: "25px",
+                }}
+              >
+                Filters
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Box
+                sx={{
+                  flex: "0 0 280px",
+                  maxWidth: { xs: "100%", md: "280px" },
+                }}
+              >
+                <SearchInput
+                  onSearch={handleSearch}
+                  initialSearchQuery={searchQuery}
+                />
+                <SortSelect
+                  onSortChange={handleSortChange}
+                  currentSortOption={currentSortOption}
+                />
+                <FiltersList
+                  onFilterSubmit={handleFilterSubmit}
+                  initialFilters={currentFilters}
+                />
+              </Box>
+            </AccordionDetails>
+          </Accordion>
+        </>
+      )}
       <Box sx={{ flexGrow: 1 }}>
         <div className="main">
           <img

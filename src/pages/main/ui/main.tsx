@@ -1,10 +1,11 @@
-import type { ReactNode } from "react";
+import { useContext, type ReactNode } from "react";
 import "./style.css";
 import { ViewProducts } from "./view-products/view-products";
-import { ToCatalogButton } from "../../../shared";
+import { ToCatalogButton, TotalLineItemQuantityContext } from "../../../shared";
 import { RunningLine } from "./running-line";
 
 export function Main(): ReactNode {
+  const { setIsDownloadPage } = useContext(TotalLineItemQuantityContext);
   return (
     <>
       <main className="main">
@@ -12,7 +13,7 @@ export function Main(): ReactNode {
           <p className="head-text">
             THIS IS FOR<br></br>ETERNITY
           </p>
-          <ToCatalogButton />
+          <ToCatalogButton setIsDownloadPage={setIsDownloadPage} />
         </div>
         <div className="sale-container">
           <div className="sale-content"></div>
