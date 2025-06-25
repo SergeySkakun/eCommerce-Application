@@ -9,7 +9,7 @@ import {
 import {
   Main,
   LoginPage,
-  RegistrationForm,
+  RegistrationPage,
   CatalogProduct,
   DetailedProduct,
   NotFound,
@@ -89,7 +89,7 @@ export function PageRouter(): React.ReactNode {
               path="/registration"
               element={
                 <GuestRoute>
-                  <RegistrationForm />
+                  <RegistrationPage />
                 </GuestRoute>
               }
             ></Route>

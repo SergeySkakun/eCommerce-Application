@@ -1,19 +1,16 @@
 import type { ReactElement } from "react";
-import LoginTitle from "./login-title";
-import { Form } from "./form";
-import LoginFooter from "./login-footer";
-import "./styles.css";
+import { PageTitle } from "@/shared/ui";
+import { LoginFooter, LoginForm } from "./components";
+import styles from "./styles.module.css";
 
-const LoginPage = (): ReactElement => {
+export const LoginPage = (): ReactElement => {
   return (
-    <div className="login-page">
-      <div className="login-content">
-        <LoginTitle />
-        <Form />
+    <div className={styles.page}>
+      <div className={styles.content}>
+        <PageTitle text={"Login"} />
+        <LoginForm />
         <LoginFooter />
       </div>
     </div>
   );
 };
-
-export { LoginPage };

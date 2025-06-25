@@ -13,15 +13,16 @@ import type {
   CustomerAllInfo,
 } from "./index";
 
-function goAnimationAlert(): void {
-  const alert = document.querySelector(".alert");
-  alert.classList.add("go-animation-alert");
-}
+// эти две функции закомментированны временно, так как чуть позже они могут понадобится для реализации друго
+// function goAnimationAlert(): void {
+//   const alert = document.querySelector(".alert");
+//   alert.classList.add("animation");
+// }
 
-function removeAnimationAlert(): void {
-  const alert = document.querySelector(".alert");
-  alert.classList.remove("go-animation-alert");
-}
+// function removeAnimationAlert(): void {
+//   const alert = document.querySelector(".alert");
+//   alert.classList.remove("animation");
+// }
 
 export async function sendingSignInOrSignUpRequest(
   body: BodySignUp | BodyLogin,
@@ -49,9 +50,10 @@ export async function sendingSignInOrSignUpRequest(
         saveTokenCookie(data.cart.id, TOKEN_NAMES.cartID);
         saveTokenCookie(data.cart.version.toString(), TOKEN_NAMES.cartVersion);
         if (typeRequest === "signup") {
-          goAnimationAlert();
+          // goAnimationAlert();
           setTimeout(() => {
-            removeAnimationAlert();
+            console.log("registration was successful");
+            // removeAnimationAlert();
           }, 2500);
         }
         await fetch(

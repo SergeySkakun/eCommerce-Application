@@ -1,0 +1,40 @@
+.page {
+  display: flex;
+  justify-content: center;
+  background-color: var(--background-color);
+}
+
+.content {
+  width: 30%;
+  height: fit-content;
+  margin: 150px 0 100px;
+  padding: 0 20px 10px;
+  border: 2px solid var(--white-color);
+
+  background-color: var(--grey-border);
+}
+
+.footer {
+  font-family: var(--font-family);
+  font-weight: bold;
+  color: var(--white-color);
+  text-decoration: none;
+}
+
+@media screen and (width <= 800px) {
+  .content {
+    width: 40%;
+  }
+}
+
+@media screen and (width <= 650px) {
+  .content {
+    width: 60%;
+  }
+}
+
+@media screen and (width <= 450px) {
+  .content {
+    width: 80%;
+  }
+}

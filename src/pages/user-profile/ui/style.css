@@ -18,3 +18,7 @@
   line-height: 10;
   color: #ffff;
 }
+
+.my-datepicker-input {
+  color: red;
+}

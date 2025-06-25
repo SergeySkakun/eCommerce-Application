@@ -1,6 +1,6 @@
 export { Main } from "./main";
 export { LoginPage } from "./login";
-export { RegistrationForm } from "./registration";
+export { RegistrationPage } from "./registration";
 export { NotFound } from "./not-found/";
 export { LoadingPage } from "./loading/";
 export { CatalogProduct } from "./catalog-product";

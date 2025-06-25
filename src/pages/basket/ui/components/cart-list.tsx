@@ -71,7 +71,7 @@ export function CartList(): ReactElement {
         setIsHasDiscount(true);
       }
     }
-  }, [cart, setTotalLineItemQuantity]);
+  }, [cart, setIsHasDiscount, setTotalLineItemQuantity]);
 
   if (isUpdatedCart) {
     return (
