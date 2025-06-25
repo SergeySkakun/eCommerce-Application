@@ -60,6 +60,19 @@ export default tseslint.config(
       "class-methods-use-this": "error",
       "unicorn/better-regex": "error",
       "no-console": "warn",
+      "unicorn/no-document-cookie": "off",
+      "unicorn/no-null": "off",
+    },
+    settings: {
+      "import/resolver": {
+        node: {
+          extensions: [".js", ".tsx", ".ts", ".d.ts"],
+        },
+        alias: {
+          extensions: [".tsx", ".js", ".ts", ".scss", ".css", ".d.ts"],
+          map: ["@/shared", "./src/shared"],
+        },
+      },
     },
   },
 );

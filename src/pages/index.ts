@@ -1,0 +1,10 @@
+export { Main } from "./main";
+export { LoginPage } from "./login";
+export { RegistrationForm } from "./registration";
+export { NotFound } from "./not-found/";
+export { LoadingPage } from "./loading/";
+export { CatalogProduct } from "./catalog-product";
+export { ProfilePage } from "./user-profile";
+export { DetailedProduct } from "./detailed-product";
+export { BasketPage } from "./basket";
+export { About } from "./about-us";

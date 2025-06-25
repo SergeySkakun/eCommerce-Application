@@ -1,0 +1,94 @@
+.basket {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  background-color: var(--background-color);
+}
+
+.title {
+  width: 15rem;
+  margin-top: 60px;
+  padding: 0;
+
+  font-size: 3rem;
+  color: var(--white-color);
+  text-align: center;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  border-radius: 10px;
+
+  background-color: var(--dark-gray);
+}
+
+.image {
+  max-width: 133px;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.block {
+  display: flex;
+  align-items: center;
+  padding: 0;
+
+  &:last-child {
+    padding-bottom: 0.7rem !important;
+  }
+}
+
+.subtitle {
+  display: none;
+}
+
+.separator {
+  display: none;
+}
+
+@media only screen and (width <= 968px) {
+  .card {
+    flex-direction: column;
+    justify-content: center;
+    max-width: 18rem;
+    text-align: center;
+  }
+
+  .image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .title {
+    width: auto;
+    padding: 1rem 0;
+  }
+
+  .block {
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.7rem;
+  }
+
+  .subtitle {
+    display: block;
+  }
+
+  .separator {
+    display: block;
+    width: 100%;
+    margin: "0.5rem 0";
+    border: 1px solid #333;
+  }
+}

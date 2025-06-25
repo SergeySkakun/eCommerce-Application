@@ -1,0 +1,38 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 345px;
+  box-shadow:
+    5px 5px 10px rgba(80, 80, 80, 0.3),
+    -5px -5px 10px rgba(80, 80, 80, 0.3);
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card-name {
+  overflow: "hidden";
+  white-space: "nowrap";
+  margin: 10px;
+  font-size: 25px;
+  color: var(--white-color);
+}
+
+.card:hover {
+  box-shadow:
+    10px 10px 10px var(--card-hover-shadow),
+    -10px -10px 10px var(--card-hover-shadow);
+  transform: scale(1.02);
+}
+
+.icon-sale {
+  position: absolute;
+  right: 20px;
+  width: 30px;
+  height: 70px;
+  background-image: url("../../../../public/assets/catalog/icon-sale.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 50;
+}

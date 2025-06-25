@@ -1,0 +1,177 @@
+.cartConteiner {
+  display: flex;
+  flex-direction: column;
+  gap: "0.5rem";
+  align-items: center;
+
+  width: 80%;
+  margin-bottom: 30px;
+  padding: 10px 20px;
+  border-radius: 15px;
+
+  background-color: var(--light-background-color);
+}
+
+.cartContent {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: space-around;
+
+  width: 70%;
+}
+
+.clearCart {
+  cursor: pointer;
+
+  width: 100%;
+  max-width: 24.5rem;
+  height: 45px;
+  margin: 20px 0;
+  padding: 10px;
+  border: 2px solid var(--item-remove-cart-color);
+  border-radius: 5px;
+
+  font-family: var(--font-family);
+  font-weight: bold;
+  color: var(--item-remove-cart-color);
+
+  background-color: var(--transparent);
+
+  &:hover {
+    color: var(--red-color);
+    background-color: var(--item-remove-cart-bgcolor);
+  }
+}
+
+.formPromo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  height: 45px;
+  margin-bottom: 20px;
+}
+
+.clearPromo {
+  cursor: pointer;
+
+  height: 45px;
+  padding: 10px;
+
+  font-family: var(--font-family);
+  font-size: 30px;
+  color: var(--red-color);
+}
+
+.inputPromo {
+  width: 61%;
+  margin: 0 15px;
+  padding: 10px;
+  border: 2px solid var(--my-team);
+  border-radius: 10px;
+
+  font-size: 18px;
+  color: var(--white-color);
+  text-align: center;
+
+  background-color: var(--transparent);
+}
+
+.buttonPromo {
+  cursor: pointer;
+
+  height: 45px;
+  padding: 10px;
+  border: 2px solid var(--my-team);
+  border-radius: 10px;
+
+  font-family: var(--font-family);
+  font-weight: bold;
+  color: var(--my-team);
+
+  background-color: var(--transparent);
+
+  &:hover {
+    background-color: var(--transparent-hover);
+  }
+}
+
+.messagePromo {
+  width: 50%;
+  height: 50px;
+  color: var(--white-color);
+  text-align: center;
+}
+
+.totalCost {
+  width: 100%;
+}
+
+.totalCostConteiner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 40px;
+
+  background-color: var(--background-color);
+}
+
+.totalCostText {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  width: 80%;
+  margin: 0;
+
+  font-family: var(--font-family);
+  color: var(--white-color);
+  text-align: center;
+}
+
+.discountCost {
+  margin-left: 20px;
+
+  font-family: var(--font-family);
+  font-size: 12px;
+  color: var(--red-color);
+  text-align: center;
+}
+
+.placeOrder {
+  cursor: pointer;
+
+  width: 100%;
+  max-width: 24.5rem;
+  height: 45px;
+  margin: 20px 0;
+  padding: 10px;
+  border: 2px solid var(--team-color);
+  border-radius: 5px;
+
+  font-family: var(--font-family);
+  font-weight: bold;
+  color: var(--team-color);
+
+  background-color: var(--transparent);
+
+  &:hover {
+    color: var(--button-apply-filters);
+    border-color: var(--button-apply-filters);
+    background-color: var(--item-place-order-bgcolor);
+  }
+}
+
+@media only screen and (width <= 500px) {
+  .totalCostText {
+    font-size: 14px;
+  }
+
+  .totalCostText {
+    width: 90%;
+  }
+}

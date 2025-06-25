@@ -1,0 +1,1 @@
+export { CatalogProduct } from "./ui";

@@ -1,0 +1,27 @@
+.alert-id {
+  font-weight: "bold";
+  color: "red";
+}
+
+.default-shipping-row-highlighting {
+  background-color: rgb(134 182 68);
+}
+
+.default-building-row-highlighting {
+  background-color: rgb(59 130 212);
+}
+
+.default-address-row-highlighting {
+  background-color: rgb(223 143 196);
+}
+
+.dialog-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  background: transparent;
+}

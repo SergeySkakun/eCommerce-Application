@@ -1,0 +1,37 @@
+.filters-container {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: var(--dark-gray);
+}
+
+.button-apply-filters {
+  width: 50%;
+  height: 61px;
+  border: none;
+  border-radius: 10px;
+  font-family: var(--font-family);
+  font-size: 18px;
+  color: var(--button-apply-filters-text);
+  background-color: var(--button-apply-filters);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--button-apply-filters-hover);
+  }
+}
+
+.button-reset-filters {
+  width: 50%;
+  height: 61px;
+  border: 2px solid var(--red-color);
+  border-radius: 10px;
+  font-family: var(--font-family);
+  font-size: 18px;
+  color: var(--red-color);
+  background-color: var(--transparent);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--transparent-hover);
+  }
+}

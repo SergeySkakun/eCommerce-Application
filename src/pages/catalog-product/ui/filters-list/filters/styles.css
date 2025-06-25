@@ -1,0 +1,6 @@
+.search-conteiner {
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  background-color: var(--dark-gray);
+}

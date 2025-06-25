@@ -1,0 +1,108 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 310px;
+  background-color: var(--light-background-color);
+  padding-top: 15px;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 50%;
+}
+
+.button-footer {
+  color: var(--light-gray);
+  background-color: var(--transparent);
+  border: none;
+  font-family: var(--font-family);
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.button-footer:hover {
+  color: var(--white-color);
+}
+
+.contacts {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 30px 0 40px 0;
+  width: 100%;
+}
+.github {
+  width: 30px;
+  height: 30px;
+  background-image: url("../../../assets/footer/gh.png");
+  background-size: 100%;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+
+.authors {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 33%;
+  color: var(--white-color);
+  font-size: 15px;
+  font-weight: bold;
+  font-family: var(--font-family);
+  color: var(--light-gray);
+}
+
+.rs-icon {
+  width: 40px;
+  height: 40px;
+  background-image: url("../../../assets/footer/rs.png");
+  background-size: 100%;
+  border-radius: 100%;
+}
+
+.rs-school {
+  display: flex;
+  margin-top: 30px;
+}
+
+.description {
+  color: var(--light-gray);
+  font-family: var(--font-family);
+  font-size: 12px;
+}
+
+@media screen and (max-width: 1030px) {
+  .content {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .content {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .footer {
+    height: 45vh;
+  }
+  .contacts {
+    flex-direction: column;
+    align-items: center;
+    margin: 5px 0 10px 0;
+  }
+
+  .authors {
+    padding: 5px 0;
+    width: 60%;
+  }
+}

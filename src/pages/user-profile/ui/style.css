@@ -1,0 +1,20 @@
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  padding: 0 2rem;
+  padding-top: 5rem;
+
+  background-color: var(--burger-button);
+}
+
+.profile-page-title {
+  font-size: 6rem;
+  line-height: 10;
+  color: #ffff;
+}

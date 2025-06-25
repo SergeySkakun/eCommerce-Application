@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300..900&display=swap");
+
+.price {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  flex-grow: 1;
+  column-gap: 6px;
+  padding-right: 5px;
+}
+
+.price__currency,
+.price__amount,
+.price__amount_discounted {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.price__currency,
+.price__amount,
+.price__amount_with-discount {
+  font-weight: 500;
+  color: var(--price-blue-color);
+}
+
+.price__amount_with-discount {
+  color: var(--price-gold-color);
+}
+
+.price__amount_without-discount {
+  text-decoration: line-through;
+  font-weight: 300;
+  color: var(--price-blue-color);
+}

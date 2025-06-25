@@ -1,0 +1,268 @@
+@import "../../../shared/variables.css";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 1920px;
+  height: 100%;
+  margin: auto;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  margin: 0 auto;
+
+  background-color: var(--background-color);
+}
+
+.head-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100vh;
+
+  background-image: var(--main-image);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.head-text {
+  width: 100%;
+  height: 45vh;
+  margin: 0;
+
+  font-family: "Times New Roman";
+  font-size: 140px;
+  color: var(--main-text-color);
+  text-align: center;
+
+  -webkit-text-stroke: 1px var(--head-text-stroke);
+}
+
+.button-main-head {
+  cursor: pointer;
+
+  padding: 10px;
+  border: 2px solid var(--button-head);
+
+  font-size: 1rem;
+  color: var(--light-gray);
+
+  background-color: var(--transparent);
+
+  &:hover {
+    border-color: var(--button-head);
+    color: var(--white-color);
+    transition: 0.4s;
+  }
+}
+
+.link {
+  display: flex;
+  height: 40px;
+  text-decoration: none;
+}
+
+.sale-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 400px;
+
+  background-color: var(--light-background-color);
+}
+
+.sale-content {
+  width: 70%;
+  height: 300px;
+
+  background-image: var(--sale-image);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  box-shadow: var(--sale-shadow-color) 0 20px 30px -5px;
+}
+
+.history-container,
+.technology-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 50vh;
+  padding-bottom: 20px;
+
+  background-color: var(--background-color);
+}
+
+.content-history,
+.content-technology {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 95%;
+}
+
+h2 {
+  width: 100%;
+  font-family: var(--font-family);
+  color: var(--white-color);
+  text-align: center;
+}
+
+.image-history {
+  width: 50%;
+  height: 400px;
+
+  background-image: var(--history-image);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 68%;
+}
+
+.text-history,
+.text-technology {
+  width: 50%;
+  font-family: var(--font-family);
+  font-size: 20px;
+  color: var(--white-color);
+}
+
+.best-product-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 520px;
+  padding-bottom: 20px;
+
+  background-color: var(--light-background-color);
+}
+
+.image-technology {
+  width: 50%;
+  height: 40vh;
+
+  background-image: url("../../../../assets/main/img_3.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 45%;
+}
+
+.sale-board {
+  margin-top: 50px;
+}
+
+@media screen and (width <= 1000px) {
+  .image-technology {
+    background-size: 80%;
+  }
+
+  .sale-content {
+    width: 85%;
+  }
+}
+
+@media screen and (width <= 800px) {
+  .head-text {
+    height: 35vh;
+    font-size: 100px;
+  }
+
+  .sale-content {
+    width: 90%;
+    height: 200px;
+  }
+
+  .sale-container {
+    height: 300px;
+  }
+}
+
+@media screen and (width <= 600px) {
+  .head-text {
+    height: 30vh;
+    font-size: 60px;
+  }
+
+  .text-history,
+  .text-technology {
+    font-size: 10px;
+  }
+
+  .image-technology {
+    width: 70%;
+  }
+}
+
+@media screen and (width <= 500px) {
+  .text-history {
+    width: 90%;
+    font-size: 12px;
+  }
+
+  .text-technology {
+    width: 90%;
+    font-size: 12px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  .content-history {
+    flex-direction: column;
+    width: 95%;
+  }
+
+  .image-history {
+    width: 100%;
+    height: 200px;
+  }
+
+  .content-technology {
+    flex-direction: column-reverse;
+    width: 95%;
+  }
+
+  .image-technology {
+    width: 100%;
+    height: 220px;
+    background-size: 50%;
+  }
+
+  .sale-content {
+    height: 100px;
+  }
+
+  .sale-container {
+    height: 200px;
+  }
+}
